@@ -11,6 +11,8 @@ register = template.Library()
 #slugify tillater mellomrom fra input men fjerner de når det lagres til db
 # antar for å spare plass?
 
+#misaka tillater markdown text, usikker på hva det betyr
+
 class Group(models.Model):
     name = models.CharField(max_length=255, unique = True)
     slug = models-slugField(allow_unicode = True, unique = True)
@@ -25,6 +27,12 @@ class Group(models.Model):
         self.slug = slugify(self.name)
         self.description_html = misaka.html(self.description)
         super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('groups:single', kwargs = {'slug' : self.slug})
+
+    class Meta:
+        ordering = ['name']
 
 class GroupMember(models.Model):
     # Linking table mellom gruppe og user
