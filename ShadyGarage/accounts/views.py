@@ -9,9 +9,9 @@ from django.views.generic import CreateView, TemplateView
 class SignUp(CreateView):
     form_class = forms.UserForm
     template_name="accounts/signup.html"
-    success_url = "merinfo"
+    success_url = "login"
 
-class MoreInfo(CreateView, ):
+class MoreInfo(CreateView ):
     form_class = forms.ProfileForm
     template_name = "accounts/moreinfo.html"
     success_url = "login"
