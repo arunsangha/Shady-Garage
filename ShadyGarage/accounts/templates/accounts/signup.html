@@ -1,9 +1,14 @@
 {% extends "base.html" %}
 {% load bootstrap3 %}
 {% block content %}
-  <form method="POST">
-    {% csrf_token %}
-    {% bootstrap_form form%}
-    <input type="submit" value="Registrer meg!">
-  </form>
+  <div class="container">
+    <div class="jumbotron signup-form">
+      <h3>Registrer deg!</h3>
+        <form method="POST">
+          {% csrf_token %}
+          {% bootstrap_form form%}
+          <input type="submit" value="Registrer meg!">
+        </form>
+    </div>
+  </div>
 {% endblock %}
