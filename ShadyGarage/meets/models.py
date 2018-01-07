@@ -1,3 +1,15 @@
 from django.db import models
+from django.contrib import auth
+from django.utils.text import slugify
 
 # Create your models here.
+class Meet(models.Model):
+
+    meet_name = models.CharField(max_length = 200, unique = True)
+    date = models.DateTimeField()
+    slug = models.SlugField(allow_unicode = True, unique = True)
+    description = models.TextField()
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.meet_name)
+        super().save(*args, **kwargs)
