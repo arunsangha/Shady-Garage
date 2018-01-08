@@ -9,9 +9,9 @@ from django.views.generic import CreateView, TemplateView
 class SignUp(CreateView):
     form_class = forms.UserForm
     template_name="accounts/signup.html"
-    success_url = "login"
+    success_url = reverse_lazy("login")
 
-class MoreInfo(CreateView ):
+class ProfileInfo(CreateView):
     form_class = forms.ProfileForm
-    template_name = "accounts/moreinfo.html"
-    success_url = "login"
+    template_name = "accounts/profile_info.html"
+    success_url = reverse_lazy("home")

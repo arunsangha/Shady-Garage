@@ -22,15 +22,22 @@
           <li class="nav-item">
             <a class="nav-link" href="{% url 'meets:meets_list' %}">Treff</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'accounts:login' %}">Log In</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Sign Up</a>
-          </li>
+          {% if user.is_authenticated %}
           <li class="nav-item">
             <a class="nav-link" href="#">Min Profil</a>
           </li>
+          <li class="nav-item">
+              <a class="nav-link" href="{% url 'accounts:logout' %}">Logg ut</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'accounts:login' %}">Logg inn</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'accounts:signup' %}">Sign Up</a>
+          </li>
+          {% endif %}
+
         </ul>
       </div>
     </nav>

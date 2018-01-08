@@ -14,8 +14,7 @@ class UserForm(UserCreationForm):
         self.fields["password1"].label = "Passord"
         self.fields["password2"].label = "Gjenta passord"
 
-
 class ProfileForm(forms.ModelForm):
     class Meta():
         model = models.Profile
-        fields = ('teams',)
+        fields = ("teams", "age")

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block body %}
+{% load bootstrap3 %}
+   <div class="container">
+     <div class="jumbotron">
+       <form method="post">
+         {% csrf_token %}
+         {% bootstrap_form form%}
+         {{ profile_form.as_p }}
+         <input type="submit" name="" value="save">
+       </form>
+     </div>
+   </div>
+
+{% endblock %}
