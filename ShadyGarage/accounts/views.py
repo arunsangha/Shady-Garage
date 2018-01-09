@@ -9,12 +9,12 @@ from django.views.generic import CreateView, TemplateView
 class SignUp(CreateView):
     form_class = forms.UserForm
     template_name="accounts/signup.html"
-    success_url = reverse_lazy("login")
+    success_url = reverse_lazy("edit_profile")
 
 class ProfileInfo(CreateView):
     form_class = forms.ProfileForm
     template_name = "accounts/profile_info.html"
-    success_url = reverse_lazy("home")
+    success_url = reverse_lazy("login")
     def form_valid(self, form):
         self.object = form.save(commit = False)
         self.object.user = self.request.user

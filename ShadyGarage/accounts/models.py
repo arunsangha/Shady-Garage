@@ -11,7 +11,7 @@ class Profile(models.Model):
     user = models.OneToOneField(auth.models.User, on_delete = models.CASCADE)
     teams = models.CharField(max_length = 150)
     age = models.PositiveIntegerField(null = True, blank = True)
-
+    profile_pic = models.ImageField(upload_to = "profile_pic", default = "/default/default.png")
 
 def create_profile(sender, **kwargs):
     if kwargs['created']:

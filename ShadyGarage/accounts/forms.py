@@ -17,4 +17,19 @@ class UserForm(UserCreationForm):
 class ProfileForm(forms.ModelForm):
     class Meta():
         model = models.Profile
-        fields = ("teams", "age")
+        fields = ("teams", "age", "profile_pic")
+
+    def clean_image(self):
+        image = self.cleaned_data.get('profile_pic', False)
+        if image:
+            if image._size > 4*700*700:
+                raise ValidationError("Image file too large ( > 4mb )")
+            return image
+        else:
+            raise ValidationError("Couldn't read uploaded image")
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["teams"].label = "Team"
+        self.fields["age"].label = "Alder"
+        self.fields["profile_pic"].label = "Profilbilde"
