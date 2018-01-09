@@ -15,3 +15,8 @@ class ProfileInfo(CreateView):
     form_class = forms.ProfileForm
     template_name = "accounts/profile_info.html"
     success_url = reverse_lazy("home")
+    def form_valid(self, form):
+        self.object = form.save(commit = False)
+        self.object.user = self.request.user
+        self.object.save()
+        return super().form_valid(form)
