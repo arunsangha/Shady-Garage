@@ -15,6 +15,7 @@ class ProfileInfo(CreateView, LoginRequiredMixin):
     form_class = forms.ProfileForm
     template_name = "accounts/profile_info.html"
     success_url = reverse_lazy("login")
+    
     def form_valid(self, form):
         self.object = form.save(commit = False)
         self.object.user = self.request.user
