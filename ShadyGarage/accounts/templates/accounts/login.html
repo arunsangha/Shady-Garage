@@ -1,13 +1,21 @@
 {% extends "base.html" %}
 {% load bootstrap3 %}
+{% load staticfiles %}
 {% block body %}
-<div class="container">
-  <div class="jumbotron login-jumbotron">
-    <h2 id ="logintitle">Login!</h2>
+<style>
+  body {
+    background-color: black;
+  }
+</style>
+
+
+<div class="container" align="center">
+  <img src="{%static "images/logomidlertidig.png"%}" alt="" id="logo-login"> </img>
+  <div class="login_container">
     <form method="POST">
       {% csrf_token %}
       {% bootstrap_form form%}
-      <input type="submit" class="btn btn-info" value="login!">
+      <input type="submit" class="btn btn-outline-info btn-block" value="login!">
     </form>
   </div>
 </div>

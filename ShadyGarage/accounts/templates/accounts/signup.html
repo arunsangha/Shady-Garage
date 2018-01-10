@@ -1,14 +1,22 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 {% load bootstrap3 %}
 {% block body %}
-  <div class="container">
-    <div class="jumbotron signup-form">
-      <h3>Registrer deg!</h3>
+ <!--Byttet bakgrunn her..skjønner ikke helt hvordan jeg skal ellers gjøre det, pga  -->
+  <style>
+    body{
+      background-image: url('{%static 'images/signupbackground.jpg'%}');
+    }
+  </style>
+
+  <div class="signup_container">
+    <div class="signup-form_container">
+      <h1 id="registrer-deg-h1">Registrer deg!</h1>
         <form method="POST">
           {% csrf_token %}
           {% bootstrap_form form%}
-          <input type="submit" class="btn btn-info" value="Registrer meg!">
+          <input type="submit" class="btn btn-info " value="Registrer meg!">
         </form>
-    </div>
+      </div>
   </div>
 {% endblock %}
