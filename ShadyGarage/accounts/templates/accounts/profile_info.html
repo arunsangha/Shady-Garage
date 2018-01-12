@@ -1,8 +1,15 @@
 {% extends "base.html" %}
-{% block body %}
+{% load staticfiles %}
 {% load bootstrap3 %}
+{% block body %}
+<style>
+  body{
+    background-image: url({%static 'images/signupdel2.jpeg'%});
+    background-size: cover;
+  }
+</style>
    <div class="container">
-     <div class="jumbotron">
+     <div class="signupdel2-container">
        <form method="post" enctype="multipart/form-data">
          {% csrf_token %}
          {% bootstrap_form form%}
