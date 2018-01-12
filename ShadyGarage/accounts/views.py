@@ -7,11 +7,6 @@ from . import forms
 from django.views.generic import CreateView, UpdateView, TemplateView
 # Create your views here.
 
-class SignUp(CreateView):
-    form_class = forms.UserForm
-    template_name="accounts/signup.html"
-    success_url = reverse_lazy("login")
-
 def signup(request):
     registered = False
     if request.method == 'POST':
