@@ -8,16 +8,15 @@
     background-size: cover;
   }
 </style>
-   <div class="container">
-     <div class="signupdel2-container">
+   <div class="signupdel2-container">
+     <div class="signupdel2-form-container">
+       <h4> Når du trykker ferdig, vil du bli bedt om å logge inn.
+          Dette er for å sørge for at du husker brukernavnet og passordet</h4>
        <form method="post" enctype="multipart/form-data">
          {% csrf_token %}
          {% bootstrap_form form%}
-         {{ profile_form.as_p }}
-         <input type="submit" name="" value="Ferdig!">
+         <input type="submit" class="btn btn-info" value="Ferdig!">
        </form>
-        <h3> Når du trykker ferdig, vil du bli bedt om å logge inn.<br>
-           Dette er for å sørge for at du husker brukernavnet og passordet</h3>
      </div>
    </div>
 
