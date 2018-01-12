@@ -1,9 +1,22 @@
 {% extends "base.html" %}
 {% block body %}
+{% if user.is_authenticated %}
+
   {% for meet in object_list %}
     <p>{{meet.meet_name}}</p>
-
   {% endfor %}
 
-
+{% else %}
+<div class="container" >
+    <div class="jumbotron">
+      <h1 class="display-4">Ops, ser ut som du ikke er logget inn!</h1>
+      <p class="lead">Logg inn eller registrer deg for å se treff i nærheten av deg!</p>
+      <a class="btn btn-danger btn-lg" href="{% url 'accounts:login'%}" role="button">Logg inn</a>
+      <a class="btn btn-info btn-lg" href="{%url 'accounts:signup'%}" role="button">Registrer meg!</a>
+    </div>
+    <div id ="gif" align="center">
+    <iframe src="https://giphy.com/embed/rUwbpQKelwneM" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/day-perfect-burnout-rUwbpQKelwneM"></a>
+    </div>
+</div>
+{% endif %}
 {% endblock %}
