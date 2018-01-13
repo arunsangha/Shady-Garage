@@ -8,11 +8,17 @@
     <div class="meet_card_container">
       <div class="meet_card_img_container">
       </div><div class="meet_card_time_container">
-        <p class="meet_card_day">Søndag</p>
-        <p class="meet_card_date">1. Januar</p>
-        <p class="meet_card_hour">20:00</p>
-      </div><div class="meet_card_title_container">
-        <p>{{meet.meet_name}}</p>
+        <p>Søndag</p>
+        <p>1. Januar</p>
+        <p>20:00</p>
+      </div><!--
+  --><div class="meet_card_info_container">
+        <h2>{{meet.meet_name}}</h2>
+        <div class="meet_card_info">
+          <h4>Ikea Furuset</h4>
+          <h4>Burning tillat</h4>
+          <h4>120</h4>
+        </div>
       </div>
     </div>
 {% endfor %}
