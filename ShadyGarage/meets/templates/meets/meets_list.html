@@ -1,29 +1,24 @@
 {% extends "base.html" %}
 {% block body %}
-<<<<<<< HEAD
-  <div class="meet_list_container">
-  {% for meet in object_list %}
-      <div class="meet_card_container">
-        <div class="meet_card_img_container">
-        </div><!--
-     --><div class="meet_card_time_container">
-          <p class="meet_card_day">Søndag</p>
-          <p class="meet_card_date">10. Januar</p>
-          <p class="meet_card_hour">20:00</p>
-        </div><!--
-     --><div class="meet_card_title_container">
-          <p>{{meet.meet_name}}</p>
-        </div>
-      </div>
-  {% endfor %}
-  </div>
 
-=======
 {% if user.is_authenticated %}
 
-  {% for meet in object_list %}
-    <p>{{meet.meet_name}}</p>
-  {% endfor %}
+<div class="meet_list_container">
+{% for meet in object_list %}
+    <div class="meet_card_container">
+      <div class="meet_card_img_container">
+      </div><!--
+   --><div class="meet_card_time_container">
+        <p class="meet_card_day">Søndag</p>
+        <p class="meet_card_date">10. Januar</p>
+        <p class="meet_card_hour">20:00</p>
+      </div><!--
+   --><div class="meet_card_title_container">
+        <p>{{meet.meet_name}}</p>
+      </div>
+    </div>
+{% endfor %}
+</div>
 
 {% else %}
 <div class="container" >
@@ -38,5 +33,4 @@
     </div>
 </div>
 {% endif %}
->>>>>>> f32ed1ddc4c4caf11d64b77b3fc6da2d54ee0be0
 {% endblock %}
