@@ -14,7 +14,7 @@
       <h1 id="registrer-deg-h1">Registrer deg!</h1>
         <form method="POST">
           {% csrf_token %}
-          {% bootstrap_form form%}
+          {% bootstrap_form user_form%}
           <input type="submit" class="btn btn-info " value="Registrer meg!">
         </form>
       </div>

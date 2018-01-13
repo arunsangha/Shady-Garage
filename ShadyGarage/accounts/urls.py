@@ -4,8 +4,8 @@ from . import views
 app_name = 'accounts'
 
 urlpatterns = [
-    url(r'^signup/', views.SignUp.as_view(), name="signup"),
+    url(r'^signup/', views.signup, name="signup"),
     url(r'^login/', auth_views.LoginView.as_view(template_name = "accounts/login.html"), name = "login"),
     url(r'^logout/', auth_views.LogoutView.as_view(), name = "logout"),
-    url(r'^editprofile/', views.ProfileInfo.as_view(), name = "edit_profile"),
+    url(r'^signup_del2/', views.ProfileInfo.as_view(), name = "signup_del2"),
 ]

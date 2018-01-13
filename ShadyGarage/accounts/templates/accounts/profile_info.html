@@ -1,13 +1,21 @@
 {% extends "base.html" %}
-{% block body %}
+{% load staticfiles %}
 {% load bootstrap3 %}
-   <div class="container">
-     <div class="jumbotron">
+{% block body %}
+<style>
+  body{
+    background-image: url({%static 'images/signupdel2.jpeg'%});
+    background-size: cover;
+  }
+</style>
+   <div class="signupdel2-container">
+     <div class="signupdel2-form-container">
+       <h4> Når du trykker ferdig, vil du bli bedt om å logge inn.
+          Dette er for å sørge for at du husker brukernavnet og passordet</h4>
        <form method="post" enctype="multipart/form-data">
          {% csrf_token %}
          {% bootstrap_form form%}
-         {{ profile_form.as_p }}
-         <input type="submit" name="" value="save">
+         <input type="submit" class="btn btn-info" value="Ferdig!">
        </form>
      </div>
    </div>
