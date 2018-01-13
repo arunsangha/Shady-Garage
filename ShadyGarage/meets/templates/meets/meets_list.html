@@ -1,9 +1,20 @@
 {% extends "base.html" %}
 {% block body %}
+  <div class="meet_list_container">
   {% for meet in object_list %}
-    <p>{{meet.meet_name}}</p>
-
+      <div class="meet_card_container">
+        <div class="meet_card_img_container">
+        </div><!--
+     --><div class="meet_card_time_container">
+          <p class="meet_card_day">Søndag</p>
+          <p class="meet_card_date">10. Januar</p>
+          <p class="meet_card_hour">20:00</p>
+        </div><!--
+     --><div class="meet_card_title_container">
+          <p>{{meet.meet_name}}</p>
+        </div>
+      </div>
   {% endfor %}
-
+  </div>
 
 {% endblock %}
