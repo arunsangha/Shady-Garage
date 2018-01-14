@@ -9,6 +9,7 @@ class Meet(models.Model):
     date = models.DateTimeField()
     slug = models.SlugField(allow_unicode = True, unique = True)
     description = models.TextField()
+    meet_image = models.ImageField(upload_to = "meets_pic", blank = True, default = "/meets_pic/meet_default.png")
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.meet_name)
