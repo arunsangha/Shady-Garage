@@ -2,6 +2,7 @@
 {% block body %}
 
 {% if user.is_authenticated %}
+<a class="btn btn-info" href="{%url 'meets:create_meet'%}" role="button">Opprett treff! </a>
 
 <div class="meet_list_container">
 {% for meet in object_list %}
