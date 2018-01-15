@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib import auth
 from django.utils.text import slugify
-
+from django.core.urlresolvers import reverse
 # Create your models here.
 class Meet(models.Model):
 
@@ -15,3 +15,6 @@ class Meet(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.meet_name)
         super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse("meets:single", kwargs={"slug":self.slug})
