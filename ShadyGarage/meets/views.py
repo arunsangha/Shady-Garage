@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import ListView
 from . import models
-
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, CreateView
 from django.core.urlresolvers import reverse_lazy
 from . import models
@@ -13,8 +13,7 @@ class MeetsListView(ListView):
     template_name = 'meets/meets_list.html'
     model = models.Meet
 
-
-class CreateMeetView(CreateView):
+class CreateMeetView(CreateView, LoginRequiredMixin):
     template_name = 'meets/meets_form.html'
     form_class = forms.CreateMeetForm
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('meets')
