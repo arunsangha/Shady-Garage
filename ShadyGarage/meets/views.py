@@ -23,7 +23,6 @@ class DetailMeetView(DetailView):
 class MeetJoinToogleView(RedirectView):
     def get_redirect_url(self, *args, **kwargs):
         slug = self.kwargs.get("slug")
-        print(slug)
         obj = get_object_or_404(models.Meet, slug=slug)
         url_ = obj.get_absolute_url()
         user = self.request.user
