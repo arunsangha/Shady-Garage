@@ -4,6 +4,8 @@
   <p>{{ meet.meet_name}}</p>
   <p>{{ meet.date|date:'Y-m-d' }} </p>
   <p>{{ meet.time}}</p>
+  <p>Skal på treffet: {{meet.users_joining.count}}</p>
+  <a href="{{ meet.join_url }}"> Jeg skal være med!</a>
 
 
   {% else %}

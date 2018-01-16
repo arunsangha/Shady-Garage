@@ -11,6 +11,7 @@ class Meet(models.Model):
     slug = models.SlugField(allow_unicode = True, unique = True)
     description = models.TextField()
     meet_image = models.ImageField(upload_to = "meets_pic", blank = True, default = "/meets_pic/meet_default.png")
+    users_joining = models.ManyToManyField(auth.models.User, blank = True, related_name = "members_joining_meet")
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.meet_name)
@@ -18,3 +19,6 @@ class Meet(models.Model):
 
     def get_absolute_url(self):
         return reverse("meets:single", kwargs={"slug":self.slug})
+
+    def join_url(self):
+        return reverse("meets:join_meet", kwargs={"slug":self.slug})

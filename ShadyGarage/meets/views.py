@@ -1,9 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView
 from . import models
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView, CreateView, DetailView
-from django.core.urlresolvers import reverse_lazy
+from django.views.generic import ListView, CreateView, DetailView, RedirectView
 from . import models
 from . import forms
 
@@ -20,3 +19,17 @@ class CreateMeetView(CreateView, LoginRequiredMixin):
 class DetailMeetView(DetailView):
     template_name = 'meets/meets_detail.html'
     model = models.Meet
+
+class MeetJoinToogleView(RedirectView):
+    def get_redirect_url(self, *args, **kwargs):
+        slug = self.kwargs.get("slug")
+        print(slug)
+        obj = get_object_or_404(models.Meet, slug=slug)
+        url_ = obj.get_absolute_url()
+        user = self.request.user
+        if user.is_authenticated():
+            if user in obj.users_joining.all():
+                obj.users_joining.remove(user)
+            else:
+                obj.users_joining.add(user)
+        return url_
