@@ -1,20 +1,20 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 {% block body  %}
-  <div class="card text-white bg-dark mb-3" style="width: 18rem;">
+  <div class="card card-outline-primary mb-3 text-center" style="width: 18rem; background-color: rgba(0,0,0,0.5);">
   <img class="card-img-top" src="{%static "images/logoforindex.png"%}" alt="Card image cap">
   <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <h5 class="card-title">Shady Garage</h5>
+    <h6 class="card-text">Et forent bilsamfunn.</h6>
+    <ul class="list-item-homepage">
+      <li class="item-homepage">Hold oversikt over treff i nærheten av deg.</li>
+      <li class="item-homepage"> Opprett treff. </li>
+      <li class="item-homepage"> Se og følg med på andre biler. </li>
+      <li class="item-homepage"> Et kombinert samfunn bestående av raagere, rånere og bilentusiaster.</li>
+    </ul>
   </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">Cras justo odio</li>
-    <li class="list-group-item">Dapibus ac facilisis in</li>
-    <li class="list-group-item">Vestibulum at eros</li>
-  </ul>
-  <div class="card-body">
-    <a href="#" class="card-link">Card link</a>
-    <a href="#" class="card-link">Another link</a>
+  <div class="card-body" style="background-color: rgba(0,0,0,0.5);">
+    <a href="#" class="card-link btn-info btn-lg">Mer om ShadyGarage!</a>
   </div>
 </div>
 
@@ -22,7 +22,7 @@
     body{
       background-image:url("static/images/alle_elsker_bobler.jpeg");
       background-repeat: no-repeat;
-      background-size: 100%;
+      background-size: cover;
     }
   </style>
 {% endblock %}
