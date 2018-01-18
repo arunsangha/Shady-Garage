@@ -20,7 +20,7 @@ class DetailMeetView(DetailView):
     template_name = 'meets/meets_detail.html'
     model = models.Meet
 
-class MeetJoinToogleView(RedirectView):
+class MeetJoinToggleView(RedirectView):
     def get_redirect_url(self, *args, **kwargs):
         slug = self.kwargs.get("slug")
         obj = get_object_or_404(models.Meet, slug=slug)
