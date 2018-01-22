@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block body %}
+  <style>
+    body{
+      background-image: url({%static "images/aboutpage.jpeg"%});
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+  </style>
+  <div class="container">
+    <img src="{% static 'images/biltyper-liste2.png'%}" id="about-image"></img>
+    <div class="boks">
+      <p>noafaafoafafoeafoeafeafaeeaeaefaoaefoefhoafhoeahoaefoehafhaefaefhaehfaef
+        noafaafoafafoeafoeafeafaeeaeaefaoaefoefhoafhoeahoaefoehafhaefaefhaehfaef
+        noafaafoafafoeafoeafeafaeeaeaefaoaefoefhoafhoeahoaefoehafhaefaefhaehfaef
+        noafaafoafafoeafoeafeafaeeaeaefaoaefoefhoafhoeahoaefoehafhaefaefhaehfaef</p>
+    </div>
+  </div>
+{% endblock %}
