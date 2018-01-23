@@ -29,6 +29,6 @@ class Meet(models.Model):
 
 
 class Meet_comments(models.Model):
-    user = models.ForeignKey(User, related_name = "meet_user_comment")
+    user = models.ForeignKey(User, related_name ="meet_user_comment", blank = True, null = True)
     meet = models.ManyToManyField(Meet, blank = True, related_name = "meet_comments")
     comment = models.TextField(max_length = 255);
