@@ -26,9 +26,3 @@ class Meet(models.Model):
 
     def join_url(self):
         return reverse("meets:join_meet", kwargs={"slug":self.slug})
-
-
-class Meet_comments(models.Model):
-    user = models.ForeignKey(User, related_name ="meet_user_comment", blank = True, null = True)
-    meet = models.ManyToManyField(Meet, blank = True, related_name = "meet_comments")
-    comment = models.TextField(max_length = 255);

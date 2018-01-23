@@ -32,10 +32,3 @@ class MeetJoinToggleView(RedirectView):
             else:
                 obj.users_joining.add(user)
         return url_
-
-class CommentMeetView(CreateView):
-    form_class = forms.CreateMeetComment
-    template_name = 'meets/meet_comment_form.html'
-
-    def success_url(self):
-        return reverse("meets:single", kwargs={"slug":self.slug})
