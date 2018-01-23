@@ -1,11 +1,25 @@
 {% extends "base.html" %}
 {% block body %}
   {% if user.is_authenticated %}
-  <p>{{ meet.meet_name}}</p>
-  <p>{{ meet.date|date:'Y-m-d' }} </p>
-  <p>{{ meet.time}}</p>
-  <p>Skal på treffet: {{meet.users_joining.count}}</p>
-  <a href="{{ meet.join_url }}"> Jeg skal være med!</a>
+  <div class="meet_detail_body">
+    <div class="meet_detail_map_container">
+    </div>
+    <div class="meet_detail_title_container">
+        <p>{{ meet.meet_name}}</p>
+    </div>
+    <div class="meet_detail_date_container">
+        <p>{{ meet.date|date:'Y-m-d' }} </p>
+    </div>
+    <div class="meet_detail_time_container">
+        <p>{{ meet.time}}</p>
+    </div>
+    <div class="meet_detail_interested_container">
+        <p>Skal på treffet: {{meet.users_joining.count}}</p>
+    </div>
+    <div class="meet_detail_join_container">
+      <a href="{{ meet.join_url }}"> Jeg skal være med!</a>
+    </div>
+  </div>
 
 
   {% else %}
