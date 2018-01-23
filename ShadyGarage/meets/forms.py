@@ -6,7 +6,7 @@ class CreateMeetForm(forms.ModelForm):
 
     class Meta():
         model = models.Meet
-        fields = ('meet_name', 'date', 'time', 'description')
+        fields = ('meet_name', 'date', 'time', 'description', 'latitude', 'longitude')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

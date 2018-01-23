@@ -1,7 +1,18 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 {% block body %}
 
 {% if user.is_authenticated %}
+
+<style>
+  body{
+    background-image: url({%static 'images/interior.jpeg'%});
+    background-repeat:no-repeat;
+    background-attachment: fixed;
+  }
+</style>
+
+<div class="background_meets_list"></div>
 <a class="btn btn-info" href="{%url 'meets:create_meet'%}" role="button">Opprett treff! </a>
 
 <div class="meet_list_container">

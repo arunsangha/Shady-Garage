@@ -5,13 +5,15 @@ from django.core.urlresolvers import reverse
 # Create your models here.
 class Meet(models.Model):
 
-    meet_name = models.CharField(max_length = 200, unique = True)
+    meet_name = models.CharField(max_length = 255, unique = True)
     date = models.DateTimeField()
     time = models.TimeField(blank = True, default="19:00:00")
     slug = models.SlugField(allow_unicode = True, unique = True)
     description = models.TextField()
     meet_image = models.ImageField(upload_to = "meets_pic", blank = True, default = "/meets_pic/meet_default.png")
     users_joining = models.ManyToManyField(auth.models.User, blank = True, related_name = "members_joining_meet")
+    longitude = models.CharField(max_length = 255, blank = True)
+    latitude = models.CharField(max_length = 255,blank = True)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.meet_name)
