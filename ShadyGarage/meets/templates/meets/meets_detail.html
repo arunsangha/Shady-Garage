@@ -2,22 +2,30 @@
 {% block body %}
   {% if user.is_authenticated %}
   <div class="meet_detail_body">
-    <div class="meet_detail_map_container">
-    </div>
     <div class="meet_detail_title_container">
-        <p>{{ meet.meet_name}}</p>
+        <h1>{{ meet.meet_name}}</h1>
     </div>
-    <div class="meet_detail_date_container">
-        <p>{{ meet.date|date:'Y-m-d' }} </p>
+    <div class="meet_detail_map_container">
+      <div id="map"></div>
     </div>
-    <div class="meet_detail_time_container">
-        <p>{{ meet.time}}</p>
-    </div>
-    <div class="meet_detail_interested_container">
-        <p>Skal på treffet: {{meet.users_joining.count}}</p>
-    </div>
-    <div class="meet_detail_join_container">
-      <a href="{{ meet.join_url }}"> Jeg skal være med!</a>
+    <div class="meet_detail_info_container">
+      <div class="meet_detail_description_container">
+          <p>lang beskrivelse</p>
+      </div>
+      <div class="meet_detail_time_container">
+        <div class="meet_detail_date_container">
+            <p>{{ meet.date|date:'Y-m-d' }} </p>
+        </div>
+        <div class="meet_detail_hour_container">
+            <p>{{ meet.time}}</p>
+        </div>
+      </div>
+      <div class="meet_detail_interested_container">
+          <p>Skal på treffet: {{meet.users_joining.count}}</p>
+      </div>
+      <div class="meet_detail_join_container">
+        <a href="{{ meet.join_url }}"> Jeg skal være med!</a>
+      </div>
     </div>
   </div>
 
