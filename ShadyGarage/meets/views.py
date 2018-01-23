@@ -5,7 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, CreateView, DetailView, RedirectView
 from . import models
 from . import forms
-
+from django.core.urlresolvers import reverse
 # Create your views here.
 
 class MeetsListView(ListView):
@@ -32,3 +32,10 @@ class MeetJoinToggleView(RedirectView):
             else:
                 obj.users_joining.add(user)
         return url_
+
+class CommentMeetView(CreateView):
+    form_class = forms.CreateMeetComment
+    template_name = 'meets/meet_comment_form.html'
+
+    def success_url(self):
+        return reverse("meets:single", kwargs={"slug":self.slug})

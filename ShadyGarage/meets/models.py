@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib import auth
 from django.utils.text import slugify
 from django.core.urlresolvers import reverse
+from django.contrib.auth import get_user_model
+User = get_user_model()
 # Create your models here.
 class Meet(models.Model):
 
@@ -24,3 +26,9 @@ class Meet(models.Model):
 
     def join_url(self):
         return reverse("meets:join_meet", kwargs={"slug":self.slug})
+
+
+class Meet_comments(models.Model):
+    user = models.ForeignKey(User, related_name = "meet_user_comment")
+    meet = models.ManyToManyField(Meet, blank = True, related_name = "meet_comments")
+    comment = models.TextField(max_length = 255);
