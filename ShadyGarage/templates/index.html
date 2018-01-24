@@ -1,6 +1,19 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 {% block body  %}
+<!-- Bakgrunnsbilde funker best når det ligger her, så vi lar det ligge her.
+    Det vi evnt kan gjøre er å lage en block i base.html, for at det skal se penere ut!
+    Om det går..
+-->
+<style>
+  body{
+    background-image: url({% static 'images/alle_elsker_bobler.jpeg'%});
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    overflow: hidden;
+  }
+</style>
 <div class="body_index">
   <div class="card card-outline-primary mb-3 text-center" style="width: 18rem; background-color: rgba(0,0,0,0.5);">
     <img class="card-img-top" src="{%static "images/logoforindex.png"%}" alt="Card image cap">
