@@ -15,3 +15,8 @@ class CreateMeetForm(forms.ModelForm):
         self.fields['date'].label = "Dato"
         self.fields['time'].label = "Treffet starter..."
         self.fields['description'].label = "Beskrivelse av treffet:"
+
+class CommentForm(forms.ModelForm):
+    class Meta():
+        model = models.Meet_Comment
+        fields = ('comment',)

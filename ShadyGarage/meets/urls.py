@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'^new/', views.CreateMeetView.as_view(), name = 'create_meet'),
     url(r'^@/(?P<slug>[-\w]+)/$', views.DetailMeetView.as_view(), name='single'),
     url(r'^@/(?P<slug>[-\w]+)/like/$', views.MeetJoinToggleView.as_view(), name='join_meet'),
+    url(r'^@/(?P<slug>[-\w]+)/comment/$', views.CommentView.as_view(), name='comment_meet'),
 ]
