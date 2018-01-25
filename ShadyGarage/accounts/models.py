@@ -8,7 +8,7 @@ class User(auth.models.User, auth.models.PermissionsMixin):
         return "@{}".format(self.username)
 
 class Profile(models.Model):
-    TEAM_CHOICES = (('SHADYGARAGE', "ShadyGarage"), ('RAAGER', "Raager"), ('RÅNER', "Råner"))
+    TEAM_CHOICES = (('SHADYGARAGE', "ShadyGarage"), ('CLASSIC', "Classic"), ('OFFROAD', "Offroad"), ('RÅNER', "Råner"), ('STANCE', "Stance"), ('TUNER', "Tuner"))
     user = models.OneToOneField(auth.models.User, on_delete = models.CASCADE)
     teams = models.CharField(max_length = 50, choices = TEAM_CHOICES, default="SHADYGARAGE")
     age = models.PositiveIntegerField(null = True, blank = True)
