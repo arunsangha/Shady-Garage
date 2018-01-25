@@ -6,7 +6,6 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 # Create your models here.
 class Meet(models.Model):
-
     meet_name = models.CharField(max_length = 255, unique = True)
     date = models.DateTimeField()
     time = models.TimeField(blank = True, default="19:00:00")
@@ -27,8 +26,14 @@ class Meet(models.Model):
     def join_url(self):
         return reverse("meets:join_meet", kwargs={"slug":self.slug})
 
+    class Meta:
+        ordering = ['date']
 
-class Meet_comments(models.Model):
-    user = models.ForeignKey(User, related_name = "meet_user_comment")
-    meet = models.ManyToManyField(Meet, blank = True, related_name = "meet_comments")
-    comment = models.TextField(max_length = 255);
+class Meet_Comment(models.Model):
+    meet_fk = models.ForeignKey(Meet, related_name="meet_comment")
+    user = models.ForeignKey(User, related_name="meet_comment_user")
+    comment = models.TextField(max_length = 255)
+    created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created']

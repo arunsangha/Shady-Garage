@@ -8,8 +8,9 @@ class User(auth.models.User, auth.models.PermissionsMixin):
         return "@{}".format(self.username)
 
 class Profile(models.Model):
+    TEAM_CHOICES = (('SHADYGARAGE', "ShadyGarage"), ('RAAGER', "Raager"), ('RÅNER', "Råner"))
     user = models.OneToOneField(auth.models.User, on_delete = models.CASCADE)
-    teams = models.CharField(max_length = 150)
+    teams = models.CharField(max_length = 50, choices = TEAM_CHOICES, default="SHADYGARAGE")
     age = models.PositiveIntegerField(null = True, blank = True)
     profile_pic = models.ImageField(upload_to = "profile_pic", default = "/default/default.png")
 

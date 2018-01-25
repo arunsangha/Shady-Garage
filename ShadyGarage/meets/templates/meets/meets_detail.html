@@ -10,7 +10,7 @@
     </div>
     <div class="meet_detail_info_container">
       <div class="meet_detail_description_container">
-          <p>lang beskrivelse</p>
+          <p>{{meet.description}}</p>
       </div>
       <div class="meet_detail_time_container">
         <div class="meet_detail_date_container">
@@ -25,6 +25,15 @@
       </div>
       <div class="meet_detail_join_container">
         <a href="{{ meet.join_url }}"> Jeg skal være med!</a>
+      </div>
+      <div class="comments">
+        <h4><a href="{% url 'meets:comment_meet' slug=meet.slug %}">Kommenter</a><h4>
+        <h1>Kommentarer:</h1>
+        {% for comment in meet.meet_comment.all %}
+          <p>Bruker:{{comment.user}}</p>
+          <p>Skrev: {{comment.comment}}</p>
+          <p>Dato: {{comment.created|date:'Y-m-d H:i'}}
+        {% endfor %}
       </div>
     </div>
   </div>
