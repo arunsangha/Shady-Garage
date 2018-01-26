@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block body %}
+  <div class="container">
+    <img src="{{user.profile.profile_pic.url}}" width="240" alt=""></img>
+    <h1>Brukernavn: {{user.username}}</h1>
+    <p>Team: {{user.profile.teams}}</p>
+    <p>Alder: {{user.profile.age}}</p>
+  </div>
+{% endblock %}

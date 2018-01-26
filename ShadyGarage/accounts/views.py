@@ -32,3 +32,6 @@ class ProfileInfo(CreateView, LoginRequiredMixin):
         self.object.user = self.request.user
         self.object.save()
         return super().form_valid(form)
+
+class ProfilePage(TemplateView):
+    template_name = "accounts/profilepage.html"

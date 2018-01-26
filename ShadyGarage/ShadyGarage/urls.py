@@ -16,6 +16,8 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -24,5 +26,5 @@ urlpatterns = [
     url(r'^accounts/', include('accounts.urls'), name = 'accounts'),
     url(r'^accounts/', include("django.contrib.auth.urls")),
     url(r'^meets/', include('meets.urls'), name = 'meets'),
-
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    #Setningen over virker kun under production, ikke deployment.
