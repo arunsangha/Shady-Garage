@@ -1,10 +1,25 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 {% block body %}
-  <div class="container">
-    <img src="{{user.profile.profile_pic.url}}" width="240" alt=""></img>
-    <h1>Brukernavn: {{user.username}}</h1>
-    <p>Team: {{user.profile.teams}}</p>
-    <p>Alder: {{user.profile.age}}</p>
+  <div class="profile_info_container">
+    <img class="profile_info_profilepic" src="{{user.profile.profile_pic.url}}" width="240" alt=""></img>
+    <div class="profile_info_text_container">
+      <h1 class="profile_info_username">{{user.username}}</h1>
+      <p class="profile_info_team">Team: {{user.profile.teams}}</p>
+      <p class="profile_info_age">Alder: {{user.profile.age}}</p>
+    </div>
+  </div>
+  <div class="profile_img_container">
+    <!-- for loop  -->
+    <img class="profile_user_img" src="{{user.profile.profile_pic.url}}" alt="">
+    <img class="profile_user_img" src="{{user.profile.profile_pic.url}}" alt="">
+    <img class="profile_user_img" src="{{user.profile.profile_pic.url}}" alt="">
+    <img class="profile_user_img" src="{{user.profile.profile_pic.url}}" alt="">
+    <img class="profile_user_img" src="{{user.profile.profile_pic.url}}" alt="">
+    <img class="profile_user_img" src="{{user.profile.profile_pic.url}}" alt="">
+    <img class="profile_user_img" src="{{user.profile.profile_pic.url}}" alt="">
+    <img class="profile_user_img" src="{{user.profile.profile_pic.url}}" alt="">
+    <img class="profile_user_img" src="{{user.profile.profile_pic.url}}" alt="">
+    <!-- end for loop-->
   </div>
 {% endblock %}
