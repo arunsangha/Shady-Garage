@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from . import models
 from . import forms
 from django.views.generic import CreateView, UpdateView, TemplateView
-# Create your views here.
 
 def signup(request):
     registered = False
@@ -33,9 +34,11 @@ class ProfileInfo(CreateView, LoginRequiredMixin):
         self.object.save()
         return super().form_valid(form)
 
+
 class ProfilePage(TemplateView):
     template_name = "accounts/profilepage.html"
 
+@login_required
 def edit_profile(request):
     if request.method == 'POST':
         form = forms.EditProfileForm(request.POST, instance=request.user.profile)
@@ -47,3 +50,19 @@ def edit_profile(request):
     else:
         form = forms.EditProfileForm(instance=request.user.profile)
         return render(request, 'accounts/edit_profile.html', {'form':form})
+
+@login_required
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(data = request.POST, user = request.user)
+
+        if form.is_valid():
+            form.save()
+            return redirect('accounts:profile_page')
+
+        else:
+            return redirect('accounts:change_password')
+
+    else:
+        form = PasswordChangeForm(user = request.user)
+        return render(request, 'accounts/change_password.html', {'form':form})
