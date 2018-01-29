@@ -10,6 +10,7 @@ urlpatterns = [
     url(r'^logout/$', auth_views.LogoutView.as_view(), name = "logout"),
     url(r'^signup_del2/$', views.ProfileInfo.as_view(), name = "signup_del2"),
     url(r'^myprofile/$', login_required(views.ProfilePage.as_view()), name="profile_page"),
+    url(r'^otherprofiles/(?P<pk>\d+)/$', views.view_profiles, name="profile_page_pk"),
     url(r'^myprofile/edit/$', views.edit_profile, name="profile_edit"),
     url(r'^myprofile/change-password/$', views.change_password, name="change_password"),
 ]

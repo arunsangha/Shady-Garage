@@ -30,7 +30,7 @@
         <h4><a href="{% url 'meets:comment_meet' slug=meet.slug %}">Kommenter</a><h4>
         <h1>Kommentarer:</h1>
         {% for comment in meet.meet_comment.all %}
-          <p>Bruker:{{comment.user}}</p>
+          <p>Bruker:<a href="{%url 'accounts:profile_page_pk' pk=comment.user.pk %}">{{comment.user}}</a></p>
           <p>Skrev: {{comment.comment}}</p>
           <p>Dato: {{comment.created|date:'Y-m-d H:i'}}
         {% endfor %}

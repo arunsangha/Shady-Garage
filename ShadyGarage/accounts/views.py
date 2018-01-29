@@ -4,6 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from . import models
 from . import forms
 from django.views.generic import CreateView, UpdateView, TemplateView
@@ -38,6 +39,7 @@ class ProfileInfo(CreateView, LoginRequiredMixin):
 class ProfilePage(TemplateView):
     template_name = "accounts/profilepage.html"
 
+
 @login_required
 def edit_profile(request):
     if request.method == 'POST':
@@ -66,3 +68,10 @@ def change_password(request):
     else:
         form = PasswordChangeForm(user = request.user)
         return render(request, 'accounts/change_password.html', {'form':form})
+
+def view_profiles(request, pk=None):
+    if pk:
+        user = User.objects.get(pk=pk)
+    else:
+        user = request.user
+    return render(request, 'accounts/profilepage.html', {'user':user})
