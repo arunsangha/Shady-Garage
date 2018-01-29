@@ -35,3 +35,15 @@ class ProfileInfo(CreateView, LoginRequiredMixin):
 
 class ProfilePage(TemplateView):
     template_name = "accounts/profilepage.html"
+
+def edit_profile(request):
+    if request.method == 'POST':
+        form = forms.EditProfileForm(request.POST, instance=request.user.profile)
+
+        if form.is_valid():
+            form.save()
+            return redirect('accounts:profile_page')
+
+    else:
+        form = forms.EditProfileForm(instance=request.user.profile)
+        return render(request, 'accounts/edit_profile.html', {'form':form})
