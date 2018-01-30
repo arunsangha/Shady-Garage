@@ -26,15 +26,22 @@
       <div class="meet_detail_join_container">
         <a href="{{ meet.join_url }}"> Jeg skal være med!</a>
       </div>
-      <div class="comments">
-        <h4><a href="{% url 'meets:comment_meet' slug=meet.slug %}">Kommenter</a><h4>
-        <h1>Kommentarer:</h1>
-        {% for comment in meet.meet_comment.all %}
-          <p>Bruker:<a href="{%url 'accounts:profile_page_pk' pk=comment.user.pk %}">{{comment.user}}</a></p>
-          <p>Skrev: {{comment.comment}}</p>
-          <p>Dato: {{comment.created|date:'Y-m-d H:i'}}
-        {% endfor %}
-      </div>
+    </div>
+    <div class="meet_detail_comments_container">
+      <h4><a href="{% url 'meets:comment_meet' slug=meet.slug %}">Kommenter</a><h4>
+      <h1>Kommentarer:</h1>
+      {% for comment in meet.meet_comment.all %}
+        <div class="meet_detail_comment_container">
+          <div class="meet_detail_comment_container_userinfo">
+              <img class="meet_detail_comment_container_userinfo_profilepic" src="{{comment.user.profile.profile_pic.url}}" alt="bilde">
+              <p>Bruker:<a href="{%url 'accounts:profile_page_pk' pk=comment.user.pk %}">{{comment.user}}</a></p>
+              <p>Dato: {{comment.created|date:'Y-m-d H:i'}}
+          </div>
+          <div class="meet_detail_comment_container_comment">
+            <p>{{comment.comment}}</p>
+          </div>
+        </div>
+      {% endfor %}
     </div>
   </div>
 
@@ -51,6 +58,5 @@
       <iframe src="https://giphy.com/embed/rUwbpQKelwneM" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/day-perfect-burnout-rUwbpQKelwneM"></a>
       </div>
   </div>
-
   {% endif %}
 {% endblock %}
