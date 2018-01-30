@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block body %}
+  <div class="container">
+    {% for post in object_list %}
+        <h1> {{post.post_title}} </h1>
+        <h3> {{post.post_description}} </h3>
+        <p> <a href="{{ post.post_like }}"> Like </a> </p>
+    {% endfor %}
+  </div>
+{% endblock %}

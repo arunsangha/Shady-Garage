@@ -26,5 +26,6 @@ urlpatterns = [
     url(r'^accounts/', include('accounts.urls'), name = 'accounts'),
     url(r'^accounts/', include("django.contrib.auth.urls")),
     url(r'^meets/', include('meets.urls'), name = 'meets'),
+    url(r'^posts/', include('posts.urls'), name = 'posts'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     #Setningen over virker kun under production, ikke deployment.
