@@ -10,7 +10,8 @@ class Post(models.Model):
     post_title = models.CharField(max_length = 100)
     post_image = models.ImageField(upload_to="post_pic", blank = True)
     post_description = models.TextField(max_length = 255, blank = True)
-    post_likes = models.ManyToManyField(auth.models.User, blank = True, related_name = "post_likes" )
+    post_likes = models.ManyToManyField(auth.models.User, blank = True, related_name = "post_likes")
+    post_created = models.DateTimeField(auto_now_add = True)
     slug = models.SlugField(unique = True)
 
     def get_absolute_url(self):
@@ -32,3 +33,15 @@ class Post(models.Model):
         if not self.slug:
             self.slug = self._get_unique_slug()
         super().save()
+
+    class Meta:
+        ordering = ['-post_created']
+
+class PostComment(models.Model):
+     post_fk = models.ForeignKey(Post, related_name="post_comment_fk")
+     user_fk = models.ForeignKey(User, related_name="post_comment_user")
+     comment = models.TextField(max_length=1020)
+     created = models.DateTimeField(auto_now_add = True)
+
+     class Meta:
+         ordering = ['-created']
