@@ -11,7 +11,43 @@
     <form class="" action="{% url 'meets:create_meet' %}" method="post">
       {% csrf_token %}
       {% bootstrap_form form %}
+
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalLong">
+        Les dette først!
+      </button>
+      
       <input type="submit" class="btn btn-info" value="Opprett treff">
     </form>
   </div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">VIKTIG!!!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <h3>Shady Garage er ikke ansvarlig!</h3>
+
+          <p> ShadyGarage er kun et plattform som hjelper deg å opprette og dele treff!</p>
+          <hr>
+          <p> Tillatelse for å holde et treff må være avklart mellom oppretter og eier av tomten.</p>
+          <hr>
+          <p> ShadyGarage er kun et plattform som hjelper deg å opprette og dele treff!</p>
+          <hr>
+          <p> Tillatelse for å holde et treff må være avklart mellom oppretter og eier av tomten.</p>
+          <hr>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" data-dismiss="modal">Forstått!</button>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
