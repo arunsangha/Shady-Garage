@@ -14,6 +14,9 @@ class Profile(models.Model):
     age = models.PositiveIntegerField(null = True, blank = True)
     profile_pic = models.ImageField(upload_to = "profile_pic", default = "/default/default.png")
 
+    def __str__(self):
+        return self.user.username
+        
 def create_profile(sender, **kwargs):
     if kwargs['created']:
         profile = Profile.objects.create(users = kwargs['instance'])

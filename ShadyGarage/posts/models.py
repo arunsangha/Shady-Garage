@@ -14,6 +14,9 @@ class Post(models.Model):
     post_created = models.DateTimeField(auto_now_add = True)
     slug = models.SlugField(unique = True)
 
+    def __str__(self):
+        return "User:{} PostTitle: {}".format(self.user_fk.username, self.post_title)
+
     def get_absolute_url(self):
         return reverse('posts:post_detail', kwargs={'slug':self.slug})
 
@@ -43,5 +46,7 @@ class PostComment(models.Model):
      comment = models.TextField(max_length=1020)
      created = models.DateTimeField(auto_now_add = True)
 
+     def __str__(self):
+         return "Post: {} Kommentar:{}".format(self.post_fk.post_title, self.comment)
      class Meta:
          ordering = ['-created']

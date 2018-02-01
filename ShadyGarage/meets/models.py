@@ -26,6 +26,9 @@ class Meet(models.Model):
     def join_url(self):
         return reverse("meets:join_meet", kwargs={"slug":self.slug})
 
+    def __str__(self):
+        return str(self.meet_name)
+
     class Meta:
         ordering = ['date']
 
@@ -37,3 +40,6 @@ class Meet_Comment(models.Model):
 
     class Meta:
         ordering = ['-created']
+
+    def __str__(self):
+        return "Treff:{} | Kommentar : {}".format(self.meet_fk.meet_name, self.comment)
