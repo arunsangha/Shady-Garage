@@ -35,7 +35,7 @@
           <div class="meet_detail_comment_container_userinfo">
               <img class="meet_detail_comment_container_userinfo_profilepic" src="{{comment.user.profile.profile_pic.url}}" alt="bilde">
               <p>Bruker:<a href="{%url 'accounts:profile_page_pk' pk=comment.user.pk %}">{{comment.user}}</a></p>
-              <p>Dato: {{comment.created|date:'Y-m-d H:i'}}
+              <p>Dato: {{comment.created|timesince}}
           </div>
           <div class="meet_detail_comment_container_comment">
             <p>{{comment.comment}}</p>
