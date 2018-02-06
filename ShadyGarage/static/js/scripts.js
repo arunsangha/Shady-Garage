@@ -9,3 +9,9 @@ function initMap() {
        map: map
      });
    }
+
+   $(document).ready(function() {
+   	$(".burger-nav").on('click', function() {
+   		$("div ul").toggleClass("nav-list-open");
+   	});
+   });
