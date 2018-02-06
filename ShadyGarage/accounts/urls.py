@@ -13,4 +13,16 @@ urlpatterns = [
     url(r'^otherprofiles/(?P<pk>\d+)/$', views.view_profiles, name="profile_page_pk"),
     url(r'^myprofile/edit/$', views.edit_profile, name="profile_edit"),
     url(r'^myprofile/change-password/$', views.change_password, name="change_password"),
+
+    #if user has forgotten password
+    url(r'^reset-password/$', auth_views.password_reset,{'template_name': 'accounts/reset_password.html',
+        'post_reset_redirect':'accounts:password_reset_done', 'email_template_name':'accounts/reset_password_email.html'}
+        , name="reset_password"),
+    url(r'^reset-password/done/$', auth_views.password_reset_done,
+        {'template_name':'accounts/reset_password_done.html'}, name="password_reset_done"),
+    url(r'^reset-password/confirm/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/$', auth_views.password_reset_confirm,
+        {'template_name':'accounts/password_reset_confirm.html', 'post_reset_redirect':'accounts:password_reset_complete'}
+        ,name="password_reset_confirm"),
+    url(r'^reset-password/complete/$', auth_views.password_reset_complete,
+        {'template_name':'accounts/password_reset_complete.html'}, name="password_reset_complete"),
 ]
