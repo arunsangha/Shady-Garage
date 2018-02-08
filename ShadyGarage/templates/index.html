@@ -1,22 +1,9 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 {% block body  %}
-<!-- Bakgrunnsbilde funker best når det ligger her, så vi lar det ligge her.
-    Det vi evnt kan gjøre er å lage en block i base.html, for at det skal se penere ut!
-    Om det går..
-
-<style>
-  body{
-    background-image: url({% static 'images/alle_elsker_bobler.jpeg'%});
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-    overflow: hidden;
-  }
-</style>
--->
 <div class="background-image-div">
   <div class="body_index">
+<!--
     <div class="card card-outline-primary mb-3 text-center" style="width: 18rem; background-color: rgba(0,0,0,0.5);">
       <img class="card-img-top" src="{%static "images/logoforindex.png"%}" alt="Card image cap">
       <div class="card-body">
@@ -30,7 +17,24 @@
         </ul>
       </div>
       <a href="{%url 'about'%}" class="card-link btn-info btn-lg">Mer om ShadyGarage!</a>
+    </div>-->
+
+    <div class="index-card">
+      <img class="index-card-img" src="{%static "images/logoforindex.png"%}" alt="Card image cap">
+      </img>
+      <div class="index-card-body">
+        <h5 class="index-card-title">Shady Garage</h5>
+        <h6 class="index-card-sub-title">Et forent bilsamfunn.</h6>
+        <ul class="index-card-list">
+          <li class="index-card-list-item">Hold oversikt over treff i nærheten av deg.</li>
+          <li class="index-card-list-item"> Opprett treff. </li>
+          <li class="index-card-list-item"> Se og følg med på andre biler. </li>
+          <li class="index-card-list-item"> Et kombinert samfunn bestående av rånere og bilentusiaster.</li>
+        </ul>
+        <a href="{%url 'about'%}" class="index-card-button">Mer om ShadyGarage!</a>
+      </div>
     </div>
+
   </div>
 </div>
 

@@ -2,16 +2,9 @@
 {% load bootstrap3 %}
 {% load staticfiles %}
 {% block body %}
-<style>
-  body {
-    background-color: black;
-  }
-</style>
-
-
-<div class="container" align="center">
+<div class="login-container">
   <img src="{%static "images/logomidlertidig.png"%}" alt="" id="logo-login"> </img>
-  <div class="login_container">
+  <div class="login-form-container">
     <form method="POST">
       {% csrf_token %}
       {% bootstrap_form form%}
