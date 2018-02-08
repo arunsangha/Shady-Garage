@@ -6,11 +6,27 @@ from django.views.generic import ListView, CreateView, DetailView, RedirectView
 from . import models
 from . import forms
 from django.core.urlresolvers import reverse, reverse_lazy
+from django.db.models import Q
 # Create your views here.
 
 class MeetsListView(ListView):
     template_name = 'meets/meets_list.html'
-    model = models.Meet
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(MeetsListView, self).get_context_data(*args, **kwargs)
+        return context
+
+    def get_queryset(self, *args, **kwargs):
+        qs = models.Meet.objects.all()
+        query = self.request.GET.get("q", None)
+        if query is not None:
+            qs = qs.filter(
+                Q(date__icontains=query) |
+                Q(meet_name__icontains=query) |
+                Q(description__icontains=query) |
+                Q(time__icontains=query)
+            )
+        return qs
 
 class CreateMeetView(LoginRequiredMixin, CreateView):
     template_name = 'meets/meets_form.html'

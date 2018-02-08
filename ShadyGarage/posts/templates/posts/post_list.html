@@ -2,10 +2,30 @@
 {% load staticfiles %}
 {% block body %}
   <div class="container" align="center">
+    <form action="{% url 'posts:posts_feed' %}" method="action">
+      <input type="text" name="q" placeholder="Søk">
+      <input type="submit" name="" value="Søk">
+    </form>
     {% for post in object_list %}
-        <h1> <a href="{{ post.get_absolute_url }}">{{post.post_title}} </a></h1>
-        <h3> {{post.post_description}} </h3>
-        <p> <a href="{{ post.post_like }}"> Like </a> </p>
+        <div class="card text-center" style="margin:20px;">
+          <div class="card-header">
+            @{{post.user_fk.username}}
+          </div>
+          <div class="card-body">
+            <h3 class="card-text"><a href="{{ post.get_absolute_url }}">{{post.post_title}} </a></h3>
+            <p class="card-text">{{post.post_description}}</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+          <div class="card-footer text-muted">
+            {{post.post_created|timesince}}
+          </div>
+        </div>
+    {% empty %}
+      {% if request.GET.q %}
+        <h4>Fant ikke noe....</h4>
+        {% else %}
+        <h4>Ingen posts enda...</h4>
+      {% endif %}
     {% endfor %}
   </div>
 {% endblock %}

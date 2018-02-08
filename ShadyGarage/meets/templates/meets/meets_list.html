@@ -15,6 +15,11 @@
 <div class="background_meets_list"></div>
 <a class="btn btn-info" href="{%url 'meets:create_meet'%}" role="button">Opprett treff! </a>
 
+<form action="{% url 'meets:meets_list'%}" method="action">
+  <input type="text" name="q" placeholder="Søk">
+  <input type="submit" value="Søk">
+</form>
+
 <div class="meet_list_container">
 {% for meet in object_list %}
     <div class="meet_card_container">
@@ -34,6 +39,12 @@
         </div>
       </div>
     </div>
+{% empty %}
+  {% if request.GET.q %}
+    <h4>No meets found!<h4>
+  {% else %}
+    <h4> No meets yet!</h4>
+  {% endif %}
 {% endfor %}
 </div>
 
