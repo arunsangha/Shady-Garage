@@ -136,5 +136,5 @@ LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "home"
 
 #Open a terminal and paste in "python -m smtpd -n -c DebuggingServer localhost:1025"
- -EMAIL_HOST = 'localhost'
- -EMAIL_PORT = 1025
+ #-EMAIL_HOST = 'localhost'
+ #-EMAIL_PORT = 1025
