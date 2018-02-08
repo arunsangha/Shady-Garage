@@ -12,12 +12,12 @@ class MeetsListView(ListView):
     template_name = 'meets/meets_list.html'
     model = models.Meet
 
-class CreateMeetView(CreateView, LoginRequiredMixin):
+class CreateMeetView(LoginRequiredMixin, CreateView):
     template_name = 'meets/meets_form.html'
     form_class = forms.CreateMeetForm
     success_url = reverse_lazy('meets:meets_list')
 
-class DetailMeetView(DetailView):
+class DetailMeetView(LoginRequiredMixin, DetailView):
     template_name = 'meets/meets_detail.html'
     model = models.Meet
 
@@ -34,7 +34,7 @@ class MeetJoinToggleView(RedirectView):
                 obj.users_joining.add(user)
         return url_
 
-class CommentView(CreateView):
+class CommentView(LoginRequiredMixin, CreateView):
     form_class = forms.CommentForm
     template_name = "meets/meets_comment.html"
 

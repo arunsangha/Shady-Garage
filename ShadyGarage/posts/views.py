@@ -3,18 +3,18 @@ from . import models
 from . import forms
 from django.views.generic import ListView, CreateView, DetailView, RedirectView
 from django.core.urlresolvers import reverse_lazy, reverse
-
+from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 
-class PostList(ListView):
+class PostList(LoginRequiredMixin, ListView):
     model = models.Post
     template_name = 'posts/post_list.html'
 
-class PostDetail(DetailView):
+class PostDetail(LoginRequiredMixin, DetailView):
     model = models.Post
     template_name = 'posts/post_detail.html'
 
-class PostForm(CreateView):
+class PostForm(LoginRequiredMixin, CreateView):
     form_class = forms.PostForm
     template_name = 'posts/post_form.html'
 
