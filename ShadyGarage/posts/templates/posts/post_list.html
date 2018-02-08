@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load staticfiles %}
+{% block title %}ShadyGarage{% endblock %}
 {% block body %}
   <div class="container" align="center">
     <form action="{% url 'posts:posts_feed' %}" method="action">
