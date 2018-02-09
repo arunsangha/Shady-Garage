@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load staticfiles %}
-{% block title %} Shady Meets{% endblock %}
+{% block title %} Shady Meets {% endblock %}
 {% block body %}
 
 {% if user.is_authenticated %}
@@ -14,32 +14,30 @@
 </style>
 
 <div class="background_meets_list"></div>
-<a class="btn btn-info" href="{%url 'meets:create_meet'%}" role="button">Opprett treff! </a>
-
-<form action="{% url 'meets:meets_list'%}" method="action">
-  <input type="text" name="q" placeholder="Søk">
-  <input type="submit" value="Søk">
-</form>
-
-<div class="meet_list_container">
-{% for meet in object_list %}
-    <div class="meet_card_container">
-      <div class="meet_card_img_container">
-      </div><!--
-   --><div class="meet_card_time_container">
-        <p>Søndag</p>
-        <p>{{ meet.date|date:'d.m.Y'}}</p>
-        <p>20:00</p>
-      </div><!--
-  --><div class="meet_card_info_container">
-        <h2><a href="{{ meet.get_absolute_url }}">{{meet.meet_name}}</a></h2>
-        <div class="meet_card_info">
-          <h4>Ikea Furuset</h4>
-          <h4>Burning tillat</h4>
-          <h4>Skal: {{meet.users_joining.count}}</h4>
+  <div class="meet-search-container">
+    <a class="btn btn-info" href="{%url 'meets:create_meet'%}" role="button">Opprett treff! </a>
+    <form action="{% url 'meets:meets_list'%}" method="action">
+      <input type="text" name="q" placeholder="Søk">
+      <input type="submit" value="Søk">
+    </form>
+  </div>
+  <div class="meet-list-container">
+    {% for meet in object_list %}
+      <div class="meet-card-container"><!--
+     --><div class="meet-card-time-container">
+          <p>Søndag</p>
+          <p>{{ meet.date|date:'d.m.Y'}}</p>
+          <p>20:00</p>
+        </div><!--
+    --><div class="meet-card-info-container">
+          <h2><a href="{{ meet.get_absolute_url }}">{{meet.meet_name}}</a></h2>
+          <div class="meet-card-info">
+            <h4>Ikea Furuset</h4>
+            <h4>Burning tillat</h4>
+            <h4>Skal: {{meet.users_joining.count}}</h4>
+          </div>
         </div>
       </div>
-    </div>
 {% empty %}
   {% if request.GET.q %}
     <h4>No meets found!<h4>
@@ -52,14 +50,14 @@
 {% else %}
 <div class="container" >
     <div class="jumbotron">
-      <h1 class="display-4">Ops, ser ut som du ikke er logget inn!</h1>
+      <h1>Ops, ser ut som du ikke er logget inn!</h1>
       <p class="lead">Logg inn eller registrer deg for å se treff i nærheten av deg!</p>
       <a class="btn btn-danger btn-lg" href="{% url 'accounts:login'%}" role="button">Logg inn</a>
       <a class="btn btn-info btn-lg" href="{%url 'accounts:signup'%}" role="button">Registrer meg!</a>
     </div>
 
     <div id ="gif" align="center">
-    <iframe src="https://giphy.com/embed/rUwbpQKelwneM" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/day-perfect-burnout-rUwbpQKelwneM"></a>
+    <iframe src="https://giphy.com/embed/rUwbpQKelwneM" width="100%" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/day-perfect-burnout-rUwbpQKelwneM"></a>
     </div>
 </div>
 {% endif %}
