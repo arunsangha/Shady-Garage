@@ -36,7 +36,7 @@
           <a class="nav-list-item-link" href="{% url 'accounts:logout' %}">Logg Ut</a>
         </li>
         <li class="nav-list-item nav-list-item-move-right">
-          <a class="nav-list-item-link" href="{% url 'accounts:profile_page'%}">@{{user.username}}</a>
+          <a class="nav-list-item-link" href="{% url 'accounts:profile_page'%}">@{{user.get_username}}</a>
         </li>
         {% else %}
         <li class="nav-list-item">
