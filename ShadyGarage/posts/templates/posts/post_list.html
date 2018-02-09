@@ -7,26 +7,87 @@
       <input type="text" name="q" placeholder="Søk">
       <input type="submit" name="" value="Søk">
     </form>
-    {% for post in object_list %}
-        <div class="card text-center" style="margin:20px;">
-          <div class="card-header">
-            @{{post.user_fk.username}}
-          </div>
-          <div class="card-body">
-            <h3 class="card-text"><a href="{{ post.get_absolute_url }}">{{post.post_title}} </a></h3>
-            <p class="card-text">{{post.post_description}}</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-          <div class="card-footer text-muted">
-            {{post.post_created|timesince}}
-          </div>
-        </div>
-    {% empty %}
-      {% if request.GET.q %}
-        <h4>Fant ikke noe....</h4>
-        {% else %}
-        <h4>Ingen posts enda...</h4>
-      {% endif %}
-    {% endfor %}
+    <div id="fraAjax"> </div>
+    <a href="#" id="loadMore" class="btn btn-info">Fler posts</a>
   </div>
+{% endblock %}
+{% block script %}
+<script>
+    function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+
+    $(document).ready(function(){
+      console.log("working");
+      var query = getParameterByName('q')
+      var nextUrl;
+      var postList = [];
+
+      function parsePosts(){
+        if(postList == 0){
+          $("#fraAjax").append(
+            "<h5>Fant ikke noe...</h5>"
+          )
+        }else{
+          //Posts exists!
+        $.each(postList, function(key, value){
+            var user_name = value.user_fk.username
+            var post_title = value.post_title
+            var post_description = value.post_description
+            var post_created = value.post_created
+            var timesince = value.timesince
+            console.log("Username:" + user_name)
+            $("#fraAjax").append(
+                "<div class='card text-center' style='margin:20px;'><div class='card-header'>" +
+                    user_name
+                  + "</div> <div class='card-body'> <h3 class='card-text'><a href='{{ post.get_absolute_url }}'>"
+                  + post_title + "</a></h3> <p class='card-text'>" + post_description + "</p></div><div class='card-footer text-muted'>"
+                  +  timesince
+                  + "</div></div>"
+            )
+        })
+       }
+      }
+
+
+    function fetchPosts(url){
+      var fetchUrl;
+      if(!url){
+        fetchUrl = "../../api/posts/"
+      }else{
+        fetchUrl = url
+      }
+      $.ajax({
+        url:fetchUrl,
+        data:{
+          'q':query
+        },
+        method:"GET",
+        success:function(data){
+          postList = data.results
+          nextUrl = data.next
+          parsePosts()
+        },
+          error:function(data){
+          console.log("Error")
+          console.log(data)
+        }
+      })
+    }
+
+      fetchPosts()
+      $("#loadMore").click(function(event){
+        event.preventDefault()
+        if(nextUrl){
+          fetchPosts(nextUrl)
+        }
+      })
+    });
+  </script>
 {% endblock %}
