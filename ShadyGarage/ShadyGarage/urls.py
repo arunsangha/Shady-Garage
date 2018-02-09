@@ -18,7 +18,6 @@ from django.contrib import admin
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
-
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.HomePage.as_view(), name = 'home'),
@@ -27,5 +26,6 @@ urlpatterns = [
     url(r'^accounts/', include("django.contrib.auth.urls")),
     url(r'^meets/', include('meets.urls'), name = 'meets'),
     url(r'^posts/', include('posts.urls'), name = 'posts'),
+    url(r'^api/posts/', include('posts.api.urls'), name="api-posts"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     #Setningen over virker kun under production, ikke deployment.

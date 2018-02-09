@@ -3,6 +3,7 @@
 {% block title %} {{user.username}} {% endblock %}
 {% block body %}
   <a href="{% url 'accounts:profile_edit' %}" class="btn btn-info">Edit profile</a>
+  <a href="{% url 'accounts:change_password'%}" class="btn btn-info">Bytt passord</a>
   <div class="profile_info_container">
     <img class="profile_info_profilepic" src="{{user.profile.profile_pic.url}}" width="240" alt=""></img>
     <div class="profile_info_text_container">

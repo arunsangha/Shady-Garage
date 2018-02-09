@@ -1,0 +1,6 @@
+{% load bootstrap3 %}
+<form class="form {% if form_class%} {{form_class}} {% endif %}" action="{% if action_url%} {{action_url}} {% endif %}" method="post">
+  {% csrf_token %}
+  {% bootstrap_form form%}
+  <input type="submit" class="btn btn-info"  value="{{btn_title}}">
+</form>

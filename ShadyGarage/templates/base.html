@@ -4,7 +4,7 @@
     {% load staticfiles %}
     <meta name="viewport" content="width=device-width">
     <meta charset="utf-8">
-    <title>{%block title%} {% endblock%} </title> 
+    <title>{%block title%} {% endblock%} </title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <script
@@ -33,14 +33,14 @@
           <a class="nav-list-item-link" href="{% url 'accounts:profile_page'%}">Min Profil</a>
         </li>
         <li class="nav-list-item">
-          <a class="nav-list-item-link" href="{% url 'accounts:logout' %}}">Log Ut</a>
+          <a class="nav-list-item-link" href="{% url 'accounts:logout' %}">Logg Ut</a>
         </li>
         <li class="nav-list-item nav-list-item-move-right">
           <a class="nav-list-item-link" href="{% url 'accounts:profile_page'%}">@{{user.username}}</a>
         </li>
         {% else %}
         <li class="nav-list-item">
-          <a class="nav-list-item-link" href="{% url 'accounts:login' %}">Log Inn</a>
+          <a class="nav-list-item-link" href="{% url 'accounts:login' %}">Logg Inn</a>
         </li>
         <li class="nav-list-item">
           <a class="nav-list-item-link" href="{% url 'accounts:signup' %}">Sign Up</a>
