@@ -33,6 +33,13 @@ class CreateMeetView(LoginRequiredMixin, CreateView):
     form_class = forms.CreateMeetForm
     success_url = reverse_lazy('meets:meets_list')
 
+    def form_valid(self, form):
+        meet_form = form.save(commit = False)
+        meet_form.user_fk = self.request.user
+        meet_form.save(commit = True)
+        slug = meet_form.slug
+        return HttpResponseRedirect(reverse("meets:single", kwargs={'slug':slug}))
+
 class DetailMeetView(LoginRequiredMixin, DetailView):
     template_name = 'meets/meets_detail.html'
     model = models.Meet

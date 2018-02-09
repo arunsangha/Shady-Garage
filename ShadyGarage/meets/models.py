@@ -4,8 +4,10 @@ from django.utils.text import slugify
 from django.core.urlresolvers import reverse
 from django.contrib.auth import get_user_model
 User = get_user_model()
+from django.contrib import auth
 # Create your models here.
 class Meet(models.Model):
+    user_fk = models.ForeignKey(auth.models.User, related_name="meets_user_fk")
     meet_name = models.CharField(max_length = 255, unique = True)
     date = models.DateTimeField()
     time = models.TimeField(blank = True, default="19:00:00")
@@ -18,7 +20,7 @@ class Meet(models.Model):
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.meet_name)
-        super().save(*args, **kwargs)
+        super().save()
 
     def get_absolute_url(self):
         return reverse("meets:single", kwargs={"slug":self.slug})
