@@ -101,6 +101,8 @@
         event.preventDefault()
         if(nextUrl){
           fetchPosts(nextUrl)
+        } else{
+          $("#loadMore").html("Ingen flere treff")
         }
       })
     });

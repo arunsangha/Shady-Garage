@@ -12,7 +12,6 @@
     background-attachment: fixed;
   }
 </style>
-
 <div class="background_meets_list"></div>
   <div class="meet-search-container">
     <a class="btn btn-info" href="{%url 'meets:create_meet'%}" role="button">Opprett treff! </a>
@@ -21,32 +20,10 @@
       <input type="submit" value="Søk">
     </form>
   </div>
-  <div class="meet-list-container">
-    {% for meet in object_list %}
-      <div class="meet-card-container"><!--
-     --><div class="meet-card-time-container">
-          <p>Søndag</p>
-          <p>{{ meet.date|date:'d.m.Y'}}</p>
-          <p>20:00</p>
-        </div><!--
-    --><div class="meet-card-info-container">
-          <h2><a href="{{ meet.get_absolute_url }}">{{meet.meet_name}}</a></h2>
-          <div class="meet-card-info">
-            <h4>Ikea Furuset</h4>
-            <h4>Burning tillat</h4>
-            <h4>Skal: {{meet.users_joining.count}}</h4>
-          </div>
-        </div>
-      </div>
-{% empty %}
-  {% if request.GET.q %}
-    <h4>No meets found!<h4>
-  {% else %}
-    <h4> No meets yet!</h4>
-  {% endif %}
-{% endfor %}
-</div>
 
+<div id="fraAjax"></div>
+
+<a href="#" id="loadMeets" class="btn btn-info">Fler meets!</a>
 {% else %}
 <div class="container" >
     <div class="jumbotron">
@@ -61,4 +38,101 @@
     </div>
 </div>
 {% endif %}
+{% endblock %}
+
+{% block script %}
+  <script>
+
+  function getParameterByName(name, url) {
+      if (!url) url = window.location.href;
+      name = name.replace(/[\[\]]/g, "\\$&");
+      var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+          results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return '';
+      return decodeURIComponent(results[2].replace(/\+/g, " "));
+  }
+
+  $(document).ready(function(){
+      console.log("Working")
+      var query = getParameterByName('q');
+      var nextUrl;
+      var meetsList = [];
+
+      function fetchMeets(url){
+        var fetchUrl;
+        if(!url){
+          fetchUrl = "../../api/meets"
+        }else{
+          fetchUrl = url
+        }
+
+        $.ajax({
+          url:fetchUrl,
+          data:{
+            'q':query
+          },
+          method:"GET",
+          success:function(data){
+            meetsList = data.results
+            nextUrl = data.next
+            parseMeets()
+          }, error:function(data){
+            console.log("ERROR")
+          }
+
+        })
+
+      }
+
+      fetchMeets()
+
+      function parseMeets(){
+        if(meetsList == 0){
+          $("#fraAjax").append(
+            "<h2> Fant ingen meets..</h2>"
+          )
+        } else {
+            $.each(meetsList, function(key, value){
+              var username = value.user_fk.username
+              var meet_name = value.meet_name
+              console.log(meet_name)
+              var date = value.date
+              var time = value.time
+              var description = value.description
+              var users_joining = value.users_joining
+
+            $("#fraAjax").append(
+                "<div class='meet-list-container'> <div class='meet-card-container'>"
+                + "<div class='meet-card-time-container'>"
+                      + "<p>" + value.day + "</p>"
+                      +  "<p>"+ date + "</p>" +
+                       "<p>"+ time +"</p> </div>"
+                      + "<div class='meet-card-info-container'>"
+                        +"<h2><a href='{{ meet.get_absolute_url }}'>" + meet_name + "</a></h2>" +
+                        "<div class='meet-card-info'>" +
+                          "<h4>Ikea furuset</h4>" +
+                          "<h4>Oppretter Navn</h4>" +
+                          "<h4>Skal:"+  value.users_joining +  "</h4>" +
+                        "</div>" +
+                      "</div> </div>"
+            )
+
+
+            })
+
+        }
+      }
+
+      $("#loadMeets").click(function(event){
+        event.preventDefault()
+        if(nextUrl){
+          fetchMeets(nextUrl)
+        }else{
+          $("#loadMeets").html("Ingen flere treff")
+        }
+      })
+  });
+
+  </script>
 {% endblock %}
