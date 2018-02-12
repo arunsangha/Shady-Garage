@@ -22,7 +22,18 @@ class MeetsModelSerializer(serializers.ModelSerializer):
         )
 
     def get_day(self, obj):
-        return obj.date.strftime("%A")
+
+        days = (
+            'Mandag',
+            'Tirsdag',
+            'Onsdag',
+            'Torsdag',
+            'Fredag',
+            'Lørdag',
+            'Søndag',
+        )
+
+        return days[obj.date.weekday()]
 
     def get_date(self, obj):
         return obj.date.strftime("%Y.%m.%d")
