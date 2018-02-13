@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
 from . import models
 from . import forms
 from django.views.generic import ListView, CreateView, DetailView, RedirectView, DeleteView
@@ -40,9 +40,21 @@ class PostForm(LoginRequiredMixin, CreateView):
 
         return HttpResponseRedirect(reverse("posts:posts_feed"))
 
-
-
 class PostDeleteView(DeleteView):
     model = models.Post
     template_name = "posts/delete_confirm.html"
     success_url = reverse_lazy("posts:posts_feed")
+
+class PostCommentCreateView(LoginRequiredMixin, CreateView):
+    form_class = forms.PostCommentForm
+    template_name = "posts/post_comment.html"
+
+
+    def form_valid(self, form):
+        post_comment = form.save(commit = False)
+        slug = self.kwargs.get('slug')
+        post_comment.post_fk = get_object_or_404(models.Post, slug=slug)
+        post_comment.user_fk = self.request.user
+        post_comment.save()
+
+        return HttpResponseRedirect(reverse("posts:post_detail", kwargs={'slug':slug}))

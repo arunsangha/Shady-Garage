@@ -11,6 +11,7 @@ class PostModelSerializer(serializers.ModelSerializer):
     url = serializers.SerializerMethodField()
     post_likes = serializers.SerializerMethodField()
     did_like = serializers.SerializerMethodField()
+    comment_url = serializers.SerializerMethodField()
     class Meta:
         model = Post
         fields = (
@@ -24,6 +25,8 @@ class PostModelSerializer(serializers.ModelSerializer):
             'timesince',
             'url',
             'did_like',
+            'id',
+            'comment_url',
         )
 
     def get_date_display(self, obj):
@@ -45,3 +48,6 @@ class PostModelSerializer(serializers.ModelSerializer):
             if user in obj.post_likes.all():
                 return True
         return False
+
+    def get_comment_url(self, obj):
+        return reverse("posts:post_comment", kwargs={'slug':obj.slug})

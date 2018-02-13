@@ -11,3 +11,8 @@ class PostForm(forms.ModelForm):
         self.fields['post_title'].label = "Tittel"
         self.fields['post_image'].label = "Bilde"
         self.fields['post_description'].label = "Beskrivelse"
+
+class PostCommentForm(forms.ModelForm):
+    class Meta():
+        model = models.PostComment
+        fields = ('comment',)

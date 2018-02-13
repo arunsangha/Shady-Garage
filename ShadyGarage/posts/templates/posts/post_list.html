@@ -58,13 +58,18 @@
             var post_description = value.post_description
             var post_created = value.post_created
             var timesince = value.timesince
+            var likes = value.post_likes
+            var verb = 'Like'
+            if(value.did_like){
+              verb = 'Unlike'
+            }
             $("#fraAjax").append(
                 "<div class='card text-center' style='margin:20px;'><div class='card-header'>" +
                     user_name
                   + "</div> <div class='card-body'> <h3 class='card-text'><a href='" + value.url + "'>"
                   + post_title + "</a></h3> <p class='card-text'>" + post_description + "</p>" +
-                   "<a href='#' data-id='" + value.id + "' class='like-button'>Like</a>" +
-                    "<a href='#' data-id='" + value.id + "' class='comment-button'>Kommenter</a>" +
+                   "<a href='#' data-id='" + value.id + "' class='like-button'>" + verb + "</a> ("+ likes + ") | " +
+                    "<a href='" + value.comment_url + "' class='comment-button'>Kommenter</a>" +
                   "</div><div class='card-footer text-muted'>"
                   +  timesince
                   + "</div></div>"
@@ -107,6 +112,28 @@
         } else{
           $("#loadMore").html("Ingen flere treff")
         }
+      })
+
+      $(document.body).on("click", ".like-button", function(e){
+          e.preventDefault()
+          this_ = $(this)
+          var postId = this_.attr("data-id")
+          var likedUrl = '../../api/posts/' + postId + '/like/'
+
+          $.ajax({
+            method: 'GET',
+            url: likedUrl,
+            success:function(data){
+              if(data.liked){
+                this_.text("Liker")
+              }else{
+                this_.text("Unlike")
+              }
+            }, error:function(data){
+              console.log("Error in likes method!")
+            }
+
+          })
       })
     });
   </script>

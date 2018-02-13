@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% block body %}
+<div class="container">
+  <form method="post">
+    <h3>Kommentar</h3>
+    {% csrf_token %}
+    {% bootstrap_form form%}
+    <input type="submit" class="btn btn-info" value="Kommenter">
+  </form>
+</div>
+{% endblock %}
