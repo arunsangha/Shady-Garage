@@ -40,19 +40,7 @@ class PostForm(LoginRequiredMixin, CreateView):
 
         return HttpResponseRedirect(reverse("posts:posts_feed"))
 
-class PostLikeToggleView(RedirectView):
-    def get_redirect_url(self, *args, **kwargs):
-        slug = self.kwargs.get['slug']
-        obj = get_object_or_404(models.Post, slug=slug)
-        url_ = obj.get_absolute_url()
-        user = self.request.user
-        if user.is_authenticated():
-            if user in obj.post_like.all():
-                obj.post_like.remove(user)
-            else:
-                obj.post_like.add(user)
 
-        return url_
 
 class PostDeleteView(DeleteView):
     model = models.Post

@@ -58,12 +58,14 @@
             var post_description = value.post_description
             var post_created = value.post_created
             var timesince = value.timesince
-            console.log("Username:" + user_name)
             $("#fraAjax").append(
                 "<div class='card text-center' style='margin:20px;'><div class='card-header'>" +
                     user_name
-                  + "</div> <div class='card-body'> <h3 class='card-text'><a href='{{ post.get_absolute_url }}'>"
-                  + post_title + "</a></h3> <p class='card-text'>" + post_description + "</p></div><div class='card-footer text-muted'>"
+                  + "</div> <div class='card-body'> <h3 class='card-text'><a href='" + value.url + "'>"
+                  + post_title + "</a></h3> <p class='card-text'>" + post_description + "</p>" +
+                   "<a href='#' data-id='" + value.id + "' class='like-button'>Like</a>" +
+                    "<a href='#' data-id='" + value.id + "' class='comment-button'>Kommenter</a>" +
+                  "</div><div class='card-footer text-muted'>"
                   +  timesince
                   + "</div></div>"
             )

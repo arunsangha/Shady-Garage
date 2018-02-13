@@ -96,7 +96,6 @@
             $.each(meetsList, function(key, value){
               var username = value.user_fk.username
               var meet_name = value.meet_name
-              console.log(meet_name)
               var date = value.date
               var time = value.time
               var description = value.description
@@ -109,7 +108,7 @@
                       +  "<p>"+ date + "</p>" +
                        "<p>"+ time +"</p> </div>"
                       + "<div class='meet-card-info-container'>"
-                        +"<h2><a href='{{ meet.get_absolute_url }}'>" + meet_name + "</a></h2>" +
+                        +"<h2><a href='" + value.url + "' class='btn-meet-name'>" + meet_name + "</a></h2>" +
                         "<div class='meet-card-info'>" +
                           "<h4>Ikea furuset</h4>" +
                           "<h4>Oppretter Navn</h4>" +
@@ -132,6 +131,8 @@
           $("#loadMeets").html("Ingen flere treff")
         }
       })
+
+
   });
 
   </script>

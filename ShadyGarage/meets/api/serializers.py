@@ -1,13 +1,14 @@
 from rest_framework import serializers
 from accounts.api.serializers import UserDisplaySerializer
 from meets.models import Meet
-
+from django.urls import reverse
 
 class MeetsModelSerializer(serializers.ModelSerializer):
     user_fk = UserDisplaySerializer()
     day = serializers.SerializerMethodField()
     date = serializers.SerializerMethodField()
     time = serializers.SerializerMethodField()
+    url = serializers.SerializerMethodField()
     class Meta:
         model = Meet
         fields = (
@@ -19,6 +20,7 @@ class MeetsModelSerializer(serializers.ModelSerializer):
             'meet_image',
             'users_joining',
             'day',
+            'url',
         )
 
     def get_day(self, obj):
@@ -40,3 +42,6 @@ class MeetsModelSerializer(serializers.ModelSerializer):
 
     def get_time(self, obj):
         return obj.time.strftime("%H:%M")
+
+    def get_url(self, obj):
+        return reverse("meets:single", kwargs={'slug':obj.slug})

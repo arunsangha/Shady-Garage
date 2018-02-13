@@ -4,7 +4,18 @@ User = get_user_model()
 from django.contrib import auth
 from django.utils.text import slugify
 from django.core.urlresolvers import reverse
-#må legge til video og..
+
+class PostManager(models.Manager):
+    def like_toggle(self, user, post_obj):
+        if user in post_obj.post_likes.all():
+            is_liked = True
+            post_obj.post_likes.remove(user)
+        else:
+            is_liked = False
+            post_obj.post_likes.add(user)
+        return is_liked
+
+
 class Post(models.Model):
     user_fk = models.ForeignKey(User, related_name = "user_posting")
     post_title = models.CharField(max_length = 100)
@@ -14,14 +25,13 @@ class Post(models.Model):
     post_created = models.DateTimeField(auto_now_add = True)
     slug = models.SlugField(unique = True)
 
+    objects = PostManager()
+
     def __str__(self):
         return "User:{} PostTitle: {}".format(self.user_fk.username, self.post_title)
 
     def get_absolute_url(self):
         return reverse('posts:post_detail', kwargs={'slug':self.slug})
-
-    def post_like(self):
-        return reverse('posts:post_like', kwargs={'slug':self.slug})
 
     def _get_unique_slug(self):
         slug = slugify(self.post_title)
