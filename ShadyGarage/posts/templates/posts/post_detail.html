@@ -19,5 +19,9 @@
       </div>
     </div>
     {% endfor %}
+
+    {% if request.user == post.user_fk %}
+      <a href="{% url 'posts:post_delete' slug=post.slug %} " class="btn btn-danger">Slett!</a>
+    {% endif %}
   </div>
 {% endblock %}

@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponseRedirect
 from . import models
 from . import forms
-from django.views.generic import ListView, CreateView, DetailView, RedirectView
+from django.views.generic import ListView, CreateView, DetailView, RedirectView, DeleteView
 from django.core.urlresolvers import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
@@ -53,3 +53,8 @@ class PostLikeToggleView(RedirectView):
                 obj.post_like.add(user)
 
         return url_
+
+class PostDeleteView(DeleteView):
+    model = models.Post
+    template_name = "posts/delete_confirm.html"
+    success_url = reverse_lazy("posts:posts_feed")
