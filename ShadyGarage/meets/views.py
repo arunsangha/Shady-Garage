@@ -2,7 +2,8 @@ from django.shortcuts import render, get_object_or_404, HttpResponseRedirect
 from django.views.generic import ListView
 from . import models
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView, CreateView, DetailView, RedirectView
+from django.views.generic import (ListView, CreateView,
+        DetailView, RedirectView, DeleteView)
 from . import models
 from . import forms
 from django.core.urlresolvers import reverse, reverse_lazy
@@ -69,3 +70,8 @@ class CommentView(LoginRequiredMixin, CreateView):
         meet_comment.save()
 
         return HttpResponseRedirect(reverse("meets:single", kwargs={'slug':slug}))
+
+class MeetDeleteView(LoginRequiredMixin, DeleteView):
+    model = models.Meet
+    template_name = "meets/delete_confirm.html"
+    success_url = reverse_lazy("meets:meets_list")
