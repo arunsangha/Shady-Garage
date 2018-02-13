@@ -58,3 +58,11 @@ class PostCommentCreateView(LoginRequiredMixin, CreateView):
         post_comment.save()
 
         return HttpResponseRedirect(reverse("posts:post_detail", kwargs={'slug':slug}))
+
+class PostCommentDeleteView(DeleteView):
+    model = models.PostComment
+    template_name = "posts/comment_delete.html"
+    
+    def get_success_url(self):
+        slug_field = self.kwargs.get('slug')
+        return reverse_lazy("posts:post_detail", kwargs={'slug':slug_field})

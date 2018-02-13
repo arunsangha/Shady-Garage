@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block body %}
+  <div class="container">
+    <form method="post">
+      {% csrf_token %}
+      <h3>Sikker på at du vil slette kommentaren {{object.comment}}?</h3>
+      <input type="submit" class="btn btn-danger" value="Slett">
+    </form>
+  </div>
+{% endblock %}
