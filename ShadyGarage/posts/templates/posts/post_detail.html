@@ -4,6 +4,10 @@
 {% block body %}
   <div class="container">
     <h2> {{ post.post_title}} </h2>
+    <p> {{ post.post_description}} </h2>
+    {% if post.post_image %}
+      <img src="{{post.post_image.url}}" alt="" width="200px" heigh="200px">
+    {% endif %}
     <a href="{% url 'posts:post_comment' slug=post.slug%}" class="btn btn-info">Kommenter</a>
     <h4>Kommentarer:</h4>
     {% for comment in post.post_comment_fk.all %}
