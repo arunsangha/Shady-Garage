@@ -43,6 +43,9 @@
           </div>
           <div class="meet_detail_comment_container_comment">
             <p>{{comment.comment}}</p>
+            {% if request.user == comment.user %}
+              <a href="{% url 'meets:meet_comment_delete' slug=meet.slug pk=comment.id %}" class="btn btn-danger btn-sm">Slett</a>
+            {% endif %}
           </div>
         </div>
       {% endfor %}

@@ -75,3 +75,11 @@ class MeetDeleteView(LoginRequiredMixin, DeleteView):
     model = models.Meet
     template_name = "meets/delete_confirm.html"
     success_url = reverse_lazy("meets:meets_list")
+
+class MeetCommentDeleteView(LoginRequiredMixin, DeleteView):
+    model = models.Meet_Comment
+    template_name = "meets/comment_delete.html"
+
+    def get_success_url(self):
+        slug = self.kwargs.get('slug')
+        return reverse_lazy('meets:single', kwargs={'slug':slug})
