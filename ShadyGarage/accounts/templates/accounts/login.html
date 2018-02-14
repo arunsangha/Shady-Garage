@@ -11,6 +11,7 @@
       {% bootstrap_form form%}
       <input type="submit" class="btn btn-outline-info btn-block" value="login!">
     </form>
+    <a href="{% url 'accounts:reset_password'%}"><p id="forgotten-password">Glemt passord?</p></a>
   </div>
 </div>
 {% endblock %}

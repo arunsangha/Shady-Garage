@@ -488,6 +488,15 @@ margin-top: 50px;
   }
 }
 
+#forgotten-password{
+  position: relative;
+  top:20px;
+  color:white;
+}
+
+#forgotten-password:hover{
+  color:#5bc0de;
+}
 
 /*
 -------------------------------------------
