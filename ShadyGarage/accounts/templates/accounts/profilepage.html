@@ -15,16 +15,16 @@
     </div>
   </div>
   <div class="profile_img_container">
-    <!-- for loop  -->
-    <img class="profile_user_img" src="{{user.profile.profile_pic.url}}" alt="">
-    <img class="profile_user_img" src="{{user.profile.profile_pic.url}}" alt="">
-    <img class="profile_user_img" src="{{user.profile.profile_pic.url}}" alt="">
-    <img class="profile_user_img" src="{{user.profile.profile_pic.url}}" alt="">
-    <img class="profile_user_img" src="{{user.profile.profile_pic.url}}" alt="">
-    <img class="profile_user_img" src="{{user.profile.profile_pic.url}}" alt="">
-    <img class="profile_user_img" src="{{user.profile.profile_pic.url}}" alt="">
-    <img class="profile_user_img" src="{{user.profile.profile_pic.url}}" alt="">
-    <img class="profile_user_img" src="{{user.profile.profile_pic.url}}" alt="">
-    <!-- end for loop-->
+    {% for post in user.user_posting.all %}
+      {% if post.post_image %}
+        <h6>{{post.post_title}}</h6>
+        <img class="profile_user_img" src="{{post.post_image.url}}">
+      {% else %}
+        <h6>{{post.post_title}}</h6>
+        <p>{{post.post_description}}</p>
+      {% endif %}
+
+
+    {% endfor %}
   </div>
 {% endblock %}
