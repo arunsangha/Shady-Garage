@@ -8,7 +8,13 @@
   <div class="container">
     <h2> @{{post.user_fk.username}} </h2>
     <h2> {{ post.post_title}} </h2>
-    <p> {{ post.post_description}} </h2>
+    <p> {{ post.post_description}} </p>
+    <!--
+      //TODO:!LANSERING! Bytte ut u=www.shadygarage.pythonanywhere.com/{{request.get_full_path}}" med  u=www.shadygarage.com/{{request.get_full_path}}
+    -->
+      <a href="https://www.facebook.com/sharer/sharer.php?u=www.shadygarage.pythonanywhere.com/{{request.get_full_path}}">
+          Share on Facebook
+      </a>
     {% if post.post_image %}
       <img src="{{post.post_image.url}}" alt="" width="200px" heigh="200px">
     {% endif %}
