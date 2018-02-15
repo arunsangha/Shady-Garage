@@ -1,8 +1,12 @@
 {% extends "base.html" %}
 {% block title %}{{meet.meet_name}}{% endblock %}
+<!--
+//TODO:Style ferdig detail siden.
+-->
 {% block body %}
   {% if request.user == meet.user_fk %}
     <a href="{% url 'meets:delete_meet' slug=meet.slug%}" class="btn btn-danger">Slett</a>
+    <a href="{% url 'meets:update_meet' slug=meet.slug%}" class="btn btn-info">Oppdater</a>
   {% endif %}
   {% if user.is_authenticated %}
   <div class="meet_detail_body">

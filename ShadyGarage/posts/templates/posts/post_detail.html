@@ -2,7 +2,11 @@
 {% load staticfiles %}
 {% block title %}Shady: {{post.post_title}} {% endblock %}
 {% block body %}
+<!--
+  //TODO:Finne et bra nok design og implementere det.
+-->
   <div class="container">
+    <h2> @{{post.user_fk.username}} </h2>
     <h2> {{ post.post_title}} </h2>
     <p> {{ post.post_description}} </h2>
     {% if post.post_image %}
@@ -28,6 +32,7 @@
 
     {% if request.user == post.user_fk %}
       <a href="{% url 'posts:post_delete' slug=post.slug %} " class="btn btn-danger">Slett post!</a>
+      <a href="{% url 'posts:post_update' slug=post.slug %}" class="btn btn-info">Oppdater post!</a>
     {% endif %}
   </div>
 {% endblock %}

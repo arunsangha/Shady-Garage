@@ -11,4 +11,6 @@ urlpatterns = [
     url(r'^@/(?P<slug>[-\w]+)/comment/$', views.CommentView.as_view(), name='comment_meet'),
     url(r'^@/(?P<slug>[-\w]+)/delete/$', views.MeetDeleteView.as_view(), name='delete_meet'),
     url(r'^@/(?P<slug>[-\w]+)/comment/(?P<pk>\d+)/delete/$', views.MeetCommentDeleteView.as_view(), name='meet_comment_delete'),
+    url(r'^@/(?P<slug>[-\w]+)/update/$', views.UpdateMeetView.as_view(), name='update_meet'),
+    url(r'^@/(?P<slug>[-\w]+)/faaaaiilll!/$', views.MeetUpdateFail.as_view(), name='meet_update_fail'),
 ]

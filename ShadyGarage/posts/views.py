@@ -1,7 +1,8 @@
 from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
 from . import models
 from . import forms
-from django.views.generic import ListView, CreateView, DetailView, RedirectView, DeleteView
+from django.views.generic import (ListView, CreateView, DetailView,
+                RedirectView, DeleteView, UpdateView, TemplateView)
 from django.core.urlresolvers import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
@@ -62,7 +63,26 @@ class PostCommentCreateView(LoginRequiredMixin, CreateView):
 class PostCommentDeleteView(DeleteView):
     model = models.PostComment
     template_name = "posts/comment_delete.html"
-    
+
     def get_success_url(self):
         slug_field = self.kwargs.get('slug')
         return reverse_lazy("posts:post_detail", kwargs={'slug':slug_field})
+
+class PostUpdateView(LoginRequiredMixin, UpdateView):
+    queryset = models.Post.objects.all()
+    form_class = forms.PostForm
+    template_name = "posts/post_update.html"
+
+    def form_valid(self, form):
+        if form.instance.user_fk == self.request.user:
+            return super(PostUpdateView, self).form_valid(form)
+        else:
+            slug = self.kwargs['slug']
+            return HttpResponseRedirect(reverse("posts:post_update_fail", kwargs={'slug':slug}))
+
+    def get_success_url(self):
+        slug_field = self.kwargs.get('slug')
+        return reverse_lazy("posts:post_detail", kwargs={'slug':slug_field})
+
+class PostUpdateFail(TemplateView):
+    template_name = "update_invalid.html"

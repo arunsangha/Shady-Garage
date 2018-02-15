@@ -3,7 +3,7 @@ from django.views.generic import ListView
 from . import models
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import (ListView, CreateView,
-        DetailView, RedirectView, DeleteView)
+        DetailView, RedirectView, DeleteView, UpdateView, TemplateView)
 from . import models
 from . import forms
 from django.core.urlresolvers import reverse, reverse_lazy
@@ -40,6 +40,25 @@ class CreateMeetView(LoginRequiredMixin, CreateView):
         meet_form.save(commit = True)
         slug = meet_form.slug
         return HttpResponseRedirect(reverse("meets:single", kwargs={'slug':slug}))
+
+class UpdateMeetView(LoginRequiredMixin, UpdateView):
+    queryset = models.Meet.objects.all()
+    template_name = 'meets/meet_update.html'
+    form_class = forms.CreateMeetForm
+
+    def form_valid(self, form):
+        if form.instance.user_fk == self.request.user:
+            return super(UpdateMeetView, self).form_valid(form)
+        else:
+            slug = self.kwargs['slug']
+            return HttpResponseRedirect(reverse("meets:meet_update_fail", kwargs={'slug':slug}))
+
+    def get_success_url(self):
+        slug_field = self.kwargs.get('slug')
+        return reverse("meets:meets_list")
+
+class MeetUpdateFail(TemplateView):
+    template_name = 'update_invalid.html'
 
 class DetailMeetView(LoginRequiredMixin, DetailView):
     template_name = 'meets/meets_detail.html'

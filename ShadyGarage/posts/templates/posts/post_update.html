@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% block title %} Shady Post{% endblock %}
+{% block body %}
+   <div class="container">
+    <form method="post" enctype="multipart/form-data">
+      <h4> Oppdater {{post.post_title}} </h4>
+      {% csrf_token %}
+      {% bootstrap_form form%}
+      <input type="submit" class="btn btn-info btn-lg" value="Oppdater!">
+    </form>
+  </div>
+{% endblock %}
