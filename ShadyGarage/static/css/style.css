@@ -297,10 +297,18 @@ BackGround Images
   align-items: center;
 }
 
-@media only screen and (max-width: 750px){
+@media only screen and (max-width: 480px){
 
   .meet-card-container{
+    border: 1px solid white;
+  }
 
+  .meet-card-info{
+    flex-direction: column;
+  }
+
+  .meet-card-info h4{
+    justify-content: center;
   }
 
 }
