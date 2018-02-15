@@ -12,18 +12,21 @@
     background-attachment: fixed;
   }
 </style>
+
 <div class="background_meets_list"></div>
   <div class="meet-search-container">
-    <a class="btn btn-info" href="{%url 'meets:create_meet'%}" role="button">Opprett treff! </a>
+    <a class="btn btn-info btn-custom" href="{%url 'meets:create_meet'%}" role="button">Opprett treff! </a>
     <form action="{% url 'meets:meets_list'%}" method="action">
       <input type="text" name="q" placeholder="Søk">
-      <input type="submit" value="Søk">
+      <input type="submit" value="Søk" class="btn btn-sm btn-success">
     </form>
   </div>
 
 <div id="fraAjax"></div>
+<div class="meet-bottom-load-container">
+    <a href="#" id="loadMeets" class="btn btn-info">Se flere treff</a>
+</div>
 
-<a href="#" id="loadMeets" class="btn btn-info">Fler meets!</a>
 {% else %}
 <div class="container" >
     <div class="jumbotron">

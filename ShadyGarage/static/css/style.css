@@ -22,17 +22,25 @@ a:hover{
   text-decoration: none !important;
 }
 
+
 /*
   Universals
 */
 
 p {
   font-family: 'Catamaran', sans-serif;
-  font-size: 1em;
+  font-size: 16px;
 }
 
 h1,h2,h3,h4,h5,h6{
   font-family: 'Catamaran', sans-serif;
+  font-size: 60px;
+}
+
+@media only screen and (max-width: 480px){
+  h2 a{
+    font-size: 20px;
+  }
 }
 
 /*
@@ -272,6 +280,7 @@ BackGround Images
   width: 70%;
   height: 100%;
   vertical-align: top;
+  overflow: hidden;
 }
 
 .meet-card-info-container h2{
@@ -297,6 +306,12 @@ BackGround Images
   align-items: center;
 }
 
+.meet-bottom-load-container{
+  width: 100%;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
 @media only screen and (max-width: 480px){
 
   .meet-card-container{
@@ -310,6 +325,16 @@ BackGround Images
   .meet-card-info h4{
     justify-content: center;
   }
+
+  .meet-search-container{
+    flex-direction: column;
+  }
+
+  .btn-custom{
+    margin: 0 0 7px 0;
+  }
+
+
 
 }
 /*--------------------------------------*/
