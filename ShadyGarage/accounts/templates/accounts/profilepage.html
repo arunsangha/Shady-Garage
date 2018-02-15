@@ -1,30 +1,48 @@
 {% extends "base.html" %}
 {% load staticfiles %}
-{% block title %} {{user.username}} {% endblock %}
+{% block title %} Shady Garage | {{user.username}} {% endblock %}
 {% block body %}
-  {% if request.user == user %}
-  <a href="{% url 'accounts:profile_edit' %}" class="btn btn-info">Edit profile</a>
-  <a href="{% url 'accounts:change_password'%}" class="btn btn-info">Bytt passord</a>
-  {% endif %}
-  <div class="profile_info_container">
-    <img class="profile_info_profilepic" src="{{user.profile.profile_pic.url}}" width="240" alt=""></img>
-    <div class="profile_info_text_container">
-      <h1 class="profile_info_username">{{user.username}}</h1>
-      <p class="profile_info_team">Team: {{user.profile.teams}}</p>
-      <p class="profile_info_age">Alder: {{user.profile.age}}</p>
+  <div class="profile-card">
+    <img class="profile-card-img" src="{{user.profile.profile_pic.url}}" alt="Card image cap">
+    </img>
+    <div class="profile-card-body">
+      <h5 class="profile-card-title">{{user.username}}</h5>
+      <h6 class="profile-card-sub-title">Team: {{user.profile.teams}}</h6>
+      <ul class="profile-card-list">
+        <li class="profile-card-list-item">Alder: {{user.profile.age}}</li>
+      </ul>
+      {% if request.user == user %}
+      <a href="{% url 'accounts:profile_edit' %}" class="btn btn-info">Edit profile</a>
+      <a href="{% url 'accounts:change_password'%}" class="btn btn-info">Bytt passord</a>
+      {% endif %}
     </div>
   </div>
-  <div class="profile_img_container">
-    {% for post in user.user_posting.all %}
-      {% if post.post_image %}
-        <h6>{{post.post_title}}</h6>
-        <img class="profile_user_img" src="{{post.post_image.url}}">
-      {% else %}
-        <h6>{{post.post_title}}</h6>
-        <p>{{post.post_description}}</p>
-      {% endif %}
+    <div class="profile-page-title">
+      <h4>{{user.username}}´s garage</h4>
+    </div>
+    <div class="profile-post-cards" align="center">
+      {% for post in user.user_posting.all %}
+        <div class="card text-white bg-dark mb-4" id="profile-posts-cards-bootstrap" style="max-width: 25rem;">
+          <div class="card-header">{{post.post_title}}</div>
+            <div class="card-body">
+              {% if post.post_image %}
+                  <img src="{{post.post_image.url}}" alt="" class="profile-page-post-image">
+                  <p class="card-text">{{post.post_description}}</p>
+              {% else %}
+                <p class="card-text">{{post.post_description}}</p>
+              {% endif %}
+            </div>
+
+            <div class="card-footer">
+              <a href="{% url 'posts:post_detail' slug=post.slug %}" style="color:white;">Se kommentarer</a>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">{{post.post_created|timesince}}</small>
+            </div>
+        </div>
+      {% endfor %}
+    </div>
 
 
-    {% endfor %}
-  </div>
+
 {% endblock %}

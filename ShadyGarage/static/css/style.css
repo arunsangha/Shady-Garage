@@ -88,7 +88,7 @@ h1,h2,h3,h4,h5,h6{
       height: 50px;
       width: 100%;
       cursor: pointer;
-      background-image: url(../images/burger.png);
+      background-image: url(../images/Burger2.png);
       background-size: 10% 95%;
       background-position: 97%;
       background-repeat: no-repeat;
@@ -435,51 +435,79 @@ margin-top: 50px;
 -----------------------------------------------------
   Profile page
 */
-
-.profile_info_container{
-  padding: 30px;
-  width: 100%;
-}
-
-.profile_info_profilepic{
-  padding: 5px;
+.profile-card{
+  color: white;
   display: inline-block;
-  vertical-align: top;
-  margin-left: 20%;
-}
-
-.profile_info_text_container{
-  display: inline-block;
-  text-align: left;
-  margin-left: 15%;
-  padding-top: 30px;
-}
-
-.profile_info_text_container > p{
-  margin-top: 30px;
-}
-
-.profile_info_username{
-  vertical-align: top;
-}
-
-.profile_info_team{
-  vertical-align: top;
-}
-
-.profile_info_age{
-  vertical-align: top;
-}
-
-.profile_img_container{
+  background-color: #2E2E2E;
+  width: 280px;
+  padding: 20px;
   text-align: center;
-  padding: 0 10%;
+  border-radius: 5px;
+  position: relative;
+  top: 30px;
+  left: 30px;
 }
 
-.profile_user_img{
-  margin: 30px;
-  height: 300px;
-  width: 300px;
+.profile-card-img{
+  width: 100%;
+  margin: 10px 0 30px 0;
+}
+
+.profile-card-body{
+
+}
+
+.profile-card-title{
+
+}
+
+
+.profile-card-sub-title{
+
+}
+
+.profile-card-list{
+  list-style-type: none;
+}
+
+.profile-card-list-item{
+  border-bottom: 1px solid white;
+  padding: 5px 0;
+}
+
+.profile-card-button{
+   display: block;
+   background-color: #17a2b8;
+   color: white;
+   padding: 10px;
+   border-radius: 4px;
+}
+
+.profile-page-title{
+  display: inline-block;
+  position: relative;
+  font-family: nosifer;
+  left: 19vw;
+  top: -250px;
+}
+
+.profile-post-cards{
+  position: relative;
+  top: -200px;
+}
+.profile-posts-cards-bootstrap{
+
+}
+
+.profile-page-post-image{
+  width: 100%;
+  height: 100%;
+}
+
+#profile-post-test-bottom-button{
+  position: relative;
+  margin-top: -39px;
+
 }
 
 
