@@ -13,9 +13,6 @@
     <div class="meet_detail_title_container">
         <h1>{{ meet.meet_name}}</h1>
     </div>
-    <div class="meet_detail_map_container">
-      <div id="map"></div>
-    </div>
     <div class="meet_detail_info_container">
       <div class="meet_detail_description_container">
           <p>{{meet.description}}</p>
@@ -34,6 +31,9 @@
       <div class="meet_detail_join_container">
         <a href="{{ meet.join_url }}"> Jeg skal være med!</a>
       </div>
+    </div>
+    <div class="meet_detail_map_container">
+      <div id="map"></div>
     </div>
     <div class="meet_detail_comments_container">
       <h4><a href="{% url 'meets:comment_meet' slug=meet.slug %}">Kommenter</a><h4>

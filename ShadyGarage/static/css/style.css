@@ -39,7 +39,11 @@ h1,h2,h3,h4,h5,h6{
 
 @media only screen and (max-width: 480px){
   h2 a{
-    font-size: 20px;
+    font-size: 24px;
+  }
+
+  h4 {
+    font-size: 12px;
   }
 }
 
@@ -257,7 +261,7 @@ BackGround Images
   height: 200px;
   width: 80%;
   margin: 20px auto;
-  background-color: rgba(0,0,0,0.9);
+  background-color: rgba(0,0,0,0.8);
   color:white;
 }
 
@@ -266,12 +270,13 @@ BackGround Images
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
+  padding-top: 10px;
   width: 30%;
   height: 100%;
   border-right: 1px solid white;
 }
 
-.meet_card_time_container p{
+.meet-card-time-container p{
     font-weight: bold;
 }
 
@@ -316,10 +321,13 @@ BackGround Images
 
   .meet-card-container{
     border: 1px solid white;
+    width: 95%;
+    height: 150px;
   }
 
   .meet-card-info{
     flex-direction: column;
+    padding: 0px;
   }
 
   .meet-card-info h4{
@@ -341,13 +349,14 @@ BackGround Images
 .meet_detail_body{
 padding: 30px;
 margin-top: 50px;
+
 }
 
 
 .meet_detail_title_container{
-  display: block;
+  display: flex;
+  justify-content: center;
   vertical-align: top;
-  text-align: center;
   margin-bottom: 20px;
 }
 
@@ -358,14 +367,17 @@ margin-top: 50px;
 
 .meet_detail_info_container{
     display: inline-block;
-    width: 60%;
+    width: 50%;
     vertical-align: top;
 }
 
 .meet_detail_description_container{
   display: block;
   vertical-align: top;
-  padding: 20px;
+  padding: 3px;
+  border: 1px solid grey;
+  box-shadow: 1px 2px #888888;
+  border-radius: 2px;
 }
 
 .meet_detail_time_container{
@@ -427,8 +439,28 @@ margin-top: 50px;
   margin-left: 20px;
 }
 
-@media only screen and (max-width: 1140px){
+@media only screen and (max-width: 480px){
 
+  .meet_detail_title_container{
+
+  }
+
+  .meet_detail_map_container{
+    display: block;
+    width: 100%;
+  }
+
+  .meet_detail_info_container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .meet_detail_description_container{
+    padding: 20px;
+  }
 
 }
 /*
