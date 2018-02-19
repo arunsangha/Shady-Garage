@@ -59,6 +59,9 @@
             var post_created = value.post_created
             var timesince = value.timesince
             var likes = value.post_likes
+            if(likes == 0){
+              likes = ''
+            }
             var verb = 'Like'
             if(value.did_like){
               verb = 'Unlike'
@@ -78,8 +81,8 @@
                     + post_title + "</a></h3> <p class='card-text'>" + post_description + "</p>" +
                      "<div class='post-image'><img src='" + image + "' id='postImageFeed'></div>"+
                     "</div><div class='card-footer'>"+ "<a href='#' data-id='" + value.id +
-                    "' class='like-button'>" + verb + "</a> ("+ likes + ") | " +
-                    "<a href='" + value.comment_url + "' class='comment-button'>Kommenter</a>"
+                    "' class='like-button badge badge-info'>" + verb +  " " + likes + "</a> | " +
+                    "<a href='" + value.comment_url + "' class='comment-button badge badge-light'>Kommenter</a>"
                     + "</div><div class='card-footer text-muted'>"
                     +  timesince
                     + "</div></div>"
@@ -91,8 +94,8 @@
                   + "</div> <div class='card-body'> <h3 class='card-text'><a href='" + value.url + "'>"
                   + post_title + "</a></h3> <p class='card-text'>" + post_description + "</p>" +
                   "</div><div class='card-footer'>"+ "<a href='#' data-id='" + value.id +
-                  "' class='like-button'>" + verb + "</a> ("+ likes + ") | " +
-                  "<a href='" + value.comment_url + "' class='comment-button'>Kommenter</a>"
+                  "' class='like-button badge badge-info'>" + verb + " " + likes +"</a>   | " +
+                  "<a href='" + value.comment_url + "' class='comment-button badge badge-light'>Kommenter</a>"
                   + "</div><div class='card-footer text-muted'>"
                   +  timesince
                   + "</div></div>"
