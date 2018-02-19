@@ -11,8 +11,8 @@ body{
   //TODO:Finne et bra nok design og implementere det.
 -->
   <div class="container" align="center" style="background-color:rgba(255,255,255,0.5);">
-    <a href="{% url 'accounts:profile_page_pk' pk=post.user_fk.pk%}"<h2> @{{post.user_fk.username}} </h2></a>
-    <h2> {{ post.post_title}} </h2>
+    <a href="{% url 'accounts:profile_page_pk' pk=post.user_fk.pk%}"><h2 id="post-detail-username"> {{post.user_fk.username}} </h2></a>
+    <h2 id="post-detail-post-title"> {{ post.post_title}} </h2>
     <p> {{ post.post_description}} </p>
     <!--
       //TODO:!LANSERING! Bytte ut u=www.shadygarage.pythonanywhere.com/{{request.get_full_path}}" med  u=www.shadygarage.com/{{request.get_full_path}}

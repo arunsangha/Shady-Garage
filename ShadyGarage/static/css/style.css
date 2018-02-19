@@ -486,6 +486,17 @@ margin-top: 50px;
   width:100%;
   height:100%
 }
+
+#post-detail-username{
+  font-family: nosifer;
+  color: white;
+}
+
+#post-detail-username:hover{
+  color: #5bc0de;
+}
+
+
 /*
 -----------------------------------------------------
   Profile page
@@ -501,7 +512,7 @@ margin-top: 50px;
   position: relative;
   top: 30px;
   left: 30px;
-  z-index: 20;
+  z-index: 5;
 }
 
 .profile-card-img{

@@ -12,6 +12,7 @@ class PostModelSerializer(serializers.ModelSerializer):
     post_likes = serializers.SerializerMethodField()
     did_like = serializers.SerializerMethodField()
     comment_url = serializers.SerializerMethodField()
+    comment_count = serializers.SerializerMethodField()
     class Meta:
         model = Post
         fields = (
@@ -27,6 +28,7 @@ class PostModelSerializer(serializers.ModelSerializer):
             'did_like',
             'id',
             'comment_url',
+            'comment_count',
         )
 
     def get_date_display(self, obj):
@@ -51,3 +53,6 @@ class PostModelSerializer(serializers.ModelSerializer):
 
     def get_comment_url(self, obj):
         return reverse("posts:post_comment", kwargs={'slug':obj.slug})
+
+    def get_comment_count(self, obj):
+        return obj.post_comment_fk.count()

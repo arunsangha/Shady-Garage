@@ -73,6 +73,11 @@
               has_image = true
             }
 
+            var comment_count = value.comment_count
+            if(comment_count == 0){
+              comment_count = ''
+            }
+
             if(has_image){
               $("#fraAjax").append(
                   "<div class='card text-white bg-dark mb-4' style='max-width:40rem;'><div class='card-header'>" +
@@ -82,10 +87,9 @@
                      "<div class='post-image'><img src='" + image + "' id='postImageFeed'></div>"+
                     "</div><div class='card-footer'>"+ "<a href='#' data-id='" + value.id +
                     "' class='like-button badge badge-info'>" + verb +  " " + likes + "</a> | " +
-                    "<a href='" + value.comment_url + "' class='comment-button badge badge-light'>Kommenter</a>"
-                    + "</div><div class='card-footer text-muted'>"
-                    +  timesince
-                    + "</div></div>"
+                    "<a href='" + value.comment_url + "' class='comment-button badge badge-light'>Kommenter" + " " +
+                     comment_count + "</a>" + "</div><div class='card-footer text-muted'>"
+                    +  timesince + "</div></div>"
               )
             }else{
               $("#fraAjax").append(
@@ -95,7 +99,8 @@
                   + post_title + "</a></h3> <p class='card-text'>" + post_description + "</p>" +
                   "</div><div class='card-footer'>"+ "<a href='#' data-id='" + value.id +
                   "' class='like-button badge badge-info'>" + verb + " " + likes +"</a>   | " +
-                  "<a href='" + value.comment_url + "' class='comment-button badge badge-light'>Kommenter</a>"
+                  "<a href='" + value.comment_url + "' class='comment-button badge badge-light'>Kommenter" +
+                  " " + comment_count +  "</a>"
                   + "</div><div class='card-footer text-muted'>"
                   +  timesince
                   + "</div></div>"
