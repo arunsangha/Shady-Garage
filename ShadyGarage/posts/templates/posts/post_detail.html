@@ -10,20 +10,23 @@ body{
 <!--
   //TODO:Finne et bra nok design og implementere det.
 -->
-  <div class="container" align="center" style="background-color:rgba(255,255,255,0.5);">
+  <div class="container" id="post-detail-container" align="center" style="background-color:#3f474f;">
     <a href="{% url 'accounts:profile_page_pk' pk=post.user_fk.pk%}"><h2 id="post-detail-username"> {{post.user_fk.username}} </h2></a>
-    <h2 id="post-detail-post-title"> {{ post.post_title}} </h2>
-    <p> {{ post.post_description}} </p>
-    <!--
-      //TODO:!LANSERING! Bytte ut u=www.shadygarage.pythonanywhere.com/{{request.get_full_path}}" med  u=www.shadygarage.com/{{request.get_full_path}}
-    -->
-      <a href="https://www.facebook.com/sharer/sharer.php?u=shadygarage.pythonanywhere.com/{{request.get_full_path}}">
-        <input type="image" src="{% static 'images/facebooklogo.png'%}" class="facebookShare" id="facebookSharePost"/>
-      </a>
+    <div class="post-container">
+        {% if post.post_image %}
+          <img src="{{post.post_image.url}}" alt="" id="post-detail-image">
+        {% endif %}
+          <h2 id="post-detail-post-title"> {{ post.post_title}} </h2>
+          <p> {{ post.post_description}} </p>
+          <p> {{post.post_created|timesince}}
+          <!--
+            //TODO:!LANSERING! Bytte ut u=www.shadygarage.pythonanywhere.com/{{request.get_full_path}}" med  u=www.shadygarage.com/{{request.get_full_path}}
+          -->
+            <a href="https://www.facebook.com/sharer/sharer.php?u=shadygarage.pythonanywhere.com/{{request.get_full_path}}">
+              <input type="image" src="{% static 'images/facebooklogo.png'%}" class="facebookShare" id="facebookSharePost"/>
+            </a>
 
-    {% if post.post_image %}
-      <img src="{{post.post_image.url}}" alt="" width="200px" heigh="200px">
-    {% endif %}
+    </div>
     <a href="{% url 'posts:post_comment' slug=post.slug%}" class="btn btn-info">Kommenter</a>
     <h4>Kommentarer:</h4>
     {% for comment in post.post_comment_fk.all %}

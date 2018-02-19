@@ -490,13 +490,31 @@ margin-top: 50px;
 #post-detail-username{
   font-family: nosifer;
   color: white;
+  float: left;
 }
 
 #post-detail-username:hover{
   color: #5bc0de;
 }
+#post-detail-container{
+  box-shadow: 5px 5px 5px 5px;
+  top: 50px;
+  position: relative;
+}
 
+.post-container{
+  position: relative;
+  top: 20px;
+  height: 70vh;
+  width: 30vw;
+  background-color: red;
+  box-shadow: 5px 5px 5px 5px;
+}
 
+#post-detail-image{
+  height: 50%;
+  width: 100%;
+}
 /*
 -----------------------------------------------------
   Profile page
