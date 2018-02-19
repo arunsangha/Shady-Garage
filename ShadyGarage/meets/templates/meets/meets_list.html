@@ -100,7 +100,8 @@
               var date = value.date
               var time = value.time
               var description = value.description
-              var users_joining = value.users_joining
+              var users_joining = value.joining
+            
 
             $("#fraAjax").append(
                 `<div class='meet-list-container'> <div class='meet-card-container'>
@@ -113,7 +114,7 @@
                       <h2><a href='${value.url}' class='btn-meet-name'> ${meet_name}</a></h2>
                       <div class='meet-card-info'>
                         <h4>Ikea furuset</h4>
-                        <h4>Skal: ${value.users_joining} </h4>
+                        <h4>Skal: ${value.joining} </h4>
                     </div>
                     </div>
                 </div>`
