@@ -2,18 +2,19 @@
 {% load staticfiles %}
 {% block title %} Shady Garage | {{user.username}} {% endblock %}
 {% block body %}
-  <div class="profile-card">
+<div class="profile-card">
     <img class="profile-card-img" src="{{user.profile.profile_pic.url}}" alt="Card image cap">
     </img>
     <div class="profile-card-body">
       <h5 class="profile-card-title">{{user.username}}</h5>
       <h6 class="profile-card-sub-title">Team: {{user.profile.teams}}</h6>
       <ul class="profile-card-list">
+        <li class="profile-card-list-item">Posts: {{user.user_posting.all.count}}</li>
         <li class="profile-card-list-item">Alder: {{user.profile.age}}</li>
       </ul>
       {% if request.user == user %}
-      <a href="{% url 'accounts:profile_edit' %}" class="btn btn-info">Edit profile</a>
-      <a href="{% url 'accounts:change_password'%}" class="btn btn-info">Bytt passord</a>
+        <a href="{% url 'accounts:profile_edit' %}" class="btn btn-info">Edit profile</a>
+        <a href="{% url 'accounts:change_password' %}" class="btn btn-info">Bytt passord</a>
       {% endif %}
     </div>
   </div>
@@ -42,7 +43,5 @@
         </div>
       {% endfor %}
     </div>
-
-
 
 {% endblock %}

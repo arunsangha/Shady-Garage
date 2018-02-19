@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 {% block title %}{{meet.meet_name}}{% endblock %}
 <!--
 //TODO:Style ferdig detail siden.
@@ -29,8 +30,11 @@
           <p>Skal på treffet: {{meet.users_joining.count}}</p>
       </div>
       <div class="meet_detail_join_container">
-        <a href="{{ meet.join_url }}"> Jeg skal være med!</a>
+        <a href="" id="join_button" data-id="{{ meet.pk }}">Jeg vil være med!</a>
       </div>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=shadygarage.pythonanywhere.com/{{request.get_full_path}}">
+        <input type="image" src="{% static 'images/facebooklogo.png'%}" class="facebookShare" id="facebookShareMeet"/>
+      </a>
     </div>
     <div class="meet_detail_map_container">
       <div id="map"></div>
@@ -76,5 +80,30 @@
 {% block script%}
   <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBD4qn1fg9fSciI9hwIT8mK65aUmBHbZUg&callback=initMap">
+  </script>
+
+  <script>
+    $(document).ready(function(){
+      $(document.body).on("click", "#join_button", function(e){
+        e.preventDefault()
+        this_ = $(this)
+        var meetId = this_.attr("data-id")
+        var joinUrl = '../../../api/meets/' + meetId + '/join/'
+        $.ajax({
+          method: 'GET',
+          url: joinUrl,
+          success:function(data){
+            console.log("FUnker")
+            if(data.joining){
+              this_.text("Skal")
+            }else{
+              this_.text("Skal ikke")
+            }
+          }, error:function(data){
+            console.log("Error i join meet!")
+          }
+        })
+      })
+    });
   </script>
 {% endblock %}

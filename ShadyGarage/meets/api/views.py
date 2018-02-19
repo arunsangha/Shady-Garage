@@ -3,6 +3,9 @@ from .serializers import MeetsModelSerializer
 from posts.api.pagination import StandardResultsPagination
 from meets.models import Meet
 from django.db.models import Q
+from rest_framework.views import APIView
+from rest_framework.response import Response
+
 class MeetsListAPIView(generics.ListAPIView):
     serializer_class = MeetsModelSerializer
     pagination_class = StandardResultsPagination
@@ -21,3 +24,9 @@ class MeetsListAPIView(generics.ListAPIView):
             )
 
         return qs
+
+class JoinToggleAPIView(APIView):
+    def get(self, request, pk, format=None):
+        meet_qs = Meet.objects.filter(pk=pk)
+        is_joining = Meet.objects.join_toggle(request.user, meet_qs.first())
+        return Response({'joining':is_joining})

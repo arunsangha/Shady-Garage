@@ -2,19 +2,25 @@
 {% load staticfiles %}
 {% block title %}Shady: {{post.post_title}} {% endblock %}
 {% block body %}
+<style>
+body{
+  background-color: black;
+}
+</style>
 <!--
   //TODO:Finne et bra nok design og implementere det.
 -->
-  <div class="container">
-    <h2> @{{post.user_fk.username}} </h2>
+  <div class="container" align="center" style="background-color:rgba(255,255,255,0.5);">
+    <a href="{% url 'accounts:profile_page_pk' pk=post.user_fk.pk%}"<h2> @{{post.user_fk.username}} </h2></a>
     <h2> {{ post.post_title}} </h2>
     <p> {{ post.post_description}} </p>
     <!--
       //TODO:!LANSERING! Bytte ut u=www.shadygarage.pythonanywhere.com/{{request.get_full_path}}" med  u=www.shadygarage.com/{{request.get_full_path}}
     -->
       <a href="https://www.facebook.com/sharer/sharer.php?u=shadygarage.pythonanywhere.com/{{request.get_full_path}}">
-          Share on Facebook
+        <input type="image" src="{% static 'images/facebooklogo.png'%}" class="facebookShare" id="facebookSharePost"/>
       </a>
+
     {% if post.post_image %}
       <img src="{{post.post_image.url}}" alt="" width="200px" heigh="200px">
     {% endif %}

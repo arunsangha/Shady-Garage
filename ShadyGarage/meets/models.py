@@ -6,6 +6,18 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 from django.contrib import auth
 # Create your models here.
+
+class MeetManager(models.Manager):
+    def join_toggle(self, user, meet_obj):
+        if user in meet_obj.users_joining.all():
+            is_joining = True
+            meet_obj.users_joining.remove(user)
+        else:
+            is_joining = False
+            meet_obj.users_joining.add(user)
+
+        return is_joining
+
 class Meet(models.Model):
     user_fk = models.ForeignKey(auth.models.User, related_name="meets_user_fk")
     meet_name = models.CharField(max_length = 255, unique = True)
@@ -17,6 +29,8 @@ class Meet(models.Model):
     users_joining = models.ManyToManyField(auth.models.User, blank = True, related_name = "members_joining_meet")
     longitude = models.CharField(max_length = 255, blank = True)
     latitude = models.CharField(max_length = 255,blank = True)
+
+    objects = MeetManager()
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.meet_name)

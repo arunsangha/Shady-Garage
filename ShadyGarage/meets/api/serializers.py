@@ -9,6 +9,9 @@ class MeetsModelSerializer(serializers.ModelSerializer):
     date = serializers.SerializerMethodField()
     time = serializers.SerializerMethodField()
     url = serializers.SerializerMethodField()
+    joining = serializers.SerializerMethodField()
+    did_join = serializers.SerializerMethodField()
+
     class Meta:
         model = Meet
         fields = (
@@ -18,9 +21,10 @@ class MeetsModelSerializer(serializers.ModelSerializer):
             'time',
             'description',
             'meet_image',
-            'users_joining',
+            'joining',
             'day',
             'url',
+            'did_join',
         )
 
     def get_day(self, obj):
@@ -45,3 +49,14 @@ class MeetsModelSerializer(serializers.ModelSerializer):
 
     def get_url(self, obj):
         return reverse("meets:single", kwargs={'slug':obj.slug})
+
+    def get_joining(self, obj):
+        return obj.users_joining.all().count()
+
+    def get_did_join(self, obj):
+        request = self.context.get('request')
+        user = request.user
+        if user.is_authenticated():
+            if user in obj.users_joining.all():
+                return True
+        return False 

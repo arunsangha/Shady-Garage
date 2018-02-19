@@ -8,7 +8,7 @@
       <input type="text" name="q" placeholder="Søk">
       <input type="submit" name="" class="btn btn-info" value="Søk">
     </form>
-    <a href="{% url 'posts:post_create'%}" class="btn btn-info">Del en post!</a>
+    <a href="{% url 'posts:post_create'%}" class="btn btn-info" id="sharePost">Del en post!</a>
     <div id="fraAjax"> </div>
     <a href="#" id="loadMore" class="btn btn-info">Fler posts</a>
   </div>
@@ -72,11 +72,11 @@
 
             if(has_image){
               $("#fraAjax").append(
-                  "<div class='card text-center' style='margin:20px;'><div class='card-header'>" +
+                  "<div class='card text-white bg-dark mb-4' style='max-width:40rem;'><div class='card-header'>" +
                       user_name
                     + "</div> <div class='card-body'> <h3 class='card-text'><a href='" + value.url + "'>"
                     + post_title + "</a></h3> <p class='card-text'>" + post_description + "</p>" +
-                     "<div class='post-image'><img src='" + image + "' style='width:30%;height:30%;'></div>"+
+                     "<div class='post-image'><img src='" + image + "' id='postImageFeed'></div>"+
                      "<a href='#' data-id='" + value.id + "' class='like-button'>" + verb + "</a> ("+ likes + ") | " +
                       "<a href='" + value.comment_url + "' class='comment-button'>Kommenter</a>" +
                     "</div><div class='card-footer text-muted'>"
@@ -85,7 +85,7 @@
               )
             }else{
               $("#fraAjax").append(
-                  "<div class='card text-center' style='margin:20px;'><div class='card-header'>" +
+                  "<div class='card text-white bg-dark mb-4' style='max-width:40rem;'><div class='card-header'>" +
                       user_name
                     + "</div> <div class='card-body'> <h3 class='card-text'><a href='" + value.url + "'>"
                     + post_title + "</a></h3> <p class='card-text'>" + post_description + "</p>" +
