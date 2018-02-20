@@ -17,7 +17,9 @@
       {% endif %}
     </div>
   </div>
-
+  <!--
+    //TODO: Ajax for å hente activity. Etter at reply to comments er ferdig, hente inn replyes.
+  -->
   <div class="activity-comment-container">
     {% for comment in user.post_comment_user.all  %}
     <div class="media" style="border:2px solid black;">

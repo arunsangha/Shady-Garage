@@ -50,6 +50,10 @@ class Post(models.Model):
     class Meta:
         ordering = ['-post_created']
 
+
+
+#//TODO:Reply for comments. Gjelder for meets og.
+
 class PostComment(models.Model):
      post_fk = models.ForeignKey(Post, related_name="post_comment_fk")
      user_fk = models.ForeignKey(User, related_name="post_comment_user")

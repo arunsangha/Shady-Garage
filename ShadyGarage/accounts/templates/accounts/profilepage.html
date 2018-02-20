@@ -22,6 +22,9 @@
       <h4>{{user.username}}´s garage</h4>
     </div>
     <div class="profile-post-cards" align="center">
+      <!--
+          //TODO:Ajax for å hente inn posts.
+      -->
       {% for post in user.user_posting.all %}
         <div class="card text-white bg-dark mb-4" id="profile-posts-cards-bootstrap" style="max-width: 25rem;">
           <div class="card-header">{{post.post_title}}</div>
