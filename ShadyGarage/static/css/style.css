@@ -761,3 +761,13 @@ input[type="file"]{
     color: red;
     font-weight: bold;
 }
+
+/* activity accounts app*/
+.activity-comment-container{
+  width: 70vw;
+  height: 100vh;
+  position: relative;
+  float: right;
+  top: 50px;
+  right: 50px;
+}
