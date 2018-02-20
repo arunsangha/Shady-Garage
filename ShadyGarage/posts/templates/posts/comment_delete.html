@@ -1,10 +1,17 @@
 {% extends "base.html" %}
 {% block body %}
   <div class="container">
-    <form method="post">
-      {% csrf_token %}
-      <h3>Sikker på at du vil slette kommentaren {{object.comment}}?</h3>
-      <input type="submit" class="btn btn-danger" value="Slett">
-    </form>
+    <div class="jumbotron">
+      <form method="post">
+        {% csrf_token %}
+        <h1 class="display-4"><span class="badge badge-warning">{{object.comment}}</span></h1>
+        <p class="lead">Sikker på at du vil slette kommentaren?</p>
+        <hr class="my-4">
+        <input type="submit" class="btn btn-danger" value="Slett">
+      </form>
+    </div>
+    <div id="gif" align="center">
+      <iframe src="https://giphy.com/embed/kqu0JnieiuhGw" width="480" height="256" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+    </div>
   </div>
 {% endblock %}

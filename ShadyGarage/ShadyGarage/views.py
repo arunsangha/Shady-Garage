@@ -5,3 +5,9 @@ class HomePage(TemplateView):
 
 class AboutPage(TemplateView):
     template_name = 'about.html'
+
+class error_404(TemplateView):
+    template_name = 'error404.html'
+
+class error_500(TemplateView):
+    template_name = 'error500.html'

@@ -13,7 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url, include
+from django.conf.urls import url, include, handler404, handler500
 from django.contrib import admin
 from . import views
 from django.conf import settings
@@ -30,3 +30,5 @@ urlpatterns = [
     url(r'^api/meets/', include('meets.api.urls'), name="api-meets"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     #Setningen over virker kun under production, ikke deployment.
+handler404 = views.error_404.as_view()
+handler500 = views.error_500.as_view()
