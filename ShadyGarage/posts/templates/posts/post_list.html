@@ -3,15 +3,21 @@
 {% block title %}ShadyGarage{% endblock %}
 {% block body %}
 {% if user.is_authenticated %}
-  <div class="container" align="center">
+  <div class="post-search-container" align="center">
     <form action="{% url 'posts:posts_feed' %}" method="action">
       <input type="text" name="q" placeholder="Søk">
       <input type="submit" name="" class="btn btn-info" value="Søk">
     </form>
+
     <a href="{% url 'posts:post_create'%}" class="btn btn-info" id="sharePost">Del en post!</a>
+  </div>
+  <div class="post-list-container">
     <div id="fraAjax"> </div>
+
     <a href="#" id="loadMore" class="btn btn-info">Fler posts</a>
   </div>
+
+
 {% else %}
 <div class="container" >
   <div class="jumbotron">
@@ -80,30 +86,62 @@
 
             if(has_image){
               $("#fraAjax").append(
-                  "<div class='card text-white bg-dark mb-4' style='max-width:40rem;'><div class='card-header'>" +
-                      user_name
-                    + "</div> <div class='card-body'> <h3 class='card-text'><a href='" + value.url + "'>"
-                    + post_title + "</a></h3> <p class='card-text'>" + post_description + "</p>" +
-                     "<div class='post-image'><img src='" + image + "' id='postImageFeed'></div>"+
-                    "</div><div class='card-footer'>"+ "<a href='#' data-id='" + value.id +
-                    "' class='like-button badge badge-info'>" + verb +  " " + likes + "</a> | " +
-                    "<a href='" + value.comment_url + "' class='comment-button badge badge-light'>Kommenter" + " " +
-                     comment_count + "</a>" + "</div><div class='card-footer text-muted'>"
-                    +  timesince + "</div></div>"
+                `
+                <div class='post-list-card text-white bg-dark mb-4'>
+                  <div class='card-header'>
+                    ${user_name}
+                  </div>
+                  <div class='card-body'>
+                    <h3 class='card-text'>
+                      <a href='${value.url}'>${post_title}</a>
+                    </h3>
+                    <p class='card-text'>${post_description}</p>
+                   <div class='post-image'>
+                    <img src='${image}' id='postImageFeed'>
+                   </div>
+                </div>
+                <div class='card-footer'>
+                    <a href='#' data-id='${value.id}' class='like-button badge badge-info'>
+                      ${verb} ${likes}
+                    </a>
+                    |
+                    <a href='${value.comment_url}' class='comment-button badge badge-light'>
+                      Kommenter ${comment_count}
+                    </a>
+                  </div>
+                  <div class='card-footer text-muted'>
+                     ${timesince}
+                  </div>
+                  </div>
+                `
               )
             }else{
               $("#fraAjax").append(
-                "<div class='card text-white bg-dark mb-4' style='max-width:40rem;'><div class='card-header'>" +
-                    user_name
-                  + "</div> <div class='card-body'> <h3 class='card-text'><a href='" + value.url + "'>"
-                  + post_title + "</a></h3> <p class='card-text'>" + post_description + "</p>" +
-                  "</div><div class='card-footer'>"+ "<a href='#' data-id='" + value.id +
-                  "' class='like-button badge badge-info'>" + verb + " " + likes +"</a>   | " +
-                  "<a href='" + value.comment_url + "' class='comment-button badge badge-light'>Kommenter" +
-                  " " + comment_count +  "</a>"
-                  + "</div><div class='card-footer text-muted'>"
-                  +  timesince
-                  + "</div></div>"
+                `
+                <div class='card text-white bg-dark mb-4'>
+                  <div class='card-header'>
+                    ${user_name}
+                  </div>
+                  <div class='card-body'>
+                    <h3 class='card-text'>
+                      <a href='${value.url}'>${post_title}</a>
+                    </h3>
+                    <p class='card-text'>${post_description}</p>
+                </div>
+                <div class='card-footer'>
+                    <a href='#' data-id='${value.id}' class='like-button badge badge-info'>
+                      ${verb} ${likes}
+                    </a>
+                    |
+                    <a href='${value.comment_url}' class='comment-button badge badge-light'>
+                      Kommenter ${comment_count}
+                    </a>
+                  </div>
+                  <div class='card-footer text-muted'>
+                     ${timesince}
+                  </div>
+                  </div>
+                `
               )
             }
         })

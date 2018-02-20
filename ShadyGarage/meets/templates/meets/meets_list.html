@@ -13,7 +13,7 @@
   }
 </style>
 
-<div class="background_meets_list"></div>
+<!--<div class="background_meets_list"></div>-->
   <div class="meet-search-container">
     <a class="btn btn-info btn-custom" href="{%url 'meets:create_meet'%}" role="button">Opprett treff! </a>
     <form action="{% url 'meets:meets_list'%}" method="action">
@@ -101,7 +101,7 @@
               var time = value.time
               var description = value.description
               var users_joining = value.joining
-            
+
 
             $("#fraAjax").append(
                 `<div class='meet-list-container'> <div class='meet-card-container'>
