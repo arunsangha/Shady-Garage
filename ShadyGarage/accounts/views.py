@@ -75,3 +75,10 @@ def view_profiles(request, pk=None):
     else:
         user = request.user
     return render(request, 'accounts/profilepage.html', {'user':user})
+
+def ProfileActivity(request, pk=None):
+    if pk:
+        user = User.objects.get(pk=pk)
+    else:
+        user = request.user
+    return render(request, 'accounts/activity.html', {'user':user})
