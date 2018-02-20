@@ -101,7 +101,11 @@
               var time = value.time
               var description = value.description
               var users_joining = value.joining
-
+              if(users_joining == 0){
+                users_joining = 'Bli med!'
+              }else{
+                users_joining = 'Skal: ' + users_joining
+              }
 
             $("#fraAjax").append(
                 `<div class='meet-list-container'> <div class='meet-card-container'>
@@ -114,7 +118,7 @@
                       <h2><a href='${value.url}' class='btn-meet-name'> ${meet_name}</a></h2>
                       <div class='meet-card-info'>
                         <h4>Ikea furuset</h4>
-                        <h4>Skal: ${value.joining} </h4>
+                        <h4>${users_joining} </h4>
                     </div>
                     </div>
                 </div>`

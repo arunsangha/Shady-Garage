@@ -506,7 +506,7 @@ margin-top: 50px;
 }
 
 #post-detail-username{
-  font-family: nosifer;
+  font-family: 'nosifer';
   color: white;
   float: left;
 }
@@ -586,7 +586,7 @@ margin-top: 50px;
 .profile-page-title{
   display: inline-block;
   position: relative;
-  font-family: nosifer;
+  font-family: 'nosifer';
   left: 19vw;
   top: -250px;
 }
