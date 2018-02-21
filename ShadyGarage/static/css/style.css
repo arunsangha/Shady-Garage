@@ -8,6 +8,12 @@
 5. Div
 */
 
+:root{
+  --button-color: #17a2b8;
+  --main-dark-color: #2E2E2E;
+  --main-light-color: #3f474f;
+}
+
 
 * {
   margin: 0;
@@ -58,7 +64,7 @@ h1,h2,h3,h4,h5,h6{
   Nav
 */
 .nav-container{
-  background-color: #2E2E2E;
+  background-color: var(--main-dark-color);
   width: 100%;
   position: relative;
 }
@@ -83,7 +89,7 @@ h1,h2,h3,h4,h5,h6{
 }
 
 .nav-list-item-link:hover{
-  color: #33b5e5;
+  color: var(--button-color);
 }
 
 @media only screen and (max-width: 1110px){
@@ -103,10 +109,10 @@ h1,h2,h3,h4,h5,h6{
       width: 100%;
       cursor: pointer;
       background-image: url(../images/Burger2.png);
-      background-size: 10% 95%;
+      background-size: 10% 100%;
       background-position: 97%;
       background-repeat: no-repeat;
-      background-color: #2E2E2E;
+      background-color: var(--main-dark-color);
 
   }
 
@@ -197,7 +203,7 @@ h1,h2,h3,h4,h5,h6{
 
 .index-card-button{
    display: block;
-   background-color: #17a2b8;
+   background-color: var(--button-color);
    color: white;
    padding: 10px;
    border-radius: 4px;
@@ -478,6 +484,33 @@ margin-top: 50px;
 -----------------------------------------------------
   Post app
 */
+.post-detail-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--main-light-color);
+  padding: 30px 0 0 0;
+}
+
+.post-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 5px 5px 5px 5px rgba(0,0,0,0.3);
+  width: 80%;
+  background-color: var(--main-dark-color);
+  color: white;
+}
+
+.post-detail-post-title{
+  padding: 10px 0;
+}
+
+.post-detail-post-comment{
+  width: 100%;
+  text-align: center;
+  padding: 20px 0;
+}
 
 .post-search-container{
   margin: 20px 0;
@@ -505,6 +538,16 @@ margin-top: 50px;
   height:100%
 }
 
+.post-detail-comment-button{
+  background-color: var(--button-color);
+  width: 120px;
+  margin: 30px 0;
+  text-align: center;
+  color: white;
+  border-radius: 3px;
+  padding: 5px;
+}
+
 #post-detail-username{
   font-family: 'nosifer';
   color: white;
@@ -515,24 +558,9 @@ margin-top: 50px;
   color: #5bc0de;
 }
 
-#post-detail-container{
-  box-shadow: 5px 5px 5px 5px;
-  top: 50px;
-  position: relative;
-}
-
-.post-container{
-  position: relative;
-  top: 20px;
-  height: 70vh;
-  width: 30vw;
-  background-color: red;
-  box-shadow: 5px 5px 5px 5px;
-}
-
-#post-detail-image{
+.post-detail-image{
   height: 50%;
-  width: 100%;
+  width: 50%;
 }
 /*
 -----------------------------------------------------
@@ -541,7 +569,7 @@ margin-top: 50px;
 .profile-card{
   color: white;
   display: inline-block;
-  background-color: #2E2E2E;
+  background-color: var(--main-dark-color);
   width: 280px;
   padding: 20px;
   text-align: center;
