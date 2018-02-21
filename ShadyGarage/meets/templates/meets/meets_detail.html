@@ -5,10 +5,6 @@
 //TODO:Style ferdig detail siden.
 -->
 {% block body %}
-  {% if request.user == meet.user_fk %}
-    <a href="{% url 'meets:delete_meet' slug=meet.slug%}" class="btn btn-danger">Slett</a>
-    <a href="{% url 'meets:update_meet' slug=meet.slug%}" class="btn btn-info">Oppdater</a>
-  {% endif %}
   {% if user.is_authenticated %}
   <div class="meet_detail_body">
     <div class="meet_detail_title_container">
@@ -39,18 +35,27 @@
     <div class="meet_detail_map_container">
       <div id="map"></div>
     </div>
-    <div class="meet_detail_comments_container">
+
+    {% if request.user == meet.user_fk %}
+      <a href="{% url 'meets:delete_meet' slug=meet.slug%}" class="btn btn-danger">Slett</a>
+      <a href="{% url 'meets:update_meet' slug=meet.slug%}" class="btn btn-info">Oppdater</a>
+    {% endif %}
+    <div class="meet-commentcontainer">
       <h4><a href="{% url 'meets:comment_meet' slug=meet.slug %}">Kommenter</a><h4>
-      <h1>Kommentarer:</h1>
+
       {% for comment in meet.meet_comment.all %}
-        <div class="meet_detail_comment_container">
-          <div class="meet_detail_comment_container_userinfo">
-              <img class="meet_detail_comment_container_userinfo_profilepic" src="{{comment.user.profile.profile_pic.url}}" alt="bilde">
+        <div class="commentcontainer-comment">
+          <div class="commentcontainer-userinfo">
+            <div class="commentcontainer-userinfo-profilepiccontainer">
+              <img class="commentcontainer-userinfo-profilepic" src="{{comment.user.profile.profile_pic.url}}" alt="bilde">
+            </div>
+            <div class="commentcontainer-userinfo-textinfo">
               <p>Bruker:<a href="{%url 'accounts:profile_page_pk' pk=comment.user.pk %}">{{comment.user}}</a></p>
               <p>Dato: {{comment.created|timesince}}
+            </div>
           </div>
-          <div class="meet_detail_comment_container_comment">
-            <p>{{comment.comment}}</p>
+          <div class="commentcontainer-commentfield">
+            <textarea>{{comment.comment}}</textarea>
             {% if request.user == comment.user %}
               <a href="{% url 'meets:meet_comment_delete' slug=meet.slug pk=comment.id %}" class="btn btn-danger btn-sm">Slett</a>
             {% endif %}

@@ -363,9 +363,8 @@ BackGround Images
 }
 /*--------------------------------------*/
 .meet_detail_body{
-padding: 30px;
-margin-top: 50px;
-
+  padding: 30px;
+  background-color: var(--main-light-color);
 }
 
 
@@ -484,37 +483,11 @@ margin-top: 50px;
 -----------------------------------------------------
   Post app
 */
-.post-detail-container{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: var(--main-light-color);
-  padding: 30px 0 0 0;
-}
 
-.post-container{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-shadow: 5px 5px 5px 5px rgba(0,0,0,0.3);
-  width: 80%;
-  background-color: var(--main-dark-color);
-  color: white;
-}
+/*
+    Post List
+*/
 
-.post-detail-post-title{
-  padding: 10px 0;
-}
-
-.post-detail-post-comment{
-  width: 100%;
-  text-align: center;
-  padding: 20px 0;
-}
-
-.post-search-container{
-  margin: 20px 0;
-}
 
 .post-list-container{
   display: flex;
@@ -526,6 +499,42 @@ margin-top: 50px;
 
 .post-list-card{
   border-radius: 5px;
+}
+
+.post-search-container{
+  margin: 20px 0;
+}
+
+/*
+    Post Detail
+*/
+.post-detail-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--main-light-color);
+  padding: 30px 0 30px 0;
+}
+
+.post-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 5px 5px 5px 5px rgba(0,0,0,0.3);
+  width: 80%;
+  background-color: var(--main-dark-color);
+  color: white;
+  margin: 0 0 20px 0;
+}
+
+.post-detail-post-title{
+  padding: 10px 0;
+}
+
+.post-detail-post-comment{
+  width: 100%;
+  text-align: center;
+  padding: 20px 0;
 }
 
 #sharePost{
@@ -682,6 +691,125 @@ margin-top: 50px;
 
 #forgotten-password:hover{
   color:#5bc0de;
+}
+
+
+/*
+----------------------------------------------------
+*/
+/*
+  Comment Section
+*/
+.post-commentcontainer{
+  width: 80%;
+  padding: 0 30px;
+}
+
+.meet-commentcontainer{
+  width: 80%;
+  padding: 0 30px;
+  margin: 30px auto;
+}
+
+.commentcontainer-comment{
+  margin: 20px 0;
+  display: flex;
+  flex-direction: row;
+  min-height: 150px;
+  box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.6);
+}
+
+.commentcontainer-userinfo{
+  display: flex;
+  flex-direction: row;
+  width: 30%;
+  max-height: 150px;
+}
+
+.commentcontainer-userinfo-profilepiccontainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+}
+
+.commentcontainer-userinfo-profilepic{
+  width: 90%;
+  height: 90%;
+  border-radius: 50%;
+}
+
+.commentcontainer-userinfo-textinfo{
+  padding: 3px;
+}
+
+.commentcontainer-commentfield{
+  flex-grow: 1;
+  padding: 5px;
+}
+
+.commentcontainer-commentfield textarea{
+  width: 90%;
+  height: 130px;
+}
+
+@media only screen and (max-width: 480px){
+
+  .post-commentcontainer{
+    width: 100%;
+    padding: 0 30px;
+  }
+
+  .meet-commentcontainer{
+    width: 100%;
+    padding: 0 0;
+    margin: 30px auto;
+  }
+
+  .commentcontainer-comment{
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 150px;
+    box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.6);
+  }
+
+  .commentcontainer-userinfo{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    max-height: 150px;
+  }
+
+  .commentcontainer-userinfo-profilepiccontainer{
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    padding: 2px;
+  }
+
+  .commentcontainer-userinfo-profilepic{
+    width: 90%;
+    height: 90%;
+    border-radius: 5%;
+  }
+
+  .commentcontainer-userinfo-textinfo{
+    flex-grow: 1;
+    padding: 10px 0 0 0;
+  }
+
+  .commentcontainer-commentfield{
+    flex-grow: 1;
+    padding: 5px;
+  }
+
+  .commentcontainer-commentfield textarea{
+    width: 90%;
+    height: 130px;
+  }
 }
 
 /*

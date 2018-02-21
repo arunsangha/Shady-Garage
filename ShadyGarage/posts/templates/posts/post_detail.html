@@ -22,29 +22,35 @@
           <a href="https://www.facebook.com/sharer/sharer.php?u=shadygarage.pythonanywhere.com/{{request.get_full_path}}">
             <input type="image" src="{% static 'images/facebooklogo.png'%}" class="facebookShare" id="facebookSharePost"/>
           </a>
-
     </div>
-    <a class="post-detail-comment-button" href="{% url 'posts:post_comment' slug=post.slug%}">Kommenter</a>
-    <h4>Kommentarer:</h4>
-    {% for comment in post.post_comment_fk.all %}
-    <div class="post_detail_comment_container">
-      <div class="post_detail_comment_container_userinfo">
-          <img class="post_detail_comment_container_userinfo_profilepic" src="{{comment.user.profile.profile_pic.url}}" alt="bilde">
-          <p>Bruker:<a href="{%url 'accounts:profile_page_pk' pk=comment.user_fk.pk %}">{{comment.user_fk}}</a></p>
-          <p>Dato: {{comment.created|date:'Y-m-d H:i'}}</p>
-      </div>
-      <div class="post_detail_comment_container_comment">
-        <p>{{comment.comment}}</p>
-        {% if request.user == comment.user_fk %}
-          <a href="{% url 'posts:post_comment_delete' slug=post.slug pk=comment.id%}" class="btn btn-danger btn-sm">Slett</a>
-        {% endif %}
-      </div>
-    </div>
-    {% endfor %}
-
     {% if request.user == post.user_fk %}
       <a href="{% url 'posts:post_delete' slug=post.slug %} " class="btn btn-danger">Slett post!</a>
       <a href="{% url 'posts:post_update' slug=post.slug %}" class="btn btn-info">Oppdater post!</a>
     {% endif %}
+
+    <a class="post-detail-comment-button" href="{% url 'posts:post_comment' slug=post.slug%}">Kommenter</a>
+    <div class="post-commentcontainer">
+    {% for comment in post.post_comment_fk.all %}
+      <div class="commentcontainer-comment">
+        <div class="commentcontainer-userinfo">
+          <div class="commentcontainer-userinfo-profilepiccontainer">
+            <img class="commentcontainer-userinfo-profilepic" src="{{comment.user_fk.profile.profile_pic.url}}" alt="bilde">
+          </div>
+          <div class="commentcontainer-userinfo-textinfo">
+            <p>Bruker: <a href="{%url 'accounts:profile_page_pk' pk=comment.user_fk.pk %}">{{comment.user_fk}}</a></p>
+            <p>Dato: {{comment.created|date:'Y-m-d H:i'}}</p>
+          </div>
+        </div>
+        <div class="commentcontainer-commentfield">
+          <textarea>{{comment.comment}}</textarea>
+          {% if request.user == comment.user_fk %}
+            <a href="{% url 'posts:post_comment_delete' slug=post.slug pk=comment.id%}" class="btn btn-danger btn-sm">Slett</a>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+
+    </div>
   </div>
+
 {% endblock %}
