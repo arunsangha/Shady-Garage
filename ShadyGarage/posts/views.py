@@ -10,7 +10,6 @@ from django.db.models import Q
 
 class PostList(LoginRequiredMixin, ListView):
     template_name = 'posts/post_list.html'
-
     def get_context_data(self, *args, **kwargs):
         context = super(PostList, self).get_context_data(*args, **kwargs)
         return context
@@ -25,6 +24,7 @@ class PostList(LoginRequiredMixin, ListView):
                 Q(post_description__icontains=query)
             )
         return qs
+
 
 class PostDetail(LoginRequiredMixin, DetailView):
     model = models.Post

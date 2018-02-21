@@ -5,7 +5,7 @@ from accounts.api import serializers as accounts_serialisers
 from django.urls import reverse
 
 class PostModelSerializer(serializers.ModelSerializer):
-    user_fk = accounts_serialisers.UserDisplaySerializer()
+    user_fk = accounts_serialisers.UserDisplaySerializer(read_only=True)
     date_display = serializers.SerializerMethodField()
     timesince = serializers.SerializerMethodField()
     url = serializers.SerializerMethodField()

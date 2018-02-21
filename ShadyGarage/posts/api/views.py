@@ -1,4 +1,4 @@
-from rest_framework import generics
+from rest_framework import generics, permissions
 from posts.models import Post
 from .serializers import PostModelSerializer
 from django.db.models import Q
@@ -13,7 +13,7 @@ class PostListAPIView(generics.ListAPIView):
     def get_serializer_context(self, *args, **kwargs):
         context = super(PostListAPIView, self).get_serializer_context(*args, **kwargs)
         context['request'] = self.request
-        return context 
+        return context
 
     def get_queryset(self):
         qs = Post.objects.all()
@@ -32,3 +32,9 @@ class LikeToggleAPIView(APIView):
         post_qs = Post.objects.filter(pk=pk)
         is_liked = Post.objects.like_toggle(request.user, post_qs.first())
         return Response({'liked':is_liked})
+
+class PostCreateAPIView(generics.CreateAPIView):
+    serializer_class = PostModelSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    def perform_create(self, serializer):
+        serializer.save(user_fk=self.request.user)
