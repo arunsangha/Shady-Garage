@@ -2,6 +2,7 @@
 {% load staticfiles %}
 {% block title %}ShadyGarage{% endblock %}
 {% block body %}
+{% include "posts/comment-modal.html" %}
 {% if user.is_authenticated %}
   <div class="post-search-container" align="center">
     <form action="{% url 'posts:posts_feed' %}" method="action">
@@ -12,8 +13,7 @@
     <a href="{% url 'posts:post_create'%}" class="btn btn-info" id="sharePost">Del en post!</a>
   </div>
   <div class="post-list-container">
-    <div id="fraAjax"> </div>
-
+    <div id="fraAjax"></div>
     <a href="#" id="loadMore" class="btn btn-info">Fler posts</a>
   </div>
 
@@ -108,6 +108,10 @@
                     <a href='${value.comment_url}' class='comment-button badge badge-light'>
                       Kommenter ${comment_count}
                     </a>
+                    <a href='#' class='comment-button badge badge-light' id='comment-modal'  data-id='${value.id}' data-post-owner='${user_name}' data-post-title='${post_title}'>
+                      Kommenter ${comment_count}
+                    </a>
+
                   </div>
                   <div class='card-footer text-muted'>
                      ${timesince}
@@ -204,6 +208,16 @@
             }
 
           })
+      })
+
+      $(document.body).on("click", "#comment-modal", function(e){
+        e.preventDefault()
+        var this_ = $(this)
+        var postId = this_.attr("data-id")
+        var owner = this_.attr("data-post-owner")
+        var title = this_.attr("data-post-title")
+        console.log("COMMENT KNAPP")
+        $("#commentModal").modal()
       })
     });
   </script>
