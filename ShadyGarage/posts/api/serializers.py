@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.utils.timesince import timesince
-from posts.models import Post
+from posts.models import Post, PostComment
 from accounts.api import serializers as accounts_serialisers
 from django.urls import reverse
 
@@ -29,6 +29,7 @@ class PostModelSerializer(serializers.ModelSerializer):
             'id',
             'comment_url',
             'comment_count',
+            'slug',
         )
 
     def get_date_display(self, obj):
@@ -56,3 +57,15 @@ class PostModelSerializer(serializers.ModelSerializer):
 
     def get_comment_count(self, obj):
         return obj.post_comment_fk.count()
+
+class PostCommentSerializer(serializers.ModelSerializer):
+    post_fk = PostModelSerializer(read_only=True)
+    user_fk = accounts_serialisers.UserDisplaySerializer(read_only=True)
+    class Meta:
+        model = PostComment
+        fields= (
+            'post_fk',
+            'user_fk',
+            'comment',
+            'created',
+        )

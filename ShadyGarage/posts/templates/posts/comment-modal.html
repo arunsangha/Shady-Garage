@@ -8,13 +8,16 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
+      <form class="comment-api" id="test">
+        {% csrf_token %}
+        <textarea id="commentReply" class="form-control" name="content"></textarea>
 
-      </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Kanskje ikke allikevel..</button>
         <input type="submit" class="btn btn-info" value="Kommenter">
       </div>
+      </form>
+      </form>
     </div>
   </div>
 </div>

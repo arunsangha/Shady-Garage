@@ -108,7 +108,7 @@
                     <a href='${value.comment_url}' class='comment-button badge badge-light'>
                       Kommenter ${comment_count}
                     </a>
-                    <a href='#' class='comment-button badge badge-light' id='comment-modal'  data-id='${value.id}' data-post-owner='${user_name}' data-post-title='${post_title}'>
+                    <a href='#' class='comment-button badge badge-light' id='comment-modal' data-sluug="${value.slug}" data-id='${value.id}' data-post-owner='${user_name}' data-post-title='${post_title}'>
                       Kommenter ${comment_count}
                     </a>
 
@@ -192,7 +192,7 @@
           e.preventDefault()
           this_ = $(this)
           var postId = this_.attr("data-id")
-          var likedUrl = '../../api/posts/' + postId + '/like/'
+          var likedUrl = '../../api/posts/like/' + postId + '/'
 
           $.ajax({
             method: 'GET',
@@ -217,7 +217,29 @@
         var owner = this_.attr("data-post-owner")
         var title = this_.attr("data-post-title")
         console.log("COMMENT KNAPP")
-        $("#commentModal").modal()
+        $("#commentModal").modal({})
+        $("#commentModal").on("shown.bs.modal", function(){
+          $('textarea').focus()
+        })
+      })
+
+      $("#test").submit(function(event){
+        event.preventDefault()
+        var this_ = $(this)
+        var formData = this_.serialize()
+        console.log(formData)
+        var slug = $("#comment-modal").attr("data-sluug")
+        $.ajax({
+          url: '../../api/posts/create_comment/' + slug + '/',
+          method:'POST',
+          data: formData,
+          success:function(data){
+            console.log("WORKING IN API COMMENT SUBMIT FUNCTION")
+            this_.find("input[type=text], textarea").val("")
+          }, error:function(data){
+            console.log("ERROR I API POST COMMENT")
+          }
+        })
       })
     });
   </script>
