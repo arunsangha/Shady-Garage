@@ -212,6 +212,7 @@
         var postId = this_.attr("data-id")
         var owner = this_.attr("data-post-owner")
         var title = this_.attr("data-post-title")
+        $('textarea').val('')
         $("#commentModal").modal({})
         $("#commentModal").on("shown.bs.modal", function(){
           $('#commentModal').attr('data-sluug', this_.attr("data-sluug"))
