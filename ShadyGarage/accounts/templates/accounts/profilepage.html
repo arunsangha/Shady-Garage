@@ -18,33 +18,34 @@
       {% endif %}
     </div>
   </div>
-    <div class="profile-page-title">
+  <div class="profile-page-title">
       <h4>{{user.username}}´s garage</h4>
-    </div>
-    <div class="profile-post-cards" align="center">
+  </div>
+  <div class="profile-post-cards" align="center">
       <!--
           //TODO:Ajax for å hente inn posts.
       -->
-      {% for post in user.user_posting.all %}
-        <div class="card text-white bg-dark mb-4" id="profile-posts-cards-bootstrap" style="max-width: 25rem;">
-          <div class="card-header">{{post.post_title}}</div>
-            <div class="card-body">
-              {% if post.post_image %}
-                  <img src="{{post.post_image.url}}" alt="" class="profile-page-post-image">
-                  <p class="card-text">{{post.post_description}}</p>
-              {% else %}
-                <p class="card-text">{{post.post_description}}</p>
-              {% endif %}
-            </div>
-
-            <div class="card-footer">
-              <a href="{% url 'posts:post_detail' slug=post.slug %}" style="color:white;">Se kommentarer</a>
-            </div>
-            <div class="card-footer">
-              <small class="text-muted">{{post.post_created|timesince}}</small>
-            </div>
-        </div>
-      {% endfor %}
+    {% for post in user.user_posting.all %}
+    <div class="card text-white bg-dark mb-4" id="profile-posts-cards-bootstrap" style="max-width: 25rem;">
+      <div class="card-header">
+        {{post.post_title}}
+      </div>
+      <div class="card-body">
+        {% if post.post_image %}
+          <img src="{{post.post_image.url}}" alt="" class="profile-page-post-image">
+          <p class="card-text">{{post.post_description}}</p>
+        {% else %}
+          <p class="card-text">{{post.post_description}}</p>
+        {% endif %}
+      </div>
+      <div class="card-footer">
+        <a href="{% url 'posts:post_detail' slug=post.slug %}" style="color:white;">Se kommentarer</a>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted">{{post.post_created|timesince}}</small>
+      </div>
     </div>
+      {% endfor %}
+  </div>
 
 {% endblock %}

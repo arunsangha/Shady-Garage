@@ -501,6 +501,14 @@ BackGround Images
   border-radius: 5px;
 }
 
+.card-header{
+  text-align: center;
+}
+
+.card-body{
+  text-align: center;
+}
+
 .post-search-container{
   margin: 20px 0;
 }
@@ -822,22 +830,17 @@ BackGround Images
     width: 93.3px;
 }
 
-.signup_container{
-  position: relative;
-  background-color: rgba(0,0,0, 0.7);
-  color: white; /*#34495e*/
-  height: 600px;
-  width: 700px;
-  left: 40px;
-  top: 30px;
-  border-radius: 20px;
+.signup-container{
+  display: flex;
+  padding: 30px 0 30px 30px;
 }
 
-.signup-form_container{
-  position: relative;
-  left: 50px;
-  height: 500px;
-  width: 600px;
+.signup-form-container{
+  background-color: rgba(0,0,0, 0.7);
+  color: white; /*#34495e*/
+  border-radius: 20px;
+  padding: 30px;
+  width: 55%;
 }
 
 #registrer-deg-h1{
@@ -850,8 +853,7 @@ BackGround Images
   width: 50vh;
   background-color: rgba(0, 0, 0, 0.5);
   padding: 20px;
-  margin: 0 auto;
-  margin-top: 20px;
+  margin: 20px auto;
   border-radius: 20px;
   border: thin solid white;
 }
@@ -868,6 +870,19 @@ input[type="file"]{
   color: #72BCD4;
   vertical-align: middle;
   cursor: pointer;
+}
+
+@media only screen and (max-width: 480px){
+  .signup-container{
+    padding: 15px;
+    justify-content: center;
+  }
+
+  .signup-form-container{
+    border-radius: 20px;
+    padding: 30px;
+    width: 90%;
+  }
 }
 
 /* Select date widget in "shadygarage.com/meets/new/"*/
