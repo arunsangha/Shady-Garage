@@ -29,7 +29,7 @@ class Meet(models.Model):
     users_joining = models.ManyToManyField(auth.models.User, blank = True, related_name = "members_joining_meet")
     longitude = models.CharField(max_length = 255, blank = True)
     latitude = models.CharField(max_length = 255,blank = True)
-
+    location = models.CharField(max_length = 1275, blank = True)
     objects = MeetManager()
 
     def save(self, *args, **kwargs):
