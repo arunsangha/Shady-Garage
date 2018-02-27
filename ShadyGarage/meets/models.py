@@ -27,8 +27,6 @@ class Meet(models.Model):
     description = models.TextField()
     meet_image = models.ImageField(upload_to = "meets_pic", blank = True, default = "/meets_pic/meet_default.png")
     users_joining = models.ManyToManyField(auth.models.User, blank = True, related_name = "members_joining_meet")
-    longitude = models.CharField(max_length = 255, blank = True)
-    latitude = models.CharField(max_length = 255,blank = True)
     location = models.CharField(max_length = 1275, blank = True)
     objects = MeetManager()
 

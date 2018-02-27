@@ -1,27 +1,29 @@
 function initMap() {
      var geocoder = new google.maps.Geocoder();
-     var location = $(this).find('.location').text();
+     var location = document.getElementById('location').textContent;
+     console.log("Location: " + location)
      var oslo = {lat: 59.913, lng: 10.752};
-
+     var directionsService = new google.maps.DirectionsService();
+     var directionsDisplay = new google.maps.DirectionsRenderer();
      geocoder.geocode({'address':location}, function(results, status){
+       console.log(results)
+       console.log(status)
        if(status === google.maps.GeocoderStatus.OK){
          map.setCenter(results[0].geometry.location);
          var marker = new google.maps.Marker({
            map:map,
-           position: results[0].geometry.location
+           position: results[0].geometry.location,
+           zoom: 10,
          })
        }else{
          console.log("ERROR I MAP")
        }
      })
      var map = new google.maps.Map(document.getElementById('map'), {
-       zoom: 6,
-       center: oslo
+       zoom: 15,
+       center: oslo,
      });
-     var marker = new google.maps.Marker({
-       position: oslo,
-       map: map
-     });
+
    }
 
    $(document).ready(function() {

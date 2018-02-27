@@ -6,7 +6,7 @@ class CreateMeetForm(forms.ModelForm):
 
     class Meta():
         model = models.Meet
-        fields = ('meet_name', 'date', 'time', 'description', 'latitude', 'longitude')
+        fields = ('meet_name', 'date', 'time', 'description', 'location',)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -15,6 +15,8 @@ class CreateMeetForm(forms.ModelForm):
         self.fields['date'].label = "Dato"
         self.fields['time'].label = "Treffet starter..."
         self.fields['description'].label = "Beskrivelse av treffet:"
+        self.fields['location'].label = "Adresse:"
+        self.fields['location'].widget.attrs.update({'placeholder': 'F.eks "Altagårdskogen 32, 9515 Alta"'})
 
 class CommentForm(forms.ModelForm):
     class Meta():

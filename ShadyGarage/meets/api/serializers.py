@@ -25,6 +25,7 @@ class MeetsModelSerializer(serializers.ModelSerializer):
             'day',
             'url',
             'did_join',
+            'location',
         )
 
     def get_day(self, obj):
@@ -59,4 +60,4 @@ class MeetsModelSerializer(serializers.ModelSerializer):
         if user.is_authenticated():
             if user in obj.users_joining.all():
                 return True
-        return False 
+        return False
