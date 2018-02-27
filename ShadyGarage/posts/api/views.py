@@ -1,11 +1,11 @@
 from rest_framework import generics, permissions
 from posts.models import Post
-from .serializers import PostModelSerializer
+from .serializers import PostModelSerializer, PostCommentSerializer
 from django.db.models import Q
 from .pagination import StandardResultsPagination
 from rest_framework.views import APIView
 from rest_framework.response import Response
-
+from django.shortcuts import get_object_or_404
 class PostListAPIView(generics.ListAPIView):
     serializer_class = PostModelSerializer
     pagination_class = StandardResultsPagination
@@ -38,3 +38,11 @@ class PostCreateAPIView(generics.CreateAPIView):
     permission_classes = [permissions.IsAuthenticated]
     def perform_create(self, serializer):
         serializer.save(user_fk=self.request.user)
+
+class PostCommentCreateAPIView(generics.CreateAPIView):
+    serializer_class = PostCommentSerializer
+    permissions_classes = [permissions.IsAuthenticated]
+
+    def perform_create(self, serializer):
+        slug = self.kwargs.get('slug')
+        serializer.save(user_fk = self.request.user, post_fk = get_object_or_404(Post, slug=slug))

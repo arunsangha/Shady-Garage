@@ -105,13 +105,9 @@
                       ${verb} ${likes}
                     </a>
                     |
-                    <a href='${value.comment_url}' class='comment-button badge badge-light'>
+                    <a href='#' class='comment-button badge badge-light' id='comment-modal' data-sluug="${value.slug}" data-id='${value.id}' data-post-owner='${user_name}' data-post-title='${post_title}'>
                       Kommenter ${comment_count}
                     </a>
-                    <a href='#' class='comment-button badge badge-light' id='comment-modal'  data-id='${value.id}' data-post-owner='${user_name}' data-post-title='${post_title}'>
-                      Kommenter ${comment_count}
-                    </a>
-
                   </div>
                   <div class='card-footer text-muted'>
                      ${timesince}
@@ -137,7 +133,7 @@
                       ${verb} ${likes}
                     </a>
                     |
-                    <a href='${value.comment_url}' class='comment-button badge badge-light'>
+                    <a href='#' class='comment-button badge badge-light' id='comment-modal' data-sluug="${value.slug}" data-id='${value.id}' data-post-owner='${user_name}' data-post-title='${post_title}'>
                       Kommenter ${comment_count}
                     </a>
                   </div>
@@ -192,7 +188,7 @@
           e.preventDefault()
           this_ = $(this)
           var postId = this_.attr("data-id")
-          var likedUrl = '../../api/posts/' + postId + '/like/'
+          var likedUrl = '../../api/posts/like/' + postId + '/'
 
           $.ajax({
             method: 'GET',
@@ -216,8 +212,34 @@
         var postId = this_.attr("data-id")
         var owner = this_.attr("data-post-owner")
         var title = this_.attr("data-post-title")
-        console.log("COMMENT KNAPP")
-        $("#commentModal").modal()
+        $('textarea').val('')
+        $("#commentModal").modal({})
+        $("#commentModal").on("shown.bs.modal", function(){
+          $('#commentModal').attr('data-sluug', this_.attr("data-sluug"))
+          $('textarea').focus()
+        })
+      })
+
+      $("#test").submit(function(event){
+        event.preventDefault()
+        var this_ = $(this)
+        var comment = this_.find("input[type=text], textarea").val()
+        var slug = $("#commentModal").attr("data-sluug")
+        $.ajax({
+          url: '../../api/posts/create_comment/' + slug + '/',
+          method:'POST',
+          data: {
+            'comment':comment,
+             csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+          },
+
+          success:function(data){
+            $("#commentModal").modal('hide');
+            console.log("Commented")
+          }, error:function(data){
+            console.log("ERROR I API POST COMMENT")
+          }
+        })
       })
     });
   </script>
