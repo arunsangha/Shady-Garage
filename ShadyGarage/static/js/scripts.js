@@ -19,6 +19,7 @@ function initMap() {
              map:map,
              position: results[0].geometry.location,
              zoom: 10,
+             icon: "../../../static/images/e30marker.svg",
            });
 
            infowindow = new google.maps.InfoWindow({
