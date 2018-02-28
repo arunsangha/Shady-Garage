@@ -6,12 +6,12 @@
 <div class="login-container">
   <img src="{%static "images/logomidlertidig.png"%}" alt="" id="logo-login"> </img>
   <div class="login-form-container">
-    <form method="POST">
+    <form method="POST" class="login-form">
       {% csrf_token %}
-      {% bootstrap_form form%}
+      {% bootstrap_form form %}
       <input type="submit" class="btn btn-outline-info btn-block" value="login!">
     </form>
-    <a href="{% url 'accounts:reset_password'%}"><p id="forgotten-password">Glemt passord?</p></a>
+    <a class="btn btn-outline-warning btn-block btn-custom-pw-forgotten" href="{% url 'accounts:reset_password'%}">Glemt passord?</a>
   </div>
 </div>
 {% endblock %}
