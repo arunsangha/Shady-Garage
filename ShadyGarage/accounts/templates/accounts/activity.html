@@ -1,44 +1,32 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 {% block body %}
-<div class="profile-card">
-    <img class="profile-card-img" src="{{user.profile.profile_pic.url}}" alt="Card image cap">
-    </img>
-    <div class="profile-card-body">
-      <h5 class="profile-card-title">{{user.username}}</h5>
-      <h6 class="profile-card-sub-title">Team: {{user.profile.teams}}</h6>
-      <ul class="profile-card-list">
-        <li class="profile-card-list-item">Posts: {{user.user_posting.all.count}}</li>
-        <li class="profile-card-list-item">Alder: {{user.profile.age}}</li>
-      </ul>
-      {% if request.user == user %}
-        <a href="{% url 'accounts:profile_edit' %}" class="btn btn-info">Edit profile</a>
-        <a href="{% url 'accounts:change_password' %}" class="btn btn-info">Bytt passord</a>
-      {% endif %}
-    </div>
-  </div>
   <!--
     //TODO: Ajax for å hente activity. Etter at reply to comments er ferdig, hente inn replyes.
   -->
-  <div class="activity-comment-container">
-    {% for comment in user.post_comment_user.all  %}
-    <div class="media" style="border:2px solid black;">
-      <img class="mr-3" src="{{ comment.post_fk.user_fk.profile.profile_pic.url }}" alt="bruker mangler bilde" width="10%" heigth="10%">
-      <div class="media-body">
-        <a href="{{ comment.post_fk.get_absolute_url }}"><h5 class="mt-0">{{comment.post_fk.user_fk.username}} sin post '{{comment.post_fk.post_title}}'</h5></a>
-        Kommenterte: {{comment.comment}} | for {{comment.created|timesince}}
-      </div>
-    </div>
+  <div class="container">
+    {% for post in user.user_posting.all  %}
+        {% if post.post_comment_fk.all.count > 0 %}
+          <p>{{post.post_title}}</p>
+          <p>Folk har kommentert:</p>
+          {% for comment in post.post_comment_fk.all %}
+              <h6>{{comment.comment}} </h6>
+              <h6>{{comment.created|timesince}}</h6>
+          {% endfor %}
+        {% endif %}
+        {% if post.post_likes.all.count > 0 %}
+            <p>{{post.post_title}}</p>
+            <p>Disse har likt din post:</p>
+            {% for u in post.post_likes.all %}
+                <h6>{{u.username}} </h6>
+            {% endfor %}
+        {% endif %}
     {% endfor %}
 
-    {% for like in user.post_likes.all reversed %}
-    <div class="media" style="border:2px solid black;">
-      <img class="mr-3" src="{{ like.user_fk.profile.profile_pic.url }}" alt="bruker mangler bilde" width="10%" heigth="10%">
-      <div class="media-body">
-        <a href="{{ like.get_absolute_url }}"><h5 class="mt-0">Likte: {{like.user_fk.username}} sin post '{{like.post_title}}'</h5></a>
-      </div>
-    </div>
-    {% endfor %}
+    
+
+
+
   </div>
 
 {% endblock %}

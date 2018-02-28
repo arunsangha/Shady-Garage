@@ -15,6 +15,7 @@
       {% if request.user == user %}
         <a href="{% url 'accounts:profile_edit' %}" class="btn btn-info">Edit profile</a>
         <a href="{% url 'accounts:change_password' %}" class="btn btn-info">Bytt passord</a>
+        <a href="{% url 'accounts:activity' %}" class="btn btn-info">Innboks</a>
       {% endif %}
     </div>
   </div>
