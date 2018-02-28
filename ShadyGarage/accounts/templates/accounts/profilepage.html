@@ -2,35 +2,38 @@
 {% load staticfiles %}
 {% block title %} Shady Garage | {{user.username}} {% endblock %}
 {% block body %}
-<div class="profile-card">
-    <img class="profile-card-img" src="{{user.profile.profile_pic.url}}" alt="Card image cap">
-    </img>
-    <div class="profile-card-body">
-      <h5 class="profile-card-title">{{user.username}}</h5>
-      <h6 class="profile-card-sub-title">Team: {{user.profile.teams}}</h6>
-      <ul class="profile-card-list">
-        <li class="profile-card-list-item">Posts: {{user.user_posting.all.count}}</li>
-        <li class="profile-card-list-item">Alder: {{user.profile.age}}</li>
-      </ul>
-      {% if request.user == user %}
-        <a href="{% url 'accounts:profile_edit' %}" class="btn btn-info">Edit profile</a>
-        <a href="{% url 'accounts:change_password' %}" class="btn btn-info">Bytt passord</a>
-      {% endif %}
+<div class="profile-body">
+  <div class="profile-top">
+    <div class="profile-card">
+      <img class="profile-card-img" src="{{user.profile.profile_pic.url}}" alt="Card image cap">
+      </img>
+      <div class="profile-card-body">
+        <h5 class="profile-card-title">{{user.username}}</h5>
+        <h6 class="profile-card-sub-title">Team: {{user.profile.teams}}</h6>
+        <ul class="profile-card-list">
+          <li class="profile-card-list-item">Posts: {{user.user_posting.all.count}}</li>
+          <li class="profile-card-list-item">Alder: {{user.profile.age}}</li>
+        </ul>
+        {% if request.user == user %}
+          <a href="{% url 'accounts:profile_edit' %}" class="btn btn-info">Edit profile</a>
+          <a href="{% url 'accounts:change_password' %}" class="btn btn-info">Bytt passord</a>
+        {% endif %}
+      </div>
+    </div>
+    <div class="profile-page-title">
+      <h4>{{user.username}}´s garage</h4>
     </div>
   </div>
-  <div class="profile-page-title">
-      <h4>{{user.username}}´s garage</h4>
-  </div>
-  <div class="profile-post-cards" align="center">
-      <!--
-          //TODO:Ajax for å hente inn posts.
-      -->
+  <div class="profile-post-list">
+        <!--
+            //TODO:Ajax for å hente inn posts.
+        -->
     {% for post in user.user_posting.all %}
-    <div class="card text-white bg-dark mb-4" id="profile-posts-cards-bootstrap" style="max-width: 25rem;">
+    <div class="profile-post-list-card">
       <div class="card-header">
         {{post.post_title}}
       </div>
-      <div class="card-body">
+      <div class="profile-post-list-card-image">
         {% if post.post_image %}
           <img src="{{post.post_image.url}}" alt="" class="profile-page-post-image">
           <p class="card-text">{{post.post_description}}</p>
@@ -47,5 +50,7 @@
     </div>
       {% endfor %}
   </div>
+</div>
+
 
 {% endblock %}

@@ -583,23 +583,39 @@ BackGround Images
 -----------------------------------------------------
   Profile page
 */
+
+.profile-body{
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-top{
+  display: flex;
+  flex-direction: row;
+  padding: 40px;
+}
+
+.profile-page-title{
+  text-align: center;
+  padding: 40px 0 0 0;
+  font-family: 'nosifer';
+  flex-grow: 1;
+}
+
 .profile-card{
   color: white;
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
   background-color: var(--main-dark-color);
-  width: 280px;
-  padding: 20px;
+  width: 25%;
   text-align: center;
-  border-radius: 5px;
-  position: relative;
-  top: 30px;
-  left: 30px;
-  z-index: 5;
+  padding: 10px;
+  border-radius: 10px;
 }
 
 .profile-card-img{
   width: 100%;
-  margin: 10px 0 30px 0;
+  height: 200px;
 }
 
 .profile-card-body{
@@ -628,22 +644,22 @@ BackGround Images
 
 }
 
-.profile-page-title{
-  display: inline-block;
-  position: relative;
-  font-family: 'nosifer';
-  left: 19vw;
-  top: -250px;
+.profile-post-list{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.profile-post-cards{
-  position: relative;
-  top: 20px;
-  float: center;
-  top: -200px;
-}
-.profile-posts-cards-bootstrap{
+.profile-post-list-card{
+  width: 25%;
+  background-color: var(--main-light-color);
+  margin: 30px;
+  text-align: center;
 
+}
+
+.profile-post-list-card-image{
+  width: 100%;
 }
 
 .profile-page-post-image{
@@ -651,6 +667,11 @@ BackGround Images
   height: 100%;
 }
 
+@media only screen and (max-width: 480px){
+
+
+
+}
 
 
 /*
@@ -660,13 +681,12 @@ BackGround Images
 .login-container{
   background-color: black;
   text-align: center;
-  height: 100vh;
+  padding: 30px 0;
   width: 100%;
 }
 
 .login-form-container {
   color: white;
-  height: 40% auto;
   margin: 0 auto;
   width: 40%;
   border: thin solid white;
@@ -677,6 +697,10 @@ BackGround Images
   width: 560px;
   height: 315px auto;
   max-width: 100%;
+}
+
+.btn-custom-pw-forgotten{
+  margin-top: 20px;
 }
 
 @media only screen and (max-width: 1024px){
@@ -691,15 +715,6 @@ BackGround Images
   }
 }
 
-#forgotten-password{
-  position: relative;
-  top:20px;
-  color:white;
-}
-
-#forgotten-password:hover{
-  color:#5bc0de;
-}
 
 
 /*
