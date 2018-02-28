@@ -8,6 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 # Create your views here.
 
+
 class PostList(LoginRequiredMixin, ListView):
     template_name = 'posts/post_list.html'
     def get_context_data(self, *args, **kwargs):

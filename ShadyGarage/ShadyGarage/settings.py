@@ -44,7 +44,10 @@ INSTALLED_APPS = [
     'meets',
     'bootstrap3',
     'posts',
+    'actstream',
 ]
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
