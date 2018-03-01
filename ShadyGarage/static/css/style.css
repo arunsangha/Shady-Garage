@@ -36,12 +36,16 @@ a:hover{
 p {
   font-family: 'Catamaran', sans-serif;
   font-size: 16px;
+
 }
 
 h1,h2,h3,h4,h5,h6{
   font-family: 'Catamaran', sans-serif;
   font-size: 60px;
+
 }
+
+
 
 @media only screen and (max-width: 480px){
   h2 a{
@@ -411,6 +415,10 @@ BackGround Images
   margin: 0 30px;
 }
 
+.meet-detail-button-container{
+  padding-top: 10px;
+}
+
 .meet_detail_interested_container{
   display: block;
   text-align: center;
@@ -498,19 +506,52 @@ BackGround Images
 }
 
 .post-list-card{
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--main-dark-color);
   border-radius: 5px;
+  margin: 20px 0;
+  width: 100%;
+  padding: 5px;
 }
 
-.card-header{
+.post-list-card-header{
+  width: 100%;
+  padding: 3px 0 5px 0;
+  text-align: center;
+  border-bottom: 1px solid var(--main-light-color);
+}
+
+.post-list-card-title{
+
+}
+
+.post-list-card-body{
   text-align: center;
 }
 
-.card-body{
-  text-align: center;
+.post-list-card-text-container{
+  padding: 5px;
+}
+
+.post-list-card-text{
+  display: inline-block;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+.post-list-card-image{
+  margin: 10px 0;
 }
 
 .post-search-container{
   margin: 20px 0;
+}
+
+#loadMore{
+  margin-bottom: 10px;
 }
 
 /*
@@ -522,6 +563,18 @@ BackGround Images
   align-items: center;
   background-color: var(--main-light-color);
   padding: 30px 0 30px 0;
+}
+
+.post-detail-username{
+  display: inline-block;
+  font-family: 'nosifer';
+  word-wrap: break-word;
+  word-break: break-all;
+  width: 80%;
+}
+
+.post-detail-username a{
+  color: white;
 }
 
 .post-container{
@@ -543,6 +596,7 @@ BackGround Images
   width: 100%;
   text-align: center;
   padding: 20px 0;
+  word-break: break-all;
 }
 
 #sharePost{
@@ -563,12 +617,6 @@ BackGround Images
   color: white;
   border-radius: 3px;
   padding: 5px;
-}
-
-#post-detail-username{
-  font-family: 'nosifer';
-  color: white;
-  float: left;
 }
 
 #post-detail-username:hover{
@@ -623,7 +671,7 @@ BackGround Images
 }
 
 .profile-card-title{
-
+  word-wrap: break-word;
 }
 
 
@@ -641,7 +689,8 @@ BackGround Images
 }
 
 .profile-card-button{
-
+  margin: 3px;
+  width: 60%;
 }
 
 .profile-post-list{
@@ -655,7 +704,7 @@ BackGround Images
   background-color: var(--main-light-color);
   margin: 30px;
   text-align: center;
-
+  border-radius: 3px;
 }
 
 .profile-post-list-card-image{
@@ -669,7 +718,27 @@ BackGround Images
 
 @media only screen and (max-width: 480px){
 
+  .profile-top{
+    flex-flow: column-reverse;
+    padding: 0;
+    align-items: center;
+  }
 
+  .profile-card{
+    width: 90%;
+  }
+
+  .profile-post-list-card{
+    width: 90%;
+    margin: 30px;
+  }
+
+  .profile-page-title{
+    padding: 20px 0 0 0;
+    flex-grow: 0;
+    width: 90%;
+    word-wrap: break-word;
+  }
 
 }
 
@@ -770,7 +839,10 @@ BackGround Images
 .commentcontainer-commentfield{
   flex-grow: 1;
   padding: 5px;
+  overflow: auto;
+  word-wrap: break-word;
 }
+
 
 .commentcontainer-commentfield textarea{
   width: 90%;

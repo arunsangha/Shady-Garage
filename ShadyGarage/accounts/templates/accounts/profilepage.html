@@ -2,6 +2,9 @@
 {% load staticfiles %}
 {% block title %} Shady Garage | {{user.username}} {% endblock %}
 {% block body %}
+
+
+
 <div class="profile-body">
   <div class="profile-top">
     <div class="profile-card">
@@ -14,10 +17,13 @@
           <li class="profile-card-list-item">Posts: {{user.user_posting.all.count}}</li>
           <li class="profile-card-list-item">Alder: {{user.profile.age}}</li>
         </ul>
-        {% if request.user == user %}
-          <a href="{% url 'accounts:profile_edit' %}" class="btn btn-info">Edit profile</a>
-          <a href="{% url 'accounts:change_password' %}" class="btn btn-info">Bytt passord</a>
-        {% endif %}
+        <div class="profile-button-container">
+          {% if request.user == user %}
+            <a href="{% url 'accounts:profile_edit' %}" class="btn btn-info profile-card-button">Edit profile</a>
+            <a href="{% url 'accounts:change_password' %}" class="btn btn-info profile-card-button">Bytt passord</a>
+          {% endif %}
+        </div>
+
       </div>
     </div>
     <div class="profile-page-title">

@@ -36,11 +36,12 @@
     <div class="meet_detail_map_container">
       <div id="map"></div>
     </div>
-
-    {% if request.user == meet.user_fk %}
-      <a href="{% url 'meets:delete_meet' slug=meet.slug%}" class="btn btn-danger">Slett</a>
-      <a href="{% url 'meets:update_meet' slug=meet.slug%}" class="btn btn-info">Oppdater</a>
-    {% endif %}
+    <div class="meet-detail-button-container">
+      {% if request.user == meet.user_fk %}
+        <a href="{% url 'meets:delete_meet' slug=meet.slug%}" class="btn btn-danger">Slett</a>
+        <a href="{% url 'meets:update_meet' slug=meet.slug%}" class="btn btn-info">Oppdater</a>
+      {% endif %}
+    </div>
     <div class="meet-commentcontainer">
       <h4><a href="{% url 'meets:comment_meet' slug=meet.slug %}">Kommenter</a><h4>
 
@@ -56,7 +57,7 @@
             </div>
           </div>
           <div class="commentcontainer-commentfield">
-            <textarea>{{comment.comment}}</textarea>
+            <p>{{comment.comment}}</p>
             {% if request.user == comment.user %}
               <a href="{% url 'meets:meet_comment_delete' slug=meet.slug pk=comment.id %}" class="btn btn-danger btn-sm">Slett</a>
             {% endif %}

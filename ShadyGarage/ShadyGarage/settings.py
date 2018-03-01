@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'meets',
     'bootstrap3',
     'posts',
-    'actstream',
 ]
 
 

@@ -7,7 +7,9 @@
   //TODO:Finne et bra nok design og implementere det.
 -->
   <div class="post-detail-container">
-    <a href="{% url 'accounts:profile_page_pk' pk=post.user_fk.pk%}"><h2 id="post-detail-username"> {{post.user_fk.username}} </h2></a>
+    <div class="post-detail-username">
+      <a href="{% url 'accounts:profile_page_pk' pk=post.user_fk.pk%}"><h2> {{post.user_fk.username}} </h2></a>
+    </div>
     <div class="post-container">
         <h2 class="post-detail-post-title"> {{ post.post_title}} </h2>
         {% if post.post_image %}

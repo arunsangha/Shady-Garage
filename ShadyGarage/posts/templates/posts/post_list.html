@@ -87,20 +87,22 @@
             if(has_image){
               $("#fraAjax").append(
                 `
-                <div class='post-list-card text-white bg-dark mb-4'>
-                  <div class='card-header'>
+                <div class='post-list-card'>
+                  <div class='post-list-card-header'>
                     ${user_name}
                   </div>
-                  <div class='card-body'>
-                    <h3 class='card-text'>
+                  <div class='post-list-card-body'>
+                    <h3 class='post-list-card-title'>
                       <a href='${value.url}'>${post_title}</a>
                     </h3>
-                    <p class='card-text'>${post_description}</p>
-                   <div class='post-image'>
+                    <div class="post-list-card-text-container">
+                      <p class='post-list-card-text'>${post_description}</p>
+                    </div>
+                   <div class='post-list-card-image'>
                     <img src='${image}' id='postImageFeed'>
                    </div>
                 </div>
-                <div class='card-footer'>
+                <div class='post-list-card-footer'>
                     <a href='#' data-id='${value.id}' class='like-button badge badge-info'>
                       ${verb} ${likes}
                     </a>
@@ -109,7 +111,7 @@
                       Kommenter ${comment_count}
                     </a>
                   </div>
-                  <div class='card-footer text-muted'>
+                  <div class='post-list-card-footer text-muted'>
                      ${timesince}
                   </div>
                   </div>
@@ -118,17 +120,19 @@
             }else{
               $("#fraAjax").append(
                 `
-                <div class='card text-white bg-dark mb-4'>
-                  <div class='card-header'>
+                <div class='post-list-card'>
+                  <div class='post-list-card-header'>
                     ${user_name}
                   </div>
-                  <div class='card-body'>
-                    <h3 class='card-text'>
+                  <div class='post-list-card-body'>
+                    <h3 class='post-list-card-title'>
                       <a href='${value.url}'>${post_title}</a>
                     </h3>
-                    <p class='card-text'>${post_description}</p>
-                </div>
-                <div class='card-footer'>
+                    <div class="post-list-card-text-container">
+                      <p class="post-list-card-text">${post_description}</p>
+                    </div>
+                  </div>
+                  <div class='post-list-card-footer'>
                     <a href='#' data-id='${value.id}' class='like-button badge badge-info'>
                       ${verb} ${likes}
                     </a>
@@ -137,10 +141,10 @@
                       Kommenter ${comment_count}
                     </a>
                   </div>
-                  <div class='card-footer text-muted'>
+                  <div class='post-list-card-footer text-muted'>
                      ${timesince}
                   </div>
-                  </div>
+                </div>
                 `
               )
             }
