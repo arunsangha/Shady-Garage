@@ -46,3 +46,29 @@ class PostCommentCreateAPIView(generics.CreateAPIView):
     def perform_create(self, serializer):
         slug = self.kwargs.get('slug')
         serializer.save(user_fk = self.request.user, post_fk = get_object_or_404(Post, slug=slug))
+
+class PostDetailAPIView(generics.ListAPIView):
+    serializer_class = PostModelSerializer
+    pagination_class = StandardResultsPagination
+
+    def get_serializer_context(self, *args, **kwargs):
+        context = super(PostDetailAPIView, self).get_serializer_context(*args, **kwargs)
+        context['request'] = self.request
+        return context
+
+    def get_queryset(self, *args, **kwargs):
+        requested_user = self.kwargs.get("username")
+        if requested_user:
+            qs = Post.objects.filter(user_fk=requested_user)
+        else:
+            qs = Post.objects.filter(user_fk=self.kwargs.get("pk"))
+
+        query = self.request.GET.get("q", None)
+        if query is not None:
+            qs = qs.filter(
+                Q(user_fk__username__icontains=query) |
+                Q(post_title__icontains=query) |
+                Q(post_description__icontains=query) |
+                Q(post_created__icontains=query)
+            )
+        return qs
