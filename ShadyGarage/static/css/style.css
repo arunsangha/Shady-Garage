@@ -522,10 +522,17 @@ BackGround Images
   padding: 3px 0 5px 0;
   text-align: center;
   border-bottom: 1px solid var(--main-light-color);
+  word-wrap: break-word;
+  word-break: break-all;
 }
 
 .post-list-card-title{
 
+}
+
+.post-list-card-title a{
+  word-wrap: break-word;
+  word-break: break-all;
 }
 
 .post-list-card-body{
@@ -573,8 +580,10 @@ BackGround Images
   width: 80%;
 }
 
-.post-detail-username a{
+.post-detail-username a h2{
   color: white;
+  word-break: break-all;
+  word-wrap: break-word;
 }
 
 .post-container{
@@ -590,6 +599,8 @@ BackGround Images
 
 .post-detail-post-title{
   padding: 10px 0;
+  word-wrap: break-word;
+  word-break: break-all;
 }
 
 .post-detail-post-comment{
@@ -645,9 +656,11 @@ BackGround Images
 
 .profile-page-title{
   text-align: center;
-  padding: 40px 0 0 0;
+  padding: 40px 0 0 10px;
   font-family: 'nosifer';
   flex-grow: 1;
+  word-wrap: break-word;
+  max-width: 75%;
 }
 
 .profile-card{
@@ -737,7 +750,6 @@ BackGround Images
     padding: 20px 0 0 0;
     flex-grow: 0;
     width: 90%;
-    word-wrap: break-word;
   }
 
 }
