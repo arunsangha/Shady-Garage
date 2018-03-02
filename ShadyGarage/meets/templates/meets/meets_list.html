@@ -22,10 +22,14 @@
     </form>
   </div>
 
-<div id="fraAjax"></div>
-<div class="meet-bottom-load-container">
+
+  <div class="meet-list-container">
+
+  </div>
+
+  <div class="meet-bottom-load-container">
     <a href="#" id="loadMeets" class="btn btn-info">Se flere treff</a>
-</div>
+  </div>
 
 {% else %}
 <div class="container" >
@@ -90,7 +94,7 @@
 
       function parseMeets(){
         if(meetsList == 0){
-          $("#fraAjax").append(
+          $(".meet-list-container").append(
             "<h2> Fant ingen meets..</h2>"
           )
         } else {
@@ -107,21 +111,17 @@
                 users_joining = 'Skal: ' + users_joining
               }
 
-            $("#fraAjax").append(
-                `<div class='meet-list-container'> <div class='meet-card-container'>
-                    <div class='meet-card-time-container'>
-                      <p> ${value.day} </p>
-                      <p> ${date} </p>
-                      <p> ${time} </p>
+            $(".meet-list-container").append(
+                `
+                <div class="meet-card-container">
+                  <div class="meet-card-container-color-overlay">
+                    <div class="meet-card-title">
+                      <a class="w" href='${value.url}'><h3>${meet_name}</h3></a>
                     </div>
-                    <div class='meet-card-info-container'>
-                      <h2><a href='${value.url}' class='btn-meet-name'> ${meet_name}</a></h2>
-                      <div class='meet-card-info'>
-                        <h4>${value.location}</h4>
-                        <h4>${users_joining} </h4>
-                    </div>
-                    </div>
-                </div>`
+                  </div>
+                </div>
+
+                `
             )
             })
         }
@@ -139,3 +139,19 @@
 
   </script>
 {% endblock %}
+
+<!--
+  <div class='meet-card-container'>
+    <div class='meet-card-time-container'>
+      <p> ${value.day} </p>
+      <p> ${date} </p>
+      <p> ${time} </p>
+    </div>
+    <div class='meet-card-info-container'>
+      <h2><a href='${value.url}' class='btn-meet-name'> ${meet_name}</a></h2>
+      <div class='meet-card-info'>
+        <h4>${value.location}</h4>
+        <h4>${users_joining} </h4>
+    </div>
+  </div>
+-->
