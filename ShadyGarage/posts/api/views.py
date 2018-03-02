@@ -57,18 +57,8 @@ class PostDetailAPIView(generics.ListAPIView):
         return context
 
     def get_queryset(self, *args, **kwargs):
-        requested_user = self.kwargs.get("username")
-        if requested_user:
-            qs = Post.objects.filter(user_fk=requested_user)
+        if self.kwargs.get("pk") == None:
+            qs = Post.objects.filter(user_fk=self.request.user)
         else:
             qs = Post.objects.filter(user_fk=self.kwargs.get("pk"))
-
-        query = self.request.GET.get("q", None)
-        if query is not None:
-            qs = qs.filter(
-                Q(user_fk__username__icontains=query) |
-                Q(post_title__icontains=query) |
-                Q(post_description__icontains=query) |
-                Q(post_created__icontains=query)
-            )
         return qs
