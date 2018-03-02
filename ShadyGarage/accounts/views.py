@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 from . import models
 from . import forms
 from django.views.generic import CreateView, UpdateView, TemplateView
+from posts.models import Notification
 
 def signup(request):
     registered = False
@@ -81,4 +82,5 @@ def ProfileActivity(request, pk=None):
         user = User.objects.get(pk=pk)
     else:
         user = request.user
-    return render(request, 'accounts/activity.html', {'user':user})
+    notifications = Notification.objects.filter(owner=user)
+    return render(request, 'accounts/activity.html', {'user':user, 'notifications':notifications})

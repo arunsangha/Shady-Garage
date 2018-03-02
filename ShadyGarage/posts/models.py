@@ -4,6 +4,8 @@ User = get_user_model()
 from django.contrib import auth
 from django.utils.text import slugify
 from django.core.urlresolvers import reverse
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 class PostManager(models.Manager):
     def like_toggle(self, user, post_obj):
@@ -11,6 +13,7 @@ class PostManager(models.Manager):
             is_liked = True
             post_obj.post_likes.remove(user)
         else:
+            Notification.objects.create(post_fk=post_obj, user_fk=user, owner=post_obj.user_fk, liked=True)
             is_liked = False
             post_obj.post_likes.add(user)
         return is_liked
@@ -64,3 +67,23 @@ class PostComment(models.Model):
          return "Post: {} Kommentar:{}".format(self.post_fk.post_title, self.comment)
      class Meta:
          ordering = ['-created']
+
+class Notification(models.Model):
+    post_fk = models.ForeignKey(Post, related_name="post_notification_fk")
+    user_fk = models.ForeignKey(User, related_name="post_notification_user")
+    noti_fk = models.ForeignKey(PostComment, related_name="notiii", blank=True, null=True)
+    owner = models.ForeignKey(User, related_name="post_notification_owner")
+    commented = models.BooleanField(default=False, blank=True)
+    liked = models.BooleanField(default=False, blank=True)
+    created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created']
+
+@receiver(post_save, sender=PostComment)
+def create_notification(sender, instance, **kwargs):
+    if(kwargs.get('created', False)):
+        user_fk = instance.user_fk
+        post_fk = instance.post_fk
+        owner = instance.post_fk.user_fk
+        Notification.objects.create(post_fk=post_fk, user_fk=user_fk, noti_fk=instance, owner=owner, commented=True)

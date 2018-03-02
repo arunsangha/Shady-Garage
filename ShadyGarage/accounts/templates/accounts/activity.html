@@ -5,27 +5,18 @@
     //TODO: Ajax for å hente activity. Etter at reply to comments er ferdig, hente inn replyes.
   -->
   <div class="container">
-    {% for post in user.user_posting.all  %}
-        {% if post.post_comment_fk.all.count > 0 %}
-          <p>{{post.post_title}}</p>
-          <p>Folk har kommentert:</p>
-          {% for comment in post.post_comment_fk.all %}
-              <h6>{{comment.comment}} </h6>
-              <h6>{{comment.created|timesince}}</h6>
-          {% endfor %}
-        {% endif %}
-        {% if post.post_likes.all.count > 0 %}
-            <p>{{post.post_title}}</p>
-            <p>Disse har likt din post:</p>
-            {% for u in post.post_likes.all %}
-                <h6>{{u.username}} </h6>
-            {% endfor %}
-        {% endif %}
-    {% endfor %}
-  </div>
-
-  <div class="container">
-      
+    <p>Brukern som eier postene: {{user.username}}</p>
+  {% for notifi in notifications %}
+    <p>...................</p>
+    {% if notifi.liked %}
+      <p>{{notifi.user_fk}} likte din post: <a href="{{notifi.post_fk.get_absolute_url}}">{{notifi.post_fk.post_title}}</a></p>
+    {% else %}
+      <p>{{notifi.user_fk}} kommenterte {{notifi.noti_fk.comment}} </p>
+      <p>På din post:<a href="{{notifi.post_fk.get_absolute_url}}">{{notifi.post_fk.post_title}}</a></p>
+    {% endif %}
+      <p>For {{notifi.created|timesince}}</p>
+      <p>...................</p>
+  {% endfor %}
   </div>
 
 {% endblock %}
