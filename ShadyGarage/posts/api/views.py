@@ -2,7 +2,7 @@ from rest_framework import generics, permissions
 from posts.models import Post
 from .serializers import PostModelSerializer, PostCommentSerializer
 from django.db.models import Q
-from .pagination import StandardResultsPagination
+from .pagination import StandardResultsPagination, ProfilePostResultsPagination
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
@@ -49,7 +49,7 @@ class PostCommentCreateAPIView(generics.CreateAPIView):
 
 class PostDetailAPIView(generics.ListAPIView):
     serializer_class = PostModelSerializer
-    pagination_class = StandardResultsPagination
+    pagination_class = ProfilePostResultsPagination
 
     def get_serializer_context(self, *args, **kwargs):
         context = super(PostDetailAPIView, self).get_serializer_context(*args, **kwargs)

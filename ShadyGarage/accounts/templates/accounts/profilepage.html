@@ -2,7 +2,6 @@
 {% load staticfiles %}
 {% block title %} Shady Garage | {{user.username}} {% endblock %}
 {% block body %}
-<div id="fraAjax"></div>
 <div class="profile-body">
   <div class="profile-top">
     <div class="profile-card">
@@ -19,6 +18,7 @@
           {% if request.user == user %}
             <a href="{% url 'accounts:profile_edit' %}" class="btn btn-info profile-card-button">Edit profile</a>
             <a href="{% url 'accounts:change_password' %}" class="btn btn-info profile-card-button">Bytt passord</a>
+            <a href="{% url 'accounts:activity'%}" class="btn btn-info profile-card-button">EU-kontroll</a>
           {% endif %}
         </div>
 
@@ -28,12 +28,10 @@
       <h4>{{user.username}}´s garage</h4>
     </div>
   </div>
-  <div class="profile-post-list">
-        <!--
-            //TODO:Ajax for å hente inn posts.
-        -->
 
-  </div>
+  <div class="profile-post-list"></div>
+
+  <a href="#" id="loadMore" class="btn btn-info">Fler posts</a>
 </div>
 
 
@@ -78,7 +76,8 @@
               comment_count = ''
             }
             <!--//TODO:Fikse link til knappene + load more knapp-->
-            $(".profile-post-list").append(
+              if(has_image){
+                $(".profile-post-list").append(
               `
              <div class='profile-post-list-card'> <div class='card-header'>
                   ${post_title}
@@ -86,17 +85,35 @@
                 <div class='profile-post-list-card-image'>
                     <img src='${image}' alt='' class='profile-page-post-image'>
                     <p class='card-text'>${post_description}</p>
-                    <p class='card-text'>${post_description}</p>
                 </div>
                 <div class='card-footer'>
-                  <a href='#' data-sluug="${slug}" %}' style='color:white;'>Se kommentarer</a>
+                  <a href='${value.url}' %}' class='badge badge-info'>Se kommentarer ${comment_count}</a>
                 </div>
                 <div class='card-footer'>
                   <small class='text-muted'>${value.timesince}</small>
                 </div>
               </div>
               `
-              )
+            )}else{
+              $(".profile-post-list").append(
+              `
+             <div class='profile-post-list-card'> <div class='card-header'>
+                  ${post_title}
+                </div>
+                <div class='profile-post-list-card-image'>
+                    <p class='card-text'>${post_description}</p>
+                </div>
+                <div class='card-footer'>
+                  <a href='${value.url}'%}' class='badge badge-info'>Se kommentarer ${comment_count}</a>
+                </div>
+                <div class='card-footer'>
+                  <small class='text-muted'>${value.timesince}</small>
+                </div>
+              </div>
+              `
+
+            )}
+
             }
         )}
        }
@@ -104,8 +121,6 @@
 
       function fetchPost(url){
         var fetchUrl = url;
-
-
         $.ajax({
           url:fetchUrl,
           method:'GET',
@@ -121,7 +136,14 @@
       }
       fetchPost(url)
 
-
+      $("#loadMore").click(function(event){
+        event.preventDefault()
+        if(nextUrl){
+          fetchPost(nextUrl)
+        }else{
+          $("#loadMore").html("Ingen flere posts")
+        }
+      })
   });
 
 </script>
