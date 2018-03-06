@@ -1,6 +1,6 @@
 from rest_framework import generics, permissions
 from posts.models import Post, Notification
-from .serializers import PostModelSerializer, PostCommentSerializer, NotificationSerializer
+from .serializers import PostModelSerializer, PostCommentSerializer, NotificationSerializer, NotificationSeenSerializer
 from django.db.models import Q
 from .pagination import StandardResultsPagination, ProfilePostResultsPagination
 from rest_framework.views import APIView
@@ -78,3 +78,8 @@ class NotificationAPIView(generics.ListAPIView):
         else:
             qs = Notification.objects.filter(owner=self.kwargs.get("pk")).exclude(user_fk =self.kwargs.get("pk"))
         return qs
+
+class NotificationSeenUpdateView(generics.UpdateAPIView):
+    serializer_class = NotificationSeenSerializer
+    queryset = Notification.objects.all()
+    lookup_field = 'pk'

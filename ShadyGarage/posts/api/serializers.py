@@ -81,6 +81,7 @@ class NotificationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Notification
         fields = (
+            'id',
             'post_fk',
             'user_fk',
             'noti_fk',
@@ -89,6 +90,7 @@ class NotificationSerializer(serializers.ModelSerializer):
             'liked',
             'timesince',
             'actor_image',
+            'seen',
         )
 
     def get_timesince(self, obj):
@@ -97,3 +99,11 @@ class NotificationSerializer(serializers.ModelSerializer):
     def get_actor_image(self, obj):
         user_ = accounts_models.Profile.objects.get(user=obj.user_fk)
         return user_.profile_pic.url
+
+class NotificationSeenSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Notification
+        fields = (
+            'id',
+            'seen',
+        )

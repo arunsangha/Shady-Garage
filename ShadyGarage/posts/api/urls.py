@@ -9,6 +9,7 @@ urlpatterns = [
     url(r'^accounts/myprofile/$', views.PostDetailAPIView.as_view(), name="post-detail-api"),
     url(r'^accounts/otherprofiles/(?P<pk>\d+)/$', views.PostDetailAPIView.as_view(), name="post-detail-api"),
     url(r'^accounts/myactivities/$', views.NotificationAPIView.as_view(), name="notificaition-self-api"),
-    #Er ikke så veldig sikker på om vi skal vise aktiviteten til andre brukere. 
+    url(r'^accounts/marknoti_seen/(?P<pk>\d+)/$', views.NotificationSeenUpdateView.as_view(), name="notification-mark-read"),
+    #Er ikke så veldig sikker på om vi skal vise aktiviteten til andre brukere.
     #url(r'^accounts/otheractivities/(?P<pk>\d+)/$', views.NotificationAPIView.as_view(), name="notifications-other-api"),
 ]

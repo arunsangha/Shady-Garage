@@ -76,6 +76,7 @@ class Notification(models.Model):
     commented = models.BooleanField(default=False, blank=True)
     liked = models.BooleanField(default=False, blank=True)
     created = models.DateTimeField(auto_now_add=True)
+    seen = models.BooleanField(default=False, blank=True)
 
     class Meta:
         ordering = ['-created']
