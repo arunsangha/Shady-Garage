@@ -1,8 +1,9 @@
 from rest_framework import serializers
 from django.utils.timesince import timesince
-from posts.models import Post, PostComment
+from posts.models import Post, PostComment, Notification
 from accounts.api import serializers as accounts_serialisers
 from django.urls import reverse
+from accounts import models as accounts_models
 
 class PostModelSerializer(serializers.ModelSerializer):
     user_fk = accounts_serialisers.UserDisplaySerializer(read_only=True)
@@ -69,3 +70,30 @@ class PostCommentSerializer(serializers.ModelSerializer):
             'comment',
             'created',
         )
+
+class NotificationSerializer(serializers.ModelSerializer):
+    post_fk = PostModelSerializer(read_only=True)
+    user_fk = accounts_serialisers.UserDisplaySerializer(read_only=True)
+    owner = accounts_serialisers.UserDisplaySerializer(read_only=True)
+    noti_fk = PostCommentSerializer(read_only=True)
+    timesince = serializers.SerializerMethodField()
+    actor_image = serializers.SerializerMethodField()
+    class Meta:
+        model = Notification
+        fields = (
+            'post_fk',
+            'user_fk',
+            'noti_fk',
+            'owner',
+            'commented',
+            'liked',
+            'timesince',
+            'actor_image',
+        )
+
+    def get_timesince(self, obj):
+        return timesince(obj.created)
+
+    def get_actor_image(self, obj):
+        user_ = accounts_models.Profile.objects.get(user=obj.user_fk)
+        return user_.profile_pic.url

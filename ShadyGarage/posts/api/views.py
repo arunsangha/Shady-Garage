@@ -1,6 +1,6 @@
 from rest_framework import generics, permissions
-from posts.models import Post
-from .serializers import PostModelSerializer, PostCommentSerializer
+from posts.models import Post, Notification
+from .serializers import PostModelSerializer, PostCommentSerializer, NotificationSerializer
 from django.db.models import Q
 from .pagination import StandardResultsPagination, ProfilePostResultsPagination
 from rest_framework.views import APIView
@@ -61,4 +61,20 @@ class PostDetailAPIView(generics.ListAPIView):
             qs = Post.objects.filter(user_fk=self.request.user)
         else:
             qs = Post.objects.filter(user_fk=self.kwargs.get("pk"))
+        return qs
+
+class NotificationAPIView(generics.ListAPIView):
+    serializer_class = NotificationSerializer
+    pagination_class = StandardResultsPagination
+
+    def get_serializer_context(self, *args, **kwargs):
+        context = super(NotificationAPIView, self).get_serializer_context(*args, **kwargs)
+        context['request'] = self.request
+        return context
+
+    def get_queryset(self, *args, **kwargs):
+        if self.kwargs.get("pk") == None:
+            qs = Notification.objects.filter(owner=self.request.user)
+        else:
+            qs = Notification.objects.filter(owner=self.kwargs.get("pk"))
         return qs

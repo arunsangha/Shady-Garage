@@ -2,21 +2,117 @@
 {% load staticfiles %}
 {% block body %}
   <!--
-    //TODO: Ajax for å hente activity. Etter at reply to comments er ferdig, hente inn replyes.
+    //TODO: Hente replyies to comments etter at det er ferdig.
   -->
   <div class="container">
-    <p>Brukern som eier postene: {{user.username}}</p>
-  {% for notifi in notifications %}
-    <p>...................</p>
-    {% if notifi.liked %}
-      <p>{{notifi.user_fk}} likte din post: <a href="{{notifi.post_fk.get_absolute_url}}">{{notifi.post_fk.post_title}}</a></p>
-    {% else %}
-      <p>{{notifi.user_fk}} kommenterte {{notifi.noti_fk.comment}} </p>
-      <p>På din post:<a href="{{notifi.post_fk.get_absolute_url}}">{{notifi.post_fk.post_title}}</a></p>
-    {% endif %}
-      <p>For {{notifi.created|timesince}}</p>
-      <p>...................</p>
-  {% endfor %}
+    <div class="notification-list-container"></div>
+    <a href="#" id="loadMoreNotification" class="btn btn-info">Flere aktiviteter!</a>
+
+    <!-- alert is only visual when there is no more notifications -->
+    <div id="alert-empty" class="alert alert-info collapse">
+      <strong>Å nei..!</strong> Bli med på treff da, så skjer det nok noe mer her!
+      <a href="{% url 'meets:meets_list' %}" class="btn btn-info"><strong>Trykk på meg! </strong></a>
+    </div>
+
   </div>
 
+
+{% endblock %}
+
+{% block script %}
+  <script>
+  $(document).ready(function(){
+      <!-- globale variabler -->
+      var notifList = [];
+      var nextUrl;
+      <!-- fetch notifications -->
+      function fetchNotifications(url){
+        var fetchUrl;
+        if(url){
+          fetchUrl = url;
+        }else{
+          fetchUrl = '/../../api/posts/accounts/myactivities/'
+        }
+        $.ajax({
+          url: fetchUrl,
+          method: 'GET',
+          success:function(data){
+            notifList = data.results
+            nextUrl = data.next
+            parseNotifications()
+          },
+          error:function(data){
+            console.log("ERROR!->! I henting av notifications")
+          }
+        })
+      };
+      fetchNotifications();
+
+      function parseNotifications(){
+        if(notifList == 0){
+          <!-- add bedre design om ikke noe aktivitet har skjedd -->
+          $('.notification-list-container').append(
+            "<h5> Godkjent EU-kontroll ;)</h5>"
+          );
+        }else{
+          $.each(notifList, function(key, value){
+            var owner = value.owner.username
+            var actor = value.user_fk.username
+            var post_title = value.post_fk.post_title
+            var post_url = value.post_fk.url
+            var liked = value.liked
+            var commented = value.commented
+            var timesince = value.timesince
+            var image = value.actor_image
+            var comment;
+
+            if(commented){
+              comment = value.noti_fk.comment
+
+              $('.notification-list-container').append(
+                `
+                <div class="media">
+                  <img class="mr-3" width="64px" height="64px" src="${image}" alt="">
+                  <div class="media-body">
+                    <h5 class="mt-0">${actor} kommenterte:</h5>
+                      <h3><footer class="blockquote-footer">${comment}</footer></h3>
+                      <h6>På din post:<a href="${post_url}">${post_title}</a></h6>
+                  </div>
+                  <p>For ${timesince}</p>
+                </div>
+
+                `
+              )
+            } else {
+              $('.notification-list-container').append(
+                `
+                <div class="media">
+                  <img class="mr-3" width="64px" height="64px" src="${image}" alt="">
+                  <div class="media-body">
+                    <h5 class="mt-0">${actor} likte din post: <a href="${post_url}">${post_title}</a></h5>
+                  </div>
+                  <p>For ${timesince}</p>
+                </div>
+
+                `
+              )
+            }
+
+          })
+
+        }
+      }
+
+      $("#loadMoreNotification").click(function(event){
+          event.preventDefault()
+          if(nextUrl){
+            fetchNotifications(nextUrl)
+          }else{
+            $("#loadMoreNotification").html("Ingen flere aktiviteter..")
+            $("#alert-empty").show()
+          }
+      })
+  });
+
+  </script>
 {% endblock %}
