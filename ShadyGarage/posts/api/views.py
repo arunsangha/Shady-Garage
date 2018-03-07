@@ -79,7 +79,8 @@ class NotificationAPIView(generics.ListAPIView):
             qs = Notification.objects.filter(owner=self.kwargs.get("pk")).exclude(user_fk =self.kwargs.get("pk"))
         return qs
 
-class NotificationSeenUpdateView(generics.UpdateAPIView):
-    serializer_class = NotificationSeenSerializer
-    queryset = Notification.objects.all()
-    lookup_field = 'pk'
+class NotificationSeenAPIView(APIView):
+    def get(self, request, pk, format=None):
+        noti_qs = Notification.objects.filter(pk=pk)
+        is_seen = Notification.objects.seen_toggle(request.user, noti_qs.first())
+        return Response({'seen':is_seen})

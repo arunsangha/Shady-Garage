@@ -68,6 +68,16 @@ class PostComment(models.Model):
      class Meta:
          ordering = ['-created']
 
+class NotificationManager(models.Manager):
+    def seen_toggle(self, user, notification_obj):
+        if notification_obj.seen == True:
+            is_seen = True
+        else:
+            is_seen = False
+            notification_obj.seen = True
+            notification_obj.save()
+        return is_seen
+
 class Notification(models.Model):
     post_fk = models.ForeignKey(Post, related_name="post_notification_fk")
     user_fk = models.ForeignKey(User, related_name="post_notification_user")
@@ -78,6 +88,7 @@ class Notification(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     seen = models.BooleanField(default=False, blank=True)
 
+    objects = NotificationManager()
     class Meta:
         ordering = ['-created']
 
