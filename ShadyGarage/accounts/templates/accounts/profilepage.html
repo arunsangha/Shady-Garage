@@ -18,7 +18,7 @@
           {% if request.user == user %}
             <a href="{% url 'accounts:profile_edit' %}" class="btn btn-info profile-card-button">Edit profile</a>
             <a href="{% url 'accounts:change_password' %}" class="btn btn-info profile-card-button">Bytt passord</a>
-            <a href="{% url 'accounts:activity'%}" class="btn btn-info profile-card-button">EU-kontroll</a>
+            <a href="{% url 'accounts:activity'%}" class="btn btn-info profile-card-button" id="activityCount">EU-kontroll </a>
           {% endif %}
         </div>
 
@@ -41,6 +41,7 @@
   $(document).ready(function(){
       var nextUrl;
       var postList = [];
+
       var url = "/../../api/posts" + "{{request.get_full_path}}"
       function parsePosts(){
         if(postList == 0){
@@ -50,6 +51,10 @@
         }else{
           //Posts exists!
         $.each(postList, function(key, value){
+            var activity_count_ = value.activity_count
+            if(activity_count_ > 0){
+              setActivityCountBtn(activity_count_)
+            }
             var user_name = value.user_fk.username
             var post_title = value.post_title
             var post_description = value.post_description
@@ -144,6 +149,11 @@
           $("#loadMore").html("Ingen flere posts")
         }
       })
+
+      function setActivityCountBtn(count){
+        var add_ = "<h6 class='badge badge-warning'>" + count + "</h6>"
+        $("#activityCount").append(add_);
+      };
   });
 
 </script>

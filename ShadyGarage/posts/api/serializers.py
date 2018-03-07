@@ -14,6 +14,7 @@ class PostModelSerializer(serializers.ModelSerializer):
     did_like = serializers.SerializerMethodField()
     comment_url = serializers.SerializerMethodField()
     comment_count = serializers.SerializerMethodField()
+    activity_count = serializers.SerializerMethodField()
     class Meta:
         model = Post
         fields = (
@@ -31,6 +32,7 @@ class PostModelSerializer(serializers.ModelSerializer):
             'comment_url',
             'comment_count',
             'slug',
+            'activity_count',
         )
 
     def get_date_display(self, obj):
@@ -59,6 +61,11 @@ class PostModelSerializer(serializers.ModelSerializer):
     def get_comment_count(self, obj):
         return obj.post_comment_fk.count()
 
+    def get_activity_count(self, obj):
+        qs = Notification.objects.filter(owner=obj.user_fk)
+        count_ = qs.filter(seen=False).count()
+        return count_
+
 class PostCommentSerializer(serializers.ModelSerializer):
     post_fk = PostModelSerializer(read_only=True)
     user_fk = accounts_serialisers.UserDisplaySerializer(read_only=True)
@@ -78,6 +85,7 @@ class NotificationSerializer(serializers.ModelSerializer):
     noti_fk = PostCommentSerializer(read_only=True)
     timesince = serializers.SerializerMethodField()
     actor_image = serializers.SerializerMethodField()
+    did_mark_seen = serializers.SerializerMethodField()
     class Meta:
         model = Notification
         fields = (
@@ -91,6 +99,7 @@ class NotificationSerializer(serializers.ModelSerializer):
             'timesince',
             'actor_image',
             'seen',
+            'did_mark_seen',
         )
 
     def get_timesince(self, obj):
@@ -99,6 +108,11 @@ class NotificationSerializer(serializers.ModelSerializer):
     def get_actor_image(self, obj):
         user_ = accounts_models.Profile.objects.get(user=obj.user_fk)
         return user_.profile_pic.url
+
+    def get_did_mark_seen(self, obj):
+        if obj.seen == True:
+            return True
+        return False
 
 class NotificationSeenSerializer(serializers.ModelSerializer):
     class Meta:
