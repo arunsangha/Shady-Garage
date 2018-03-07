@@ -68,6 +68,16 @@ class PostComment(models.Model):
      class Meta:
          ordering = ['-created']
 
+class PostCommentReply(models.Model):
+    comment_fk = models.ForeignKey(PostComment, related_name="reply_comment_fk")
+    user_fk = models.ForeignKey(User, related_name="reply_comment_user")
+    comment = models.TextField(max_length=1020)
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return "PostComment: {} Reply: {}".format(self.comment_fk.comment, self.comment)
+
+
 class NotificationManager(models.Manager):
     def seen_toggle(self, user, notification_obj):
         if notification_obj.seen == True:
@@ -89,6 +99,10 @@ class Notification(models.Model):
     seen = models.BooleanField(default=False, blank=True)
 
     objects = NotificationManager()
+
+    def __str__(self):
+        return "PostOwner: {}, Seen:{}".format(self.owner, self.seen)
+        
     class Meta:
         ordering = ['-created']
 
