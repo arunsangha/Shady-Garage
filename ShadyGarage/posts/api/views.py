@@ -1,10 +1,15 @@
 from rest_framework import generics, permissions
-from posts.models import Post, Notification, PostComment
+from posts.models import (Post,
+                        Notification,
+                        PostComment,
+                        PostCommentReply)
+
 from .serializers import (PostModelSerializer,
                         PostCommentSerializer,
                         NotificationSerializer,
                         NotificationSeenSerializer,
-                        PostCommentReplySerializer)
+                        PostCommentReplySerializer,
+                        PostCommentReplyDetailSerializer)
 from django.db.models import Q
 from .pagination import StandardResultsPagination, ProfilePostResultsPagination
 from rest_framework.views import APIView
@@ -60,6 +65,21 @@ class PostCommentReplyCreateAPIView(generics.CreateAPIView):
     def perform_create(self, serializer):
         pk_ = self.kwargs.get('pk')
         serializer.save(user_fk = self.request.user, comment_fk = get_object_or_404(PostComment, id=pk_))
+
+class PostCommentReplyListAPIView(generics.ListAPIView):
+    serializer_class = PostCommentReplyDetailSerializer
+    pagination_class = StandardResultsPagination
+
+    def get_serializer_context(self, *args, **kwargs):
+        context = super(PostCommentReplyListAPIView, self).get_serializer_context(*args, **kwargs)
+        context['request'] = self.request
+        return context
+
+    def get_queryset(self, *args, **kwargs):
+        qs = PostCommentReply.objects.filter(comment_fk=self.kwargs.get('pk'))
+        return qs
+
+
 
 class PostDetailAPIView(generics.ListAPIView):
     serializer_class = PostModelSerializer

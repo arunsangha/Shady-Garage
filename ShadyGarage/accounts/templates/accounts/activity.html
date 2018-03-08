@@ -64,7 +64,7 @@
             var liked = value.liked
             var commented = value.commented
             var timesince = value.timesince
-            var image = value.user_fk
+
             var mark_seen_text_button = value.did_mark_seen
             var button_mark;
             var comment;
@@ -80,7 +80,7 @@
               $('.notification-list-container').append(
                 `
                 <div class="media">
-                  <img class="mr-3" width="64px" height="64px" src="${image}" alt="">
+                  <img class="mr-3" width="64px" height="64px" src="" alt="">
                   <div class="media-body">
                     <h5 class="mt-0">${actor} kommenterte:</h5>
                       <h3><footer class="blockquote-footer">${comment}</footer></h3>
@@ -96,11 +96,11 @@
               $('.notification-list-container').append(
                 `
                 <div class="media">
-                  <img class="mr-3" width="64px" height="64px" src="${image}" alt="">
+                  <img class="mr-3" width="64px" height="64px" src="" alt="">
                   <div class="media-body">
-                    <h5 class="mt-0">${value.noti_reply_fk.user_fk.username} kommenterte:</h5>
+                    <h5 class="mt-0">${value.noti_reply_fk.user_fk.username} svarte:</h5>
                       <h3><footer class="blockquote-footer">${value.noti_reply_fk.comment}</footer></h3>
-                      <h6>Svarte på din kommentar:${value.noti_reply_fk.comment_fk.comment}</h6>
+                      <h6>til din kommentar:<a href="${post_url}">${value.noti_reply_fk.comment_fk.comment}</a></h6>
                       <a href="#" id="markSeen" data-id="${value.id}" class="btn btn-warning btn-sm">${button_mark}</a>
                   </div>
                   <p>For ${value.noti_reply_fk.created}</p>
@@ -112,7 +112,7 @@
               $('.notification-list-container').append(
                 `
                 <div class="media">
-                  <img class="mr-3" width="64px" height="64px" src="${image}" alt="">
+                  <img class="mr-3" width="64px" height="64px" src="" alt="">
                   <div class="media-body">
                     <h5 class="mt-0" id="test" data-id="${value.id}">${actor} likte din post: <a href="${post_url}">${post_title}</a></h5>
                     <a href="#" id="markSeen" data-id="${value.id}" class="btn btn-warning btn-sm"> ${button_mark}</a>

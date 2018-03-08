@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load staticfiles %}
+{% include "posts/comment_answers_modal.html" %}
 {% block title %}Shady: {{post.post_title}} {% endblock %}
 {% block body %}
 
@@ -42,8 +43,13 @@
             <p>Bruker: <a href="{%url 'accounts:profile_page_pk' pk=comment.user_fk.pk %}">{{comment.user_fk}}</a></p>
             <p>Dato: {{comment.created|date:'Y-m-d H:i'}}</p>
             <a href="{% url 'posts:post_comment_reply' slug=comment.post_fk.slug pk=comment.id%}" class="btn btn-warning btn-sm">Svar</a>
-            <p>{{comment.post_fk.slug}}</p>
-
+            <div class="comment-reply-container">
+              {% for comment_answers in comment.reply_comment_fk.all %}
+                <h4>{{comment_answers.comment}}</h4>
+                <h4>Bruker: {{comment_answers.user_fk}}</h4>
+                <h5>For: {{comment_answers.created|timesince}}</h5>
+              {% endfor %}
+            </div>
           </div>
         </div>
         <div class="commentcontainer-commentfield">
@@ -57,5 +63,9 @@
 
     </div>
   </div>
+
+{% endblock %}
+
+{% block script %}
 
 {% endblock %}

@@ -88,6 +88,15 @@ class PostCommentReplySerializer(serializers.ModelSerializer):
             'comment',
             'created',
         )
+class PostCommentReplyDetailSerializer(serializers.ModelSerializer):
+    user_fk = accounts_serialisers.UserDisplaySerializer(read_only=True)
+    class Meta:
+        model = PostCommentReply
+        fields=(
+            'user_fk',
+            'comment',
+            'created',
+        )
 
 class NotificationSerializer(serializers.ModelSerializer):
     post_fk = PostModelSerializer(read_only=True)

@@ -14,4 +14,5 @@ urlpatterns = [
     url(r'^accounts/marknoti_seen/(?P<pk>\d+)/$', views.NotificationSeenAPIView.as_view(), name="notification-mark-read"),
     #Er ikke så veldig sikker på om vi skal vise aktiviteten til andre brukere.
     url(r'^accounts/otheractivities/(?P<pk>\d+)/$', views.NotificationAPIView.as_view(), name="notifications-other-api"),
+    url(r'^comment_replys/(?P<pk>\d+)/$', views.PostCommentReplyListAPIView.as_view(), name="comment-reply-list"),
 ]

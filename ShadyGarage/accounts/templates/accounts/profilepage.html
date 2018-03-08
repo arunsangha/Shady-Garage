@@ -41,9 +41,11 @@
   $(document).ready(function(){
       var nextUrl;
       var postList = [];
-
+      var append_activity_count = 0;
       var url = "/../../api/posts" + "{{request.get_full_path}}"
       function parsePosts(){
+        append_activity_count = 0;
+
         if(postList == 0){
           $(".profile-post-list").append(
             "<h5>Har ikke lagt ut noe enda...</h5>"
@@ -51,10 +53,6 @@
         }else{
           //Posts exists!
         $.each(postList, function(key, value){
-            var activity_count_ = value.activity_count
-            if(activity_count_ > 0){
-              setActivityCountBtn(activity_count_)
-            }
             var user_name = value.user_fk.username
             var post_title = value.post_title
             var post_description = value.post_description
@@ -62,6 +60,14 @@
             var timesince = value.timesince
             var likes = value.post_likes
             var slug = value.slug
+            var ac_count = value.activity_count
+            if(ac_count >0){
+                if(append_activity_count == 0){
+                  setActivityCountBtn(ac_count)
+                }
+            }
+            append_activity_count++;
+            
             if(likes == 0){
               likes = ''
             }
@@ -152,8 +158,8 @@
       })
 
       function setActivityCountBtn(count){
-        var add_ = "<h6 class='badge badge-warning'>" + count + "</h6>"
-        $("#activityCount").append(add_);
+          var add_ = "<h6 class='badge badge-warning'>" + count + "</h6>"
+          $("#activityCount").append(add_);
       };
   });
 
