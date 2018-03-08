@@ -302,16 +302,71 @@ BackGround Images
 .meet-card-container-color-overlay{
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 100%;
   height: 100%;
   background-color: rgba(100,100,0,0.5);
 }
 
 .meet-card-title{
+  flex-grow: 1;
   text-align: center;
   padding: 10px 0;
   word-wrap: break-word;
   word-break: break-all;
+}
+
+.meet-card-imagecontainer{
+  flex-grow: 1;
+  border: 3px solid white;
+  width: 75%;
+  height: 25%;
+  background-image: url("../images/burning.jpg");
+  background-size: cover;
+}
+
+.meet-card-timecontainer{
+  flex-grow: 1;
+  padding: 10px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.meet-card-timecontainer p{
+  font-size: 20px;
+}
+
+.meet-card-location{
+  flex-grow: 1;
+}
+
+.meet-card-joinbutton{
+  flex-grow: 1;
+  margin: 0 0 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  width: 45%;
+  height: 7%;
+  border: 2px solid white;
+  border-radius: 30px;
+}
+
+.meet-card-bottom-info{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  width: 80%;
+  margin-top: 10px;
+  padding: 7px 0 0 0;
+  border-top: 2px solid var(--main-light-color);
+}
+
+.meet-card-bottom-info p {
+  text-transform: uppercase;
 }
 
 .meet-bottom-load-container{
@@ -322,19 +377,12 @@ BackGround Images
 
 @media only screen and (max-width: 480px){
 
+  .meet-list-container{
+    width: 100%;
+  }
+
   .meet-card-container{
-    border: 1px solid white;
-    width: 95%;
-    height: 150px;
-  }
-
-  .meet-card-info{
-    flex-direction: column;
-    padding: 0px;
-  }
-
-  .meet-card-info h4{
-    justify-content: center;
+    width: 100%;
   }
 
   .meet-search-container{
