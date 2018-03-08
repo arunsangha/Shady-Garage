@@ -25,3 +25,8 @@ class PostCommentForm(forms.ModelForm):
     class Meta():
         model = models.PostComment
         fields = ('comment',)
+
+class PostCommentReplyForm(forms.ModelForm):
+    class Meta():
+        model = models.PostCommentReply
+        fields = ('comment',)

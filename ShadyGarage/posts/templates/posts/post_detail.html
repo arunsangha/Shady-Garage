@@ -41,6 +41,9 @@
           <div class="commentcontainer-userinfo-textinfo">
             <p>Bruker: <a href="{%url 'accounts:profile_page_pk' pk=comment.user_fk.pk %}">{{comment.user_fk}}</a></p>
             <p>Dato: {{comment.created|date:'Y-m-d H:i'}}</p>
+            <a href="{% url 'posts:post_comment_reply' slug=comment.post_fk.slug pk=comment.id%}" class="btn btn-warning btn-sm">Svar</a>
+            <p>{{comment.post_fk.slug}}</p>
+
           </div>
         </div>
         <div class="commentcontainer-commentfield">

@@ -87,3 +87,16 @@ class PostUpdateView(LoginRequiredMixin, UpdateView):
 
 class PostUpdateFail(TemplateView):
     template_name = "update_invalid.html"
+
+class PostCommentReplyCreateView(CreateView):
+    form_class = forms.PostCommentReplyForm
+    template_name = "posts/post_comment.html"
+
+    def form_valid(self, form):
+        comment_reply = form.save(commit=False)
+        id_ = self.kwargs.get('pk')
+        comment_reply.comment_fk = get_object_or_404(models.PostComment, id=id_)
+        slug = self.kwargs.get('slug')
+        comment_reply.user_fk = self.request.user
+        comment_reply.save()
+        return HttpResponseRedirect(reverse("posts:post_detail", kwargs={'slug':slug}))

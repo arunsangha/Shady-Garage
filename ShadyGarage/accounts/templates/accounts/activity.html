@@ -42,6 +42,7 @@
             parseNotifications()
           },
           error:function(data){
+            console.log(data)
             console.log("ERROR!->! I henting av notifications")
           }
         })
@@ -91,7 +92,23 @@
 
                 `
               )
-            } else {
+            } else if(value.noti_reply_fk){
+              $('.notification-list-container').append(
+                `
+                <div class="media">
+                  <img class="mr-3" width="64px" height="64px" src="${image}" alt="">
+                  <div class="media-body">
+                    <h5 class="mt-0">${value.noti_reply_fk.user_fk.username} kommenterte:</h5>
+                      <h3><footer class="blockquote-footer">${value.noti_reply_fk.comment}</footer></h3>
+                      <h6>Svarte på din kommentar:${value.noti_reply_fk.comment_fk.comment}</h6>
+                      <a href="#" id="markSeen" data-id="${value.id}" class="btn btn-warning btn-sm">${button_mark}</a>
+                  </div>
+                  <p>For ${value.noti_reply_fk.created}</p>
+                </div>
+
+                `
+              )
+            }else {
               $('.notification-list-container').append(
                 `
                 <div class="media">
@@ -122,8 +139,6 @@
           }
       })
 
-      <!--"Tror knappen må gjøres om til input type for at det skal virke--">
-
 
       $(document.body).on("click", "#markSeen", function(e){
         e.preventDefault()
@@ -142,7 +157,7 @@
             }
           },
           error:function(data){
-            console.log("Error i markering av sett aktiviteter")
+            console.log("ERROR!-> Marking sett on notif")
           }
         })
       })

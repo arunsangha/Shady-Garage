@@ -92,6 +92,7 @@ class Notification(models.Model):
     post_fk = models.ForeignKey(Post, related_name="post_notification_fk")
     user_fk = models.ForeignKey(User, related_name="post_notification_user")
     noti_fk = models.ForeignKey(PostComment, related_name="notiii", blank=True, null=True)
+    noti_reply_fk = models.ForeignKey(PostCommentReply, related_name="notiii_reply", blank=True, null=True)
     owner = models.ForeignKey(User, related_name="post_notification_owner")
     commented = models.BooleanField(default=False, blank=True)
     liked = models.BooleanField(default=False, blank=True)
@@ -102,7 +103,7 @@ class Notification(models.Model):
 
     def __str__(self):
         return "PostOwner: {}, Seen:{}".format(self.owner, self.seen)
-        
+
     class Meta:
         ordering = ['-created']
 
@@ -113,3 +114,8 @@ def create_notification(sender, instance, **kwargs):
         post_fk = instance.post_fk
         owner = instance.post_fk.user_fk
         Notification.objects.create(post_fk=post_fk, user_fk=user_fk, noti_fk=instance, owner=owner, commented=True)
+
+@receiver(post_save, sender=PostCommentReply)
+def create_notification_reply(sender, instance, **kwargs):
+    if(kwargs.get('created', False)):
+        Notification.objects.create(post_fk=instance.comment_fk.post_fk, user_fk=instance.user_fk, noti_reply_fk=instance, owner=instance.comment_fk.user_fk)

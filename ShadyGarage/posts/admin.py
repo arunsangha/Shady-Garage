@@ -4,3 +4,4 @@ from . import models
 admin.site.register(models.Post)
 admin.site.register(models.PostComment)
 admin.site.register(models.Notification)
+admin.site.register(models.PostCommentReply)

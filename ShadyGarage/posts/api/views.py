@@ -1,11 +1,17 @@
 from rest_framework import generics, permissions
-from posts.models import Post, Notification
-from .serializers import PostModelSerializer, PostCommentSerializer, NotificationSerializer, NotificationSeenSerializer
+from posts.models import Post, Notification, PostComment
+from .serializers import (PostModelSerializer,
+                        PostCommentSerializer,
+                        NotificationSerializer,
+                        NotificationSeenSerializer,
+                        PostCommentReplySerializer)
 from django.db.models import Q
 from .pagination import StandardResultsPagination, ProfilePostResultsPagination
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
+from accounts.models import User, Profile
+
 class PostListAPIView(generics.ListAPIView):
     serializer_class = PostModelSerializer
     pagination_class = StandardResultsPagination
@@ -47,6 +53,14 @@ class PostCommentCreateAPIView(generics.CreateAPIView):
         slug = self.kwargs.get('slug')
         serializer.save(user_fk = self.request.user, post_fk = get_object_or_404(Post, slug=slug))
 
+class PostCommentReplyCreateAPIView(generics.CreateAPIView):
+    serializer_class = PostCommentReplySerializer
+    permissions_classes = [permissions.IsAuthenticated]
+
+    def perform_create(self, serializer):
+        pk_ = self.kwargs.get('pk')
+        serializer.save(user_fk = self.request.user, comment_fk = get_object_or_404(PostComment, id=pk_))
+
 class PostDetailAPIView(generics.ListAPIView):
     serializer_class = PostModelSerializer
     pagination_class = ProfilePostResultsPagination
@@ -73,11 +87,11 @@ class NotificationAPIView(generics.ListAPIView):
         return context
 
     def get_queryset(self, *args, **kwargs):
-        if self.kwargs.get("pk") == None:
-            qs = Notification.objects.filter(owner=self.request.user).exclude(user_fk =self.request.user)
-        else:
-            qs = Notification.objects.filter(owner=self.kwargs.get("pk")).exclude(user_fk =self.kwargs.get("pk"))
+        user_ = get_user_model()
+        qs = Notification.objects.filter(owner=self.request.user).exclude(user_fk=self.request.user)
         return qs
+
+
 
 class NotificationSeenAPIView(APIView):
     def get(self, request, pk, format=None):

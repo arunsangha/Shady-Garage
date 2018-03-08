@@ -28,7 +28,7 @@ def signup(request):
 class ProfileInfo(CreateView, LoginRequiredMixin):
     form_class = forms.ProfileForm
     template_name = "accounts/profile_info.html"
-    success_url = reverse_lazy("login")
+    success_url = reverse_lazy('meets:meets_list')
 
     def form_valid(self, form):
         self.object = form.save(commit = False)
