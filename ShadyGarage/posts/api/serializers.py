@@ -62,7 +62,7 @@ class PostModelSerializer(serializers.ModelSerializer):
         return obj.post_comment_fk.count()
 
     def get_activity_count(self, obj):
-        qs = Notification.objects.filter(owner=obj.user_fk)
+        qs = Notification.objects.filter(owner=obj.user_fk).exclude(user_fk=obj.user_fk)
         count_ = qs.filter(seen=False).count()
         return count_
 
@@ -95,7 +95,7 @@ class NotificationSerializer(serializers.ModelSerializer):
     owner = accounts_serialisers.UserDisplaySerializer(read_only=True)
     noti_fk = PostCommentSerializer(read_only=True)
     timesince = serializers.SerializerMethodField()
-    actor_image = serializers.SerializerMethodField()
+    #actor_image = serializers.SerializerMethodField()
     did_mark_seen = serializers.SerializerMethodField()
     noti_reply_fk = PostCommentReplySerializer(read_only=True)
     class Meta:
@@ -109,7 +109,7 @@ class NotificationSerializer(serializers.ModelSerializer):
             'commented',
             'liked',
             'timesince',
-            'actor_image',
+            #'actor_image',
             'seen',
             'did_mark_seen',
             'noti_reply_fk',
@@ -117,10 +117,6 @@ class NotificationSerializer(serializers.ModelSerializer):
 
     def get_timesince(self, obj):
         return timesince(obj.created)
-
-    def get_actor_image(self, obj):
-        user_ = accounts_models.Profile.objects.get(user=obj.user_fk)
-        return user_.profile_pic.url
 
     def get_did_mark_seen(self, obj):
         if obj.seen == True:

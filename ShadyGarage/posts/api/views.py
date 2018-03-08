@@ -87,10 +87,11 @@ class NotificationAPIView(generics.ListAPIView):
         return context
 
     def get_queryset(self, *args, **kwargs):
-        user_ = get_user_model()
-        qs = Notification.objects.filter(owner=self.request.user).exclude(user_fk=self.request.user)
+        if self.kwargs.get("pk") == None:
+            qs = Notification.objects.filter(owner=self.request.user).exclude(user_fk=self.request.user)
+        else:
+            qs = Notification.objects.filter(owner=self.kwargs.get("pk"))
         return qs
-
 
 
 class NotificationSeenAPIView(APIView):
