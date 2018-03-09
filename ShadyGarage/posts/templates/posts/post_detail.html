@@ -43,7 +43,7 @@
             <p>Bruker: <a href="{%url 'accounts:profile_page_pk' pk=comment.user_fk.pk %}">{{comment.user_fk}}</a></p>
             <p>Dato: {{comment.created|date:'Y-m-d H:i'}}</p>
             <a href="{% url 'posts:post_comment_reply' slug=comment.post_fk.slug pk=comment.id%}" class="btn btn-warning btn-sm">Svar</a>
-            <a href="#" id="commentReplyDiv" data-id="{{comment.id}}" class="btn btn-danger btn-sm"> Se svar</a>
+            <a href="#" id="commentReplyButton" data-id="{{comment.id}}" class="btn btn-danger btn-sm"> Se svar</a>
           </div>
         </div>
         <div class="commentcontainer-commentfield">
@@ -51,6 +51,15 @@
           {% if request.user == comment.user_fk %}
             <a href="{% url 'posts:post_comment_delete' slug=post.slug pk=comment.id%}" class="btn btn-danger btn-sm">Slett</a>
           {% endif %}
+        </div>
+        <div class="comment-reply-container" data-id="{{comment.id}}">
+          <h4> Svar til kommentaren </h4>
+          {% if comment.reply_comment_fk.count < 0  %} <p>"hei"</p>{% endif %}
+          {% for reply in comment.reply_comment_fk.all %}
+              <p>Bruker: <a href="{%url 'accounts:profile_page_pk' pk=comment.user_fk.pk %}">{{reply.user_fk}}</a></p>
+              <p>Dato: {{reply.created|date:'Y-m-d H:i'}}</p>
+              <h5>{{reply.comment}}</h5>
+          {%endfor%}
         </div>
       </div>
     {% endfor %}
@@ -61,19 +70,5 @@
 {% endblock %}
 
 {% block script %}
-<script>
-  $(document).ready(function(){
-      var nextUrl;
-      var commentReplyList = [];
-      $(document.body).on("click", "#commentReplyDiv", function(e){
-        e.preventDefault()
-        console.log("TRYKK")
-        $("#exampleModal").modal()
-        $("#exampleModal").modal('show')
 
-      })
-
-
-  });
-</script>
 {% endblock %}
