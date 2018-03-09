@@ -21,6 +21,7 @@ class PostModelSerializer(serializers.ModelSerializer):
             'user_fk',
             'post_title',
             'post_image',
+            'thumbnail',
             'post_description',
             'post_likes',
             'post_created',
