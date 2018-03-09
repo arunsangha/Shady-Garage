@@ -67,7 +67,7 @@
                 }
             }
             append_activity_count++;
-            
+
             if(likes == 0){
               likes = ''
             }
@@ -91,17 +91,16 @@
               if(has_image){
                 $(".profile-post-list").append(
               `
-             <div class='profile-post-list-card'> <div class='card-header'>
-                  ${post_title}
+             <div class='profile-post-list-card'>
+                <div class='profile-post-list-card-header'>
+                  <h4>${post_title}</h4>
                 </div>
                 <div class='profile-post-list-card-image'>
                     <img src='${image}' alt='' class='profile-page-post-image'>
-                    <p class='card-text'>${post_description}</p>
                 </div>
-                <div class='card-footer'>
+                <p class='profile-post-list-card-text'>${post_description}</p>
+                <div class='profile-post-list-card-footer'>
                   <a href='${value.url}' %}' class='badge badge-info'>Se kommentarer ${comment_count}</a>
-                </div>
-                <div class='card-footer'>
                   <small class='text-muted'>${value.timesince}</small>
                 </div>
               </div>
@@ -109,16 +108,13 @@
             )}else{
               $(".profile-post-list").append(
               `
-             <div class='profile-post-list-card'> <div class='card-header'>
-                  ${post_title}
+             <div class='profile-post-list-card'>
+                <div class='profile-post-list-card-header'>
+                  <h4>${post_title}</h4>
                 </div>
-                <div class='profile-post-list-card-image'>
-                    <p class='card-text'>${post_description}</p>
-                </div>
-                <div class='card-footer'>
+                <p class='profile-post-list-card-text'>${post_description}</p>
+                <div class='profile-post-list-card-footer'>
                   <a href='${value.url}'%}' class='badge badge-info'>Se kommentarer ${comment_count}</a>
-                </div>
-                <div class='card-footer'>
                   <small class='text-muted'>${value.timesince}</small>
                 </div>
               </div>

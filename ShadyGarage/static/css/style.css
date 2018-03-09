@@ -746,20 +746,46 @@ BackGround Images
 }
 
 .profile-post-list-card{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 25%;
   background-color: var(--main-light-color);
   margin: 30px;
   text-align: center;
   border-radius: 3px;
+  max-height: 600px;
+}
+
+.profile-post-list-card-header{
+  word-wrap: break-word;
+  word-break: break-all;
+
+
 }
 
 .profile-post-list-card-image{
   width: 100%;
 }
 
+.profile-post-list-card-text{
+  width: 95%;
+  flex-grow: 1;
+  word-wrap: break-word;
+  word-break: break-all;
+  padding: 2px;
+  margin: 4px 0 0 0;
+  border: 1px solid var(--main-dark-color);
+  box-shadow: 1px 1px;
+}
+
 .profile-page-post-image{
   width: 100%;
   height: 100%;
+}
+
+.profile-post-list-card-footer{
+  padding: 5px;
 }
 
 @media only screen and (max-width: 480px){
