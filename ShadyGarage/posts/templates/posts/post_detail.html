@@ -54,7 +54,6 @@
         </div>
         <div class="comment-reply-container" data-id="{{comment.id}}">
           <h4> Svar til kommentaren </h4>
-          {% if comment.reply_comment_fk.count < 0  %} <p>"hei"</p>{% endif %}
           {% for reply in comment.reply_comment_fk.all %}
               <p>Bruker: <a href="{%url 'accounts:profile_page_pk' pk=comment.user_fk.pk %}">{{reply.user_fk}}</a></p>
               <p>Dato: {{reply.created|date:'Y-m-d H:i'}}</p>
