@@ -1,9 +1,7 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 {% block title %}{{meet.meet_name}}{% endblock %}
-<!--
-//TODO:Style ferdig detail siden.
--->
+
 {% block body %}
   {% if user.is_authenticated %}
   <div class="meet_detail_body">

@@ -31,7 +31,7 @@
 
   <div class="profile-post-list"></div>
 
-  <a href="#" id="loadMore" class="btn btn-info">Fler posts</a>
+  <a href="#" id="loadMore" class="btn btn-info profile-more-posts-button">Se mer</a>
 </div>
 
 
@@ -86,12 +86,11 @@
             if(comment_count == 0){
               comment_count = ''
             }
-            <!--//TODO:Fikse buggy størrelse på diver uten bilde
-            // som havner på samme linje som diver med bilde-->
-              if(has_image){
+
+            if(has_image){
                 $(".profile-post-list").append(
               `
-             <div class='profile-post-list-card'>
+             <div class='profile-post-list-card w'>
                 <div class='profile-post-list-card-header'>
                   <h4>${post_title}</h4>
                 </div>
@@ -108,7 +107,7 @@
             )}else{
               $(".profile-post-list").append(
               `
-             <div class='profile-post-list-card'>
+             <div class='profile-post-list-card w'>
                 <div class='profile-post-list-card-header'>
                   <h4>${post_title}</h4>
                 </div>

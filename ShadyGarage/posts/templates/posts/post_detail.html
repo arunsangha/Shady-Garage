@@ -4,9 +4,7 @@
 {% include "posts/comment-replys-list-modal.html" %}
 {% block body %}
 
-<!--
-  //TODO:Finne et bra nok design og implementere det.
--->
+
   <div class="post-detail-container">
     <div class="post-detail-username">
       <a href="{% url 'accounts:profile_page_pk' pk=post.user_fk.pk%}"><h2> {{post.user_fk.username}} </h2></a>

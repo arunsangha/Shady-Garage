@@ -44,8 +44,6 @@ function initMap() {
 
 
 /*
-TODO: Må aktivere googlemaps geocode i christan sin apikey.
-
 fra google api:
 
 var geocoder;
