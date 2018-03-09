@@ -44,7 +44,7 @@ class ProfilePage(TemplateView):
 @login_required
 def edit_profile(request):
     if request.method == 'POST':
-        form = forms.EditProfileForm(request.POST, instance=request.user.profile)
+        form = forms.EditProfileForm(request.POST, request.FILES or None, instance=request.user.profile)
 
         if form.is_valid():
             form.save()
