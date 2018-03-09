@@ -163,6 +163,17 @@ h1,h2,h3,h4,h5,h6{
 ---------------------------------------------
  Index.html
 */
+
+.background-image-div{
+  background-image: url('../images/alle_elsker_bobler.jpeg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: 53% 50%;
+  padding: 0 0 50px 0;
+  height: 100vh;
+}
+
 .body_index{
   padding: 15px 0 0 15px;
 }
@@ -252,15 +263,6 @@ h1,h2,h3,h4,h5,h6{
 BackGround Images
 */
 
-.background-image-div{
-  background-image: url('../images/alle_elsker_bobler.jpeg');
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-  background-position: 53% 50%;
-  padding: 0 0 50px 0;
-  height: 100vh;
-}
 
 /*
 -----------------------------------------------------------------
