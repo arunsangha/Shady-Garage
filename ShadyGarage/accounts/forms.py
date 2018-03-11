@@ -38,7 +38,7 @@ class ProfileForm(forms.ModelForm):
 class EditProfileForm(forms.ModelForm):
     class Meta():
         model = models.Profile
-        fields = ('profile_pic','teams', 'age')
+        fields = ('teams', 'age','profile_pic')
 
     def clean_image(self):
         image = self.cleaned_data.get('profile_pic', False)

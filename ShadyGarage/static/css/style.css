@@ -135,6 +135,7 @@ h1,h2,h3,h4,h5,h6{
 
   .nav-list-open{
     height: auto !important;
+    z-index: 5;
   }
 
   .nav-list-image-item{
@@ -515,6 +516,27 @@ h1,h2,h3,h4,h5,h6{
 }
 
 /*
+--------------------------------------------------------
+*/
+.create-meet-container{
+  display: flex;
+  justify-content: center;
+  margin: 15px auto;
+  width: 30%;
+  border: thin solid white;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 20px;
+  color: white;
+}
+
+@media only screen and (max-width: 480px){
+  .create-meet-container{
+    width: 90%;
+  }
+}
+
+/*
 -----------------------------------------------------
   Post app
 */
@@ -793,7 +815,12 @@ h1,h2,h3,h4,h5,h6{
   margin: 0 auto 30px auto;
 }
 
-
+.profile-edit-title{
+  display: block;
+  text-align: center;
+  padding: 7px;
+  margin: 10px 0;
+}
 
 
 @media only screen and (max-width: 480px){
@@ -932,7 +959,7 @@ h1,h2,h3,h4,h5,h6{
 }
 
 
-.commentcontainer-commentfield textarea{
+.commentcontainer-commentfield p{
   width: 90%;
   height: 130px;
 }
@@ -989,9 +1016,12 @@ h1,h2,h3,h4,h5,h6{
     padding: 5px;
   }
 
-  .commentcontainer-commentfield textarea{
+  .commentcontainer-commentfield p{
     width: 90%;
     height: 130px;
+    padding: 5px;
+    border: 1px solid var(--main-dark-color);
+    box-shadow: 2px 2px var(--main-dark-color);
   }
 }
 
@@ -1006,12 +1036,9 @@ h1,h2,h3,h4,h5,h6{
 }
 
 .form-container{
-  display: flex;
-  padding: 30px 0 30px 30px;
-}
-
-.form-container form{
-  z-index: -100;
+  display: block;
+  width: 60%;
+  margin: 0 auto;
 }
 
 .signup-form-container{
@@ -1043,8 +1070,7 @@ h1,h2,h3,h4,h5,h6{
 
 @media only screen and (max-width: 480px){
   .form-container{
-    padding: 15px;
-    justify-content: center;
+    width: 90%;
   }
 
   .signup-form-container{
@@ -1054,25 +1080,11 @@ h1,h2,h3,h4,h5,h6{
   }
 }
 
-input[type=file]{
-}
 
 /* Select date widget in "shadygarage.com/meets/new/"*/
 .bootstrap3-multi-input{
   position: relative;
   left: 15px;
-}
-
-.create-meet-container{
-  position: relative;
-  margin: 0 auto;
-  height: 50% auto;
-  width: 60vh;
-  border: thin solid white;
-  padding: 20px;
-  background-color: rgba(0, 0, 0, 0.5);
-  border-radius: 20px;
-  color: white;
 }
 
 

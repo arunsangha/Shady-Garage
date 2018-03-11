@@ -5,7 +5,8 @@
 {% block body %}
 <!--TODO:Responsive fix.
 -->
-  <div class="container">
+  <h3 class="profile-edit-title">Edit Profile</h3>
+  <div class="form-container">
     <form method="POST" enctype="multipart/form-data">
       {% csrf_token %}
       {% bootstrap_form form%}
