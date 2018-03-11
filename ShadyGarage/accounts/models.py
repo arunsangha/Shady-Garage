@@ -31,7 +31,7 @@ class Profile(models.Model):
          if DJANGO_TYPE == 'image/jpeg':
              PIL_TYPE = 'jpeg'
              FILE_EXTENSION = 'jpg'
-         elif DJANGO_TYPE = 'image/jpg'
+         elif DJANGO_TYPE = 'image/jpg':
              PIL_TYPE = 'jpg'
              FILE_EXTENSION = 'jpg'
          elif DJANGO_TYPE == 'image/png':
