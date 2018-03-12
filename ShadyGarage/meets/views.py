@@ -102,3 +102,6 @@ class MeetCommentDeleteView(LoginRequiredMixin, DeleteView):
     def get_success_url(self):
         slug = self.kwargs.get('slug')
         return reverse_lazy('meets:single', kwargs={'slug':slug})
+
+class MeetsMarkersList(TemplateView):
+    template_name = 'meets/meets_markers_list.html'

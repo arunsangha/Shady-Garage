@@ -20,7 +20,8 @@ class MeetsListAPIView(generics.ListAPIView):
                 Q(date__icontains=query) |
                 Q(time__icontains=query) |
                 Q(description__icontains=query) |
-                Q(users_joining__username__icontains=query)
+                Q(users_joining__username__icontains=query) |
+                Q(location__icontains=query) 
             )
 
         return qs
