@@ -36,7 +36,7 @@ class Profile(models.Model):
              FILE_EXTENSION = 'jpg'
          elif DJANGO_TYPE == 'image/png':
              PIL_TYPE = 'png'
-             FILE_EXTENSION = 'png'
+             FILE_EXTENSION = 'png' 
 
         # Open original photo which we want to thumbnail using PIL's Image
          image = Image.open(BytesIO(self.profile_pic.read()))
