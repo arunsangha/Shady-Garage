@@ -20,12 +20,21 @@ location = ['Frognerveien 13, 0263 Oslo', 'Storgaten 12, 3126 Tønsberg', 'Furus
 post_title = ['Ute med bae!', 'Godt med ny vasket bil!', 'Vinter er herlig!', 'Nye sko til bilen :)', 'Æ elsk hu!']
 
 def add_meets(N=5):
-    t = Meet.objects.get_or_create(user_fk= user_[N], meet_name=meet_name[N], date=fake.date_this_month(before_today=True, after_today=False),
+    meet_, created_or_not = Meet.objects.get_or_create(user_fk= user_[N], meet_name=meet_name[N], date=fake.date_this_month(before_today=True, after_today=False),
     time=fake.time(pattern="%H:%M:%S", end_datetime=None), description=random.choice(meet_name), location=location[N])[0]
-    t.save()
 
-    comment_ = Meet_Comment.objects.get_or_create(meet_fk=t, user=user, comment=comments[N])
-    return t
+    count = 0
+    for i in user_:
+        meet_.joining.add(user_[count])
+        comment_, create_bool = Meet_Comment.objects.get_or_create(meet_fk=t, user=user, comment=comments[count])
+
+        if(count == 4){
+            count = 0
+        }else{
+            count = count + 1
+        }
+    meet_.save()
+    return created_or_not
 
 def add_posts(N=5):
     obj_, post_ = Post.objects.get_or_create(user_fk=user_[N], post_title=post_title[N])
@@ -33,13 +42,14 @@ def add_posts(N=5):
     count = 0
     for i in user_:
         obj_.post_likes.add(i)
-        obj_.save()
 
         #Creating comments
         comment_, created_bool = PostComment.objects.get_or_create(post_fk=obj_,
                                 user_fk=i, comment=comments[count])
         count = count + 1
 
+    obj_.save()
+    return post_
 
 def delete_objects():
     Post.objects.all().delete()
