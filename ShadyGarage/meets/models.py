@@ -19,7 +19,7 @@ class MeetManager(models.Manager):
         return is_joining
 
 class Meet(models.Model):
-    MARKER_CHOICES = (("static/images/e30marker.svg", "BMW E30"), ("MARKER SVG", "static/images/marker.svg"))
+    MARKER_CHOICES = (("static/images/e30marker.svg", "BMW E30"), ("static/images/Stance.svg", "Audi A4 B8 Stance"), ("static/images/lamborghini.svg", "Lamborghini Huracan"))
     user_fk = models.ForeignKey(auth.models.User, related_name="meets_user_fk")
     meet_name = models.CharField(max_length = 255, unique = True)
     date = models.DateTimeField()
@@ -27,7 +27,7 @@ class Meet(models.Model):
     slug = models.SlugField(allow_unicode = True, unique = True)
     description = models.TextField()
     meet_image = models.ImageField(upload_to = "meets_pic", blank = True, default = "/meets_pic/meet_default.png")
-    marker_image = models.ImageField(choices = MARKER_CHOICES, default="BMW E30")
+    marker_image = models.CharField(choices = MARKER_CHOICES, default="static/images/e30marker.svg", max_length=255)
     users_joining = models.ManyToManyField(auth.models.User, blank = True, related_name = "members_joining_meet")
     location = models.CharField(max_length = 1275)
     objects = MeetManager()

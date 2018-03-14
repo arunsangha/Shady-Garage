@@ -1,5 +1,5 @@
 function initMap() {
-     var oslo = {lat: 63.74644, lng: 11.29963};
+     var norway_middle = {lat: 63.74644, lng: 11.29963};
      var marker, placeid, contentString, infowindow;
 
 
@@ -12,7 +12,7 @@ function initMap() {
        success:function(data){
          var map = new google.maps.Map(document.getElementById('map'), {
            zoom: 5,
-           center: oslo,
+           center: norway_middle,
          });
          meetsList = data.results;
          nextUrl = data.nextUrl;
@@ -22,17 +22,17 @@ function initMap() {
              var geocoder = new google.maps.Geocoder();
              var location = value.location
              var marker, placeid, contentString, infowindow;
-
+             var markerIcon = value.marker_image
              geocoder.geocode({'address':location}, function(results, status){
                if(status === google.maps.GeocoderStatus.OK){
                    placeid = results[0].place_id;
                    contentString = '<div id="content">'+
                            '<a href="https://www.google.com/maps/place/?q=place_id:' + placeid +'"target="_blank" class="btn btn-info">Ta meg hit</a></div>';
 
-                   marker = new google.maps.Marker({
+                     marker = new google.maps.Marker({
                      map:map,
                      position: results[0].geometry.location,
-                     icon: "../../../static/images/e30marker.svg",
+                     icon: "../../../" + markerIcon,
                      size: (1, 1),
                    });
 

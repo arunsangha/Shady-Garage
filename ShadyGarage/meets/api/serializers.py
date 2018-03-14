@@ -11,7 +11,6 @@ class MeetsModelSerializer(serializers.ModelSerializer):
     url = serializers.SerializerMethodField()
     joining = serializers.SerializerMethodField()
     did_join = serializers.SerializerMethodField()
-
     class Meta:
         model = Meet
         fields = (
@@ -26,6 +25,7 @@ class MeetsModelSerializer(serializers.ModelSerializer):
             'url',
             'did_join',
             'location',
+            'marker_image',
         )
 
     def get_day(self, obj):
