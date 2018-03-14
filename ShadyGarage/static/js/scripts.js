@@ -1,6 +1,8 @@
 function initMap() {
      var geocoder = new google.maps.Geocoder();
      var location = document.getElementById('location').textContent;
+     var markerIcon = document.getElementById("location").getAttribute("data-marker")
+     console.log(markerIcon)
      console.log("Location: " + location)
      var oslo = {lat: 59.913, lng: 10.752};
      var directionsService = new google.maps.DirectionsService();
@@ -15,11 +17,13 @@ function initMap() {
            contentString = '<div id="content">'+
                    '<a href="https://www.google.com/maps/place/?q=place_id:' + placeid +'"target="_blank" class="btn btn-info">Ta meg hit</a></div>';
 
+
+
            marker = new google.maps.Marker({
              map:map,
              position: results[0].geometry.location,
              zoom: 10,
-             icon: "../../../static/images/e30marker.svg",
+             icon: "../../../static/images/" + markerIcon + "/" ,
            });
 
            infowindow = new google.maps.InfoWindow({
