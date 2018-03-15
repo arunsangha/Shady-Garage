@@ -23,7 +23,7 @@ function initMap() {
              map:map,
              position: results[0].geometry.location,
              zoom: 10,
-             icon: "../../../" + markerIcon + "/",
+             icon: "../../../" + markerIcon,
            });
 
            infowindow = new google.maps.InfoWindow({
