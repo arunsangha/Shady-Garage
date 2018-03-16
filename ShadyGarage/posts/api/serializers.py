@@ -4,6 +4,7 @@ from posts.models import Post, PostComment, Notification, PostCommentReply
 from accounts.api import serializers as accounts_serialisers
 from django.urls import reverse
 from accounts import models as accounts_models
+from django.shortcuts import get_object_or_404
 
 class PostModelSerializer(serializers.ModelSerializer):
     user_fk = accounts_serialisers.UserDisplaySerializer(read_only=True)
@@ -78,6 +79,7 @@ class PostCommentSerializer(serializers.ModelSerializer):
             'comment',
             'created',
         )
+
 class PostCommentReplySerializer(serializers.ModelSerializer):
     comment_fk = PostCommentSerializer(read_only=True)
     user_fk = accounts_serialisers.UserDisplaySerializer(read_only=True)
@@ -105,9 +107,9 @@ class NotificationSerializer(serializers.ModelSerializer):
     owner = accounts_serialisers.UserDisplaySerializer(read_only=True)
     noti_fk = PostCommentSerializer(read_only=True)
     timesince = serializers.SerializerMethodField()
-    #actor_image = serializers.SerializerMethodField()
     did_mark_seen = serializers.SerializerMethodField()
     noti_reply_fk = PostCommentReplySerializer(read_only=True)
+    profile = accounts_serialisers.ProfileDisplaySerializer(read_only=True)
     class Meta:
         model = Notification
         fields = (
@@ -119,7 +121,7 @@ class NotificationSerializer(serializers.ModelSerializer):
             'commented',
             'liked',
             'timesince',
-            #'actor_image',
+            'profile',
             'seen',
             'did_mark_seen',
             'noti_reply_fk',
@@ -132,6 +134,7 @@ class NotificationSerializer(serializers.ModelSerializer):
         if obj.seen == True:
             return True
         return False
+
 
 class NotificationSeenSerializer(serializers.ModelSerializer):
     class Meta:
