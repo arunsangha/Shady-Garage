@@ -1,7 +1,8 @@
 from rest_framework import serializers
 from accounts.api.serializers import UserDisplaySerializer
-from meets.models import Meet
+from meets.models import Meet, Meet_Comment
 from django.urls import reverse
+from django.utils.timesince import timesince
 
 class MeetsModelSerializer(serializers.ModelSerializer):
     user_fk = UserDisplaySerializer()
@@ -61,3 +62,20 @@ class MeetsModelSerializer(serializers.ModelSerializer):
             if user in obj.users_joining.all():
                 return True
         return False
+
+class MeetCommentSerializer(serializers.ModelSerializer):
+    user = UserDisplaySerializer()
+    meet_fk = MeetsModelSerializer()
+    created = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Meet_Comment
+        fields = (
+            'user',
+            'meet_fk',
+            'comment',
+            'created',
+        )
+
+    def get_created(self, obj):
+        return timesince(obj.created)
