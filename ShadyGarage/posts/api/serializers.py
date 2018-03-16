@@ -71,14 +71,18 @@ class PostModelSerializer(serializers.ModelSerializer):
 class PostCommentSerializer(serializers.ModelSerializer):
     post_fk = PostModelSerializer(read_only=True)
     user_fk = accounts_serialisers.UserDisplaySerializer(read_only=True)
+    profile = accounts_serialisers.ProfileDisplaySerializer(read_only=True)
     class Meta:
         model = PostComment
         fields= (
             'post_fk',
             'user_fk',
+            'profile',
             'comment',
             'created',
         )
+
+
 
 class PostCommentReplySerializer(serializers.ModelSerializer):
     comment_fk = PostCommentSerializer(read_only=True)

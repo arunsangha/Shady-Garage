@@ -11,6 +11,7 @@ class UserDisplaySerializer(serializers.ModelSerializer):
             'username',
             'first_name',
             'last_name',
+            'id',
         ]
 
 class ProfileDisplaySerializer(serializers.ModelSerializer):

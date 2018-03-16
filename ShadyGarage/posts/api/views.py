@@ -50,6 +50,19 @@ class PostCreateAPIView(generics.CreateAPIView):
     def perform_create(self, serializer):
         serializer.save(user_fk=self.request.user)
 
+class PostCommentListAPIView(generics.ListAPIView):
+    serializer_class = PostCommentSerializer
+
+    def get_serializer_context(self, *args, **kwargs):
+        context = super(PostCommentListAPIView, self).get_serializer_context(*args, **kwargs)
+        context['request'] = self.request
+        return context
+
+    def get_queryset(self, *args, **kwargs):
+        post_object = get_object_or_404(Post, slug=self.kwargs.get('slug'))
+        qs = PostComment.objects.filter(post_fk=post_object)
+        return qs
+
 class PostCommentCreateAPIView(generics.CreateAPIView):
     serializer_class = PostCommentSerializer
     permissions_classes = [permissions.IsAuthenticated]

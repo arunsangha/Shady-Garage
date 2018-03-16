@@ -10,13 +10,13 @@
       <a href="{% url 'accounts:profile_page_pk' pk=post.user_fk.pk%}"><h2> {{post.user_fk.username}} </h2></a>
     </div>
     <div class="post-container">
-        <h2 class="post-detail-post-title"> {{ post.post_title}} </h2>
+        <h2 class="post-detail-post-title" id="sluuug" data-sluug="{{post.slug}}"> {{ post.post_title}} </h2>
         {% if post.post_image %}
         <img src="{{post.post_image.url}}" alt="" class="post-detail-image">
         {% endif %}
 
         <p class="post-detail-post-comment"> {{ post.post_description}} </p>
-        <p> {{post.post_created|timesince}}
+        <p> {{post.post_created|timesince}}</p>
           <!--
             //TODO:!LANSERING! Bytte ut u=www.shadygarage.pythonanywhere.com/{{request.get_full_path}}" med  u=www.shadygarage.com/{{request.get_full_path}}
           -->
@@ -31,41 +31,67 @@
 
     <a class="post-detail-comment-button" href="{% url 'posts:post_comment' slug=post.slug%}">Kommenter</a>
     <div class="post-commentcontainer">
-    {% for comment in post.post_comment_fk.all %}
-      <div class="commentcontainer-comment">
-        <div class="commentcontainer-userinfo">
-          <div class="commentcontainer-userinfo-profilepiccontainer">
-            <img class="commentcontainer-userinfo-profilepic" src="{{comment.user_fk.profile.profile_pic.url}}" alt="bilde">
-          </div>
-          <div class="commentcontainer-userinfo-textinfo">
-            <p>Bruker: <a href="{%url 'accounts:profile_page_pk' pk=comment.user_fk.pk %}">{{comment.user_fk}}</a></p>
-            <p>Dato: {{comment.created|date:'Y-m-d H:i'}}</p>
-            <a href="{% url 'posts:post_comment_reply' slug=comment.post_fk.slug pk=comment.id%}" class="btn btn-warning btn-sm">Svar</a>
-            <a href="#" id="commentReplyButton" data-id="{{comment.id}}" class="btn btn-danger btn-sm"> Se svar</a>
-          </div>
-        </div>
-        <div class="commentcontainer-commentfield">
-          <p>{{comment.comment}}</p>
-          {% if request.user == comment.user_fk %}
-            <a href="{% url 'posts:post_comment_delete' slug=post.slug pk=comment.id%}" class="btn btn-danger btn-sm">Slett</a>
-          {% endif %}
-        </div>
-        <div class="comment-reply-container" data-id="{{comment.id}}">
-          <h4> Svar til kommentaren </h4>
-          {% for reply in comment.reply_comment_fk.all %}
-              <p>Bruker: <a href="{%url 'accounts:profile_page_pk' pk=comment.user_fk.pk %}">{{reply.user_fk}}</a></p>
-              <p>Dato: {{reply.created|date:'Y-m-d H:i'}}</p>
-              <h5>{{reply.comment}}</h5>
-          {%endfor%}
-        </div>
-      </div>
-    {% endfor %}
 
     </div>
-  </div>
+
+    </div>
+
 
 {% endblock %}
 
 {% block script %}
+<script>
+  $(document).ready(function(){
+    var slug = document.getElementById("sluuug").getAttribute("data-sluug");
+    var commentsList = [];
+    function fetchComments(){
+      $.ajax({
+        method: "GET",
+        url: '/../../../api/posts/comments/' + slug ,
+        success:function(data){
+          commentsList = data
+          parseComments();
+        },error:function(data){
+          console.log("Error!!-> in getting comments")
+        },
+
+      })
+
+    }
+
+    fetchComments()
+
+    function parseComments(){
+        $.each(commentsList, function(key, value){
+          var username = value.user_fk.username
+          var id_ = value.user_fk.id
+
+          $(".post-commentcontainer").append(
+            `
+            <div class="commentcontainer-comment">
+              <div class='commentcontainer-userinfo'>
+                <div class='commentcontainer-userinfo-profilepiccontainer'>
+                  <img class='commentcontainer-userinfo-profilepic' src="" alt="bilde">
+                </div>
+                <div class="commentcontainer-userinfo-textinfo">
+                  <p>Bruker: <a href="#">${value.user_fk.username}</a></p>
+                  <p>Dato: ${value.created}</p>
+                  <a href="#" class="btn btn-warning btn-sm">Svar</a>
+                    <a href="#" id="commentReplyButton" data-id="" class="btn btn-danger btn-sm"> Se svar</a>
+                </div>
+              </div>
+             </div>
+            `
+          )
+        })
+    }
+    /*
+      fetch replys,
+      parse comments,
+      fikse knapper ->Svar og se svar
+    */
+
+  });
+</script>
 
 {% endblock %}
