@@ -68,10 +68,12 @@ class PostModelSerializer(serializers.ModelSerializer):
         count_ = qs.filter(seen=False).count()
         return count_
 
+
 class PostCommentSerializer(serializers.ModelSerializer):
     post_fk = PostModelSerializer(read_only=True)
     user_fk = accounts_serialisers.UserDisplaySerializer(read_only=True)
     profile = accounts_serialisers.ProfileDisplaySerializer(read_only=True)
+    comment_replys = serializers.SerializerMethodField()
     class Meta:
         model = PostComment
         fields= (
@@ -80,9 +82,15 @@ class PostCommentSerializer(serializers.ModelSerializer):
             'profile',
             'comment',
             'created',
+            'id',
+            'comment_replys',
         )
 
-
+    def get_comment_replys(self, obj):
+        replys_ = PostCommentReply.objects.filter(comment_fk=obj.id).count()
+        if(replys_):
+            return replys_
+        return 0
 
 class PostCommentReplySerializer(serializers.ModelSerializer):
     comment_fk = PostCommentSerializer(read_only=True)
@@ -95,6 +103,8 @@ class PostCommentReplySerializer(serializers.ModelSerializer):
             'comment',
             'created',
         )
+
+
 class PostCommentReplyDetailSerializer(serializers.ModelSerializer):
     user_fk = accounts_serialisers.UserDisplaySerializer(read_only=True)
     class Meta:

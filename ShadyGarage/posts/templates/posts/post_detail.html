@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 {% block title %}Shady: {{post.post_title}} {% endblock %}
-{% include "posts/comment-replys-list-modal.html" %}
+
 {% block body %}
 
-
+{% include "posts/comment-replys-modal.html" %}
   <div class="post-detail-container">
     <div class="post-detail-username">
       <a href="{% url 'accounts:profile_page_pk' pk=post.user_fk.pk%}"><h2> {{post.user_fk.username}} </h2></a>
@@ -65,31 +65,87 @@
         $.each(commentsList, function(key, value){
           var username = value.user_fk.username
           var id_ = value.user_fk.id
-
-          $(".post-commentcontainer").append(
-            `
-            <div class="commentcontainer-comment">
-              <div class='commentcontainer-userinfo'>
-                <div class='commentcontainer-userinfo-profilepiccontainer'>
-                  <img class='commentcontainer-userinfo-profilepic' src="" alt="bilde">
+          if(value.comment_replys > 0){
+            $(".post-commentcontainer").append(
+              `
+              <div class="commentcontainer-comment">
+                <div class='commentcontainer-userinfo'>
+                  <div class='commentcontainer-userinfo-profilepiccontainer'>
+                    <img class='commentcontainer-userinfo-profilepic' src="" alt="bilde">
+                  </div>
+                  <div class="commentcontainer-userinfo-textinfo">
+                    <p>Bruker: <a href="#">${value.user_fk.username}</a></p>
+                    <p>Dato: ${value.created}</p>
+                    <a href="#" id="answerComment" class="btn btn-warning btn-sm" data-slug="${value.slug}" data-id="${value.id}">Svar</a>
+                    <a href="#" id="commentReplyButton" data-comment-user="${value.user_fk.username}" data-id="${value.id}" class="btn btn-danger btn-sm"> Se svar <span class="badge badge-light">${value.comment_replys}</span></a>
                 </div>
-                <div class="commentcontainer-userinfo-textinfo">
-                  <p>Bruker: <a href="#">${value.user_fk.username}</a></p>
-                  <p>Dato: ${value.created}</p>
-                  <a href="#" class="btn btn-warning btn-sm">Svar</a>
-                    <a href="#" id="commentReplyButton" data-id="" class="btn btn-danger btn-sm"> Se svar</a>
                 </div>
-              </div>
-             </div>
-            `
-          )
+                <div class="commentcontainer-commentfield">
+                  <p>${value.comment}</p>
+                </div>
+               </div>
+              `
+            )
+          }else{
+            $(".post-commentcontainer").append(
+              `
+              <div class="commentcontainer-comment">
+                <div class='commentcontainer-userinfo'>
+                  <div class='commentcontainer-userinfo-profilepiccontainer'>
+                    <img class='commentcontainer-userinfo-profilepic' src="" alt="bilde">
+                  </div>
+                  <div class="commentcontainer-userinfo-textinfo">
+                    <p>Bruker: <a href="#">${value.user_fk.username}</a></p>
+                    <p>Dato: ${value.created}</p>
+                    <a href="#" id="answerComment" class="btn btn-warning btn-sm" data-slug="${value.slug}" data-id="${value.id}">Svar</a>
+                </div>
+                </div>
+                <div class="commentcontainer-commentfield">
+                  <p>${value.comment}</p>
+                </div>
+               </div>
+              `
+            )
+          }
         })
     }
-    /*
-      fetch replys,
-      parse comments,
-      fikse knapper ->Svar og se svar
-    */
+
+
+    $(document.body).on("click", "#commentReplyButton", function(e){
+      e.preventDefault()
+      var this_ = $(this)
+      var id_ = this_.attr("data-id")
+      var replys = [];
+      $.ajax({
+        method:'GET',
+        url: '../../../api/posts/comment_replys/' + id_,
+        success:function(data){
+          replys = data.results
+        },error:function(data){
+          console.log("ERROR!!-> Getting comment replys")
+        }
+      })
+
+      $("#exampleModalCenter").modal({})
+      $("#exampleModalTitle").text("Svar til " + this_.attr("data-comment-user") + " sin kommentar")
+      $("#exampleModalCenter").on("shown.bs.modal", function(){
+        $(".replys-container").html()
+         $.each(replys, function(key, value){
+           var clone_ = $(".replys-container").clone()
+           clone_.find("p")[0].text("HEI")
+
+
+         })
+      })
+
+    });
+
+    $(document).ready(function(){
+      $("#exampleModalCenter").on("hidden.bs.modal", function(e){
+           $('.modal-body').html()
+      })
+    })
+
 
   });
 </script>
