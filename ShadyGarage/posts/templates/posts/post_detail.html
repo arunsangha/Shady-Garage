@@ -128,23 +128,25 @@
 
       $("#exampleModalCenter").modal({})
       $("#exampleModalTitle").text("Svar til " + this_.attr("data-comment-user") + " sin kommentar")
+
       $("#exampleModalCenter").on("shown.bs.modal", function(){
-        $(".replys-container").html()
-         $.each(replys, function(key, value){
-           var clone_ = $(".replys-container").clone()
-           clone_.find("p")[0].text("HEI")
+        var add_ = '';
+        $.each(replys, function(key, value){
+          add_ += "<p class='user-id' >" + value.user_fk.username + ": "+ value.comment + "</p><p> for "
+          + value.timesince + "</p><hr>"
+        })
 
-
-         })
+        $(".replys-container").html(add_)
       })
 
     });
 
-    $(document).ready(function(){
-      $("#exampleModalCenter").on("hidden.bs.modal", function(e){
-           $('.modal-body').html()
-      })
-    })
+
+
+    $('#exampleModalCenter').on('hidden.bs.modal', function () {
+
+           $('p').remove(".user-id")
+      });
 
 
   });

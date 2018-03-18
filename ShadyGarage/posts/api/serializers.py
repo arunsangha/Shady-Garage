@@ -95,25 +95,32 @@ class PostCommentSerializer(serializers.ModelSerializer):
 class PostCommentReplySerializer(serializers.ModelSerializer):
     comment_fk = PostCommentSerializer(read_only=True)
     user_fk = accounts_serialisers.UserDisplaySerializer(read_only=True)
+    timesince = serializers.SerializerMethodField()
     class Meta:
         model = PostCommentReply
         fields=(
             'comment_fk',
             'user_fk',
             'comment',
-            'created',
+            'timesince',
         )
 
+    def get_timesince(self, obj):
+        return timesince(obj.created)
 
 class PostCommentReplyDetailSerializer(serializers.ModelSerializer):
     user_fk = accounts_serialisers.UserDisplaySerializer(read_only=True)
+    timesince = serializers.SerializerMethodField()
     class Meta:
         model = PostCommentReply
         fields=(
             'user_fk',
             'comment',
-            'created',
+            'timesince',
         )
+
+    def get_timesince(self, obj):
+        return timesince(obj.created)
 
 class NotificationSerializer(serializers.ModelSerializer):
     post_fk = PostModelSerializer(read_only=True)
