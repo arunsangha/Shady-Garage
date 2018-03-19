@@ -3,7 +3,7 @@
 {% block title %}Shady: {{post.post_title}} {% endblock %}
 
 {% block body %}
-
+{% include "posts/comment-modal.html" %}
 {% include "posts/comment-replys-modal.html" %}
   <div class="post-detail-container">
     <div class="post-detail-username">
@@ -76,7 +76,7 @@
                   <div class="commentcontainer-userinfo-textinfo">
                     <p>Bruker: <a href="#">${value.user_fk.username}</a></p>
                     <p>Dato: ${value.created}</p>
-                    <a href="#" id="answerComment" class="btn btn-warning btn-sm" data-slug="${value.slug}" data-id="${value.id}">Svar</a>
+                    <a href="#" id="answerComment" class="btn btn-warning btn-sm" data-slug="${value.post_fk.slug}" data-id="${value.id}">Svar</a>
                     <a href="#" id="commentReplyButton" data-comment-user="${value.user_fk.username}" data-id="${value.id}" class="btn btn-danger btn-sm"> Se svar <span class="badge badge-light">${value.comment_replys}</span></a>
                 </div>
                 </div>
@@ -97,7 +97,7 @@
                   <div class="commentcontainer-userinfo-textinfo">
                     <p>Bruker: <a href="#">${value.user_fk.username}</a></p>
                     <p>Dato: ${value.created}</p>
-                    <a href="#" id="answerComment" class="btn btn-warning btn-sm" data-slug="${value.slug}" data-id="${value.id}">Svar</a>
+                    <a href="#" id="answerComment" class="btn btn-warning btn-sm" data-slug="${value.post_fk.slug}" data-id="${value.id}">Svar</a>
                 </div>
                 </div>
                 <div class="commentcontainer-commentfield">
@@ -142,11 +142,45 @@
     });
 
 
-
     $('#exampleModalCenter').on('hidden.bs.modal', function () {
 
            $('p').remove(".user-id")
       });
+
+    $(document.body).on("click", "#answerComment", function(e){
+      var this_ = $(this)
+      var id = this_.attr("data-id")
+      var slug = this_.attr("data-slug")
+      $('textarea').val('')
+      $("#commentModal").modal({})
+      $("#commentModal").on("shown.bs.modal", function(){
+         $("#commentModal").attr("data-slug", slug)
+         $("#commentModal").attr("data-id", id)
+         $("textarea").focus()
+      })
+    });
+
+    $("#comment_form").submit(function(event){
+      event.preventDefault()
+      var this_ = $(this)
+      var id = $("#commentModal").attr("data-id")
+      var slug = $("#commentModal").attr("data-slug")
+      var comment = this_.find("input[type=text], textarea").val()
+      $.ajax({
+        url: '../../../api/posts/create_comment_reply/id/' + id + '/',
+        method: 'post',
+        data:{
+          'comment': comment,
+          csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+        },
+        success:function(data){
+          $("#commentModal").modal('hide')
+        }, error:function(data){
+           console.log("ERROR!!-> Answering comment")
+        }
+
+      })
+    });
 
 
   });
