@@ -1,6 +1,6 @@
 from rest_framework import generics
 from .serializers import MeetsModelSerializer, MeetCommentSerializer
-from posts.api.pagination import StandardResultsPagination
+from posts.api.pagination import StandardResultsPagination, ProfilePostResultsPagination
 from meets.models import Meet, Meet_Comment
 from django.db.models import Q
 from rest_framework.views import APIView
@@ -9,7 +9,7 @@ from .pagination import CommentResultsPagination
 
 class MeetsListAPIView(generics.ListAPIView):
     serializer_class = MeetsModelSerializer
-    pagination_class = StandardResultsPagination
+    pagination_class = ProfilePostResultsPagination
 
     def get_queryset(self, *args, **kwargs):
         qs = Meet.objects.all()
