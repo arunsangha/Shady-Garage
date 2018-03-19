@@ -1,10 +1,23 @@
-from rest_framework import serializers
+from rest_framework import serializers, reverse
 from django.contrib.auth import get_user_model
 User = get_user_model()
 
+from django.urls import reverse
 from accounts.models import Profile
+from accounts.models import User as model_user
+class ProfileDisplaySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = (
+            'profile_pic',
+            'teams',
+            'age',
+            'thumbnail',
+        )
 
 class UserDisplaySerializer(serializers.ModelSerializer):
+    profile = ProfileDisplaySerializer()
+    url = serializers.SerializerMethodField()
     class Meta:
         model = User
         fields = [
@@ -12,16 +25,9 @@ class UserDisplaySerializer(serializers.ModelSerializer):
             'first_name',
             'last_name',
             'id',
+            'profile',
+            'url',
         ]
 
-class ProfileDisplaySerializer(serializers.ModelSerializer):
-    user = UserDisplaySerializer()
-    class Meta:
-        model = Profile
-        fields = (
-            'user',
-            'profile_pic',
-            'teams'
-            'age',
-            'thumbnail',
-        )
+    def get_url(self, obj):
+        return reverse("accounts:profile_page_pk", kwargs={'pk':obj.id})
