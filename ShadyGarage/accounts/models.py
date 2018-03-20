@@ -8,7 +8,7 @@ class User(auth.models.User, auth.models.PermissionsMixin):
         return "@{}".format(self.username)
 
 class Profile(models.Model):
-    TEAM_CHOICES = (('SHADYGARAGE', "ShadyGarage"), ('CLASSIC', "Classic"), ('OFFROAD', "Offroad"), ('RÅNER', "Råner"), ('STANCE', "Stance"), ('TUNER', "Tuner"))
+    TEAM_CHOICES = (('SHADYGARAGE', "ShadyGarage"), ('CLASSIC', "Classic"), ('OFFROAD', "Offroad"), ('RÅNER', "Råner"), ('STANCE', "Stance"), ('TUNER', "Tuner"), ('MC', "MC"))
     user = models.OneToOneField(auth.models.User, on_delete = models.CASCADE)
     teams = models.CharField(max_length = 50, choices = TEAM_CHOICES, default="SHADYGARAGE")
     age = models.PositiveIntegerField(null = True, blank = True)
@@ -36,7 +36,7 @@ class Profile(models.Model):
              FILE_EXTENSION = 'jpg'
          elif DJANGO_TYPE == 'image/png':
              PIL_TYPE = 'png'
-             FILE_EXTENSION = 'png' 
+             FILE_EXTENSION = 'png'
 
         # Open original photo which we want to thumbnail using PIL's Image
          image = Image.open(BytesIO(self.profile_pic.read()))

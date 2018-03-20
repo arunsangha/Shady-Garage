@@ -25,7 +25,14 @@
           <p>Skal på treffet: {{meet.users_joining.count}}</p>
       </div>
       <div class="meet_detail_join_container">
+        {% for user in meet.users_joining.all  %}
+          {% if request.user == user %}
+            <div id="isUserJoining" data-bool="true" style="display:none;"></div>
+          {% endif %}
+        {% endfor %}
+
         <a href="" id="join_button" data-id="{{ meet.pk }}">Jeg vil være med!</a>
+
       </div>
       <a href="https://www.facebook.com/sharer/sharer.php?u=shadygarage.pythonanywhere.com/{{request.get_full_path}}">
         <input type="image" src="{% static 'images/facebooklogo.png'%}" class="facebookShare" id="facebookShareMeet"/>
@@ -51,7 +58,7 @@
             </div>
             <div class="commentcontainer-userinfo-textinfo">
               <p>Bruker:<a href="{%url 'accounts:profile_page_pk' pk=comment.user.pk %}">{{comment.user}}</a></p>
-              <p>Dato: {{comment.created|timesince}}
+              <p>Dato: {{comment.created|timesince}}</p>
             </div>
           </div>
           <div class="commentcontainer-commentfield">
@@ -88,9 +95,7 @@
   </script>
   <script src="{% static "js/meets_detail_marker.js" %}" type="text/javascript"></script>
   <script>
-    <!--
-    //TODO:Fikse slik at "jeg skal knappen" heter noe annet når man har valgt skal tidligere
-    -->
+
     $(document).ready(function(){
       $(document.body).on("click", "#join_button", function(e){
         e.preventDefault()
@@ -111,6 +116,15 @@
           }
         })
       })
+
+      function userJoining(){
+        var isJoining = $("#isUserJoining").attr("data-bool")
+        if(isJoining){
+          $("#join_button").text("Jeg kan ikke allikevell..");
+        }
+      }
+
+      userJoining()
     });
   </script>
 {% endblock %}
