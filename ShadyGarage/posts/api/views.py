@@ -34,7 +34,8 @@ class PostListAPIView(generics.ListAPIView):
                 Q(user_fk__username__icontains=query) |
                 Q(post_title__icontains=query) |
                 Q(post_description__icontains=query) |
-                Q(post_created__icontains=query)
+                Q(post_created__icontains=query) |
+                Q(user_fk__profile__teams=query)
             )
         return qs
 
