@@ -1,11 +1,5 @@
 /*
 
-1. Resets
-2. Index.html
-2. Background images
-3. Meets app
-4. Profile Page
-5. Div
 */
 
 :root{
@@ -70,6 +64,7 @@ h1,h2,h3,h4,h5,h6{
 ------------------------------------
   Nav
 */
+
 .nav-container{
   background-color: var(--main-dark-color);
   width: 100%;
@@ -344,8 +339,8 @@ h1,h2,h3,h4,h5,h6{
   align-items: center;
   justify-content: center;
   text-transform: uppercase;
-  width: 45%;
-  height: 7%;
+  width: 40%;
+  height: 5%;
   border: 2px solid white;
   border-radius: 30px;
 }
@@ -549,7 +544,6 @@ h1,h2,h3,h4,h5,h6{
 .post-list-container{
   display: flex;
   flex-direction: column;
-  align-items: center;
   width: 80%;
   margin: 0 auto;
 }
@@ -559,11 +553,13 @@ h1,h2,h3,h4,h5,h6{
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
   background-color: var(--main-dark-color);
+  width: 75%;
   border-radius: 5px;
-  margin: 20px 0;
-  width: 100%;
+  margin: 20px auto;
   padding: 5px;
+  min-height: 200px;
 }
 
 .post-list-card-header{
@@ -607,7 +603,25 @@ h1,h2,h3,h4,h5,h6{
 }
 
 #loadMore{
-  margin-bottom: 10px;
+  width: 30%;
+  margin: 20px auto 40px auto;
+}
+
+@media only screen and (max-width: 480px){
+  .post-list-container{
+    width: 100%;
+  }
+
+  .post-list-card{
+    width: 90%;
+    margin: 20px auto;
+    padding: 5px;
+  }
+
+  #loadMore{
+    width: 40%;
+  }
+
 }
 
 /*
