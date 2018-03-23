@@ -10,19 +10,18 @@
       <a href="{% url 'accounts:profile_page_pk' pk=post.user_fk.pk%}"><h2> {{post.user_fk.username}} </h2></a>
     </div>
     <div class="post-container">
-        <h2 class="post-detail-post-title" id="sluuug" data-sluug="{{post.slug}}"> {{ post.post_title}} </h2>
-        {% if post.post_image %}
-        <img src="{{post.post_image.url}}" alt="" class="post-detail-image">
-        {% endif %}
-
-        <p class="post-detail-post-comment"> {{ post.post_description}} </p>
-        <p> {{post.post_created|timesince}}</p>
-          <!--
-            //TODO:!LANSERING! Bytte ut u=www.shadygarage.pythonanywhere.com/{{request.get_full_path}}" med  u=www.shadygarage.com/{{request.get_full_path}}
-          -->
-          <a href="https://www.facebook.com/sharer/sharer.php?u=shadygarage.pythonanywhere.com/{{request.get_full_path}}">
-            <input type="image" src="{% static 'images/facebooklogo.png'%}" class="facebookShare" id="facebookSharePost"/>
-          </a>
+      <h2 class="post-detail-post-title" id="sluuug" data-sluug="{{post.slug}}"> {{ post.post_title}} </h2>
+      {% if post.post_image %}
+      <img src="{{post.post_image.url}}" alt="" class="post-detail-image">
+      {% endif %}
+      <p class="post-detail-post-comment"> {{ post.post_description}} </p>
+      <p> {{post.post_created|timesince}}</p>
+        <!--
+          //TODO:!LANSERING! Bytte ut u=www.shadygarage.pythonanywhere.com/{{request.get_full_path}}" med  u=www.shadygarage.com/{{request.get_full_path}}
+        -->
+      <a href="https://www.facebook.com/sharer/sharer.php?u=shadygarage.pythonanywhere.com/{{request.get_full_path}}">
+        <input type="image" src="{% static 'images/facebooklogo.png'%}" class="facebookShare" id="facebookSharePost"/>
+      </a>
     </div>
     {% if request.user == post.user_fk %}
       <a href="{% url 'posts:post_delete' slug=post.slug %} " class="btn btn-danger">Slett post!</a>
