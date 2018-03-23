@@ -62,7 +62,7 @@ class Post(models.Model):
              FILE_EXTENSION = 'jpg'
          elif DJANGO_TYPE == 'image/png':
              PIL_TYPE = 'png'
-             FILE_EXTENSION = 'png' 
+             FILE_EXTENSION = 'png'
 
         # Open original photo which we want to thumbnail using PIL's Image
          image = Image.open(BytesIO(self.post_image.read()))
@@ -96,8 +96,6 @@ class Post(models.Model):
         ordering = ['-post_created']
 
 
-
-#//TODO:Reply for comments. Gjelder for meets og.
 
 class PostComment(models.Model):
      post_fk = models.ForeignKey(Post, related_name="post_comment_fk")

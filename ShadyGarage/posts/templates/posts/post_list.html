@@ -9,7 +9,7 @@
       <input type="text" name="q" placeholder="Søk">
       <input type="submit" name="" class="btn btn-info" value="Søk">
     </form>
-
+    <a href="#" class="btn btn-info" id="load-mc-list">MC LOAD</a>
     <a href="{% url 'posts:post_create'%}" class="btn btn-info" id="sharePost">Del en post!</a>
   </div>
   <div class="post-list-container">
@@ -152,31 +152,31 @@
        }
       }
 
-
-    function fetchPosts(url){
-      var fetchUrl;
-      if(!url){
-        fetchUrl = "../../api/posts/"
-      }else{
-        fetchUrl = url
-      }
-      $.ajax({
-        url:fetchUrl,
-        data:{
-          'q':query
-        },
-        method:"GET",
-        success:function(data){
-          postList = data.results
-          nextUrl = data.next
-          parsePosts()
-        },
-          error:function(data){
-          console.log("Error")
-          console.log(data)
+      function fetchPosts(url){
+        var fetchUrl;
+        if(!url){
+          fetchUrl = "../../api/posts/"
+        }else{
+          fetchUrl = url
         }
-      })
-    }
+        $.ajax({
+          url:fetchUrl,
+          data:{
+            'q':query
+          },
+          method:"GET",
+          success:function(data){
+            postList = data.results
+            nextUrl = data.next
+            parsePosts()
+          },
+            error:function(data){
+            console.log("Error")
+            console.log(data)
+          }
+        })
+      }
+
 
       fetchPosts()
       $("#loadMore").click(function(event){
@@ -186,6 +186,12 @@
         } else{
           $("#loadMore").html("Ingen flere posts")
         }
+      })
+
+      $("#load-mc-list").click(function(event){
+        event.preventDefault()
+        $("#fraAjax").html("")
+        fetchPosts('../../api/posts/mc_list/')
       })
 
       $(document.body).on("click", ".like-button", function(e){
@@ -224,7 +230,7 @@
         })
       })
 
-      $("#test").submit(function(event){
+      $("#comment_form").submit(function(event){
         event.preventDefault()
         var this_ = $(this)
         var comment = this_.find("input[type=text], textarea").val()

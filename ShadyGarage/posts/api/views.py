@@ -34,7 +34,8 @@ class PostListAPIView(generics.ListAPIView):
                 Q(user_fk__username__icontains=query) |
                 Q(post_title__icontains=query) |
                 Q(post_description__icontains=query) |
-                Q(post_created__icontains=query)
+                Q(post_created__icontains=query) |
+                Q(user_fk__profile__teams=query)
             )
         return qs
 
@@ -132,3 +133,19 @@ class NotificationSeenAPIView(APIView):
         noti_qs = Notification.objects.filter(pk=pk)
         is_seen = Notification.objects.seen_toggle(request.user, noti_qs.first())
         return Response({'seen':is_seen})
+
+class PostMCListSerializer(generics.ListAPIView):
+    serializer_class = PostModelSerializer
+    pagination_class = StandardResultsPagination
+
+    def get_serializer_context(self, *args, **kwargs):
+        context = super(PostMCListSerializer, self).get_serializer_context(*args, **kwargs)
+        context['request'] = self.request
+        return context
+
+    def get_queryset(self, *args, **kwargs):
+        qs = Post.objects.all()
+        qs = qs.filter(
+                user_fk__profile__teams__icontains="MC"
+            )
+        return qs

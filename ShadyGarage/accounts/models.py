@@ -8,15 +8,15 @@ class User(auth.models.User, auth.models.PermissionsMixin):
         return "@{}".format(self.username)
 
 class Profile(models.Model):
-    TEAM_CHOICES = (('SHADYGARAGE', "ShadyGarage"), ('CLASSIC', "Classic"), ('OFFROAD', "Offroad"), ('RÅNER', "Råner"), ('STANCE', "Stance"), ('TUNER', "Tuner"))
+    TEAM_CHOICES = (('SHADYGARAGE', "ShadyGarage"), ('CLASSIC', "Classic"), ('OFFROAD', "Offroad"), ('RÅNER', "Råner"), ('STANCE', "Stance"), ('TUNER', "Tuner"), ('MC', "MC"))
     user = models.OneToOneField(auth.models.User, on_delete = models.CASCADE)
     teams = models.CharField(max_length = 50, choices = TEAM_CHOICES, default="SHADYGARAGE")
     age = models.PositiveIntegerField(null = True, blank = True)
-    profile_pic = models.ImageField(upload_to = "profile_pic", default = "/default/default.png")
-    thumbnail = models.ImageField(upload_to="profile_pic_thumbnail", blank=True)
+    profile_pic = models.ImageField(upload_to = "profile_pic", default = "default/default.png")
+    thumbnail = models.ImageField(upload_to="profile_pic_thumbnail", default ="default/default.png")
     def __str__(self):
         return self.user.username
-
+#//TODO: fikse bilder..vi trenger ikke create_thumbnail
     def create_thumbnail(self):
          from PIL import Image
          from io import BytesIO
@@ -26,17 +26,19 @@ class Profile(models.Model):
         # Set our max thumbnail size in a tuple (max width, max height)
          THUMBNAIL_SIZE = (612, 612)
 
-         DJANGO_TYPE = self.profile_pic.file.content_type
 
-         if DJANGO_TYPE == 'image/jpeg':
+         if self.profile_pic.name.endswith(".jpeg"):
              PIL_TYPE = 'jpeg'
-             FILE_EXTENSION = 'jpg'
-         elif DJANGO_TYPE == 'image/jpg':
+             FILE_EXTENSION = 'jpeg'
+             DJANGO_TYPE = 'image/jpeg'
+         elif self.profile_pic.name.endswith(".jpg"):
              PIL_TYPE = 'jpg'
              FILE_EXTENSION = 'jpg'
-         elif DJANGO_TYPE == 'image/png':
+             DJANGO_TYPE = 'image/jpg'
+         elif self.profile_pic.name.endswith(".png"):
              PIL_TYPE = 'png'
-             FILE_EXTENSION = 'png' 
+             FILE_EXTENSION = 'png'
+             DJANGO_TYPE = 'image/png'
 
         # Open original photo which we want to thumbnail using PIL's Image
          image = Image.open(BytesIO(self.profile_pic.read()))

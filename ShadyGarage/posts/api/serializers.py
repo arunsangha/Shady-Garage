@@ -74,6 +74,7 @@ class PostCommentSerializer(serializers.ModelSerializer):
     user_fk = accounts_serialisers.UserDisplaySerializer(read_only=True)
     profile = accounts_serialisers.ProfileDisplaySerializer(read_only=True)
     comment_replys = serializers.SerializerMethodField()
+    created = serializers.SerializerMethodField()
     class Meta:
         model = PostComment
         fields= (
@@ -92,28 +93,38 @@ class PostCommentSerializer(serializers.ModelSerializer):
             return replys_
         return 0
 
+    def get_created(self, obj):
+        return timesince(obj.created)
+
 class PostCommentReplySerializer(serializers.ModelSerializer):
     comment_fk = PostCommentSerializer(read_only=True)
     user_fk = accounts_serialisers.UserDisplaySerializer(read_only=True)
+    timesince = serializers.SerializerMethodField()
     class Meta:
         model = PostCommentReply
         fields=(
             'comment_fk',
             'user_fk',
             'comment',
-            'created',
+            'timesince',
         )
 
+    def get_timesince(self, obj):
+        return timesince(obj.created)
 
 class PostCommentReplyDetailSerializer(serializers.ModelSerializer):
     user_fk = accounts_serialisers.UserDisplaySerializer(read_only=True)
+    timesince = serializers.SerializerMethodField()
     class Meta:
         model = PostCommentReply
         fields=(
             'user_fk',
             'comment',
-            'created',
+            'timesince',
         )
+
+    def get_timesince(self, obj):
+        return timesince(obj.created)
 
 class NotificationSerializer(serializers.ModelSerializer):
     post_fk = PostModelSerializer(read_only=True)
@@ -123,7 +134,6 @@ class NotificationSerializer(serializers.ModelSerializer):
     timesince = serializers.SerializerMethodField()
     did_mark_seen = serializers.SerializerMethodField()
     noti_reply_fk = PostCommentReplySerializer(read_only=True)
-    profile = accounts_serialisers.ProfileDisplaySerializer(read_only=True)
     class Meta:
         model = Notification
         fields = (
@@ -135,7 +145,6 @@ class NotificationSerializer(serializers.ModelSerializer):
             'commented',
             'liked',
             'timesince',
-            'profile',
             'seen',
             'did_mark_seen',
             'noti_reply_fk',

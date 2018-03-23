@@ -16,4 +16,5 @@ urlpatterns = [
     #Er ikke så veldig sikker på om vi skal vise aktiviteten til andre brukere.
     url(r'^accounts/otheractivities/(?P<pk>\d+)/$', views.NotificationAPIView.as_view(), name="notifications-other-api"),
     url(r'^comment_replys/(?P<pk>\d+)/$', views.PostCommentReplyListAPIView.as_view(), name="comment-reply-list"),
+    url(r'^mc_list/$', views.PostMCListSerializer.as_view(), name="mc-list-api"),
 ]
