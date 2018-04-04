@@ -1,3 +1,4 @@
+import os
 from django.db import models
 from django.contrib.auth import get_user_model
 User = get_user_model()
@@ -146,6 +147,34 @@ class Notification(models.Model):
 
     class Meta:
         ordering = ['-created']
+
+from PIL import Image, ExifTags
+def rotate_image(filepath):
+  try:
+    image = Image.open(filepath)
+    for orientation in ExifTags.TAGS.keys():
+      if ExifTags.TAGS[orientation] == 'Orientation':
+            break
+    exif = dict(image._getexif().items())
+
+    if exif[orientation] == 3:
+        image = image.rotate(180, expand=True)
+    elif exif[orientation] == 6:
+        image = image.rotate(270, expand=True)
+    elif exif[orientation] == 8:
+        image = image.rotate(90, expand=True)
+    image.save(filepath)
+    image.close()
+  except (AttributeError, KeyError, IndexError):
+    # cases: image don't have getexif
+    pass
+
+@receiver(post_save, sender=Post, dispatch_uid="update_image_profile")
+def update_image(sender, instance, **kwargs):
+  if instance.post_image:
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    fullpath = BASE_DIR + instance.post_image.url
+    rotate_image(fullpath)
 
 @receiver(post_save, sender=PostComment)
 def create_notification(sender, instance, **kwargs):
