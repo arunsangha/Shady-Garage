@@ -63,7 +63,8 @@ class Profile(models.Model):
 
     def save(self, *args, **kwargs):
         if self.profile_pic:
-            self.create_thumbnail()
+            if self.profile_pic != 'default/default.png':
+                self.create_thumbnail()
 
         super().save()
 
