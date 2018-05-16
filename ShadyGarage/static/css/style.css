@@ -274,7 +274,6 @@ h1,h2,h3,h4,h5,h6{
   padding: 0 0 30px 0;
   width: 90%;
   margin: 50px auto;
-  border: 1px solid black;
 }
 
 .meet-card-container{
@@ -346,6 +345,12 @@ h1,h2,h3,h4,h5,h6{
   border: 2px solid white;
   border-radius: 30px;
 }
+
+.meet-card-joinbutton:hover{
+ color: var(--button-color);
+ background-color: #2E2E2E;
+}
+
 
 .meet-card-bottom-info{
   display: flex;
@@ -882,7 +887,7 @@ h1,h2,h3,h4,h5,h6{
 .login-container{
   background-color: black;
   text-align: center;
-  padding: 30px 0;
+  padding: 30px 0 60px 0;
   width: 100%;
 }
 
