@@ -172,9 +172,11 @@ def rotate_image(filepath):
 @receiver(post_save, sender=Post, dispatch_uid="update_image_profile")
 def update_image(sender, instance, **kwargs):
   if instance.post_image:
-    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    fullpath = BASE_DIR + instance.post_image.url
-    rotate_image(fullpath)
+      if instance.thumbnail:
+          BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+          fullpath = BASE_DIR + instance.post_image.url
+          rotate_image(fullpath)
+
 
 @receiver(post_save, sender=PostComment)
 def create_notification(sender, instance, **kwargs):
