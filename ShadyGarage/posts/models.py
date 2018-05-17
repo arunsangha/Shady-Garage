@@ -175,7 +175,9 @@ def update_image(sender, instance, **kwargs):
       if instance.thumbnail:
           BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
           fullpath = BASE_DIR + instance.post_image.url
+          fullpath_thumbnail = BASE_DIR + instance.thumbnail.url
           rotate_image(fullpath)
+          rotate_image(fullpath_thumbnail)
 
 
 @receiver(post_save, sender=PostComment)
