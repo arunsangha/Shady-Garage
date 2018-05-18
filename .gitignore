@@ -4,5 +4,8 @@ ShadyGarage/accounts/__pycache__/
 ShadyGarage/meets/__pycache__/
 ShadyGarage/posts/__pycache__/
 ShadyGarage/ShadyGarage/__pycache__/
+ShadyGarage/meets/migrations/__pycache__/
+ShadyGarage/posts/migrations/__pycache__/
+ShadyGarage/accounts/migrations/__pycache__/
 ShadyGarage/db.sqlite3
 db.sqlite3
