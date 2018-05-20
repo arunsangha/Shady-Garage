@@ -20,10 +20,10 @@ class MeetManager(models.Manager):
 
 class Meet(models.Model):
     MARKER_CHOICES = (("static/images/e30marker.svg", "BMW E30"), ("static/images/Stance.svg", "Audi A4 B8 Stance"), ("static/images/lamborghini.svg", "Lamborghini Huracan"))
-    #CATEGORY_CHOICES = (("static/images/shady.jpg", "ShadyGarage"), ("static/images/stance.jpg", "Stance"),("static/images/classic.jpg", "Classic"), ("static/images/tuner.jpg", "Tuner"), ("static/images/mc.jpg", "MC"), ("static/images/offroad.jpg", "Offroad"))
+    CATEGORY_CHOICES = (("static/images/shady.jpg", "ShadyGarage"), ("static/images/stance.jpg", "Stance"),("static/images/classic.jpg", "Classic"), ("static/images/tuner.jpg", "Tuner"), ("static/images/mc.jpg", "MC"), ("static/images/offroad.jpg", "Offroad"))
     user_fk = models.ForeignKey(auth.models.User, related_name="meets_user_fk")
     meet_name = models.CharField(max_length = 255, unique = True)
-    #category = models.CharField(choices=CATEGORY_CHOICES, default="static/images/burning.jpg")
+    category = models.CharField(choices=CATEGORY_CHOICES, default="static/images/burning.jpg", max_length=255)
     date = models.DateTimeField()
     time = models.TimeField(blank = True, default="19:00:00")
     slug = models.SlugField(allow_unicode = True, unique = True)

@@ -12,7 +12,8 @@
     <form class="" action="{% url 'meets:create_meet' %}" method="post">
       {% csrf_token %}
       {% bootstrap_form form %}
-
+      <div class="bfh-timepicker">
+      </div>
       <!-- Button trigger modal -->
       <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalLong">
         Les dette først!
