@@ -35,6 +35,9 @@
 {% endif %}
 {% endblock %}
 {% block script %}
+{% if user.is_authenticated %}
+  <script src="{% static "js/getnotifications.js" %}" type="text/javascript"></script>
+{% endif %}
 <script>
     function getParameterByName(name, url) {
         if (!url) url = window.location.href;

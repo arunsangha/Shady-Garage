@@ -37,6 +37,9 @@
         <li class="nav-list-item">
           <a class="nav-list-item-link" href="{% url 'accounts:logout' %}">Logg Ut</a>
         </li>
+          <li class="nav-list-item">
+            <a class="nav-list-item-link" href="{% url 'accounts:activity'%}" id="activityButton">EU-kontroll</a>
+          </li>
         <li class="nav-list-item nav-list-item-move-right">
           <a class="nav-list-item-link" href="{% url 'accounts:profile_page'%}" style="font-family:nosifer;">{{request.user.username}}</a>
         </li>
@@ -71,6 +74,7 @@
   gtag('js', new Date());
 
   gtag('config', 'UA-113647110-1');
+
 </script>
 {%block script%}
 
