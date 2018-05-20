@@ -79,7 +79,7 @@
                     <img class='commentcontainer-userinfo-profilepic' src="${profile_pic}" alt="bilde">
                   </div>
                   <div class="commentcontainer-userinfo-textinfo">
-                    <p>Bruker: <a href="${value.user_fk.url}" id="usernameLink" data-id="${id_}" >${value.user_fk.username}</a></p>
+                    <p><a href="${value.user_fk.url}" id="usernameLink" data-id="${id_}" >${value.user_fk.username}</a></p>
                     <p>${value.created} siden</p>
                     <a href="#" id="answerComment" class="btn btn-warning btn-sm" data-slug="${value.post_fk.slug}" data-id="${value.id}">Svar</a>
                     <a href="#" id="commentReplyButton" data-comment-user="${value.user_fk.username}" data-id="${value.id}" class="btn btn-danger btn-sm"> Se svar <span class="badge badge-light">${value.comment_replys}</span></a>
@@ -100,7 +100,7 @@
                     <img class='commentcontainer-userinfo-profilepic' src="${profile_pic}" alt="bilde">
                   </div>
                   <div class="commentcontainer-userinfo-textinfo">
-                    <p>Bruker: <a href="${value.user_fk.url}">${value.user_fk.username}</a></p>
+                    <p><a href="${value.user_fk.url}" id="usernameLink" >${value.user_fk.username}</a></p>
                     <p>${value.created} siden</p>
                     <a href="#" id="answerComment" class="btn btn-warning btn-sm" data-slug="${value.post_fk.slug}" data-id="${value.id}">Svar</a>
                 </div>
@@ -108,6 +108,7 @@
                 <div class="commentcontainer-commentfield">
                   <p>${value.comment}</p>
                 </div>
+
                </div>
               `
             )
