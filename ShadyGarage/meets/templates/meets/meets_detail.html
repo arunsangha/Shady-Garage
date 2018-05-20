@@ -47,7 +47,7 @@
       {% endif %}
     </div>
     <div class="meet-commentcontainer">
-      <h4><a href="{% url 'meets:comment_meet' slug=meet.slug %}">Kommenter</a><h4>
+      <a href="{% url 'meets:comment_meet' slug=meet.slug %}" id="meet-comment-button">Kommenter</a>
 
       {% for comment in meet.meet_comment.all %}
         <div class="commentcontainer-comment">
