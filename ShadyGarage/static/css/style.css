@@ -266,7 +266,18 @@ h1,h2,h3,h4,h5,h6{
   width: 80%;
 
 }
+.meet-list-background{
+  position: absolute;
+  background-image: url('../images/interior.jpeg');
+  background-repeat:no-repeat;
+  background-attachment: fixed;
+}
 
+@media only screen and (max-width: 480px){
+  .meet-list-background{
+    background-image:none;
+  }
+}
 .meet-list-container{
   display: flex;
   flex-wrap: wrap;
@@ -275,7 +286,7 @@ h1,h2,h3,h4,h5,h6{
   width: 90%;
   margin: 50px auto;
 }
-/*background-image: url("../images/burning.jpg");*/
+
 .meet-card-container{
   display: flex;
 
@@ -572,7 +583,9 @@ h1,h2,h3,h4,h5,h6{
 /*
     Post List
 */
-
+#commentModal{
+  top:200px;
+}
 
 .post-list-container{
   display: flex;
