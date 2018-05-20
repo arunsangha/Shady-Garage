@@ -8,22 +8,26 @@
     <div class="meet_detail_title_container">
         <h1>{{ meet.meet_name}}</h1>
     </div>
+    <div class="meet_detail_description_container">
+        <p>{{meet.description}}</p>
+        <p id="location" data-marker="{{meet.marker_image}}">{{meet.location}}</p>
+        <p>{{ meet.date|date:'Y-m-d' }} </p>
+        <p>{{ meet.time}}</p>
+    </div>
+    <div class="meet_detail_map_container">
+      <div id="map"></div>
+      <div class="meet_detail_map_shadow">
+        <div class="container">
+              <img src="{% static 'images/lamborghini-inherit.svg'%}" alt="">
+              <p>Skal på treffet: {{meet.users_joining.count}}</p>
+              <a href="https://www.facebook.com/sharer/sharer.php?u=shadygarage.pythonanywhere.com/{{request.get_full_path}}">
+                <input type="image" src="{% static 'images/facebooklogo.png'%}" class="facebookShare" id="facebookShareMeet"/>
+              </a>
+        </div>
+      </div>
+    </div>
+
     <div class="meet_detail_info_container">
-      <p id="location" data-marker="{{meet.marker_image}}">{{meet.location}}</p>
-      <div class="meet_detail_description_container">
-          <p>{{meet.description}}</p>
-      </div>
-      <div class="meet_detail_time_container">
-        <div class="meet_detail_date_container">
-            <p>{{ meet.date|date:'Y-m-d' }} </p>
-        </div>
-        <div class="meet_detail_hour_container">
-            <p>{{ meet.time}}</p>
-        </div>
-      </div>
-      <div class="meet_detail_interested_container">
-          <p>Skal på treffet: {{meet.users_joining.count}}</p>
-      </div>
       <div class="meet_detail_join_container">
         {% for user in meet.users_joining.all  %}
           {% if request.user == user %}
@@ -31,16 +35,11 @@
           {% endif %}
         {% endfor %}
 
-        <a href="" id="join_button" data-id="{{ meet.pk }}">Jeg vil være med!</a>
-
+        <a href="" id="join_button" class="meet_join_button" data-id="{{ meet.pk }}">Jeg vil være med!</a>
       </div>
-      <a href="https://www.facebook.com/sharer/sharer.php?u=shadygarage.pythonanywhere.com/{{request.get_full_path}}">
-        <input type="image" src="{% static 'images/facebooklogo.png'%}" class="facebookShare" id="facebookShareMeet"/>
-      </a>
+
     </div>
-    <div class="meet_detail_map_container">
-      <div id="map"></div>
-    </div>
+
     <div class="meet-detail-button-container">
       {% if request.user == meet.user_fk %}
         <a href="{% url 'meets:delete_meet' slug=meet.slug%}" class="btn btn-danger">Slett</a>

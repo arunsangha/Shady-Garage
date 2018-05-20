@@ -20,7 +20,7 @@ class MeetManager(models.Manager):
 
 class Meet(models.Model):
     MARKER_CHOICES = (("static/images/e30marker.svg", "BMW E30"), ("static/images/Stance.svg", "Audi A4 B8 Stance"), ("static/images/lamborghini.svg", "Lamborghini Huracan"))
-    CATEGORY_CHOICES = (("static/images/shady.jpg", "ShadyGarage"), ("static/images/stance.jpg", "Stance"),("static/images/classic.jpg", "Classic"), ("static/images/tuner.jpg", "Tuner"), ("static/images/mc.jpg", "MC"), ("static/images/offroad.jpg", "Offroad"))
+    CATEGORY_CHOICES = (("static/images/logomidlertidig.png", "ShadyGarage"), ("static/images/meet_card/Stance-Car.jpg", "Stance"),("static/images/meet_card/Classic-Car.jpg", "Classic"), ("static/images/meet_card/Tuner-Car.jpg", "Tuner"), ("static/images/meet_card/Mc.jpg", "MC"), ("static/images/meet_card/Offroad-Car.jpg", "Offroad"))
     user_fk = models.ForeignKey(auth.models.User, related_name="meets_user_fk")
     meet_name = models.CharField(max_length = 255, unique = True)
     category = models.CharField(choices=CATEGORY_CHOICES, default="static/images/burning.jpg", max_length=255)

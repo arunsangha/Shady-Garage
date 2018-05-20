@@ -16,7 +16,6 @@ class CreateMeetForm(forms.ModelForm):
         self.fields['date'].widget = widgets.SelectDateWidget()
         self.fields['date'].initial = datetime.date.today()
         self.fields['date'].label = "Dato"
-        self.fields['time'].widget = widgets.SelectDateWidget()
         self.fields['time'].label = "Treffet starter..."
         self.fields['description'].label = "Beskrivelse av treffet:"
         self.fields['location'].label = "Adresse:"

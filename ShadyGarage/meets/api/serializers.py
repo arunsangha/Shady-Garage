@@ -21,6 +21,7 @@ class MeetsModelSerializer(serializers.ModelSerializer):
             'time',
             'description',
             'meet_image',
+            'category',
             'joining',
             'day',
             'url',
