@@ -601,6 +601,17 @@ h1,h2,h3,h4,h5,h6{
 */
 #commentModal{
   top:200px;
+  background-image: url('../../static/images/Gorilla-logo.png');
+  background-repeat: no-repeat;
+  background-size: 20%;
+  background-position: bottom;
+}
+
+@media only screen and(max-width:480px){
+  #commentModal{
+    top:200px;
+    background-size: 80% 60%;
+  }
 }
 
 .post-list-container{
@@ -767,6 +778,45 @@ h1,h2,h3,h4,h5,h6{
 }
 
 
+
+.modal-header {
+    color:#fff;
+    padding:9px 15px;
+    border-bottom:1px solid #eee;
+    background-color: var(--main-dark-color);
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+     border-top-left-radius: 5px;
+     border-top-right-radius: 5px;
+}
+/*.modal-body{
+  background: linear-gradient(var(--main-dark-color), var(--button-color), var(--button-color));
+  color:white;
+}
+*/
+/*.modal-footer{
+  background-image: url('../../../static/images/Gorilla-logo.png');
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: contain;
+}*/
+#exampleModalCenter{
+  background-image: url('../../static/images/Gorilla-logo.png');
+  background-repeat: no-repeat;
+  background-size: 20%;
+  background-position: bottom;
+}
+.user-id a{
+  color:black;
+  font-family:'nosifer';
+  font-size:15px;
+}
+
+.user-id a:hover{
+  color:var(--button-color);
+}
 #sharePost{
     margin-top: 20px;
     margin-bottom: 20px;
