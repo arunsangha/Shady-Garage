@@ -670,6 +670,11 @@ h1,h2,h3,h4,h5,h6{
 
 }
 
+#postImageFeed{
+  width:100%;
+  height:100%
+}
+
 /*
     Post Detail
 */
@@ -677,76 +682,113 @@ h1,h2,h3,h4,h5,h6{
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: var(--main-light-color);
-  padding: 30px 0 30px 0;
+  background: linear-gradient(var(--main-dark-color), var(--main-light-color), var(--button-color));
+  padding: 30px 0px 30px 0px;
+  
 }
 
-.post-detail-username{
+.post-detail-top-text{
   display: inline-block;
-  text-align: center;
-  font-family: 'nosifer';
+  text-align: left;
   word-wrap: break-word;
   word-break: break-all;
-  width: 80%;
+  width: 60%;
 }
 
-.post-detail-username a h2{
+.post-detail-owner-buttons{
+  position: absolute;
+  display: block;
+}
+.post-detail-top-text a h2{
   color: white;
   word-break: break-all;
   word-wrap: break-word;
+  font-family: 'nosifer';
+}
+
+.post-detail-post-title{
+  color:white;
+  font-family: 'offside';
+  font-size: 20px;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+.post-detail-post-comment{
+  font-size:15px;
+  color:white;
+  font-family: 'offside';
+  font-style: italic;
+}
+
+.post-detail-top-text a h2:hover{
+  color: var(--button-color);
 }
 
 .post-container{
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 5px 5px 5px 5px rgba(0,0,0,0.3);
-  width: 80%;
-  background-color: var(--main-dark-color);
+  width: 70%;
   color: white;
   margin: 0 0 20px 0;
 }
 
-.post-detail-post-title{
-  padding: 10px 0;
-  word-wrap: break-word;
-  word-break: break-all;
+@media only screen and (max-width:480px){
+  .post-detail-top-text{
+    text-align: center;
+  }
+  .post-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    background-color: var(--main-dark-color);
+    color: white;
+    margin: 0 0 2px 0;
+  }
+
 }
 
-.post-detail-post-comment{
-  width: 100%;
-  text-align: center;
-  padding: 20px 0;
-  word-break: break-all;
-}
 
 #sharePost{
     margin-top: 20px;
     margin-bottom: 20px;
 }
 
-#postImageFeed{
-  width:100%;
-  height:100%
-}
 
 .post-detail-comment-button{
-  background-color: var(--button-color);
   width: 120px;
   margin: 30px 0;
   text-align: center;
   color: white;
-  border-radius: 3px;
+  border-radius: 20px;
+  border: 2px solid #00f9ff;
   padding: 5px;
 }
 
-#post-detail-username:hover{
-  color: #5bc0de;
+.post-detail-comment-button:hover{
+  background-color: #00f9ff;
+  color:white;
+}
+
+.post-detail-like-button{
+  width: 120px;
+  text-align: center;
+  color: white;
+  border-radius: 20px;
+  border: 2px solid #FFFF00;
+  padding: 5px;
+}
+
+.post-detail-like-button:hover{
+  background-color:#FFFF00;
+  color:black;
 }
 
 .post-detail-image{
-  height: 50%;
-  width: 50%;
+  height: 100%;
+  width: 100%;
 }
 /*
 -----------------------------------------------------

@@ -71,7 +71,7 @@ class PostCommentDeleteView(DeleteView):
 
 class PostUpdateView(LoginRequiredMixin, UpdateView):
     queryset = models.Post.objects.all()
-    form_class = forms.PostForm
+    form_class = forms.PostUpdate
     template_name = "posts/post_update.html"
 
     def form_valid(self, form):

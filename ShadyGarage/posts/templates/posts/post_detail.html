@@ -6,16 +6,23 @@
 {% include "posts/comment-modal.html" %}
 {% include "posts/comment-replys-modal.html" %}
   <div class="post-detail-container">
-    <div class="post-detail-username">
+    <div class="post-detail-top-text">
       <a href="{% url 'accounts:profile_page_pk' pk=post.user_fk.pk%}"><h2> {{post.user_fk.username}} </h2></a>
-    </div>
-    <div class="post-container">
       <h2 class="post-detail-post-title" id="sluuug" data-sluug="{{post.slug}}"> {{ post.post_title}} </h2>
+      <p class="post-detail-post-comment"> "{{ post.post_description}}" </p>
+      {% if request.user == post.user_fk %}
+      <div class="post-detail-owner-buttons">
+        <a href="{% url 'posts:post_delete' slug=post.slug %} " class="btn btn-danger">Slett post!</a>
+        <a href="{% url 'posts:post_update' slug=post.slug %}" class="btn btn-info">Oppdater post!</a>
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="post-container">
       {% if post.post_image %}
       <img src="{{post.post_image.url}}" alt="" class="post-detail-image">
       {% endif %}
-      <p class="post-detail-post-comment"> {{ post.post_description}} </p>
-      <p> {{post.post_created|timesince}}</p>
+      <p id="post-detail-timesince"> For {{post.post_created|timesince}}</p>
         <!--
           //TODO:!LANSERING! Bytte ut u=www.shadygarage.pythonanywhere.com/{{request.get_full_path}}" med  u=www.shadygarage.com/{{request.get_full_path}}
         -->
@@ -23,11 +30,7 @@
         <input type="image" src="{% static 'images/facebooklogo.png'%}" class="facebookShare" id="facebookSharePost"/>
       </a>
     </div>
-    {% if request.user == post.user_fk %}
-      <a href="{% url 'posts:post_delete' slug=post.slug %} " class="btn btn-danger">Slett post!</a>
-      <a href="{% url 'posts:post_update' slug=post.slug %}" class="btn btn-info">Oppdater post!</a>
-    {% endif %}
-
+    <a class="post-detail-like-button" href="" data-id="{{post.id}}">Like </a>
     <a class="post-detail-comment-button" href="{% url 'posts:post_comment' slug=post.slug%}">Kommenter</a>
     <div class="post-commentcontainer">
 
@@ -182,7 +185,31 @@
         }
 
       })
+
+
     });
+
+    $(document.body).on("click", ".post-detail-like-button", function(e){
+      e.preventDefault()
+      var this_ = $(this)
+      var postId = this_.attr("data-id")
+      var likeUrl = "../../../api/posts/like/" + postId + "/"
+      $.ajax({
+        method: 'GET',
+        url: likeUrl,
+        success:function(data){
+          if(data.liked){
+            this_.text("Liker")
+          }else{
+            this_.text("Unlike")
+          }
+        },error:function(data){
+          console.log("ERROR: in liking post-detail")
+        }
+
+      })
+
+    })
 
 
 
