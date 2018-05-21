@@ -705,6 +705,11 @@ h1,h2,h3,h4,h5,h6{
 /*
     Post Detail
 */
+
+.c-comment{
+  width: 50%;
+  height: 40%;
+}
 .post-detail-container{
   display: flex;
   flex-direction: column;
@@ -773,6 +778,11 @@ h1,h2,h3,h4,h5,h6{
     background-color: var(--main-dark-color);
     color: white;
     margin: 0 0 2px 0;
+  }
+
+  .c-comment{
+    width: 80%;
+    height: 50%;
   }
 
 }
