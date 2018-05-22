@@ -39,7 +39,6 @@ class PostForm(LoginRequiredMixin, CreateView):
         post_form = form.save(commit = False)
         post_form.user_fk = self.request.user
         post_form.save()
-
         return HttpResponseRedirect(reverse("posts:posts_feed"))
 
 class PostDeleteView(DeleteView):

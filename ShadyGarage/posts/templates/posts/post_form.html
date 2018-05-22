@@ -13,16 +13,17 @@
       {% bootstrap_form form %}
       <input type="submit" class="btn btn-info btn-lg" onClick="loadingScreenShow()" value="Publiser!">
     </form>
+    <button onClick="loadingScreenShow()">Test</button>
   </div>
 {% endblock %}
 {% block script %}
 <script>
   function loadingScreenHide(){
-    $(document).getElementById('loadingScreen').style.display = 'None';
+    document.getElementById('loadingScreen').style.display = 'None';
   }
 
   function loadingScreenShow(){
-    $(document).getElementById('loadingScreen').style.display = "block";
+    document.getElementById('loadingScreen').style.display = "block";
   }
 </script>
 
