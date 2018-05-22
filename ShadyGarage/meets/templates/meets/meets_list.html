@@ -2,9 +2,9 @@
 {% load staticfiles %}
 {% block title %} Shady Meets {% endblock %}
 {% block body %}
-<div class="meet-list-background">
-{% if user.is_authenticated %}
 
+{% if user.is_authenticated %}
+<div class="meet-list-background">
 
   <div class="meet-search-container">
     <a class="btn btn-info btn-custom" href="{%url 'meets:create_meet'%}" role="button">Opprett treff! </a>
