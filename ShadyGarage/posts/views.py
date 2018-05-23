@@ -3,9 +3,11 @@ from . import models
 from . import forms
 from django.views.generic import (ListView, CreateView, DetailView,
                 RedirectView, DeleteView, UpdateView, TemplateView)
+from django.views import View
 from django.core.urlresolvers import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
+
 # Create your views here.
 
 
@@ -31,15 +33,12 @@ class PostDetail(LoginRequiredMixin, DetailView):
     model = models.Post
     template_name = 'posts/post_detail.html'
 
-class PostForm(LoginRequiredMixin, CreateView):
-    form_class = forms.PostForm
-    template_name = 'posts/post_form.html'
+class PostForm(LoginRequiredMixin, View):
 
-    def form_valid(self, form):
-        post_form = form.save(commit = False)
-        post_form.user_fk = self.request.user
-        post_form.save()
-        return HttpResponseRedirect(reverse("posts:posts_feed"))
+    def get(self, request):
+         return render(self.request, 'posts/post_form.html', {'form':forms.PostForm})
+
+
 
 class PostDeleteView(DeleteView):
     model = models.Post

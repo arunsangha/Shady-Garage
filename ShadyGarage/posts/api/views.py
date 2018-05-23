@@ -9,7 +9,8 @@ from .serializers import (PostModelSerializer,
                         NotificationSerializer,
                         NotificationSeenSerializer,
                         PostCommentReplySerializer,
-                        PostCommentReplyDetailSerializer)
+                        PostCommentReplyDetailSerializer,
+                        PostCreateSerializer)
 from django.db.models import Q
 from .pagination import StandardResultsPagination, ProfilePostResultsPagination
 from rest_framework.views import APIView
@@ -46,7 +47,7 @@ class LikeToggleAPIView(APIView):
         return Response({'liked':is_liked})
 
 class PostCreateAPIView(generics.CreateAPIView):
-    serializer_class = PostModelSerializer
+    serializer_class = PostCreateSerializer
     permission_classes = [permissions.IsAuthenticated]
     def perform_create(self, serializer):
         serializer.save(user_fk=self.request.user)
