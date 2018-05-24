@@ -3,14 +3,14 @@
 {% block title %}ShadyGarage{% endblock %}
 {% block body %}
 <!--NB: Dette må være med pga linear background er kun et bilde som blir lagt inn-->
+{% if user.is_authenticated %}
+{% include "posts/comment-modal.html" %}
 <style>
   body{
     background-color: var(--button-color);
   }
 </style>
 <div class="linear-gradient-background">
-{% include "posts/comment-modal.html" %}
-{% if user.is_authenticated %}
   <div class="post-search-container" align="center">
     <form action="{% url 'posts:posts_feed' %}" method="action">
       <input type="text" name="q" placeholder="Søk">
@@ -25,9 +25,9 @@
     <a href="#" id="loadMore" class="yellow-button-outline">Flere posts</a>
   </div>
 
-
+</div>
 {% else %}
-<div class="container" >
+<div class="container">
   <div class="jumbotron">
     <h1>Ops, ser ut som du ikke er logget inn!</h1>
     <p class="lead">Logg inn eller registrer deg for å se treff i nærheten av deg!</p>
@@ -40,7 +40,7 @@
   </div>
 </div>
 {% endif %}
-</div>
+
 {% endblock %}
 {% block script %}
 {% if user.is_authenticated %}
