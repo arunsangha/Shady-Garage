@@ -3,6 +3,12 @@
 {% block title %}Shady: {{post.post_title}} {% endblock %}
 
 {% block body %}
+<!--NB: Dette må være med pga linear background er kun et bilde som blir lagt inn-->
+<style>
+  body{
+    background-color: var(--button-color);
+  }
+</style>
 {% include "posts/comment-modal.html" %}
 {% include "posts/comment-replys-modal.html" %}
   <div class="post-detail-container">

@@ -4,8 +4,8 @@
   <div class="jumbotron">
     <form method="post">
       {% csrf_token %}
-      {% if object.post_image %}<img src="{{object.post_image.url}}" width="30%" heigth="30%">{% endif %}
-      <h1 class="display-4"><span class="badge badge-warning">{{object.post_title}}</span></h1>
+      {% if object.post_image %}<img src="{{object.thumbnail.url}}" width="30%" heigth="30%">{% endif %}
+      <h3 class="display-4"><span class="badge badge-warning">{{object.post_title}}</span></h3>
       {% if object.post_description %}<h6 class="display-5"><span class="badge badge-warning">
         {{object.post_description}}</span></h6>{% endif %}
       <p class="lead">Sikker på at du vil slette posten?</p>

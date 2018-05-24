@@ -3,6 +3,13 @@
 {% load bootstrap3 %}
 {% block title %} Shady Post{% endblock %}
 {% block body %}
+<!--NB: Dette må være med pga linear background er kun et bilde som blir lagt inn-->
+<style>
+  body{
+    background-color: var(--button-color);
+  }
+</style>
+<div class="linear-gradient-background">
 <div id="loading-screen" style="display:none;">
   <img src="{% static 'images/loading-screen.gif'%}" alt="" id="loading-screen-image">
 </div>
@@ -10,10 +17,11 @@
     <form method="post" id="myform">
         {% csrf_token %}
         {% bootstrap_form form%}
-        <input type="submit" name="" class="btn btn-info" value="Del!">
+        <input type="submit" name="" class="yellow-button-outline" value="Del!">
     </form>
 
   </div>
+</div>
 {% endblock %}
 {% block script %}
 <script>
@@ -23,7 +31,7 @@ $('#myform').submit(function(event) {
         var formData = new FormData($('form')[0]);
         formData.append('csrfmiddlewaretoken', '{{ csrf_token }}');
 
-        
+
 
         $('#loading-screen').show();
         $.ajax({

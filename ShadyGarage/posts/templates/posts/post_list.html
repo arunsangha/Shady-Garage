@@ -2,6 +2,13 @@
 {% load staticfiles %}
 {% block title %}ShadyGarage{% endblock %}
 {% block body %}
+<!--NB: Dette må være med pga linear background er kun et bilde som blir lagt inn-->
+<style>
+  body{
+    background-color: var(--button-color);
+  }
+</style>
+<div class="linear-gradient-background">
 {% include "posts/comment-modal.html" %}
 {% if user.is_authenticated %}
   <div class="post-search-container" align="center">
@@ -15,7 +22,7 @@
   </div>
   <div class="post-list-container">
     <div id="fraAjax"></div>
-    <a href="#" id="loadMore" class="btn btn-info">Flere posts</a>
+    <a href="#" id="loadMore" class="yellow-button-outline">Flere posts</a>
   </div>
 
 
@@ -33,6 +40,7 @@
   </div>
 </div>
 {% endif %}
+</div>
 {% endblock %}
 {% block script %}
 {% if user.is_authenticated %}

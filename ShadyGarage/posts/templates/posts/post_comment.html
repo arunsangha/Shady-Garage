@@ -1,12 +1,20 @@
 {% extends "base.html" %}
 {% load bootstrap3 %}
 {% block body %}
-<div class="container c-comment">
-  <form method="post">
-    <h3>Kommentar</h3>
-    {% csrf_token %}
-    {% bootstrap_form form%}
-    <input type="submit" class="btn btn-info" value="Kommenter">
-  </form>
+
+<style>
+  body{
+    background-color: var(--button-color);
+  }
+</style>
+<div class="linear-gradient-background">
+  <div class="container c-comment">
+    <form method="post">
+      <h3>Kommentar</h3>
+      {% csrf_token %}
+      {% bootstrap_form form%}
+      <input type="submit" class="yellow-button-outline" value="Kommenter">
+    </form>
+  </div>
 </div>
 {% endblock %}

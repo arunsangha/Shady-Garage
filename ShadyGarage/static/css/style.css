@@ -6,6 +6,7 @@
   --button-color: #17a2b8;
   --main-dark-color: #2E2E2E;
   --main-light-color: #3f474f;
+  --main-yellow-color: #FFFF00;
 }
 
 
@@ -62,14 +63,14 @@ h1,h2,h3,h4,h5,h6{
     width: 120px;
     color: white;
     border-radius: 20px;
-    border: 2px solid #FFFF00;
+    border: 2px solid var(--main-yellow-color);
     padding: 5px;
     background-color: Transparent;
     text-align: center;
 }
 
 .yellow-button-outline:hover{
-  background-color: #FFFF00;
+  background-color: var(--main-yellow-color);
   color:black;
 }
 
@@ -551,7 +552,7 @@ h1,h2,h3,h4,h5,h6{
 }
 
 #meet-comment-button{
-  background-color: #FFFF00;
+  background-color: var(--main-yellow-color);
   border:none;
   color:black;
   padding:15px 32px;
@@ -672,6 +673,13 @@ h1,h2,h3,h4,h5,h6{
 .post-list-card-title a{
   word-wrap: break-word;
   word-break: break-all;
+  color:white;
+}
+
+.post-list-card-title a:hover{
+  word-wrap: break-word;
+  word-break: break-all;
+  color: var(--button-color);
 }
 
 .post-list-card-body{
@@ -874,12 +882,12 @@ h1,h2,h3,h4,h5,h6{
   text-align: center;
   color: white;
   border-radius: 20px;
-  border: 2px solid #FFFF00;
+  border: 2px solid var(--main-yellow-color);
   padding: 5px;
 }
 
 .post-detail-like-button:hover{
-  background-color:#FFFF00;
+  background-color:var(--main-yellow-color);
   color:black;
 }
 
@@ -909,7 +917,7 @@ h1,h2,h3,h4,h5,h6{
 
 /* post-delete */
 .gif{
-  width: 95%;
+  width: 94%;
 }
 /*
 -----------------------------------------------------
@@ -1149,7 +1157,7 @@ h1,h2,h3,h4,h5,h6{
   min-height: 150px;
   color: white;
   border-radius: 100px;
-  border: 2px solid #FFFF00;
+  border: 2px solid var(--main-yellow-color);
   background: linear-gradient(#000000, #606060);
 }
 
