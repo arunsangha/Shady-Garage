@@ -3,21 +3,29 @@
 {% load bootstrap3 %}
 {% block title %} Shady Post{% endblock %}
 {% block body %}
+<div id="loading-screen" style="display:none;">
+  <img src="{% static 'images/loading-screen.gif'%}" alt="" id="loading-screen-image">
+</div>
   <div class="container">
     <form method="post" id="myform">
         {% csrf_token %}
         {% bootstrap_form form%}
+        <input type="submit" name="" class="btn btn-info" value="Del!">
     </form>
-    <button id="submit-image"> Upload Image </button>
+
   </div>
 {% endblock %}
 {% block script %}
 <script>
-$('#submit-image').click(function() {
+$('#myform').submit(function(event) {
+        event.preventDefault();
         var formData = new FormData();
         var formData = new FormData($('form')[0]);
         formData.append('csrfmiddlewaretoken', '{{ csrf_token }}');
-        console.log(formData)
+
+        
+
+        $('#loading-screen').show();
         $.ajax({
                 url: '../../api/posts/create_post/',
                 method: 'POST',
@@ -25,7 +33,8 @@ $('#submit-image').click(function() {
                 processData: false,
                 contentType: false,
                 success: function(data, textStatus, jqXHR) {
-                        alert('Success');
+                        $('#loading-screen').hide();
+                        window.location.replace('/posts/post_feed');
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                       alert('error');

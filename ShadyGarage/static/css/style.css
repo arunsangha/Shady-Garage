@@ -1,11 +1,7 @@
 /*
 
 */
-.rotate-gorilla {
-  -webkit-transform: rotate(360deg);
-          transform: rotate(360deg);
-	transition-duration: 5s;
-}
+
 :root{
   --button-color: #17a2b8;
   --main-dark-color: #2E2E2E;
@@ -871,10 +867,9 @@ h1,h2,h3,h4,h5,h6{
   width: 100%;
 }
 
-/*Post-detail*/
-#loadingScreen{
-    position: fixed;
-    display: none;
+/*Post-form*/
+#loading-screen{
+    position: absolute;
     width: 100%;
     height: 100%;
     top: 0;
@@ -884,6 +879,10 @@ h1,h2,h3,h4,h5,h6{
     background-color: rgba(0,0,0,0.5);
     z-index: 2;
     cursor: pointer;
+}
+#loading-screen-image{
+  width: 100%;
+  height: 100%;
 }
 /*
 -----------------------------------------------------
