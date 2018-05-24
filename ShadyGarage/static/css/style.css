@@ -43,7 +43,6 @@ h1,h2,h3,h4,h5,h6{
 }
 
 
-
 @media only screen and (max-width: 480px){
   h2 a{
     font-size: 24px;
@@ -57,6 +56,28 @@ h1,h2,h3,h4,h5,h6{
 .facebookShare{
   width: 40px;
   height: 40px;
+}
+
+.yellow-button-outline{
+    width: 120px;
+    color: white;
+    border-radius: 20px;
+    border: 2px solid #FFFF00;
+    padding: 5px;
+    background-color: Transparent;
+    text-align: center;
+}
+
+.yellow-button-outline:hover{
+  background-color: #FFFF00;
+  color:black;
+}
+
+.linear-gradient-background{
+  background: linear-gradient(var(--main-dark-color), var(--button-color), var(--button-color));
+  color:white;
+  width: 100%;
+  height: 100%;
 }
 
 
@@ -672,7 +693,7 @@ h1,h2,h3,h4,h5,h6{
 }
 
 .post-search-container{
-  margin: 20px 0;
+  margin-top: 20px 0;
 }
 
 #loadMore{
@@ -868,6 +889,7 @@ h1,h2,h3,h4,h5,h6{
 }
 
 /*Post-form*/
+
 #loading-screen{
     position: absolute;
     width: 100%;
@@ -883,6 +905,11 @@ h1,h2,h3,h4,h5,h6{
 #loading-screen-image{
   width: 100%;
   height: 100%;
+}
+
+/* post-delete */
+.gif{
+  width: 95%;
 }
 /*
 -----------------------------------------------------
@@ -1242,7 +1269,7 @@ h1,h2,h3,h4,h5,h6{
 
 .form-container{
   display: block;
-  width: 60%;
+  width: 80%;
   margin: 0 auto;
 }
 
@@ -1251,9 +1278,13 @@ h1,h2,h3,h4,h5,h6{
   color: white; /*#34495e*/
   border-radius: 20px;
   padding: 30px;
-  width: 55%;
+  width: 60%;
 }
-
+@media (min-width:1080px) {
+  .signup-form-container{
+    width:45%;
+  }
+}
 #registrer-deg-h1{
     color: orange;
 }
@@ -1291,6 +1322,7 @@ h1,h2,h3,h4,h5,h6{
   position: relative;
   left: 15px;
 }
+
 
 
 #map{
