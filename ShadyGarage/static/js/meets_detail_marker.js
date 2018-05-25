@@ -10,9 +10,9 @@ function initMap() {
        if(status === google.maps.GeocoderStatus.OK){
            map.setCenter(results[0].geometry.location);
            placeid = results[0].place_id;
-           contentString = '<div id="content">'+
-                   '<a href="https://www.google.com/maps/place/?q=place_id:' + placeid +'"target="_blank" class="btn btn-info">Ta meg hit</a></div>';
 
+           contentString = '<div id="content">'+
+                   '<a href="#" onclick="mapSelector(event)" data-placeid="' + placeid +'" class="btn btn-info" id="navigationButton">Ta meg hit</a></div>';
 
 
            marker = new google.maps.Marker({
@@ -191,4 +191,19 @@ function initMap() {
 ]
      });
 
-   }
+}
+
+
+function mapSelector(e){
+  e.preventDefault();
+  var placeid = document.getElementById("navigationButton").getAttribute("data-placeid");
+  console.log(placeid);
+  var url = "";
+  /* if we're on iOS, open in Apple Maps */
+  if ((navigator.platform.indexOf("iPhone") != -1) || (navigator.platform.indexOf("iPad") != -1) || (navigator.platform.indexOf("iPod") != -1)){
+      url = "maps://maps.google.com/maps/place/?q=place_id:" + placeid;
+  } else{
+      url = "https://www.google.com/maps/place/?q=place_id:" + placeid;
+  } 
+    window.open(url);
+}
