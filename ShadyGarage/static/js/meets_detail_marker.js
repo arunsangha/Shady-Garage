@@ -1,7 +1,8 @@
-function initMap() {
+function initMap(){
      var geocoder = new google.maps.Geocoder();
      var location = document.getElementById('location').textContent;
      var markerIcon = document.getElementById("location").getAttribute("data-marker")
+     console.log(markerIcon);
      var oslo = {lat: 59.913, lng: 10.752};
      var directionsService = new google.maps.DirectionsService();
      var directionsDisplay = new google.maps.DirectionsRenderer();
@@ -10,9 +11,11 @@ function initMap() {
        if(status === google.maps.GeocoderStatus.OK){
            map.setCenter(results[0].geometry.location);
            placeid = results[0].place_id;
+           lat = results[0].geometry.location.lat();
+           long = results[0].geometry.location.lng();
 
            contentString = '<div id="content">'+
-                   '<a href="#" onclick="mapSelector(event)" data-placeid="' + placeid +'" class="btn btn-info" id="navigationButton">Ta meg hit</a></div>';
+                   '<a href="#" onclick="mapSelector(event)" data-placeid="' + placeid +'" data-lat="' + lat + '" data-long="'+ long+'"class="btn btn-info" id="navigationButton">Ta meg hit</a></div>';
 
 
            marker = new google.maps.Marker({
@@ -197,13 +200,15 @@ function initMap() {
 function mapSelector(e){
   e.preventDefault();
   var placeid = document.getElementById("navigationButton").getAttribute("data-placeid");
+  var lat = document.getElementById("navigationButton").getAttribute("data-lat");
+  var long = document.getElementById("navigationButton").getAttribute("data-long");
   console.log(placeid);
   var url = "";
   /* if we're on iOS, open in Apple Maps */
   if ((navigator.platform.indexOf("iPhone") != -1) || (navigator.platform.indexOf("iPad") != -1) || (navigator.platform.indexOf("iPod") != -1)){
-      url = "maps://maps.google.com/maps/place/?q=place_id:" + placeid;
+      url = "http://maps.apple.com/?ll=" + lat + "," + long;
   } else{
       url = "https://www.google.com/maps/place/?q=place_id:" + placeid;
-  } 
+  }
     window.open(url);
 }

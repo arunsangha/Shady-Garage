@@ -19,7 +19,7 @@ class MeetManager(models.Manager):
         return is_joining
 
 class Meet(models.Model):
-    MARKER_CHOICES = (("static/images/e30marker.svg", "BMW E30"), ("static/images/Stance.svg", "Audi A4 B8 Stance"), ("static/images/lamborghini.svg", "Lamborghini Huracan"))
+    MARKER_CHOICES = (("static/images/markers/Ford_Mustang_Icon.svg", "Ford Mustang 69"), ("static/images/markers/Yahmaha_R1_Icon.svg", "Yahmaha R1"), ("static/images/markers/Jeep_Wrangler_Icon.svg", "Jeep Wrangler"),("static/images/markers/e30marker.svg", "BMW E30"), ("static/images/markers/Stance.svg", "Audi A4 B8 Stance"), ("static/images/markers/lamborghini.svg", "Lamborghini Huracan"))
     CATEGORY_CHOICES = (("static/images/logomidlertidig.png", "ShadyGarage"), ("static/images/meet_card/Stance-Car.jpg", "Stance"),("static/images/meet_card/Classic-Car.jpg", "Classic"), ("static/images/meet_card/Tuner-Car.jpg", "Tuner"), ("static/images/meet_card/Mc.jpg", "MC"), ("static/images/meet_card/Offroad-Car.jpg", "Offroad"))
     user_fk = models.ForeignKey(auth.models.User, related_name="meets_user_fk")
     meet_name = models.CharField(max_length = 255, unique = True)
