@@ -36,7 +36,8 @@
         <input type="image" src="{% static 'images/facebooklogo.png'%}" class="facebookShare" id="facebookSharePost"/>
       </a>
     </div>
-    <a class="post-detail-like-button" href="" data-id="{{post.id}}">Like </a>
+    <a class="post-detail-like-button" href="" data-id="{{post.id}}">
+      {% if request.user in post.post_likes.all %} Likt {% else %} Like!{% endif %}</a>
     <a class="post-detail-comment-button" href="{% url 'posts:post_comment' slug=post.slug%}">Kommenter</a>
     <div class="post-commentcontainer">
 
