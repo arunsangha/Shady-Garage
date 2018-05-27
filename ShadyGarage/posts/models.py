@@ -68,12 +68,7 @@ class Post(models.Model):
 
         # Open original photo which we want to thumbnail using PIL's Image
          image = Image.open(BytesIO(self.post_image.read()))
-        # Save exif tags from orignal image
-         print("--------")
-         print(image._getexif())
-         print("--------")
-         print("--------")
-         print("--------")
+
 
 
          image.thumbnail(THUMBNAIL_SIZE, Image.ANTIALIAS)
@@ -81,12 +76,14 @@ class Post(models.Model):
         # Save the thumbnail
          temp_handle = BytesIO()
 
-         exif_dict = image._getexif()
-         if exif_dict:
+         # Save exif tags from orignal image
+         try:
+             exif_dict = piexif.load(image._getexif())
              exif_bytes = piexif.dump(exif_dict)
              image.save(temp_handle, PIL_TYPE, exif=exif_bytes)
-         else:
+         except(AttributeError, KeyError, TypeError):
              image.save(temp_handle, PIL_TYPE)
+
          temp_handle.seek(0)
 
         # Save image to a SimpleUploadedFile which can be saved into
