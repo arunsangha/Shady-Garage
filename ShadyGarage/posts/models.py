@@ -160,7 +160,8 @@ class Notification(models.Model):
         ordering = ['-created']
 
 from PIL import Image, ExifTags
-def rotate_image(filepath):
+def rotate_image(filepath, thumbnail_filepath):
+  rotation = 0
   try:
     image = Image.open(filepath)
     for orientation in ExifTags.TAGS.keys():
@@ -170,12 +171,21 @@ def rotate_image(filepath):
 
     if exif[orientation] == 3:
         image = image.rotate(180, expand=True)
+        rotation = 180
     elif exif[orientation] == 6:
         image = image.rotate(270, expand=True)
+        rotation = 270
     elif exif[orientation] == 8:
         image = image.rotate(90, expand=True)
+        rotation = 90
     image.save(filepath)
     image.close()
+
+    image = image.open(thumbnail_filepath)
+    image = image.rotate(rotation, expand=True)
+    image.save(thumbnail_filepath)
+    image.close()
+    rotation = 0
   except (AttributeError, KeyError, IndexError):
     # cases: image don't have getexif
     pass
@@ -183,15 +193,10 @@ def rotate_image(filepath):
 @receiver(post_save, sender=Post, dispatch_uid="update_image_profile")
 def update_image(sender, instance, **kwargs):
   if instance.post_image:
-      if instance.thumbnail:
-          BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-          fullpath = BASE_DIR + instance.post_image.url
-          fullpath_thumbnail = BASE_DIR + instance.thumbnail.url
-          rotate_image(fullpath)
-          rotate_image(fullpath_thumbnail)
-
-
-
+      BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+      fullpath = BASE_DIR + instance.post_image.url
+      fullpath_thumbnail = BASE_DIR + instance.thumbnail.url
+      rotate_image(fullpath, fullpath_thumbnail)
 
 @receiver(post_save, sender=PostComment)
 def create_notification(sender, instance, **kwargs):
