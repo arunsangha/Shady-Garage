@@ -76,12 +76,8 @@ class Post(models.Model):
         # Save the thumbnail
          temp_handle = BytesIO()
 
-         # Save exif tags from orignal image
-         try:
-             exif_dict=dict(image._getexif().items())
-             image.save(temp_handle, PIL_TYPE, exif=exif_dict)
-         except(AttributeError, KeyError, TypeError):
-             image.save(temp_handle, PIL_TYPE)
+
+         image.save(temp_handle, PIL_TYPE)
 
          temp_handle.seek(0)
 

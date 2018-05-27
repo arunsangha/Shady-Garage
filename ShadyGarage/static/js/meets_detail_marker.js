@@ -15,7 +15,7 @@ function initMap(){
            long = results[0].geometry.location.lng();
 
            contentString = '<div id="content">'+
-                   '<a href="#" onclick="mapSelector(event)" data-placeid="' + placeid +'" data-lat="' + lat + '" data-long="'+ long+'"class="btn btn-info" id="navigationButton">Ta meg hit</a></div>';
+                   '<a href="#" onclick="mapSelector(event)" data-location="' + location + '"data-placeid="' + placeid +'" data-lat="' + lat + '" data-long="'+ long+'"class="btn btn-info" id="navigationButton">Ta meg hit</a></div>';
 
 
            marker = new google.maps.Marker({
@@ -202,11 +202,12 @@ function mapSelector(e){
   var placeid = document.getElementById("navigationButton").getAttribute("data-placeid");
   var lat = document.getElementById("navigationButton").getAttribute("data-lat");
   var long = document.getElementById("navigationButton").getAttribute("data-long");
+  var location = document.getElementById("navigationButton").getAttribute("data-location");
   console.log(placeid);
   var url = "";
   /* if we're on iOS, open in Apple Maps */
   if ((navigator.platform.indexOf("iPhone") != -1) || (navigator.platform.indexOf("iPad") != -1) || (navigator.platform.indexOf("iPod") != -1)){
-      url = "http://maps.apple.com/?ll=" + lat + "," + long;
+      url = "comgooglemaps://?q=" + location;
   } else{
       url = "https://www.google.com/maps/place/?q=place_id:" + placeid;
   }
