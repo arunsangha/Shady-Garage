@@ -78,9 +78,8 @@ class Post(models.Model):
 
          # Save exif tags from orignal image
          try:
-             exif_dict = piexif.load(image._getexif())
-             exif_bytes = piexif.dump(exif_dict)
-             image.save(temp_handle, PIL_TYPE, exif=exif_bytes)
+             exif_dict=dict(image._getexif().items())
+             image.save(temp_handle, PIL_TYPE, exif=exif_dict)
          except(AttributeError, KeyError, TypeError):
              image.save(temp_handle, PIL_TYPE)
 
@@ -190,6 +189,7 @@ def update_image(sender, instance, **kwargs):
           fullpath_thumbnail = BASE_DIR + instance.thumbnail.url
           rotate_image(fullpath)
           rotate_image(fullpath_thumbnail)
+
 
 
 
