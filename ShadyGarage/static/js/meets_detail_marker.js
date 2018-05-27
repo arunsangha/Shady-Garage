@@ -208,7 +208,10 @@ function mapSelector(e){
   /* if we're on iOS, open in Apple Maps */
   if ((navigator.platform.indexOf("iPhone") != -1) || (navigator.platform.indexOf("iPad") != -1) || (navigator.platform.indexOf("iPod") != -1)){
       url = "comgooglemaps://?q=" + location;
-  } else{
+  } else if((navigator.platform.indexOf("Android") != -1)){
+      url = "geo://0,0?q=" + location;
+  }
+  else{
       url = "https://www.google.com/maps/place/?q=place_id:" + placeid;
   }
     window.open(url);
