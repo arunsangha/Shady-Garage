@@ -7,6 +7,7 @@ from django.utils.text import slugify
 from django.core.urlresolvers import reverse
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+import piexif
 
 class PostManager(models.Manager):
     def like_toggle(self, user, post_obj):
@@ -67,12 +68,24 @@ class Post(models.Model):
 
         # Open original photo which we want to thumbnail using PIL's Image
          image = Image.open(BytesIO(self.post_image.read()))
+        # Save exif tags from orignal image
+         print("--------")
+         print(image._getexif())
+         print("--------")
+         print("--------")
+         print("--------")
+
 
          image.thumbnail(THUMBNAIL_SIZE, Image.ANTIALIAS)
 
         # Save the thumbnail
          temp_handle = BytesIO()
-         image.save(temp_handle, PIL_TYPE)
+
+         exif_dict = image._getexif()
+         if exif_dict:
+             image.save(temp_handle, PIL_TYPE, exif=exif_dict)
+         else:
+             image.save(temp_handle, PIL_TYPE)
          temp_handle.seek(0)
 
         # Save image to a SimpleUploadedFile which can be saved into
@@ -85,6 +98,7 @@ class Post(models.Model):
              suf,
              save=False
         )
+
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -178,6 +192,7 @@ def update_image(sender, instance, **kwargs):
           fullpath_thumbnail = BASE_DIR + instance.thumbnail.url
           rotate_image(fullpath)
           rotate_image(fullpath_thumbnail)
+
 
 
 @receiver(post_save, sender=PostComment)
