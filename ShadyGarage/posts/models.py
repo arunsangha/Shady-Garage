@@ -181,7 +181,7 @@ def rotate_image(filepath, thumbnail_filepath):
     image.save(filepath)
     image.close()
 
-    image = image.open(thumbnail_filepath)
+    image = Image.open(thumbnail_filepath)
     image = image.rotate(rotation, expand=True)
     image.save(thumbnail_filepath)
     image.close()
