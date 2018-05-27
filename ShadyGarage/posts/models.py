@@ -83,7 +83,8 @@ class Post(models.Model):
 
          exif_dict = image._getexif()
          if exif_dict:
-             image.save(temp_handle, PIL_TYPE, exif=exif_dict)
+             exif_bytes = piexif.dump(exif_dict)
+             image.save(temp_handle, PIL_TYPE, exif=exif_bytes)
          else:
              image.save(temp_handle, PIL_TYPE)
          temp_handle.seek(0)
