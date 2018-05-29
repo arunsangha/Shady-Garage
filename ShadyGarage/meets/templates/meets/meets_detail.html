@@ -4,7 +4,7 @@
 
 {% block body %}
   {% if user.is_authenticated %}
-  <div class="meet-detail-body">
+  <div class="meet-detail-body linear-gradient-background">
     <div class="meet-detail-title-container">
         <h1>{{ meet.meet_name}}</h1>
     </div>
@@ -22,11 +22,7 @@
             <img src="{% static 'images/lamborghini-inherit.svg'%}" alt="">
             <p>Skal på treffet: {{meet.users_joining.count}}</p>
         </div>
-        <div class="meet-detail-facebook-share-container">
-            <a href="https://www.facebook.com/sharer/sharer.php?u=shadygarage.pythonanywhere.com/{{request.get_full_path}}">
-              <input type="image" src="{% static 'images/facebooklogo.png'%}" class="facebookShare" id="facebookShareMeet"/>
-            </a> 
-        </div>       
+            
       </div>
     </div>
 

@@ -3,15 +3,10 @@
 {% block title %}Shady: {{post.post_title}} {% endblock %}
 
 {% block body %}
-<!--NB: Dette må være med pga linear background er kun et bilde som blir lagt inn-->
-<style>
-  body{
-    background-color: var(--button-color);
-  }
-</style>
+
 {% include "posts/comment-modal.html" %}
 {% include "posts/comment-replys-modal.html" %}
-  <div class="post-detail-container">
+  <div class="post-detail-container linear-gradient-background">
     <div class="post-detail-top-text">
       <a href="{% url 'accounts:profile_page_pk' pk=post.user_fk.pk%}"><h2> {{post.user_fk.username}} </h2></a>
       <h2 class="post-detail-post-title" id="sluuug" data-sluug="{{post.slug}}"> {{ post.post_title}} </h2>
