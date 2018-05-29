@@ -28,6 +28,7 @@ class MeetsModelSerializer(serializers.ModelSerializer):
             'did_join',
             'location',
             'marker_image',
+            'anonymous',
         )
 
     def get_day(self, obj):
