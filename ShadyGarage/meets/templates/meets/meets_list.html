@@ -98,7 +98,6 @@
           )
         } else {
             $.each(meetsList, function(key, value){
-              var username = value.user_fk.username
               var meet_name = value.meet_name
               var date = value.date
               var time = value.time
@@ -108,6 +107,12 @@
                 users_joining = 'Bli med!'
               }else{
                 users_joining = 'Skal: ' + users_joining
+              }
+              var username = ""
+              if(value.anonymous == false){
+                 username = value.user_fk.username
+              }else{
+                 username = "Anonymous"
               }
 
             $(".meet-list-container").append(
@@ -123,8 +128,8 @@
                       <p class="w"> ${value.day} - ${time}</p>
                       <p class="w"> ${date} </p>
                     </div>
-                    <h5>
-                      Arrangeres av: 
+                    <h5 id="meet-card-creator">
+                      Arrangeres av: ${username}
                     </h5>
                     <h4 class="meet-card-location w">
                       ${value.location}
@@ -138,7 +143,7 @@
 
                 `
             )
-            })
+          })
         }
       }
 

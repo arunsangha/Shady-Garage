@@ -3,11 +3,20 @@ from accounts.api.serializers import UserDisplaySerializer
 from meets.models import Meet, Meet_Comment
 from django.urls import reverse
 from django.utils.timesince import timesince
+import json
+from django.utils import timezone
+
+class DateTimeFieldWihTZ(serializers.DateTimeField):
+    '''Class to make output of a DateTime Field timezone aware
+    '''
+    def to_representation(self, value):
+        value = timezone.localtime(value)
+        return super(DateTimeFieldWihTZ, self).to_representation(value)
 
 class MeetsModelSerializer(serializers.ModelSerializer):
     user_fk = UserDisplaySerializer()
     day = serializers.SerializerMethodField()
-    date = serializers.SerializerMethodField()
+    date = DateTimeFieldWihTZ(format='%d-%m-%Y')
     time = serializers.SerializerMethodField()
     url = serializers.SerializerMethodField()
     joining = serializers.SerializerMethodField()
@@ -46,7 +55,7 @@ class MeetsModelSerializer(serializers.ModelSerializer):
         return days[obj.date.weekday()]
 
     def get_date(self, obj):
-        return obj.date.strftime("%Y.%m.%d")
+        return obj.date
 
     def get_time(self, obj):
         return obj.time.strftime("%H:%M")
