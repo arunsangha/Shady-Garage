@@ -27,18 +27,14 @@ class Profile(models.Model):
          THUMBNAIL_SIZE = (612, 612)
 
 
-         if self.profile_pic.name.endswith(".jpeg"):
+         DJANGO_TYPE = self.post_image.file.content_type
+
+         if DJANGO_TYPE == 'image/jpeg':
              PIL_TYPE = 'jpeg'
-             FILE_EXTENSION = 'jpeg'
-             DJANGO_TYPE = 'image/jpeg'
-         elif self.profile_pic.name.endswith(".jpg"):
-             PIL_TYPE = 'jpg'
              FILE_EXTENSION = 'jpg'
-             DJANGO_TYPE = 'image/jpg'
-         elif self.profile_pic.name.endswith(".png"):
+         elif DJANGO_TYPE == 'image/png':
              PIL_TYPE = 'png'
              FILE_EXTENSION = 'png'
-             DJANGO_TYPE = 'image/png'
 
         # Open original photo which we want to thumbnail using PIL's Image
          image = Image.open(BytesIO(self.profile_pic.read()))
