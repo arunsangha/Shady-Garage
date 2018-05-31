@@ -16,7 +16,7 @@ class Profile(models.Model):
     thumbnail = models.ImageField(upload_to="profile_pic_thumbnail", default ="default/default.png")
     def __str__(self):
         return self.user.username
-#//TODO: fikse bilder..vi trenger ikke create_thumbnail
+
     def create_thumbnail(self):
          from PIL import Image
          from io import BytesIO
