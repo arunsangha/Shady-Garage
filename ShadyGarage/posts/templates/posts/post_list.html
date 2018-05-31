@@ -5,11 +5,7 @@
 <!--NB: Dette må være med pga linear background er kun et bilde som blir lagt inn-->
 {% if user.is_authenticated %}
 {% include "posts/comment-modal.html" %}
-<style>
-  body{
-    background-color: var(--button-color);
-  }
-</style>
+
 <div class="linear-gradient-background">
   <div class="post-search-container" align="center">
     <form action="{% url 'posts:posts_feed' %}" method="action">
