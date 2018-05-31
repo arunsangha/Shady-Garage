@@ -25,6 +25,13 @@ $('#myform').submit(function(event) {
         event.preventDefault();
         var formData = new FormData();
         var formData = new FormData($('form')[0]);
+        for (var pair of formData.entries()) {
+            console.log(pair[0]+ ', ' + pair[1]);
+        }
+        if(formData.get('post_image').size < 1){
+          console.log("Prøvde det her")
+          formData.delete('post_image');
+        }
         formData.append('csrfmiddlewaretoken', '{{ csrf_token }}');
 
 

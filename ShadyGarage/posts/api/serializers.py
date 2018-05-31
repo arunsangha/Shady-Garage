@@ -168,7 +168,7 @@ class NotificationSeenSerializer(serializers.ModelSerializer):
         )
 
 class PostCreateSerializer(serializers.ModelSerializer):
-    post_image = serializers.ImageField(max_length=None, use_url=True)
+    post_image = serializers.ImageField(max_length=None, use_url=True, required=False)
     class Meta:
         model = Post
         fields = (
