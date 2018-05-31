@@ -9,10 +9,6 @@
     <a href="#" id="loadMoreNotification" class="btn btn-info">Flere aktiviteter!</a>
 
     <!-- alert is only visual when there is no more notifications -->
-    <div class="">
-      <strong>Å nei..!</strong> Bli med på treff da, så skjer det nok noe mer her!
-      <a href="{% url 'meets:meets_list' %}" class="btn btn-info"><strong>Trykk på meg! </strong></a>
-    </div>
 
 
   </div>
@@ -40,6 +36,9 @@
             notifList = data.results
             nextUrl = data.next
             parseNotifications()
+            if(!nextUrl){
+              $("#loadMoreNotification").hide();
+            }
           },
           error:function(data){
             console.log(data)
@@ -51,10 +50,23 @@
 
       function parseNotifications(){
         if(notifList == 0){
-          <!-- add bedre design om ikke noe aktivitet har skjedd -->
           $('.notification-list-container').append(
-            "<h5> Godkjent EU-kontroll ;)</h5>"
+            `
+            <div class="jumbotron">
+              <h1 class="display-4">EU kontrollen er godkjent!</h1>
+              <p class="lead">Her vil du kunne se varsler når noen liker eller kommenterer dine innlegg.</p>
+              <hr class="my-4">
+              <p>I mens vi prøver å finne noe i systemet, så kan jo du sjekke ut noen treff? <br> Så sier vi ifra når det skjer noe her!</p>
+              <p class="lead">
+                <a class="btn btn-info btn-lg" href="{% url 'meets:meets_list' %}" role="button">Treff !</a>
+              </p>
+            </div>
+
+            `
           );
+
+          $("#loadMoreNotification").hide();
+
         }else{
           $.each(notifList, function(key, value){
             var owner = value.owner.username
