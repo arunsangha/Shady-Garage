@@ -1,12 +1,11 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 {% block body %}
-  <!--
-    //TODO: Hente replyies to comments etter at det er ferdig.
-  -->
-  <div class="container">
+  <div class="activity-background">
+  <div class="container" align="center">
     <div class="activity-container">
     <div class="notification-list-container"></div>
+    </div>
     <a href="#" id="loadMoreNotification" class="btn btn-info">Flere aktiviteter!</a>
 
     <!-- alert is only visual when there is no more notifications -->
@@ -15,8 +14,9 @@
       <a href="{% url 'meets:meets_list' %}" class="btn btn-info"><strong>Trykk på meg! </strong></a>
     </div>
 
-   </div>
+
   </div>
+</div>
 {% endblock %}
 
 {% block script %}
@@ -80,15 +80,19 @@
 
               $('.notification-list-container').append(
                 `
-                <div class="media">
-                  <img class="mr-3" width="64px" height="64px" src="${actor_image}" alt="">
-                  <div class="media-body">
-                    <h5 class="mt-0">${actor} kommenterte:</h5>
-                      <h3><footer class="blockquote-footer">${comment}</footer></h3>
-                      <h6>På din post:<a href="${post_url}">${post_title}</a></h6>
-                      <a href="#" id="markSeen" data-id="${value.id}" class="btn btn-warning btn-sm">${button_mark}</a>
+                <div class="activity-card">
+                  <div class="activity-card-body">
+                    <img class="acitivity-card-image" src="${actor_image}" alt="">
+                    <div class="activity-card-comment">
+                      <h6><span id="activity-card-username">${actor}</span> kommenterte
+                      på din post <a href="${post_url}">${post_title}</a></h6>
+                      <p id="acitivty-card-comment">"${comment}"</p>
+                    </div>
+                    <a href="#" id="markSeen" data-id="${value.id}" class="btn btn-warning btn-sm">${button_mark}</a>
                   </div>
-                  <p>For ${timesince}</p>
+                   <div class="activity-card-footer">
+                      <p>For ${timesince} siden</p>
+                   </div>
                 </div>
 
                 `
@@ -96,29 +100,35 @@
             } else if(value.noti_reply_fk){
               $('.notification-list-container').append(
                 `
-                <div class="media">
-                  <img class="mr-3" width="64px" height="64px" src="${actor_image}" alt="">
-                  <div class="media-body">
-                    <h5 class="mt-0">${value.noti_reply_fk.user_fk.username} svarte:</h5>
-                      <h3><footer class="blockquote-footer">${value.noti_reply_fk.comment}</footer></h3>
-                      <h6>til din kommentar:<a href="${post_url}">${value.noti_reply_fk.comment_fk.comment}</a></h6>
-                      <a href="#" id="markSeen" data-id="${value.id}" class="btn btn-warning btn-sm">${button_mark}</a>
-                  </div>
-                  <p>For ${value.noti_reply_fk.created}</p>
-                </div>
+                    <div class="activity-card">
+            	         <div class="activity-card-body">
+                        <img class="acitivity-card-image" src="${actor_image}" alt="">
+            		        <div class="activity-card-comment">
+                          <h6><span id="activity-card-username">${value.noti_reply_fk.user_fk.username}</span> svarte
+                                  på din kommentar ${value.noti_reply_fk.comment_fk.comment}</h6>
+                            <p id="acitivty-card-comment"><a href="${post_url}">"${value.noti_reply_fk.comment}"</a><p>
+                        </div>
+                        <a href="#" id="markSeen" data-id="${value.id}" class="btn btn-warning btn-sm">${button_mark}</a>
+            	           </div>
+            	           <div class="activity-card-footer">
+                            <p>For ${value.noti_reply_fk.comment_fk.created} siden</p>
+                        </div>
+                       </div>
 
                 `
               )
             }else {
               $('.notification-list-container').append(
                 `
-                <div class="media">
-                  <img class="mr-3" width="64px" height="64px" src="${actor_image}" alt="">
-                  <div class="media-body">
-                    <h5 class="mt-0" id="test" data-id="${value.id}">${actor} likte din post: <a href="${post_url}">${post_title}</a></h5>
-                    <a href="#" id="markSeen" data-id="${value.id}" class="btn btn-warning btn-sm"> ${button_mark}</a>
+                <div class="activity-card">
+                  <div class="activity-card-body">
+                    <img class="acitivity-card-image" src="${actor_image}" alt="">
+                    <h5 data-id="${value.id}"><span id="activity-card-username">${actor}</span> likte din post: <a href="${post_url}">${post_title}</a></h5>
+                    <a href="#" id="markSeen" data-id="${value.id}" class="btn btn-warning btn-sm">${button_mark}</a>
                   </div>
-                  <p>For ${timesince}</p>
+                  <div class="activity-card-footer">
+                    <p>For ${timesince} siden</p>
+                  </div>
                 </div>
 
                 `
