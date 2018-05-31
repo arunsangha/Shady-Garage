@@ -204,12 +204,14 @@ function mapSelector(e){
   var long = document.getElementById("navigationButton").getAttribute("data-long");
   var location = document.getElementById("navigationButton").getAttribute("data-location");
   console.log(placeid);
+  console.log(lat)
+  console.log(long)
   var url = "";
   /* if we're on iOS, open in Apple Maps */
   if ((navigator.platform.indexOf("iPhone") != -1) || (navigator.platform.indexOf("iPad") != -1) || (navigator.platform.indexOf("iPod") != -1)){
       url = "comgooglemaps://?q=" + location;
   } else if((navigator.platform.indexOf("Android") != -1)){
-      url = "geo://0,0?q=" + location;
+      url = "https://www.google.com/maps/search/?api=1&query=" + lat + "," + long + "&query_place_id=" + placeid;
   }
   else{
       url = "https://www.google.com/maps/place/?q=place_id:" + placeid;

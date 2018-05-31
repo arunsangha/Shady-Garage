@@ -6,15 +6,15 @@ from django.db.models import Q
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .pagination import CommentResultsPagination
-import datetime
+from datetime import datetime
 
 class MeetsListAPIView(generics.ListAPIView):
     serializer_class = MeetsModelSerializer
     pagination_class = ProfilePostResultsPagination
 
     def get_queryset(self, *args, **kwargs):
-        date_now = datetime.datetime.now()
-        qs = Meet.objects.all()
+        today = datetime.now().date()
+        qs = Meet.objects.filter(Q(date__gte=today))
         query = self.request.GET.get('q',None)
         if query is not None:
             qs = qs.filter(

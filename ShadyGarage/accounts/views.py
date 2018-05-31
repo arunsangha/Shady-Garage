@@ -40,7 +40,7 @@ class ProfileInfo(CreateView, LoginRequiredMixin):
 class ProfilePage(TemplateView):
     template_name = "accounts/profilepage.html"
 
-
+# TODO: Opplasting av feil fil i edit profile
 @login_required
 def edit_profile(request):
     if request.method == 'POST':
