@@ -27,7 +27,7 @@ class Profile(models.Model):
          THUMBNAIL_SIZE = (612, 612)
 
 
-         DJANGO_TYPE = self.post_image.file.content_type
+         DJANGO_TYPE = self.profile_pic.file.content_type
 
          if DJANGO_TYPE == 'image/jpeg':
              PIL_TYPE = 'jpeg'
