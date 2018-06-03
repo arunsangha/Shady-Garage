@@ -10,3 +10,4 @@ ShadyGarage/accounts/migrations/__pycache__/
 ShadyGarage/db.sqlite3
 db.sqlite3
 ShadyGarage/media
+.DS_Store
