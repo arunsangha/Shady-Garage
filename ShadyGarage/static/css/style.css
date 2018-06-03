@@ -105,12 +105,9 @@ h1,h2,h3,h4,h5,h6{
 }
 
 .nav-list-item-move-right{
-  margin-left: 50%;
+  margin-left: 40%;
 }
 
-.nav-username{
-  
-}
 
 .nav-list-item-link{
   padding: 10px;
@@ -863,7 +860,7 @@ h1,h2,h3,h4,h5,h6{
   width: 120px;
   margin: 30px 0;
   text-align: center;
-  color: white;
+  color: black;
   border-radius: 20px;
   border: 2px solid #00f9ff;
   padding: 5px;
@@ -871,13 +868,12 @@ h1,h2,h3,h4,h5,h6{
 
 .post-detail-comment-button:hover{
   background-color: #00f9ff;
-  color:white;
 }
 
 .post-detail-like-button{
   width: 120px;
   text-align: center;
-  color: white;
+  color: black;
   border-radius: 20px;
   border: 2px solid var(--main-yellow-color);
   padding: 5px;
@@ -885,7 +881,6 @@ h1,h2,h3,h4,h5,h6{
 
 .post-detail-like-button:hover{
   background-color:var(--main-yellow-color);
-  color:black;
 }
 
 .post-detail-image{
@@ -950,6 +945,13 @@ h1,h2,h3,h4,h5,h6{
   text-align: center;
   padding: 10px;
   border-radius: 10px;
+}
+
+.profile-card-image-container{
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 300px;
 }
 
 .profile-card-img{

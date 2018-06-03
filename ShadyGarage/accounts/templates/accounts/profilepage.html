@@ -5,8 +5,12 @@
 <div class="profile-body">
   <div class="profile-top">
     <div class="profile-card">
-      <img class="profile-card-img" src="{{user.profile.thumbnail.url}}" alt="Card image cap">
-      </img>
+      <div class="profile-card-image-container" style="background-image: url({{user.profile.thumbnail.url}})">
+        <!--
+        <img class="profile-card-img" src="{{user.profile.thumbnail.url}}" alt="Card image cap">
+        </img>-->
+      </div>
+      
       <div class="profile-card-body">
         <h5 class="profile-card-title">{{user.username}}</h5>
         <h6 class="profile-card-sub-title">Team: {{user.profile.teams}}</h6>
