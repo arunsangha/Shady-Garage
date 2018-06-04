@@ -75,6 +75,20 @@ h1,h2,h3,h4,h5,h6{
   color:black;
 }
 
+.blue-button{
+  width: 120px;
+  color: white;
+  border-radius: 20px;
+  background-color: var(--button-color);
+  padding: 5px;
+  text-align: center;
+}
+
+.blue-button:hover{
+  color: black;
+  background-color: transparent;
+  border: 2px solid var(--button-color);
+}
 .linear-gradient-background{
   background: linear-gradient(var(--main-dark-color), var(--main-dark-color), #ffff);
   color:white;
@@ -644,25 +658,30 @@ h1,h2,h3,h4,h5,h6{
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  background-color: var(--main-dark-color);
+  background-color: var(--main-black-color);
   width: 75%;
-  border-radius: 5px;
+  border-radius: 15px;
+  border: 1px solid var(--main-yellow-color);
   margin: 20px auto;
-  padding: 5px;
   min-height: 200px;
 }
 
 .post-list-card-header{
   width: 100%;
-  padding: 3px 0 5px 0;
-  text-align: center;
-  border-bottom: 1px solid var(--main-light-color);
+  color: var(--main-black-color);
+  text-align: left;
+  border-bottom: 1px solid var(--main-yellow-color);
+  border-top-left-radius: 13px;
+  border-top-right-radius: 13px;
+  padding-left: 15px;
+  background-color: var(--main-yellow-color);
   word-wrap: break-word;
   word-break: break-all;
+  font-family: nosifer;
 }
 
 .post-list-card-title{
-
+  padding-top: 7px;
 }
 
 .post-list-card-title a{
@@ -695,6 +714,10 @@ h1,h2,h3,h4,h5,h6{
   margin: 10px 0;
 }
 
+.post-list-card-footer a{
+  color:white;
+}
+
 .post-search-container{
   margin-top: 20px 0;
 }
@@ -710,9 +733,9 @@ h1,h2,h3,h4,h5,h6{
   }
 
   .post-list-card{
-    width: 90%;
+    width: 95%;
     margin: 20px auto;
-    padding: 5px;
+
   }
 
   #loadMore{
@@ -723,7 +746,7 @@ h1,h2,h3,h4,h5,h6{
 
 #postImageFeed{
   width:100%;
-  height:100%
+  height:100%;
 }
 
 /*

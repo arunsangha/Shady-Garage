@@ -18,7 +18,7 @@
   </div>
   <div class="post-list-container">
     <div id="fraAjax"></div>
-    <a href="#" id="loadMore" class="yellow-button-outline">Flere posts</a>
+    <a href="#" id="loadMore" class="blue-button">Flere posts</a>
   </div>
 
 </div>
@@ -103,20 +103,19 @@
                     <h3 class='post-list-card-title'>
                       <a href='${value.url}'>${post_title}</a>
                     </h3>
-                    <div class="post-list-card-text-container">
-                      <p class='post-list-card-text'>${post_description}</p>
-                    </div>
+                    
                    <div class='post-list-card-image'>
                     <img src='${value.thumbnail}' id='postImageFeed'>
                    </div>
                 </div>
                 <div class='post-list-card-footer'>
-                    <a href='#' data-id='${value.id}' class='like-button badge badge-warning'>
+                    <a href='#' data-id='${value.id}' class="like-button">
+                      <img src="{% static 'images/like-icon.svg'%}" width="30px" height="30px">
                       ${verb} ${likes}
                     </a>
                     |
-                    <a href='#' class='comment-button badge badge-light' id='comment-modal' data-sluug="${value.slug}" data-id='${value.id}' data-post-owner='${user_name}' data-post-title='${post_title}'>
-                      Kommenter ${comment_count}
+                    <a href='#' id='comment-modal' data-sluug="${value.slug}" data-id='${value.id}' data-post-owner='${user_name}' data-post-title='${post_title}'>
+                      <img src="{% static 'images/comment-icon.svg'%}" width="30px;" height="30px"> ${comment_count}
                     </a>
                   </div>
                   <div class='post-list-card-footer text-muted'>
@@ -141,14 +140,15 @@
                     </div>
                   </div>
                   <div class='post-list-card-footer'>
-                    <a href='#' data-id='${value.id}' class='like-button badge badge-warning'>
-                      ${verb} ${likes}
-                    </a>
-                    |
-                    <a href='#' class='comment-button badge badge-light' id='comment-modal' data-sluug="${value.slug}" data-id='${value.id}' data-post-owner='${user_name}' data-post-title='${post_title}'>
-                      Kommenter ${comment_count}
-                    </a>
-                  </div>
+                      <a href='#' data-id='${value.id}' class="like-button">
+                        <img src="{% static 'images/like-icon.svg'%}" width="30px" height="30px">
+                        ${verb} ${likes}
+                      </a>
+                      |
+                      <a href='#' id='comment-modal' data-sluug="${value.slug}" data-id='${value.id}' data-post-owner='${user_name}' data-post-title='${post_title}'>
+                        <img src="{% static 'images/comment-icon.svg'%}" width="30px;" height="30px"> ${comment_count}
+                      </a>
+                    </div>
                   <div class='post-list-card-footer text-muted'>
                      ${timesince}
                   </div>
@@ -219,6 +219,7 @@
             method: 'GET',
             url: likedUrl,
             success:function(data){
+              console.log("LIKE")
               if(data.liked){
                 this_.text("Liker")
               }else{
