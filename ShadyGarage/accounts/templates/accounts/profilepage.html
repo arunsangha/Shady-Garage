@@ -3,14 +3,14 @@
 {% block title %} Shady Garage | {{user.username}} {% endblock %}
 {% block body %}
 <div class="profile-body">
+  <div class="profile-page-title">
+    <h4>{{user.username}}´s garage</h4>
+  </div>
   <div class="profile-top">
     <div class="profile-card">
       <div class="profile-card-image-container" style="background-image: url({{user.profile.thumbnail.url}})">
-        <!--
-        <img class="profile-card-img" src="{{user.profile.thumbnail.url}}" alt="Card image cap">
-        </img>-->
       </div>
-      
+
       <div class="profile-card-body">
         <h5 class="profile-card-title">{{user.username}}</h5>
         <h6 class="profile-card-sub-title">Team: {{user.profile.teams}}</h6>
@@ -28,12 +28,11 @@
 
       </div>
     </div>
-    <div class="profile-page-title">
-      <h4>{{user.username}}´s garage</h4>
+    <div class="">
+      <div class="profile-post-list"></div>
     </div>
   </div>
 
-  <div class="profile-post-list"></div>
 
   <a href="#" id="loadMore" class="btn btn-info profile-more-posts-button">Se mer</a>
 </div>
@@ -52,7 +51,15 @@
 
         if(postList == 0){
           $(".profile-post-list").append(
-            "<h5>Har ikke lagt ut noe enda...</h5>"
+           `
+           <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+              <h1 class="display-4">Oida..vi fant ikke noe!</h1>
+              <p class="lead">Kom tilbake igjen senere, kanskje brukeren har lagt ut noe til da?</p>
+            </div>
+          </div>
+
+           `
           )
         }else{
           //Posts exists!
@@ -93,35 +100,66 @@
 
             if(has_image){
                 $(".profile-post-list").append(
-              `
-             <div class='profile-post-list-card w'>
-                <div class='profile-post-list-card-header'>
-                  <h4><a href="${value.url}">${post_title}</></h4>
-                </div>
-                <div class='profile-post-list-card-image'>
-                    <img src='${image}' alt='' class='profile-page-post-image'>
-                </div>
-                <p class='profile-post-list-card-text'>${post_description}</p>
-                <div class='profile-post-list-card-footer'>
-                  <a href='${value.url}' %}' class='badge badge-info'>Se kommentarer ${comment_count}</a>
-                  <small class='text-muted'>${value.timesince}</small>
-                </div>
-              </div>
-              `
-            )}else{
+                  `
+                  <div class='post-list-card'>
+                    <div class='post-list-card-header'>
+                      ${user_name}
+                    </div>
+                    <div class='post-list-card-body'>
+                      <h3 class='post-list-card-title'>
+                        <a href='${value.url}'>${post_title}</a>
+                      </h3>
+
+                     <div class='post-list-card-image'>
+                      <img src='${value.thumbnail}' id='postImageFeed'>
+                     </div>
+                  </div>
+                  <div class='post-list-card-footer'>
+                      <a href='#' data-id='${value.id}' class="like-button">
+                        <img src="{% static 'images/like-icon.svg'%}" width="30px" height="30px">
+                        ${verb} ${likes}
+                      </a>
+                      |
+                      <a href='${value.url}'>
+                        <img src="{% static 'images/comment-icon.svg'%}" width="30px;" height="30px"> ${comment_count}
+                      </a>
+                    </div>
+                    <div class='post-list-card-footer text-muted'>
+                       ${timesince}
+                    </div>
+                    </div>
+                  `
+                )
+            }else{
               $(".profile-post-list").append(
-              `
-             <div class='profile-post-list-card w'>
-                <div class='profile-post-list-card-header'>
-                  <h4><a href="${value.url}">${post_title}</a></h4>
+                `
+                <div class='post-list-card'>
+                  <div class='post-list-card-header'>
+                    ${user_name}
+                  </div>
+                  <div class='post-list-card-body'>
+                    <h3 class='post-list-card-title'>
+                      <a href='${value.url}'>${post_title}</a>
+                    </h3>
+                    <div class="post-list-card-text-container">
+                      <p class="post-list-card-text">${post_description}</p>
+                    </div>
+                  </div>
+                  <div class='post-list-card-footer'>
+                      <a href='#' data-id='${value.id}' class="like-button">
+                        <img src="{% static 'images/like-icon.svg'%}" width="30px" height="30px">
+                        ${verb} ${likes}
+                      </a>
+                      |
+                      <a href='${value.url}'>
+                        <img src="{% static 'images/comment-icon.svg'%}" width="30px;" height="30px"> ${comment_count}
+                      </a>
+                    </div>
+                  <div class='post-list-card-footer text-muted'>
+                     ${timesince}
+                  </div>
                 </div>
-                <p class='profile-post-list-card-text'>${post_description}</p>
-                <div class='profile-post-list-card-footer'>
-                  <a href='${value.url}'%}' class='badge badge-info'>Se kommentarer ${comment_count}</a>
-                  <small class='text-muted'>${value.timesince}</small>
-                </div>
-              </div>
-              `
+                `
 
             )}
 
@@ -154,6 +192,29 @@
         }else{
           $("#loadMore").html("Ingen flere posts")
         }
+      })
+
+      $(document.body).on("click", ".like-button", function(e){
+          e.preventDefault()
+          this_ = $(this)
+          var postId = this_.attr("data-id")
+          var likedUrl = '../../api/posts/like/' + postId + '/'
+
+          $.ajax({
+            method: 'GET',
+            url: likedUrl,
+            success:function(data){
+              console.log("LIKE")
+              if(data.liked){
+                this_.text("Liker")
+              }else{
+                this_.text("Unlike")
+              }
+            }, error:function(data){
+              console.log("Error in likes method!")
+            }
+
+          })
       })
 
       function setActivityCountBtn(count){

@@ -5,7 +5,7 @@
 <!--NB: Dette må være med pga linear background er kun et bilde som blir lagt inn-->
 {% if user.is_authenticated %}
 {% include "posts/comment-modal.html" %}
-
+{% include "logo-loading-screen.html" %}
 <div class="linear-gradient-background">
   <div class="post-search-container" align="center">
     <form action="{% url 'posts:posts_feed' %}" method="action">
@@ -62,7 +62,15 @@
       function parsePosts(){
         if(postList == 0){
           $("#fraAjax").append(
-            "<h5>Fant ikke noe...</h5>"
+            `
+            <div class="jumbotron jumbotron-fluid" style="background-color: var(--main-black-color); border:2px solid var(--main-yellow-color);" align="center">
+             <div class="container">
+               <h1 class="display-4">Oida..vi fant ikke noe!</h1>
+               <p class="lead">Prøv å søk etter noe annet!</p>
+             </div>
+           </div>
+
+            `
           )
         }else{
           //Posts exists!
@@ -103,7 +111,7 @@
                     <h3 class='post-list-card-title'>
                       <a href='${value.url}'>${post_title}</a>
                     </h3>
-                    
+
                    <div class='post-list-card-image'>
                     <img src='${value.thumbnail}' id='postImageFeed'>
                    </div>
@@ -161,6 +169,7 @@
       }
 
       function fetchPosts(url){
+        $("#loading-screen-logo").show();
         var fetchUrl;
         if(!url){
           fetchUrl = "../../api/posts/"
@@ -177,6 +186,7 @@
             postList = data.results
             nextUrl = data.next
             parsePosts()
+            $("#loading-screen-logo").hide();
           },
             error:function(data){
             console.log("Error")
