@@ -2,7 +2,6 @@ function initMap(){
      var geocoder = new google.maps.Geocoder();
      var location = document.getElementById('location').textContent;
      var markerIcon = document.getElementById("location").getAttribute("data-marker")
-     console.log(markerIcon);
      var oslo = {lat: 59.913, lng: 10.752};
      var directionsService = new google.maps.DirectionsService();
      var directionsDisplay = new google.maps.DirectionsRenderer();
@@ -36,6 +35,7 @@ function initMap(){
 
        }else{
          console.log("ERROR I MAP")
+
        }
      })
      var map = new google.maps.Map(document.getElementById('map'), {

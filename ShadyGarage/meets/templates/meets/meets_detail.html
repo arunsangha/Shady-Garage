@@ -3,16 +3,33 @@
 {% block title %}{{meet.meet_name}}{% endblock %}
 
 {% block body %}
+{% if request.user == meet.user_fk %}
+<div class="meet-detail-owner-container">
+  <a href="{% url 'meets:delete_meet' slug=meet.slug%}" class="btn btn-danger">Slett</a>
+  <a href="{% url 'meets:update_meet' slug=meet.slug%}" class="btn btn-info">Oppdater</a>
+</div>
+{% endif %}
   {% if user.is_authenticated %}
   <div class="meet-detail-body linear-gradient-background">
     <div class="meet-detail-title-container">
         <h1>{{ meet.meet_name}}</h1>
     </div>
+    <div class="meet_detail_description">
+      {{meet.description}}
+    </div>
     <div class="meet_detail_description_container">
-        <p>{{meet.description}}</p>
-        <p id="location" data-marker="{{meet.marker_image}}">{{meet.location}}</p>
-        <p>{{ meet.date|date:'Y-m-d' }} </p>
-        <p>{{ meet.time}}</p>
+        <div class="meet_detail_description_item" id="location" data-marker="{{meet.marker_image}}">
+          <img src="{% static "images/maps-icon.svg" %}" class="meet_detail_icon">
+          {{meet.location}}
+        </div>
+        <div class="meet_detail_description_item">
+          <img src="{% static "images/calender-icon.svg" %}" class="meet_detail_icon">
+          {{ meet.date|date:'d.m.Y' }}
+        </div>
+        <div class="meet_detail_description_item">
+          <img src="{% static "images/clock-icon.svg" %}" class="meet_detail_icon">
+          {{ meet.time}}
+        </div>
     </div>
     <div class="meet-detail-map-container">
       <div id="map">
@@ -22,29 +39,25 @@
             <img src="{% static 'images/lamborghini-inherit.svg'%}" alt="">
             <p>Skal på treffet: {{meet.users_joining.count}}</p>
         </div>
-            
+
       </div>
     </div>
 
     <div class="meet-detail-button-container">
-      
+
         {% for user in meet.users_joining.all  %}
         {% if request.user == user %}
           <div id="isUserJoining" data-bool="true" style="display:none;"></div>
         {% endif %}
       {% endfor %}
 
-      <a href="" class="meet_join_button" data-id="{{ meet.pk }}">Jeg vil være med!</a>
+      <a href="#" class="meet_join_button" id="join_button" data-id="{{ meet.pk }}">Jeg vil være med!</a>
       <a href="{% url 'meets:comment_meet' slug=meet.slug %}" class="meet-comment-button">Kommenter</a>
 
-      {% if request.user == meet.user_fk %}
-        <a href="{% url 'meets:delete_meet' slug=meet.slug%}" class="btn btn-danger">Slett</a>
-        <a href="{% url 'meets:update_meet' slug=meet.slug%}" class="btn btn-info">Oppdater</a>
-      {% endif %}
     </div>
 
     <div class="meet-commentcontainer">
-      
+
       {% for comment in meet.meet_comment.all %}
         <div class="commentcontainer-comment">
           <div class="commentcontainer-userinfo">
