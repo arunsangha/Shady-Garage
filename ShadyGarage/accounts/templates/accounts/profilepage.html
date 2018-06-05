@@ -28,11 +28,8 @@
 
       </div>
     </div>
-    <div class="">
-      <div class="profile-post-list"></div>
-    </div>
   </div>
-
+  <div class="profile-post-list"></div>
 
   <a href="#" id="loadMore" class="btn btn-info profile-more-posts-button">Se mer</a>
 </div>
@@ -101,7 +98,7 @@
             if(has_image){
                 $(".profile-post-list").append(
                   `
-                  <div class='post-list-card'>
+                  <div class='post-list-card post-list-card-profile'>
                     <div class='post-list-card-header'>
                       ${user_name}
                     </div>
@@ -133,7 +130,7 @@
             }else{
               $(".profile-post-list").append(
                 `
-                <div class='post-list-card'>
+                <div class='post-list-card post-list-card-profile'>
                   <div class='post-list-card-header'>
                     ${user_name}
                   </div>

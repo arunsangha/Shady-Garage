@@ -825,6 +825,8 @@ h1,h2,h3,h4,h5,h6{
   margin: 0 0 20px 0;
 }
 
+
+
 @media only screen and (max-width:480px){
   .post-detail-top-text{
     text-align: center;
@@ -957,27 +959,29 @@ h1,h2,h3,h4,h5,h6{
   flex-direction: column;
 }
 
-.profile-top{
-  display: flex;
-  flex-direction: row;
-  padding: 40px;
-}
-
 .profile-page-title{
   text-align: center;
   padding: 40px 0 0 10px;
   font-family: 'nosifer';
   flex-grow: 1;
   word-wrap: break-word;
-  max-width: 75%;
 }
+
+.profile-top{
+  display: flex;
+  flex-direction: row;
+  padding: 20px;
+  justify-content: center;
+}
+
+
 
 .profile-card{
   color: white;
   display: flex;
   flex-direction: column;
   background-color: var(--main-dark-color);
-  width: 25%;
+  width: 30%;
   height: 500px;
   text-align: center;
   padding: 10px;
@@ -1025,57 +1029,13 @@ h1,h2,h3,h4,h5,h6{
 
 .profile-post-list{
   display: flex;
+  align-content: space-between;
   flex-wrap: wrap;
-  justify-content: center;
-}
-
-.profile-post-list-card{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 25%;
-  background-color: var(--main-dark-color);
-  margin: 30px;
-  padding: 5px 0 0 0;
-  border-radius: 3px;
-  max-height: 600px;
-  overflow: hidden;
-}
-
-.profile-post-list-card-header{
-  display: flex;
-  justify-content: center;
-  word-wrap: break-word;
-  word-break: break-all;
-  align-items: center;
-  padding: 10px;
-  height: 22%;
-  width: 100%;
-}
-
-.profile-post-list-card-image{
-  width: 100%;
-}
-
-.profile-post-list-card-text{
-  width: 95%;
-  flex-grow: 1;
-  word-wrap: break-word;
-  word-break: break-all;
-  text-align: center;
-  padding: 3px;
-  margin: 4px 0 0 0;
-  border: 1px solid var(--main-dark-color);
-  box-shadow: 1px 1px var(--main-dark-color);
-}
-
-.profile-page-post-image{
-  width: 100%;
   height: 100%;
 }
 
-.profile-post-list-card-footer{
-  padding: 5px;
+.post-list-card-profile{
+  width: 30%;
 }
 
 .profile-more-posts-button{
@@ -1083,42 +1043,27 @@ h1,h2,h3,h4,h5,h6{
   margin: 0 auto 30px auto;
 }
 
-.profile-edit-title{
-  display: block;
-  text-align: center;
-  padding: 7px;
-  margin: 10px 0;
-}
-
 
 @media only screen and (max-width: 480px){
 
-  .profile-top{
-    flex-flow: column-reverse;
-    padding: 0;
-    align-items: center;
-  }
-
   .profile-page-title{
-    padding: 20px 0 0 0;
-    flex-grow: 0;
-    width: 90%;
+    width: 100%;
+    padding-left: 0px;
+    padding-right: 0px;
   }
 
   .profile-card{
-    width: 90%;
-    height: auto;
-    max-height: none;
+    width: 95%;
+    height: 500px;
+  }
+  .post-list-card-profile{
+    width: 95%;
   }
 
-  .profile-post-list-card{
-    width: 90%;
-    margin: 30px 0 ;
+  .post-list-card-title{
+    font-size: 25px;
   }
 
-  .profile-post-list-card-header{
-    padding: 20px 5px;
-  }
 
   .profile-more-posts-button{
     width: 30%;
