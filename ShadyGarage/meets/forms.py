@@ -5,7 +5,6 @@ from django.forms import MultiWidget
 import datetime
 
 class CreateMeetForm(forms.ModelForm):
-
     class Meta():
         model = models.Meet
         fields = ('meet_name', 'description', 'anonymous', 'category', 'date', 'time','location', 'marker_image')

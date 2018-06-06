@@ -36,6 +36,10 @@ class PostCommentForm(forms.ModelForm):
         model = models.PostComment
         fields = ('comment',)
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['comment'].label = ""
+
 class PostCommentReplyForm(forms.ModelForm):
     class Meta():
         model = models.PostCommentReply

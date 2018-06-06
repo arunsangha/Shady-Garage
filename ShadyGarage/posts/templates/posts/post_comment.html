@@ -3,13 +3,15 @@
 {% block body %}
 
 <div class="linear-gradient-background">
-  <div class="container c-comment">
-    <form method="post">
-      <h3>Kommentar</h3>
-      {% csrf_token %}
-      {% bootstrap_form form%}
-      <input type="submit" class="yellow-button-outline" value="Kommenter">
-    </form>
+  <div class="container c-comment" align="center">
+    <div class="post-comment-page">
+      <form method="post">
+        <h3>Kommentar</h3>
+        {% csrf_token %}
+        {% bootstrap_form form%}
+        <input type="submit" class="blue-button" value="Kommenter">
+      </form>
+    </div>
   </div>
 </div>
 {% endblock %}

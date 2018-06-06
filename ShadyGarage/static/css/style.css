@@ -606,13 +606,24 @@ h1,h2,h3,h4,h5,h6{
 /*
   Post Form
 */
-
+.post-form-body{
+  padding: 10px;
+}
 .post-form-container{
   padding: 20px;
   background-color: var(--main-black-color);
   border: 2px solid var(--main-yellow-color);
   width: 60%;
   text-align: left;
+
+}
+
+@media only screen and (max-width: 480px) {
+
+  .post-form-container{
+    padding: 20px;
+    width: 100%;
+  }
 
 }
 
@@ -743,9 +754,13 @@ h1,h2,h3,h4,h5,h6{
 */
 
 .c-comment{
-  width: 50%;
-  height: 40%;
+  padding: 10px;
 }
+
+.post-comment-page{
+  width: 50%;
+}
+
 .post-detail-container{
   display: flex;
   flex-direction: column;
