@@ -60,6 +60,23 @@ h1,h2,h3,h4,h5,h6{
   height: 40px;
 }
 
+.yellow-button{
+  width: 120px;
+  color: black;
+  border-radius: 20px;
+  border: 2px solid var(--main-dark-color);
+  padding: 5px;
+  background-color: var(--main-yellow-color);
+  text-align: center;
+}
+
+.yellow-button:hover{
+    border: 2px solid var(--main-yellow-color);
+    background-color: Transparent;
+    color: white;
+}
+
+
 .yellow-button-outline{
     width: 120px;
     color: black;
@@ -69,6 +86,7 @@ h1,h2,h3,h4,h5,h6{
     background-color: Transparent;
     text-align: center;
 }
+
 
 .yellow-button-outline:hover{
   background-color: var(--main-yellow-color);
@@ -584,6 +602,19 @@ h1,h2,h3,h4,h5,h6{
 -----------------------------------------------------
   Post app
 */
+
+/*
+  Post Form
+*/
+
+.post-form-container{
+  padding: 20px;
+  background-color: var(--main-black-color);
+  border: 2px solid var(--main-yellow-color);
+  width: 60%;
+  text-align: left;
+
+}
 
 /*
     Post List
