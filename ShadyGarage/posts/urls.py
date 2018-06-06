@@ -7,6 +7,7 @@ urlpatterns = [
     url(r'^post_feed/$', views.PostList.as_view(), name="posts_feed"),
     url(r'^shady/(?P<slug>[-\w]+)/$', views.PostDetail.as_view(), name="post_detail"),
     url(r'^new_post/$', views.PostForm.as_view(), name="post_create"),
+    url(r'^new_posttext/$', views.PostTextForm.as_view(), name="post_text_create"),
     url(r'^shady/(?P<slug>[-\w]+)/delete/$', views.PostDeleteView.as_view(), name="post_delete"),
     url(r'^shady/(?P<slug>[-\w]+)/comment/$', views.PostCommentCreateView.as_view(), name="post_comment"),
     url(r'^shady/(?P<slug>[-\w]+)/reply/(?P<pk>\d+)/$', views.PostCommentReplyCreateView.as_view(), name="post_comment_reply"),

@@ -36,9 +36,12 @@ class PostDetail(LoginRequiredMixin, DetailView):
 class PostForm(LoginRequiredMixin, View):
 
     def get(self, request):
-         return render(self.request, 'posts/post_form.html', {'form':forms.PostForm})
+         return render(self.request, 'posts/post_form.html', {'form':forms.PostImageForm})
 
+class PostTextForm(LoginRequiredMixin, View):
 
+    def get(self, request):
+        return render(self.request, 'posts/post_form.html', {'form':forms.PostTextForm})
 
 class PostDeleteView(DeleteView):
     model = models.Post

@@ -2,7 +2,7 @@
 {% load staticfiles %}
 {% block title %} Shady Meets {% endblock %}
 {% block body %}
-
+{% include "logo-loading-screen.html" %}
 {% if user.is_authenticated %}
 <div class="linear-gradient-background">
 
@@ -66,6 +66,7 @@
       var meetsList = [];
 
       function fetchMeets(url){
+        $("#loading-screen-logo").show();
         var fetchUrl;
         if(!url){
           fetchUrl = "../../api/meets"
@@ -83,6 +84,7 @@
             meetsList = data.results
             nextUrl = data.next
             parseMeets()
+            $("#loading-screen-logo").hide();
           }, error:function(data){
             console.log("ERROR")
           }

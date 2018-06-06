@@ -12,9 +12,10 @@
       <input type="text" name="q" placeholder="Søk">
       <input type="submit" name="" class="btn btn-info" value="Søk">
     </form>
-    <a href="#" class="btn btn-info" id="load-mc-list">MC LOAD</a>
-    <a href="#" class="btn btn-warning" id="load-car-list">CAR LOAD </a>
-    <a href="{% url 'posts:post_create'%}" class="btn btn-info" id="sharePost">Del en post!</a>
+    <!--<a href="#" class="btn btn-info" id="load-mc-list">MC LOAD</a>
+    <a href="#" class="btn btn-warning" id="load-car-list">CAR LOAD </a>-->
+    <a href="{% url 'posts:post_create'%}" id="sharePost"><img src="{% static "images/image-icon.svg" %}" class="share-post-icon"></a>
+    <a href="{% url 'posts:post_text_create'%}" id="sharePost"><img src="{% static "images/text-icon.svg" %}" class="share-post-icon"></a>
   </div>
   <div class="post-list-container">
     <div id="fraAjax"></div>

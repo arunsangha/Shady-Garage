@@ -28,10 +28,14 @@ $('#myform').submit(function(event) {
         for (var pair of formData.entries()) {
             console.log(pair[0]+ ', ' + pair[1]);
         }
-        if(formData.get('post_image').size < 1){
-          console.log("Prøvde det her")
-          formData.delete('post_image');
+        if(formData.has('post_image')){
+          if(formData.get('post_image').size < 1){
+            formData.delete('post_image');
+          }
+        }else{
+          
         }
+
         formData.append('csrfmiddlewaretoken', '{{ csrf_token }}');
 
 
