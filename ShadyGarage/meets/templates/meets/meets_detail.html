@@ -56,38 +56,45 @@
       <a href="{% url 'meets:comment_meet' slug=meet.slug %}" class="button yellow-btn">Kommenter</a>
 
     </div>
+    {% if meet.meet_admin_message.count > 0 %}
+    <div class="container" align="center">
+      <div class="admin-message-container">
+        <h4>Viktig info fra arrangør!</h4>
+        {% for message in meet.meet_admin_message.all %}
+          <p> {{message.message}}</p>
+          <p> For {{message.created|timesince}} </p>
+        {% endfor %}
+
+      </div>
+    </div>
+    {% endif %}
 
     <div class="meet-commentcontainer">
 
       {% for comment in meet.meet_comment.all %}
+      <div class="activity-card">
+                      <div class="activity-card-body">
+                        <div class="activity-card-profileinfo">
+                          <img class="acitivity-card-image" src="{{comment.user.profile.profile_pic.url}}" alt="">
+                          <h6><span id="activity-card-username"><a href="{%url 'accounts:profile_page_pk' pk=comment.user.pk %}">{{comment.user}}</a><span></h6>
+                        </div>
+                        <div class="activity-card-comment">
+                          <p id="acitivty-card-comment" style="color:black;">"{{comment.comment}}"</p>
+                        </div>
+                        <div class="test" style="display:flex; flex-direction:column">
 
-
-
-<div class="activity-card">
-                <div class="activity-card-body">
-                  <div class="activity-card-profileinfo">
-                    <img class="acitivity-card-image" src="{{comment.user.profile.profile_pic.url}}" alt="">
-                    <h6><span id="activity-card-username"><a href="{%url 'accounts:profile_page_pk' pk=comment.user.pk %}">{{comment.user}}</a><span></h6>
-                  </div>
-                  <div class="activity-card-comment">
-                    <p id="acitivty-card-comment" style="color:black;">"{{comment.comment}}"</p>
-                  </div>
-                  <div class="test" style="display:flex; flex-direction:column">
-
-          {% if request.user == comment.user %}
-            <a href="{% url 'meets:meet_comment_delete' slug=meet.slug pk=comment.id %}" class="btn btn-danger btn-sm">Slett</a>
-          {% endif %}
-                  </div>
-                </div>
-                 <div class="activity-card-footer">
-                    <p style="color:black;">For {{comment.created|timesince}} siden</p>
-                 </div>
-              </div>
-      {% endfor %}
-    </div>
-  </div>
-
-
+                {% if request.user == comment.user %}
+                  <a href="{% url 'meets:meet_comment_delete' slug=meet.slug pk=comment.id %}" class="btn btn-danger btn-sm">Slett</a>
+                {% endif %}
+                        </div>
+                      </div>
+                       <div class="activity-card-footer">
+                          <p style="color:black;">For {{comment.created|timesince}} siden</p>
+                       </div>
+                    </div>
+            {% endfor %}
+          </div>
+        </div>
   {% else %}
   <div class="container" >
       <div class="jumbotron">
@@ -135,7 +142,7 @@
       function userJoining(){
         var isJoining = $("#isUserJoining").attr("data-bool")
         if(isJoining){
-          $("#join_button").text("Jeg kan ikke allikevell..");
+          $("#join_button").text("Kan ikke");
         }
       }
 
