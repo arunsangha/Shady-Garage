@@ -75,43 +75,46 @@
           if(value.comment_replys > 0){
             $(".post-commentcontainer").append(
               `
-              <div class="commentcontainer-comment">
-                <div class='commentcontainer-userinfo'>
-                  <div class='commentcontainer-userinfo-profilepiccontainer'>
-                    <img class='commentcontainer-userinfo-profilepic' src="${profile_pic}" alt="bilde">
-                  </div>
-                  <div class="commentcontainer-userinfo-textinfo">
-                    <p><a href="${value.user_fk.url}" id="usernameLink" data-id="${id_}" >${value.user_fk.username}</a></p>
-                    <p>${value.created} siden</p>
+
+              <div class="activity-card">
+                  <div class="activity-card-body">
+                    <img class="acitivity-card-image" src="${profile_pic}" alt="">
+                    <div class="activity-card-comment">
+                      <h6><span id="activity-card-username"><a href="${value.user_fk.url}">${value.user_fk.username}</a><span>
+                  </h6>
+                      <p id="acitivty-card-comment" style="color:black;">"${value.comment}"</p>
+                    </div>
+                    <div class="test" style="display:flex; flex-direction:column">
                     <a href="#" id="answerComment" class="btn btn-warning btn-sm" data-slug="${value.post_fk.slug}" data-id="${value.id}">Svar</a>
                     <a href="#" id="commentReplyButton" data-comment-user="${value.user_fk.username}" data-id="${value.id}" class="btn btn-danger btn-sm"> Se svar <span class="badge badge-light">${value.comment_replys}</span></a>
+                    </div>
+                  </div>
+                   <div class="activity-card-footer">
+                      <p style="color:black;">For ${value.created} siden</p>
+                   </div>
                 </div>
-                </div>
-                <div class="commentcontainer-commentfield">
-                  <p>${value.comment}</p>
-                </div>
-               </div>
               `
             )
           }else{
             $(".post-commentcontainer").append(
               `
-              <div class="commentcontainer-comment">
-                <div class='commentcontainer-userinfo'>
-                  <div class='commentcontainer-userinfo-profilepiccontainer'>
-                    <img class='commentcontainer-userinfo-profilepic' src="${profile_pic}" alt="bilde">
-                  </div>
-                  <div class="commentcontainer-userinfo-textinfo">
-                    <p><a href="${value.user_fk.url}" id="usernameLink" >${value.user_fk.username}</a></p>
-                    <p>${value.created} siden</p>
-                    <a href="#" id="answerComment" class="btn btn-warning btn-sm" data-slug="${value.post_fk.slug}" data-id="${value.id}">Svar</a>
-                </div>
-                </div>
-                <div class="commentcontainer-commentfield">
-                  <p>${value.comment}</p>
-                </div>
 
-               </div>
+              <div class="activity-card">
+                  <div class="activity-card-body">
+                    <img class="acitivity-card-image" src="${profile_pic}" alt="">
+                    <div class="activity-card-comment">
+                      <h6><span id="activity-card-username"><a href="${value.user_fk.url}">${value.user_fk.username}</a><span>
+                  </h6>
+                      <p id="acitivty-card-comment" style="color:black;">"${value.comment}"</p>
+                    </div>
+                    <div class="test" style="display:flex; flex-direction:column">
+                    <a href="#" id="answerComment" class="btn btn-warning btn-sm" data-slug="${value.post_fk.slug}" data-id="${value.id}">Svar</a>
+                    </div>
+                  </div>
+                   <div class="activity-card-footer">
+                      <p style="color:black;">For ${value.created} siden</p>
+                   </div>
+                </div>
               `
             )
           }

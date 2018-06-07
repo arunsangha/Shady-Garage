@@ -206,12 +206,19 @@ function mapSelector(e){
   console.log(placeid);
   console.log(lat)
   console.log(long)
+  var ua = navigator.userAgent.toLowerCase();
+  var isAndroid = ua.indexOf("android") > -1; //&& ua.indexOf("mobile");
+  if(isAndroid) {
+  // Do something!
+  // Redirect to Android-site?
+  window.location = 'http://android.davidwalsh.name';
+  }
   var url = "";
   /* if we're on iOS, open in Apple Maps */
   if ((navigator.platform.indexOf("iPhone") != -1) || (navigator.platform.indexOf("iPad") != -1) || (navigator.platform.indexOf("iPod") != -1)){
       url = "comgooglemaps://?q=" + location;
   } else if((navigator.platform.indexOf("Android") != -1)){
-      url = "https://www.google.com/maps/search/?api=1&query=" + lat + "," + long + "&query_place_id=" + placeid;
+      url = "https://maps.google.com/search/?api=1&query=" + lat + "," + long + "&query_place_id=" + placeid;
   }
   else{
       url = "https://www.google.com/maps/place/?q=place_id:" + placeid;
