@@ -27,3 +27,12 @@ class CommentForm(forms.ModelForm):
     class Meta():
         model = models.Meet_Comment
         fields = ('comment',)
+
+class AdminMessageForm(forms.ModelForm):
+    class Meta():
+        model = models.MeetAdminMessage
+        fields = ('message',)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['message'].label = "Melding"

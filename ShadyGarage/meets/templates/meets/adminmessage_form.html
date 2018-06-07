@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% block body %}
+    <div class="container">
+      <h1>Lag en melding</h1>
+      <form method="post">
+        {% csrf_token %}
+        {% bootstrap_form form%}
+        <input type="submit" value="Lag">
+      </form>
+    </div>
+{% endblock %}

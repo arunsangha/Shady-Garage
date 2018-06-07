@@ -62,3 +62,15 @@ class Meet_Comment(models.Model):
 
     def __str__(self):
         return "Treff:{} | Kommentar : {}".format(self.meet_fk.meet_name, self.comment)
+
+class MeetAdminMessage(models.Model):
+    meet = models.ForeignKey(Meet, related_name="meet_admin_message")
+    owner = models.ForeignKey(User, related_name="meet_admin")
+    message = models.CharField(max_length=512)
+    created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['created']
+
+    def __str__(self):
+        return "Meet: {} | Owner: {}".format(self.meet.meet_name, self.owner.username)

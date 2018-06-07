@@ -13,5 +13,6 @@ urlpatterns = [
     url(r'^@/(?P<slug>[-\w]+)/comment/(?P<pk>\d+)/delete/$', views.MeetCommentDeleteView.as_view(), name='meet_comment_delete'),
     url(r'^@/(?P<slug>[-\w]+)/update/$', views.UpdateMeetView.as_view(), name='update_meet'),
     url(r'^@/(?P<slug>[-\w]+)/faaaaiilll!/$', views.MeetUpdateFail.as_view(), name='meet_update_fail'),
+    url(r'^@/(?P<slug>[-\w]+)/message/$', views.AdminMessageCreate.as_view(), name="meet-admin-message"),
     url(r'^meets-overview/', views.MeetsMarkersList.as_view(), name="meets_markers"),
 ]

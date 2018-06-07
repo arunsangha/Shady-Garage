@@ -105,3 +105,21 @@ class MeetCommentDeleteView(LoginRequiredMixin, DeleteView):
 
 class MeetsMarkersList(TemplateView):
     template_name = 'meets/meets_markers_list.html'
+
+
+class AdminMessageCreate(CreateView):
+    template_name = 'meets/adminmessage_form.html'
+    form_class = forms.AdminMessageForm
+
+    def form_valid(self, form):
+        admin_message = form.save(commit=False)
+        meet_slug = self.kwargs.get('slug')
+        meet = models.Meet.objects.get(slug=meet_slug)
+        request_user = self.request.user
+        if request_user == meet.user_fk:
+            admin_message.user = request_user
+            admin_message.meet = meet
+            admin_message.save()
+            return HttpResponseRedirect(reverse("meets:single", kwargs={'slug':slug}))
+
+        return HttpResponseRedirect(reverse("meets:single", kwargs={'slug':slug}))
