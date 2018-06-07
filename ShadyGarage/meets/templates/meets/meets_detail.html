@@ -59,23 +59,29 @@
     <div class="meet-commentcontainer">
 
       {% for comment in meet.meet_comment.all %}
-        <div class="commentcontainer-comment">
-          <div class="commentcontainer-userinfo">
-            <div class="commentcontainer-userinfo-profilepiccontainer">
-              <img class="commentcontainer-userinfo-profilepic" src="{{comment.user.profile.profile_pic.url}}" alt="bilde">
-            </div>
-            <div class="commentcontainer-userinfo-textinfo">
-              <p>Bruker:<a href="{%url 'accounts:profile_page_pk' pk=comment.user.pk %}">{{comment.user}}</a></p>
-              <p>Dato: {{comment.created|timesince}}</p>
-            </div>
-          </div>
-          <div class="commentcontainer-commentfield">
-            <p>{{comment.comment}}</p>
-            {% if request.user == comment.user %}
-              <a href="{% url 'meets:meet_comment_delete' slug=meet.slug pk=comment.id %}" class="btn btn-danger btn-sm">Slett</a>
-            {% endif %}
-          </div>
-        </div>
+
+
+
+<div class="activity-card">
+                <div class="activity-card-body">
+                  <div class="activity-card-profileinfo">
+                    <img class="acitivity-card-image" src="{{comment.user.profile.profile_pic.url}}" alt="">
+                    <h6><span id="activity-card-username"><a href="{%url 'accounts:profile_page_pk' pk=comment.user.pk %}">{{comment.user}}</a><span></h6>
+                  </div>
+                  <div class="activity-card-comment">
+                    <p id="acitivty-card-comment" style="color:black;">"{{comment.comment}}"</p>
+                  </div>
+                  <div class="test" style="display:flex; flex-direction:column">
+
+          {% if request.user == comment.user %}
+            <a href="{% url 'meets:meet_comment_delete' slug=meet.slug pk=comment.id %}" class="btn btn-danger btn-sm">Slett</a>
+          {% endif %}
+                  </div>
+                </div>
+                 <div class="activity-card-footer">
+                    <p style="color:black;">For {{comment.created|timesince}} siden</p>
+                 </div>
+              </div>
       {% endfor %}
     </div>
   </div>
