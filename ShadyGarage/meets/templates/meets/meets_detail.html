@@ -7,6 +7,7 @@
 <div class="meet-detail-owner-container">
   <a href="{% url 'meets:delete_meet' slug=meet.slug%}" class="btn btn-danger">Slett</a>
   <a href="{% url 'meets:update_meet' slug=meet.slug%}" class="btn btn-info">Oppdater</a>
+  <a href="{% url 'meets:meet-admin-message' slug=meet.slug%}" class="btn btn-info">Melding!</a>
 </div>
 {% endif %}
   {% if user.is_authenticated %}

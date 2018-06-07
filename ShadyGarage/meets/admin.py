@@ -4,3 +4,4 @@ from . import models
 
 admin.site.register(models.Meet)
 admin.site.register(models.Meet_Comment)
+admin.site.register(models.MeetAdminMessage)

@@ -117,9 +117,9 @@ class AdminMessageCreate(CreateView):
         meet = models.Meet.objects.get(slug=meet_slug)
         request_user = self.request.user
         if request_user == meet.user_fk:
-            admin_message.user = request_user
+            admin_message.owner = request_user
             admin_message.meet = meet
             admin_message.save()
-            return HttpResponseRedirect(reverse("meets:single", kwargs={'slug':slug}))
+            return HttpResponseRedirect(reverse("meets:single", kwargs={'slug':meet_slug}))
 
-        return HttpResponseRedirect(reverse("meets:single", kwargs={'slug':slug}))
+        return HttpResponseRedirect(reverse("meets:single", kwargs={'slug':meet_slug}))
