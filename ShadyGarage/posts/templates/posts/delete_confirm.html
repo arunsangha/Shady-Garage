@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 {% block body %}
-<div class="container">
+<div class="container" align="center">
   <div class="jumbotron">
     <form method="post">
       {% csrf_token %}
       {% if object.post_image %}<img src="{{object.thumbnail.url}}" width="30%" heigth="30%">{% endif %}
-      <h3 class="display-4"><span class="badge badge-warning">{{object.post_title}}</span></h3>
+      <h3 class="display-6"><span class="badge badge-warning">{{object.post_title}}</span></h3>
       {% if object.post_description %}<h6 class="display-5"><span class="badge badge-warning">
         {{object.post_description}}</span></h6>{% endif %}
       <p class="lead">Sikker på at du vil slette posten?</p>
@@ -14,7 +14,7 @@
     </form>
   </div>
   <div id="gif" align="center">
-    <iframe src="https://giphy.com/embed/kqu0JnieiuhGw" width="480" height="256" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+    <iframe src="https://giphy.com/embed/kqu0JnieiuhGw" id="delete-gif" width="480" height="256" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
   </div>
 </div>
 {% endblock %}

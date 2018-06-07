@@ -1,8 +1,16 @@
 {% extends "base.html" %}
 {% block body %}
-  <form method="post">
-    {% csrf_token %}
-    <h4>Sikker på at du vil slette treffet?</h4>
-    <input type="submit" class="btn btn-danger" value="Bekreft">
-  </form>
+<div class="container" align="center">
+  <div class="jumbotron">
+    <form method="post">
+      {% csrf_token %}
+      <h3 class="display-6">Sikker på at du vil slette treffet?</h3>
+      <hr class="my-4">
+      <input type="submit" class="btn btn-danger" value="Slett">
+    </form>
+  </div>
+  <div id="gif" align="center">
+    <iframe src="https://giphy.com/embed/kqu0JnieiuhGw" id="delete-gif" width="480" height="256" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+  </div>
+</div>
 {% endblock %}
