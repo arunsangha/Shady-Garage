@@ -8,6 +8,7 @@
   --main-light-color: #a0a0a0;
   --main-yellow-color: #FFFF00;
   --main-black-color: #212121;
+  --main-red-color: #b81c17;
 }
 
 
@@ -82,6 +83,33 @@ h1,h2,h3,h4,h5,h6{
     color: black;
     border-radius: 20px;
     border: 2px solid var(--main-yellow-color);
+    padding: 5px;
+    background-color: Transparent;
+    text-align: center;
+}
+
+.red-button{
+  width: 120px;
+  color: black;
+  border-radius: 20px;
+  border: 2px solid var(--main-dark-color);
+  padding: 5px;
+  background-color: var(--main-red-color);
+  text-align: center;
+}
+
+.red-button:hover{
+    border: 2px solid var(--main-red-color);
+    background-color: Transparent;
+    color: white;
+}
+
+
+.red-button-outline{
+    width: 120px;
+    color: black;
+    border-radius: 20px;
+    border: 2px solid var(--main-red-color);
     padding: 5px;
     background-color: Transparent;
     text-align: center;
@@ -778,8 +806,8 @@ h1,h2,h3,h4,h5,h6{
 }
 
 .post-detail-owner-buttons{
-  position: absolute;
   display: block;
+  margin: 10px;
 }
 .post-detail-top-text a h2{
   color: white;
