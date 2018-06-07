@@ -54,15 +54,30 @@
   font-size: 30px;
 }
 
-.activity-card-comment{
+.activity-card-profileinfo{
+  display: flex;
+  flex-direction: row;
+  padding: 5px;
+  width: 100%;
+}
+
+.activity-card-profileinfo h6{
+  padding: 10px;
+}
+
+.activity-card-comment{  
   display: flex;
   flex-direction: column;
-  margin-right: 40px;
+  padding: 10px;  
+  word-break: break-word;
+  width: 100%;
 }
+
 #activity-card-delete-button{
   width: 17px;
   height: 17px;
 }
+
 .activity-card-footer{
   display: flex;
   justify-content: flex-end;

@@ -75,13 +75,13 @@
           if(value.comment_replys > 0){
             $(".post-commentcontainer").append(
               `
-
               <div class="activity-card">
                   <div class="activity-card-body">
-                    <img class="acitivity-card-image" src="${profile_pic}" alt="">
+                    <div class="activity-card-profileinfo">
+                      <img class="acitivity-card-image" src="${profile_pic}" alt="">
+                      <h6><span id="activity-card-username"><a href="${value.user_fk.url}">${value.user_fk.username}</a><span></h6>                    
+                    </div>
                     <div class="activity-card-comment">
-                      <h6><span id="activity-card-username"><a href="${value.user_fk.url}">${value.user_fk.username}</a><span>
-                  </h6>
                       <p id="acitivty-card-comment" style="color:black;">"${value.comment}"</p>
                     </div>
                     <div class="test" style="display:flex; flex-direction:column">
@@ -101,10 +101,11 @@
 
               <div class="activity-card">
                   <div class="activity-card-body">
-                    <img class="acitivity-card-image" src="${profile_pic}" alt="">
+                    <div class="activity-card-profileinfo">
+                      <img class="acitivity-card-image" src="${profile_pic}" alt="">
+                      <h6><span id="activity-card-username"><a href="${value.user_fk.url}">${value.user_fk.username}</a><span></h6>                    
+                    </div>
                     <div class="activity-card-comment">
-                      <h6><span id="activity-card-username"><a href="${value.user_fk.url}">${value.user_fk.username}</a><span>
-                  </h6>
                       <p id="acitivty-card-comment" style="color:black;">"${value.comment}"</p>
                     </div>
                     <div class="test" style="display:flex; flex-direction:column">
