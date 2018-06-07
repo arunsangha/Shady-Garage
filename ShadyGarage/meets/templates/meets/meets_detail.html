@@ -51,8 +51,8 @@
         {% endif %}
       {% endfor %}
 
-      <a href="#" class="meet_join_button" id="join_button" data-id="{{ meet.pk }}">Jeg vil være med!</a>
-      <a href="{% url 'meets:comment_meet' slug=meet.slug %}" class="meet-comment-button">Kommenter</a>
+      <a href="#" id="join_button" data-id="{{ meet.pk }}" class="button blue-btn">Bli med!</a>
+      <a href="{% url 'meets:comment_meet' slug=meet.slug %}" class="button yellow-btn">Kommenter</a>
 
     </div>
 
