@@ -13,8 +13,8 @@
       <p class="post-detail-post-comment"> "{{ post.post_description}}" </p>
       {% if request.user == post.user_fk %}
       <div class="post-detail-owner-buttons">
-        <a href="{% url 'posts:post_delete' slug=post.slug %} " class="red-button">Slett post!</a>
-        <a href="{% url 'posts:post_update' slug=post.slug %}" class="yellow-button">Oppdater post!</a>
+        <a href="{% url 'posts:post_delete' slug=post.slug %} " class="button red-btn">Slett post!</a>
+        <a href="{% url 'posts:post_update' slug=post.slug %}" class="button blue-btn">Oppdater post!</a>
       </div>
       {% endif %}
     </div>
@@ -31,9 +31,9 @@
         <input type="image" src="{% static 'images/facebooklogo.png'%}" class="facebookShare" id="facebookSharePost"/>
       </a>
     </div>
-    <a class="post-detail-like-button" href="" data-id="{{post.id}}">
+    <a class="button yellow-btn" href="" data-id="{{post.id}}">
       {% if request.user in post.post_likes.all %} Likt {% else %} Like!{% endif %}</a>
-    <a class="post-detail-comment-button" href="{% url 'posts:post_comment' slug=post.slug%}">Kommenter</a>
+    <a class="button blue-btn" href="{% url 'posts:post_comment' slug=post.slug%}">Kommenter</a>
     <div class="post-commentcontainer">
 
     </div>
@@ -79,7 +79,7 @@
                   <div class="activity-card-body">
                     <div class="activity-card-profileinfo">
                       <img class="acitivity-card-image" src="${profile_pic}" alt="">
-                      <h6><span id="activity-card-username"><a href="${value.user_fk.url}">${value.user_fk.username}</a><span></h6>                    
+                      <h6><span id="activity-card-username"><a href="${value.user_fk.url}">${value.user_fk.username}</a><span></h6>
                     </div>
                     <div class="activity-card-comment">
                       <p id="acitivty-card-comment" style="color:black;">"${value.comment}"</p>
@@ -103,7 +103,7 @@
                   <div class="activity-card-body">
                     <div class="activity-card-profileinfo">
                       <img class="acitivity-card-image" src="${profile_pic}" alt="">
-                      <h6><span id="activity-card-username"><a href="${value.user_fk.url}">${value.user_fk.username}</a><span></h6>                    
+                      <h6><span id="activity-card-username"><a href="${value.user_fk.url}">${value.user_fk.username}</a><span></h6>
                     </div>
                     <div class="activity-card-comment">
                       <p id="acitivty-card-comment" style="color:black;">"${value.comment}"</p>
