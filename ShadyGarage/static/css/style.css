@@ -3,11 +3,12 @@
 */
 
 :root{
-  --button-color: #17a2b8;
+  --main-blue-color: #17a2b8;
   --main-dark-color: #2E2E2E;
   --main-light-color: #a0a0a0;
   --main-yellow-color: #FFFF00;
   --main-black-color: #212121;
+  --main-red-color: #b81c17;
 }
 
 
@@ -60,24 +61,39 @@ h1,h2,h3,h4,h5,h6{
   height: 40px;
 }
 
-.yellow-button{
+.button{
   width: 120px;
   color: black;
   border-radius: 20px;
-  border: 2px solid var(--main-dark-color);
   padding: 5px;
-  background-color: var(--main-yellow-color);
   text-align: center;
+  margin: 5px;
 }
 
-.yellow-button:hover{
+.yellow-btn{
+  background-color: var(--main-yellow-color);
+  border: 2px solid var(--main-dark-color);
+}
+
+.red-btn{
+  background-color: var(--main-red-color);
+  border: 2px solid var(--main-dark-color);
+}
+
+.blue-btn{
+  background-color: var(--main-blue-color);
+  border: 2px solid var(--main-dark-color);
+
+}
+
+.button:hover{
     border: 2px solid var(--main-yellow-color);
     background-color: Transparent;
     color: white;
 }
 
 
-.yellow-button-outline{
+.button-outline{
     width: 120px;
     color: black;
     border-radius: 20px;
@@ -87,25 +103,9 @@ h1,h2,h3,h4,h5,h6{
     text-align: center;
 }
 
-
-.yellow-button-outline:hover{
+.button-outline:hover{
   background-color: var(--main-yellow-color);
   color:black;
-}
-
-.blue-button{
-  width: 120px;
-  color: white;
-  border-radius: 20px;
-  background-color: var(--button-color);
-  padding: 5px;
-  text-align: center;
-}
-
-.blue-button:hover{
-  color: black;
-  background-color: transparent;
-  border: 2px solid var(--button-color);
 }
 
 .linear-gradient-background{
@@ -160,7 +160,7 @@ h1,h2,h3,h4,h5,h6{
 }
 
 .nav-list-item-link:hover{
-  color: var(--button-color);
+  color: var(--main-blue-color);
 }
 
 @media only screen and (max-width: 1110px){
@@ -286,7 +286,7 @@ h1,h2,h3,h4,h5,h6{
 
 .index-card-button{
    display: block;
-   background-color: var(--button-color);
+   background-color: var(--main-blue-color);
    color: white;
    padding: 10px;
    border-radius: 4px;
@@ -416,7 +416,7 @@ h1,h2,h3,h4,h5,h6{
 }
 
 .meet-card-joinbutton:hover{
- color: var(--button-color);
+ color: var(--main-blue-color);
  background-color: #2E2E2E;
 }
 
@@ -536,7 +536,7 @@ h1,h2,h3,h4,h5,h6{
 }
 
 .meet_join_button{
-  background-color: var(--button-color);
+  background-color: var(--main-blue-color);
   border:none;
   color:white;
   text-align: center;
@@ -550,7 +550,7 @@ h1,h2,h3,h4,h5,h6{
 
 .meet_join_button:hover{
   background-color: #ffff;
-  color:var(--button-color);
+  color:var(--main-blue-color);
 }
 
 .meet-comment-button{
@@ -569,7 +569,7 @@ h1,h2,h3,h4,h5,h6{
 .meet-comment-button:hover{
   background-color: rgba(0,0,0,0.1);
   color: white;
-  border: 1px solid var(--button-color);
+  border: 1px solid var(--main-blue-color);
 }
 
 @media only screen and (max-width: 480px){
@@ -693,7 +693,7 @@ h1,h2,h3,h4,h5,h6{
 .post-list-card-title a:hover{
   word-wrap: break-word;
   word-break: break-all;
-  color: var(--button-color);
+  color: var(--main-blue-color);
 }
 
 .post-list-card-body{
@@ -778,8 +778,8 @@ h1,h2,h3,h4,h5,h6{
 }
 
 .post-detail-owner-buttons{
-  position: absolute;
   display: block;
+  margin: 10px;
 }
 .post-detail-top-text a h2{
   color: white;
@@ -804,7 +804,7 @@ h1,h2,h3,h4,h5,h6{
 }
 
 .post-detail-top-text a h2:hover{
-  color: var(--button-color);
+  color: var(--main-blue-color);
 }
 
 .post-container{
@@ -853,17 +853,7 @@ h1,h2,h3,h4,h5,h6{
      border-top-left-radius: 5px;
      border-top-right-radius: 5px;
 }
-/*.modal-body{
-  background: linear-gradient(var(--main-dark-color), var(--button-color), var(--button-color));
-  color:white;
-}
-*/
-/*.modal-footer{
-  background-image: url('../../../static/images/Gorilla-logo.png');
-  background-repeat: no-repeat;
-  background-position: left;
-  background-size: contain;
-}*/
+
 #exampleModalCenter{
   background-image: url('../../static/images/Gorilla-logo.png');
   background-repeat: no-repeat;
@@ -877,7 +867,7 @@ h1,h2,h3,h4,h5,h6{
 }
 
 .user-id a:hover{
-  color:var(--button-color);
+  color:var(--main-blue-color);
 }
 #sharePost{
     margin-top: 20px;
