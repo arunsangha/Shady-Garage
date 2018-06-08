@@ -70,7 +70,14 @@
           var username = value.user_fk.username
           var id_ = value.user_fk.id
           var profile_pic = value.user_fk.profile.thumbnail
+          var request_user = {{request.user.id}}
 
+          // TODO: Greier å sjekke om bruker på siden eier kommentaren. Nå må jeg legge til urlen på en knapp
+          var delete_comment_url = ''
+          if(request_user = value.user_fk.id){
+            delete_comment_url = '../../../shady/' + value.post_fk.slug + '/comment/'+ value.id + '/delete/'
+
+          }
 
           if(value.comment_replys > 0){
             $(".post-commentcontainer").append(
