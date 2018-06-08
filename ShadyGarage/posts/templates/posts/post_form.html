@@ -3,8 +3,6 @@
 {% load bootstrap3 %}
 {% block title %} Shady Post{% endblock %}
 {% block body %}
-<!--NB: Dette må være med pga linear background er kun et bilde som blir lagt inn-->
-
 <div class="linear-gradient-background">
 <div id="loading-screen" style="display:none;">
   <img src="{% static 'images/loading-screen.gif'%}" alt="" id="loading-screen-image">
@@ -14,7 +12,7 @@
       <form method="post" id="myform">
           {% csrf_token %}
           {% bootstrap_form form%}
-          <input type="submit" name="" class="yellow-button" value="Del!">
+          <input type="submit" name="" class="btn btn-info" value="Del!">
       </form>
     </div>
 

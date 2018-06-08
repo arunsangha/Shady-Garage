@@ -64,7 +64,7 @@ h1,h2,h3,h4,h5,h6{
 .button{
   width: 120px;
   color: white;
-  border-radius: 5px;
+  border-radius: 7px;
   padding: 5px;
   text-align: center;
   margin: 5px;
@@ -654,10 +654,10 @@ h1,h2,h3,h4,h5,h6{
   background-position: bottom;
 }
 
-@media only screen and(max-width:480px){
+@media only screen and (max-width:480px){
   #commentModal{
     top:200px;
-    background-size: 80% 60%;
+    background-size: 70%;
   }
 }
 
@@ -1261,10 +1261,13 @@ h1,h2,h3,h4,h5,h6{
 }
 
 .form-container{
+  padding-top: 10px;
   display: block;
-  width: 80%;
+  width: 50%;
   margin: 0 auto;
 }
+
+
 
 .signup-form-container{
   background-color: rgba(0,0,0, 0.7);
@@ -1297,6 +1300,12 @@ h1,h2,h3,h4,h5,h6{
   color: white;
 }
 
+.change-password-form{
+  display: block;
+  width: 50%;
+  margin: 0 auto;
+}
+
 @media only screen and (max-width: 480px){
   .form-container{
     width: 90%;
@@ -1307,6 +1316,11 @@ h1,h2,h3,h4,h5,h6{
     padding: 30px;
     width: 90%;
   }
+
+  .change-password-form{
+    width: 90%;
+  }
+
 }
 
 

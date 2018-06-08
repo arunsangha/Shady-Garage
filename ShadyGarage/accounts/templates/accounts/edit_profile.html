@@ -3,14 +3,13 @@
 {% load bootstrap3 %}
 {% block title %} Edit profile{% endblock %}
 {% block body %}
-<!--TODO:Responsive fix.
--->
-  <h3 class="profile-edit-title">Edit Profile</h3>
-  <div class="form-container">
-    <form method="POST" enctype="multipart/form-data">
-      {% csrf_token %}
-      {% bootstrap_form form%}
-      <input type="submit" value="Lagre!">
-    </form>
-  </div>
+    <div class="form-container">
+      <h3 class="profile-edit-title" align="center">Edit Profile</h3>
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% bootstrap_form form%}
+        <input type="submit" class="btn btn-info" value="Lagre!">
+      </form>
+    </div>
+
 {% endblock %}

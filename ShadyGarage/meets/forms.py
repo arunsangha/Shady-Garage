@@ -28,6 +28,11 @@ class CommentForm(forms.ModelForm):
         model = models.Meet_Comment
         fields = ('comment',)
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['comment'].label = "Kommentar:"
+        self.fields['comment'].widget.attrs.update({'placeholder': 'F.eks: Hva slags biler kommer folk med? :D'})
+
 class AdminMessageForm(forms.ModelForm):
     class Meta():
         model = models.MeetAdminMessage
