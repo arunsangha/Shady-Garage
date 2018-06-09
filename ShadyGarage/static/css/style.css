@@ -75,21 +75,38 @@ h1,h2,h3,h4,h5,h6{
   color:black;
 }
 
+.yellow-btn:hover{
+  background-color: var(--main-blue-color);
+  color:white;
+}
+
 .red-btn{
-  background-color: var(--main-red-color);
+  background-color: Transparent;
+  color:black;
+  border: 2px solid var(--main-red-color);
+}
+
+.red-btn:hover{
+  background-color: var(--main-yellow-color);
+  color:black;
 }
 
 .blue-btn{
   background-color: var(--main-blue-color);
 }
 
-
-
-.button:hover{
-    color: white;
-    background-color: Transparent;
-    border: 2px solid var(--main-black-color);
+.blue-btn:hover{
+  background-color: var(--main-yellow-color);
+  color: black;
 }
+
+
+
+/*.button:hover{
+    color: black;
+    background-color: white;
+    border: 2px solid var(--main-blue-color)
+}*/
 
 
 .button-outline{
