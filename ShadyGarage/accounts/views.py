@@ -1,5 +1,5 @@
-from django.shortcuts import render, redirect
-from django.core.urlresolvers import reverse_lazy
+from django.shortcuts import render, redirect, HttpResponseRedirect
+from django.core.urlresolvers import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import authenticate, login, logout
@@ -19,23 +19,27 @@ def signup(request):
             new_user = user_form.save()
             new_user = authenticate(username = user_form.cleaned_data['username'], password = user_form.cleaned_data['password1'],)
             login(request, new_user)
-            return redirect("accounts:signup_del2")
+            id = new_user.id
+            return HttpResponseRedirect(reverse("accounts:signup_del2", kwargs={'pk':request.user.id}))
+
 
     else:
         user_form = forms.UserForm()
     return render(request, "accounts/signup.html", {'user_form': user_form})
 
-class ProfileInfo(CreateView, LoginRequiredMixin):
+class ProfileInfo(UpdateView, LoginRequiredMixin):
+    queryset = models.Profile.objects.all()
     form_class = forms.ProfileForm
     template_name = "accounts/profile_info.html"
-    success_url = reverse_lazy('meets:meets_list')
 
     def form_valid(self, form):
-        self.object = form.save(commit = False)
-        self.object.user = self.request.user
-        self.object.save()
-        return super().form_valid(form)
+        if form.instance.user == self.request.user:
+            return super(ProfileInfo, self).form_valid(form)
+        else:
+            return HttpResponseRedirect(reverse("accounts:signup"))
 
+    def get_success_url(self, *args, **kwargs):
+        return reverse_lazy("meets:meets_list")
 
 class ProfilePage(TemplateView):
     template_name = "accounts/profilepage.html"

@@ -74,9 +74,9 @@
 
           // TODO: Greier å sjekke om bruker på siden eier kommentaren. Nå må jeg legge til urlen på en knapp
           var delete_comment_url = ''
-          if(request_user = value.user_fk.id){
-            delete_comment_url = '../../../shady/' + value.post_fk.slug + '/comment/'+ value.id + '/delete/'
-
+          if(request_user == value.user_fk.id){
+            delete_comment_url = '<a href="../../../posts/shady/' + value.post_fk.slug + '/comment/'+ value.id + '/delete/" class="btn btn-danger">Slett </a>'
+            console.log(delete_comment_url)
           }
 
           if(value.comment_replys > 0){
@@ -94,6 +94,7 @@
                     <div class="test" style="display:flex; flex-direction:column">
                     <a href="#" id="answerComment" class="btn btn-warning btn-sm" data-slug="${value.post_fk.slug}" data-id="${value.id}">Svar</a>
                     <a href="#" id="commentReplyButton" data-comment-user="${value.user_fk.username}" data-id="${value.id}" class="btn btn-danger btn-sm"> Se svar <span class="badge badge-light">${value.comment_replys}</span></a>
+                    ${delete_comment_url}
                     </div>
                   </div>
                    <div class="activity-card-footer">
@@ -117,6 +118,7 @@
                     </div>
                     <div class="test" style="display:flex; flex-direction:column">
                     <a href="#" id="answerComment" class="btn btn-warning btn-sm" data-slug="${value.post_fk.slug}" data-id="${value.id}">Svar</a>
+                    ${delete_comment_url}
                     </div>
                   </div>
                    <div class="activity-card-footer">
