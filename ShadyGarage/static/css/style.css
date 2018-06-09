@@ -150,6 +150,12 @@ h1,h2,h3,h4,h5,h6{
 }
 
 
+
+.comment-form{
+  padding: 20px;
+  border-radius: 10px;
+  border: 2px solid var(--main-yellow-color);
+}
 /*
 ------------------------------------
   Nav

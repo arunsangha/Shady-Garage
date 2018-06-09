@@ -2,11 +2,13 @@
 {% load bootstrap3 %}
 {% block title %} Meet Comment{% endblock %}
 {% block body %}
+<div class="linear-gradient-background">
   <div class="container">
-    <form method="post">
+    <form method="post" class="comment-form">
       {% csrf_token %}
       {% bootstrap_form form%}
       <input type="submit" class="btn btn-info" name="" value="Kommenter">
     </form>
   </div>
+</div>
 {% endblock %}
