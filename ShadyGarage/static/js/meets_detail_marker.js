@@ -208,17 +208,15 @@ function mapSelector(e){
   console.log(long)
   var ua = navigator.userAgent.toLowerCase();
   var isAndroid = ua.indexOf("android") > -1; //&& ua.indexOf("mobile");
-  if(isAndroid) {
-  // Do something!
-  // Redirect to Android-site?
-  window.location = "https://www.google.com/maps/place/?q=place_id:" + placeid;
-  }
+
   var url = "";
   /* if we're on iOS, open in Apple Maps */
   if ((navigator.platform.indexOf("iPhone") != -1) || (navigator.platform.indexOf("iPad") != -1) || (navigator.platform.indexOf("iPod") != -1)){
       url = "comgooglemaps://?q=" + location;
-  } else{
+        window.open(url);
+  }else if(isAndroid){
+    window.location = "https://www.google.com/maps/place/?q=place_id:" + placeid;
+  }else{
       url = "https://www.google.com/maps/place/?q=place_id:" + placeid;
+      window.open(url);
   }
-  window.open(url);
-}
