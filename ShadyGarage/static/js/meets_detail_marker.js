@@ -211,7 +211,7 @@ function mapSelector(e){
   if(isAndroid) {
   // Do something!
   // Redirect to Android-site?
-  window.location = 'http://android.davidwalsh.name';
+  window.location = "https://www.google.com/maps/place/?q=place_id:" + placeid;
   }
   var url = "";
   /* if we're on iOS, open in Apple Maps */
@@ -220,5 +220,5 @@ function mapSelector(e){
   } else{
       url = "https://www.google.com/maps/place/?q=place_id:" + placeid;
   }
-    window.open(url);
+  window.open(url);
 }
