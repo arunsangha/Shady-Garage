@@ -220,3 +220,5 @@ function mapSelector(e){
       url = "https://www.google.com/maps/place/?q=place_id:" + placeid;
       window.open(url);
   }
+
+}
