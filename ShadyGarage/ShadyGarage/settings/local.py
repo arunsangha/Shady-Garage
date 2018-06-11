@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 MEDIA_DIR = os.path.join(BASE_DIR, "media")
 
@@ -25,10 +25,9 @@ MEDIA_DIR = os.path.join(BASE_DIR, "media")
 SECRET_KEY = 'v2!n)ux548qgm3rpvh%fttfd#_&gryjjlnie-)c$x0soa4u@kb'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-ALLOWED_HOSTS = ['shadygarage.pythonanywhere.com',
-    '127.0.0.1', 'www.shadygarage.no',
-]
+DEBUG = True
+ALLOWED_HOSTS = [ '127.0.0.1',
+        ]
 
 # Application definition
 
@@ -88,11 +87,8 @@ WSGI_APPLICATION = 'ShadyGarage.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'shadygarage$ShadyDB',
-        'USER': 'shadygarage',
-        'PASSWORD': 'heipådeg97',
-        'HOST': 'shadygarage.mysql.pythonanywhere-services.com',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'db.sqlite3',
     }
 }
 
