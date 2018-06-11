@@ -691,6 +691,15 @@ h1,h2,h3,h4,h5,h6{
   margin: 0 auto;
 }
 
+#post-card-link{
+  color:white;
+}
+
+#post-card-link:hover{
+  color: white;
+  text-decoration: none;
+}
+
 .post-list-card{
   color: white;
   display: flex;

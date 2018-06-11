@@ -108,14 +108,16 @@
                   <div class='post-list-card-header'>
                     ${user_name}
                   </div>
+                  <a href='${value.url}' id="post-card-link">
                   <div class='post-list-card-body'>
                     <h3 class='post-list-card-title'>
-                      <a href='${value.url}'>${post_title}</a>
+                      ${post_title}
                     </h3>
 
                    <div class='post-list-card-image'>
                     <img src='${value.thumbnail}' id='postImageFeed'>
                    </div>
+                   </a>
                 </div>
                 <div class='post-list-card-footer'>
                     <a href='#' data-id='${value.id}' class="like-button">
