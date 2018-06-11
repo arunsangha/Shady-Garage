@@ -13,8 +13,8 @@
       <p class="post-detail-post-comment"> "{{ post.post_description}}" </p>
       {% if request.user == post.user_fk %}
       <div class="post-detail-owner-buttons">
-        <a href="{% url 'posts:post_delete' slug=post.slug %} " class="button red-btn">Slett post!</a>
-        <a href="{% url 'posts:post_update' slug=post.slug %}" class="button blue-btn">Oppdater post!</a>
+        <a href="{% url 'posts:post_delete' slug=post.slug %} " class="button red-btn">Slett!</a>
+        <a href="{% url 'posts:post_update' slug=post.slug %}" class="button blue-btn">Oppdater!</a>
       </div>
       {% endif %}
     </div>

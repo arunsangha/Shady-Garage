@@ -9,26 +9,18 @@
     background-size: cover;
     background-repeat: no-repeat;
   }
-  /* TODO: funker ikke for skjermer med wi */
-  @media only screen and (max-width: 1024px){
+  @media only screen and (max-width:480px){
     body{
-      background-image: url({%static 'images/signupdel2.jpeg'%});
-      background-size: initial;
-      background-position: left;
+      background-image: none;
     }
   }
 
-  @media only screen and (max-width:640px){
-    body{
-      background-image: url({%static 'images/signupdel2_mobile.png'%});
-      background-size: cover;
-      background-position: center;
-
-    }
+  @media only screen and (max-width:1366px){
 
   }
-
 </style>
+
+<div class="sign-up-2-background">
    <div class="signupdel2-container">
      <div class="signupdel2-form-container">
        <h4> Når du trykker ferdig, vil du bli bedt om å logge inn.
@@ -40,5 +32,5 @@
        </form>
      </div>
    </div>
-
+</div>
 {% endblock %}
