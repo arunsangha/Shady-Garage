@@ -203,9 +203,6 @@ function mapSelector(e){
   var lat = document.getElementById("navigationButton").getAttribute("data-lat");
   var long = document.getElementById("navigationButton").getAttribute("data-long");
   var location = document.getElementById("navigationButton").getAttribute("data-location");
-  console.log(placeid);
-  console.log(lat)
-  console.log(long)
   var ua = navigator.userAgent.toLowerCase();
   var isAndroid = ua.indexOf("android") > -1; //&& ua.indexOf("mobile");
 

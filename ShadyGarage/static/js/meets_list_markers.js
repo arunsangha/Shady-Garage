@@ -169,7 +169,7 @@ function initMap() {
          meetsList = data.results;
          nextUrl = data.nextUrl;
          $.each(meetsList, function(key, value){
-           console.log(value.location)
+
            if(value.location){
              var geocoder = new google.maps.Geocoder();
              var location = value.location
@@ -179,9 +179,11 @@ function initMap() {
              geocoder.geocode({'address':location}, function(results, status){
                if(status === google.maps.GeocoderStatus.OK){
                    placeid = results[0].place_id;
+                   lat = results[0].geometry.location.lat();
+                   long = results[0].geometry.location.lng();
                    contentString = '<div id="content">'+
-                            '<a href="' + meetUrl + '"class="btn btn-info"> Detail </a> <hr>' +
-                           '<a href="https://www.google.com/maps/place/?q=place_id:' + placeid +'"target="_blank" class="btn btn-info">Ta meg hit</a></div>';
+                            '<a href="' + meetUrl + '"class="btn btn-info"> Info </a> <hr>' +
+                            '<a href="#" onclick="mapSelector(event)" data-location="' + location + '"data-placeid="' + placeid +'" data-lat="' + lat + '" data-long="'+ long+'"class="btn btn-info" id="navigationButton">Ta meg hit</a></div>';
 
                      marker = new google.maps.Marker({
                      map:map,
@@ -220,3 +222,27 @@ function initMap() {
       $("div ul").toggleClass("nav-list-open");
     });
    });
+
+
+   function mapSelector(e){
+     e.preventDefault();
+     var placeid = document.getElementById("navigationButton").getAttribute("data-placeid");
+     var lat = document.getElementById("navigationButton").getAttribute("data-lat");
+     var long = document.getElementById("navigationButton").getAttribute("data-long");
+     var location = document.getElementById("navigationButton").getAttribute("data-location");
+     var ua = navigator.userAgent.toLowerCase();
+     var isAndroid = ua.indexOf("android") > -1; //&& ua.indexOf("mobile");
+
+     var url = "";
+     /* if we're on iOS, open in Apple Maps */
+     if ((navigator.platform.indexOf("iPhone") != -1) || (navigator.platform.indexOf("iPad") != -1) || (navigator.platform.indexOf("iPod") != -1)){
+         url = "comgooglemaps://?q=" + location;
+         window.open(url);
+     }else if(isAndroid){
+       window.open("geo:"+ lat +"," + long)
+     }else{
+         url = "https://www.google.com/maps/place/?q=place_id:" + placeid;
+         window.open(url);
+     }
+
+   }
