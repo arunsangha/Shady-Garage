@@ -213,9 +213,9 @@ function mapSelector(e){
   /* if we're on iOS, open in Apple Maps */
   if ((navigator.platform.indexOf("iPhone") != -1) || (navigator.platform.indexOf("iPad") != -1) || (navigator.platform.indexOf("iPod") != -1)){
       url = "comgooglemaps://?q=" + location;
-        window.open(url);
+      window.open(url);
   }else if(isAndroid){
-    window.location = "https://www.google.com/maps/place/?q=place_id:" + placeid;
+    window.open("geo:"+ lat +"," + long)
   }else{
       url = "https://www.google.com/maps/place/?q=place_id:" + placeid;
       window.open(url);
