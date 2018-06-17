@@ -23,17 +23,18 @@
       {% if post.post_image %}
       <img src="{{post.post_image.url}}" alt="" class="post-detail-image">
       {% endif %}
-      <p id="post-detail-timesince"> For {{post.post_created|timesince}}</p>
-        <!--
-          //TODO:!LANSERING! Bytte ut u=www.shadygarage.pythonanywhere.com/{{request.get_full_path}}" med  u=www.shadygarage.com/{{request.get_full_path}}
-        -->
-      <a href="https://www.facebook.com/sharer/sharer.php?u=shadygarage.pythonanywhere.com/{{request.get_full_path}}">
-        <input type="image" src="{% static 'images/facebooklogo.png'%}" class="facebookShare" id="facebookSharePost"/>
-      </a>
+      <div class="container post-footer" {% if post.post_image %} style="background-color: rgba(0,0,0,0.2);"{% endif %}>
+          <p id="post-detail-timesince"> For {{post.post_created|timesince}}</p>
+        <div id="post-footer-buttons">
+          <a class="button yellow-btn" href="" data-id="{{post.id}}">
+            {% if request.user in post.post_likes.all %} Likt {% else %} Like!{% endif %}</a>
+          <a class="button blue-btn" href="{% url 'posts:post_comment' slug=post.slug%}">Kommenter</a>
+        </div>
+     </div>
     </div>
-    <a class="button yellow-btn" href="" data-id="{{post.id}}">
-      {% if request.user in post.post_likes.all %} Likt {% else %} Like!{% endif %}</a>
-    <a class="button blue-btn" href="{% url 'posts:post_comment' slug=post.slug%}">Kommenter</a>
+
+
+
     <div class="post-commentcontainer">
 
     </div>

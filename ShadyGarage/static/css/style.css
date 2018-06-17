@@ -880,18 +880,35 @@ h1,h2,h3,h4,h5,h6{
   margin: 0 0 20px 0;
 }
 
+.post-footer{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  align-items: center;
+}
 
+#post-footer-buttons{
+  display: flex;
+  flex-direction: row;
+}
 
 @media only screen and (max-width:480px){
   .post-detail-top-text{
     text-align: center;
+
   }
+
+  .post-detail-top-text h2{
+    font-size: 23px;
+  }
+
   .post-container{
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 90%;
-    background-color: var(--main-dark-color);
     color: white;
     margin: 0 0 2px 0;
   }
@@ -903,6 +920,11 @@ h1,h2,h3,h4,h5,h6{
 
 }
 
+@media only screen and (max-width:320px) {
+  .post-detail-top-text h2{
+    font-size: 20px;
+  }
+}
 
 
 .modal-header {
