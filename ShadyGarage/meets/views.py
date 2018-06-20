@@ -60,7 +60,7 @@ class UpdateMeetView(LoginRequiredMixin, UpdateView):
 class MeetUpdateFail(TemplateView):
     template_name = 'update_invalid.html'
 
-class DetailMeetView(LoginRequiredMixin, DetailView):
+class DetailMeetView(DetailView):
     template_name = 'meets/meets_detail.html'
     model = models.Meet
 
