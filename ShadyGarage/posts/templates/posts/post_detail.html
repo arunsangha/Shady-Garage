@@ -23,7 +23,7 @@
       <img src="{{post.post_image.url}}" alt="" class="post-detail-image">
       {% endif %}
       <div class="container post-footer" {% if post.post_image %} style="background-color: rgba(0,0,0,0.2);"{% endif %}>
-          <p id="post-detail-timesince"> For {{post.post_created|timesince}}</p>
+          <p id="post-detail-timesince"> For {{post.post_created|timesince}} siden</p>
         <div id="post-footer-buttons">
           <a class="button yellow-btn" href="" data-id="{{post.id}}">
             {% if request.user in post.post_likes.all %} Likt {% else %} Like!{% endif %}</a>
