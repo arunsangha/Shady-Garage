@@ -887,7 +887,7 @@ h1,h2,h3,h4,h5,h6{
 .post-footer{
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 80%;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
   align-items: center;
