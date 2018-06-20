@@ -1,7 +1,13 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 {% block title %}{{meet.meet_name}}{% endblock %}
-
+{% block facebookShare %}
+  <meta property="og:url" content="http://www.shadygarage.no/{{request.path}}"/>
+  <meta property="og:type" content="article"/>
+  <meta property="og:title" content="Shady Garage | {{meet.title}}"/>
+  <meta property="og:description" content="{{meet.description|truncatechars:20}}..."/>
+  <meta property="og:image" content="{% static "images/Groilla-logo.png" %}"/>
+{% endblock %}
 {% block body %}
 {% if request.user == meet.user_fk %}
 <div class="meet-detail-owner-container">
@@ -55,7 +61,10 @@
       <a href="#" id="join_button" data-id="{{ meet.pk }}" class="button blue-btn">Bli med!</a>
       <a href="{% url 'meets:comment_meet' slug=meet.slug %}" class="button yellow-btn">Kommenter</a>
 
+
     </div>
+    <div id="fb-root"></div>
+    <div class="fb-share-button" data-href="https://www.shadygarage.no/{{request.path}};" data-layout="button" data-size="large" data-mobile-iframe="true" style="top:9px;"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.shadygarage.no%2F%257B%257Brequest.path%257D%257D&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Del</a></div>
     {% if meet.meet_admin_message.count > 0 %}
     <div class="container" align="center">
       <div class="admin-message-container">
@@ -149,4 +158,23 @@
       userJoining()
     });
   </script>
+  <script type="text/javascript">
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId            : '1828194693869674',
+        autoLogAppEvents : true,
+        xfbml            : true,
+        version          : 'v3.0'
+      });
+    };
+
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = 'https://connect.facebook.net/nb_NO/sdk.js#xfbml=1&version=v3.0&appId=1828194693869674&autoLogAppEvents=1';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  </script>
+
 {% endblock %}
