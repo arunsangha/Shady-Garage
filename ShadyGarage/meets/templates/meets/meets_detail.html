@@ -2,7 +2,12 @@
 {% load staticfiles %}
 {% block title %}{{meet.meet_name}}{% endblock %}
 {% block facebookShare %}
-
+<meta property="fb:app_id" content="1828194693869674"/>
+<meta property="og:url"      content="http://www.shadygarage.no/{{request.path}}">
+<meta property="og:type"            content="article" />
+<meta property="og:title"           content="Shady Garage Treff!" />
+<meta property="og:image"           content="http://www.shadygarage.no/static/images/Gorilla-logo.png" />
+<meta property="og:description"    content=" {{meet.title}}: {{meet.description|truncatechars:20}}" />
 {% endblock %}
 {% block body %}
 {% if request.user == meet.user_fk %}
@@ -56,7 +61,7 @@
 
       <a href="#" id="join_button" data-id="{{ meet.pk }}" class="button blue-btn">Bli med!</a>
       <a href="{% url 'meets:comment_meet' slug=meet.slug %}" class="button yellow-btn">Kommenter</a>
-
+      <a href="#"></a>
 
     </div>
     <div class="meet-detail-facebook-share" align="center">
