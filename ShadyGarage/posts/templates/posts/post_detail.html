@@ -25,9 +25,9 @@
       <div class="container post-footer" {% if post.post_image %} style="background-color: rgba(0,0,0,0.2);"{% endif %}>
           <p id="post-detail-timesince"> For {{post.post_created|timesince}} siden</p>
         <div id="post-footer-buttons">
-          <a class="button yellow-btn" href="" data-id="{{post.id}}">
-            {% if request.user in post.post_likes.all %} Likt {% else %} Like!{% endif %}</a>
-          <a class="button blue-btn" href="{% url 'posts:post_comment' slug=post.slug%}">Kommenter</a>
+          <a class="button yellow-btn post-detail-like-button" href="" data-id="{{post.id}}">
+            {% if request.user in post.post_likes.all %} Likt {% else %} Like!{% endif %} {% if post.post_likes.count > 0 %}({{post.post_likes.count}}){% endif %}</a>
+          <a class="button blue-btn" href="{% url 'posts:post_comment' slug=post.slug%}">Kommenter {% if post.post_comment_fk.count > 0 %}({{post.post_comment_fk.count}}){% endif %}</a>
         </div>
      </div>
     </div>

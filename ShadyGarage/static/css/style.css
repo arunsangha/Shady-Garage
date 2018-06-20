@@ -992,18 +992,7 @@ h1,h2,h3,h4,h5,h6{
   background-color: #00f9ff;
 }
 
-.post-detail-like-button{
-  width: 120px;
-  text-align: center;
-  color: black;
-  border-radius: 20px;
-  border: 2px solid var(--main-yellow-color);
-  padding: 5px;
-}
 
-.post-detail-like-button:hover{
-  background-color:var(--main-yellow-color);
-}
 
 .post-detail-image{
   height: 100%;

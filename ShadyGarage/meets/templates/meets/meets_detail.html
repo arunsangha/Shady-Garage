@@ -5,9 +5,9 @@
 <meta property="fb:app_id" content="1828194693869674"/>
 <meta property="og:url"      content="http://www.shadygarage.no/{{request.path}}">
 <meta property="og:type"            content="article" />
-<meta property="og:title"           content="Shady Garage Treff!" />
-<meta property="og:image"           content="http://www.shadygarage.no/static/images/Gorilla-logo.png" />
-<meta property="og:description"    content=" {{meet.title}}: {{meet.description|truncatechars:20}}" />
+<meta property="og:title"           content="Shady Garage: {{meet.meet_name}}" />
+<meta property="og:image"           content="http://www.shadygarage.no/static/images/facebook_share_image.jpeg" />
+<meta property="og:description"    content="{{meet.description|truncatechars:40}}" />
 {% endblock %}
 {% block body %}
 {% if request.user == meet.user_fk %}
