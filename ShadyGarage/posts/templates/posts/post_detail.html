@@ -20,9 +20,9 @@
 
     <div class="post-container">
       {% if post.post_image %}
-      <img src="{{post.post_image.url}}" alt="" class="post-detail-image">
+      <img src="{{post.post_image.url}}" alt="" class="post-detail-image" id="testtttttttttt">
       {% endif %}
-      <div class="container post-footer" {% if post.post_image %} style="background-color: rgba(0,0,0,0.2);"{% endif %}>
+      <div class="post-footer" {% if post.post_image %} style="background-color: rgba(0,0,0,0.2);"{% endif %}>
           <p id="post-detail-timesince"> For {{post.post_created|timesince}} siden</p>
         <div id="post-footer-buttons">
           <a class="button yellow-btn post-detail-like-button" href="" data-id="{{post.id}}">
