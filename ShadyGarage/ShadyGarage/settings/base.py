@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'meets',
     'bootstrap3',
     'posts',
+    'entertainments',
     'sorl.thumbnail',
 ]
 

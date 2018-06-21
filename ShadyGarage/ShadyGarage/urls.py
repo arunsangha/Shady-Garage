@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'^accounts/', include("django.contrib.auth.urls")),
     url(r'^meets/', include('meets.urls'), name = 'meets'),
     url(r'^posts/', include('posts.urls'), name = 'posts'),
+    url(r'^entertainment/', include('entertainments.urls'), name = "entertainments"),
     url(r'^api/posts/', include('posts.api.urls'), name="api-posts"),
     url(r'^api/meets/', include('meets.api.urls'), name="api-meets"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
