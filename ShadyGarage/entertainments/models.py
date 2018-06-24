@@ -7,7 +7,7 @@ class Entertainment(models.Model):
     title = models.CharField(max_length=255, blank=True)
     image = models.ImageField(upload_to="entertainment_pic/%Y/%M/%D/", blank=True)
     youtube_link = models.CharField(max_length=255, blank=True)
-
+    created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
 
@@ -61,3 +61,6 @@ class Entertainment(models.Model):
              suf,
              save=False
         )
+
+    class Meta:
+        ordering = ['-created']
