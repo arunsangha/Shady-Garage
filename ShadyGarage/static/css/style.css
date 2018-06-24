@@ -1537,3 +1537,8 @@ h1,h2,h3,h4,h5,h6{
 .entertainment-body{
   margin-bottom: 40px;
 }
+
+/* delete.html */
+#ent-delete-text{
+  word-wrap: break-word;
+}
