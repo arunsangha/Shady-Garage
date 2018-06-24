@@ -2,6 +2,19 @@
 {% load bootstrap3 %}
 {% block body %}
   <div class="container">
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-4">Ting å sjekke før du legger ut!</h1>
+        <p class="lead">
+          <ul style="margin-left:20px;">
+            <li> YouTube linken er hentet fra "embedd"/"bygg inn" knappen på YouTube</li>
+            <li> Ikke noe banning! </li>
+            <li> Storbokstav på første ord!</li>
+            <li> Er alt stavet riktig?</li>
+          </ul>
+        </p>
+      </div>
+    </div>
     <form method="post" enctype="multipart/form-data">
       {% csrf_token %}
       {% bootstrap_form form%}
