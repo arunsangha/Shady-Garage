@@ -2,7 +2,7 @@
 {% load staticfiles %}
 {% block body %}
   <div class="container">
-    {% if request.user.is_superuser %}
+    {% if perms.entertainments %}
     <div class="em-list-auth">
       <a href="{% url 'entertainments:create' %}" class="btn btn-info">Legg ut!</a>
     </div>
@@ -26,10 +26,13 @@
       {% endif %}
           </div>
         </div>
+        {% if perms.entertainments  %}
         <div class="em-list-auth">
           <a href="{% url 'entertainments:delete' pk=i.pk %}" class="btn btn-danger">Slett</a>
           <a href="{% url 'entertainments:update' pk=i.pk%}" class="btn btn-warning">Oppdater</a>
         </div>
+        {% endif %}
+
     {% endfor %}
 
   </div>
