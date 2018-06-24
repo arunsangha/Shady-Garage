@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponseRedirect
-from django.views.generic import CreateView, DeleteView, TemplateView, ListView
+from django.views.generic import CreateView, DeleteView, TemplateView, ListView, UpdateView
 from . import forms
 from . import models
 from django.core.urlresolvers import reverse
@@ -23,3 +23,19 @@ class EntertainmentList(ListView):
     def get_queryset(self, *args, **kwargs):
         qs = models.Entertainment.objects.all()
         return qs
+
+
+class EntertainmentUpdate(UpdateView):
+    template_name = "entertainments/update.html"
+    queryset =  models.Entertainment.objects.all()
+    form_class = forms.Entertainment
+
+    def get_success_url(self):
+        return reverse("entertainments:list")
+
+class EntertainmentDelete(DeleteView):
+    template_name = "entertainments/delete.html"
+    queryset = models.Entertainment.objects.all()
+
+    def get_success_url(self, *args, **kwargs):
+        return reverse("entertainments:list")

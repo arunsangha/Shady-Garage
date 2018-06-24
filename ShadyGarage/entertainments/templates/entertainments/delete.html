@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="container" align="center">
+  <div class="jumbotron">
+    <form method="post">
+      {% csrf_token %}
+      {% if object.youtube_link %}
+      <h3 class="display-6">Sikker på at du vil slette posten med videoen "{{object.youtube_link.url}}"?</h3>
+      {% else %}
+      <h3 class="display-6">Sikker på at du vil slette posten med bilde <a href="{{object.image.url}}">"{{object.image.url}}"?</a></h3>
+      {% endif %}
+      <hr class="my-4">
+      <input type="submit" class="btn btn-danger" value="Slett">
+    </form>
+  </div>
+  <div id="gif" align="center">
+    <iframe src="https://giphy.com/embed/kqu0JnieiuhGw" id="delete-gif" width="480" height="256" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+  </div>
+</div>
+{% endblock %}

@@ -2,7 +2,11 @@
 {% load staticfiles %}
 {% block body %}
   <div class="container">
-    {% if request.user.is_superuser %} <a href="{% url 'entertainments:create' %}" class="btn btn-info">Create!</a> {% endif %}
+    {% if request.user.is_superuser %}
+    <div class="em-list-auth">
+      <a href="{% url 'entertainments:create' %}" class="btn btn-info">Legg ut!</a>
+    </div>
+    {% endif %}
     {% for i in object_list %}
       <div class='post-list-card'>
         <div class='post-list-card-header'>
@@ -13,12 +17,18 @@
               {{i.title}}
             </h3>
       {% if i.image %}
-        <img src="{{i.image.url}}" alt="" width="500px">
+      <div class='post-list-card-image'>
+        <img src="{{i.image.url}}" alt="" id='postImageFeed'></img>
+      </div>
       {% endif %}
       {% if i.youtube_link %}
-        <iframe width="560" height="315" src="{{i.youtube_link}}?rel=0" frameborder="0" allowfullscreen></iframe>
+        <iframe width="560" height="315" id="entertainment-video" src="{{i.youtube_link}}?rel=0" frameborder="0" allowfullscreen></iframe>
       {% endif %}
           </div>
+        </div>
+        <div class="em-list-auth">
+          <a href="{% url 'entertainments:delete' pk=i.pk %}" class="btn btn-danger">Slett</a>
+          <a href="{% url 'entertainments:update' pk=i.pk%}" class="btn btn-warning">Oppdater</a>
         </div>
     {% endfor %}
 
