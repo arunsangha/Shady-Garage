@@ -8,7 +8,9 @@
     </div>
     {% endif %}
     <div id="entertainmentList"></div>
-
+    <div id="load-more-container" align="center">
+      <a href="#" id="loadMore" class="btn btn-info" style="align:center;">Flere posts</a>
+    </div>
   </div>
 {% endblock %}
 {% block script %}
@@ -137,6 +139,10 @@
           entList = data.results;
           nextUrl = data.next;
           parseEnterainments();
+
+          if(!nextUrl){
+            $("#loadMore").text("Ingen flere posts")
+          }
         }, error:function(data){
           console.log("Error getting ent list!");
         }
@@ -183,6 +189,16 @@
       window.open("update/"+ id+"/", "_self");
 
     });
+
+
+    $("#loadMore").click(function(event){
+      event.preventDefault()
+      if(entNextUrl){
+        fetchPosts(entNextUrl)
+      } else{
+        $("#loadMore").html("Ingen flere posts")
+      }
+    })
 
   });
 </script>
