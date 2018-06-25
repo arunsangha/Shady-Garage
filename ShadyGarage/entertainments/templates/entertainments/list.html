@@ -7,33 +7,183 @@
       <a href="{% url 'entertainments:create' %}" class="btn btn-info">Legg ut!</a>
     </div>
     {% endif %}
-    {% for i in object_list %}
-      <div class='post-list-card'>
-        <div class='post-list-card-header'>
-          Shady Garage
-        </div>
-          <div class='post-list-card-body'>
-            <h3 class='post-list-card-title'>
-              {{i.title}}
-            </h3>
-      {% if i.image %}
-      <div class='post-list-card-image'>
-        <img src="{{i.image.url}}" alt="" id='postImageFeed'></img>
-      </div>
-      {% endif %}
-      {% if i.youtube_link %}
-        <iframe width="560" height="315" id="entertainment-video" src="{{i.youtube_link}}?rel=0" frameborder="0" allowfullscreen></iframe>
-      {% endif %}
-          </div>
-        </div>
-        {% if perms.entertainments  %}
-        <div class="em-list-auth">
-          <a href="{% url 'entertainments:delete' pk=i.pk %}" class="btn btn-danger">Slett</a>
-          <a href="{% url 'entertainments:update' pk=i.pk%}" class="btn btn-warning">Oppdater</a>
-        </div>
-        {% endif %}
-
-    {% endfor %}
+    <div id="entertainmentList"></div>
 
   </div>
+{% endblock %}
+{% block script %}
+<script>
+  $(document).ready(function(){
+    var entList = [];
+    var entNextUrl = "";
+
+
+    function parseEnterainments(){
+      if (entList == 0) {
+        $("#entertainmentList").append(
+          `
+          <div class="jumbotron jumbotron-fluid" style="background-color: var(--main-black-color); border:2px solid var(--main-yellow-color);" align="center">
+           <div class="container">
+             <h1 class="display-4">Oida..vi fant ikke noe!</h1>
+             <p class="lead">Prøv å søk etter noe annet!</p>
+           </div>
+         </div>
+          `
+        );
+      }else {
+
+          $.each(entList, function(key, value){
+            var id = value.id;
+             var title = value.title;
+             var image = value.image;
+             var youtube_link = value.youtube_link;
+             var likes = value.likes;
+             var did_like = value.did_like;
+
+             var like_verb = "";
+             if(did_like){
+               like_verb = "Unlike";
+             }else{
+               like_verb = "Like";
+             }
+
+             if(likes == 0){
+               likes = "";
+             }
+
+
+             if(image != null){
+               $("#entertainmentList").append(
+                 `
+                 <div class='post-list-card'>
+                   <div class='post-list-card-header'>
+                     Shady Garage
+                   </div>
+                     <div class='post-list-card-body'>
+                         <h3 class='post-list-card-title'>
+                           ${title}
+                           <hr style="background-color: var(--main-yellow-color);">
+                         </h3>
+                       <div class='post-list-card-image'>
+                         <img src="${image}" alt="" id='postImageFeed'></img>
+                       </div>
+                      </div>
+                      <div class='post-list-card-footer'>
+                          <a href='#' data-id='${id}' class="like-button">
+                            <img src="{% static 'images/like-icon.svg'%}" width="30px" height="30px">
+                            ${like_verb} ${likes}
+                           </a>
+                      </div>
+                   </div>
+                   {% if perms.entertainments  %}
+                   <div class="em-list-auth">
+                     <a href="#" data-id="${id}" class="btn btn-danger permDelete">Slett</a>
+                     <a href="#" data-id="${id}" class="btn btn-warning permUpdate">Oppdater</a>
+                   </div>
+                   {% endif %}
+                 `
+               );
+             }else {
+              $("#entertainmentList").append(
+              `
+               <div class='post-list-card'>
+                 <div class='post-list-card-header'>
+                   Shady Garage
+                 </div>
+                   <div class='post-list-card-body'>
+                     <h3 class='post-list-card-title'>
+                       ${title}
+                       <hr style="background-color: var(--main-yellow-color);">
+                     </h3>
+                 <iframe width="560" height="315" id="entertainment-video" src="${youtube_link}?rel=0" frameborder="0" allowfullscreen></iframe>
+                  </div>
+                  <div class='post-list-card-footer'>
+                      <a href='#' data-id='${id}' class="like-button">
+                        <img src="{% static 'images/like-icon.svg'%}" width="30px" height="30px">
+                        ${like_verb} ${likes}
+                       </a>
+                  </div>
+              </div>
+              {% if perms.entertainments  %}
+              <div class="em-list-auth">
+                <a href="#" data-id="${id}" class="btn btn-danger permDelete">Slett</a>
+                <a href="#" data-id="${id}" class="btn btn-warning permUpdate">Oppdater</a>
+              </div>
+              {% endif %}
+
+                `
+              )
+             }
+
+
+
+          });
+
+      }
+
+    }
+    function getEntertainments(url){
+      var url_ = "";
+      if(url){
+        url_ = url;
+      }else {
+        url_ = "../api/entertainment/";
+      }
+
+      $.ajax({
+        url: url_,
+        method: 'GET',
+        success:function(data){
+          entList = data.results;
+          nextUrl = data.next;
+          parseEnterainments();
+        }, error:function(data){
+          console.log("Error getting ent list!");
+        }
+      });
+
+    };
+
+    getEntertainments();
+
+
+    $(document.body).on("click", ".like-button", function(e){
+      e.preventDefault();
+      var this_ = $(this)
+      var id = this_.attr("data-id");
+      var likedUrl = "../api/entertainment/like/" + id + "/";
+
+      $.ajax({
+        url: likedUrl,
+        method: 'GET',
+        success:function(data){
+          if(data.liked){
+            this_.text("Liker")
+          }else{
+            this_.text("Unlike")
+          }
+        }, error:function(data){
+          console.log("Error in liking entertainment");
+        }
+
+      })
+
+    });
+
+    $(document.body).on("click", ".permDelete", function(e){
+      e.preventDefault()
+      var id = $(this).attr("data-id");
+      window.open("delete/"+ id+"/", "_self");
+
+    });
+
+    $(document.body).on("click", ".permUpdate", function(e){
+      e.preventDefault()
+      var id = $(this).attr("data-id");
+      window.open("update/"+ id+"/", "_self");
+
+    });
+
+  });
+</script>
 {% endblock %}

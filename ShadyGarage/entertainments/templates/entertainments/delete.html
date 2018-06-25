@@ -5,7 +5,7 @@
     <form method="post">
       {% csrf_token %}
       {% if object.youtube_link %}
-      <h3 class="display-6" id="ent-delete-text">Sikker på at du vil slette posten med videoen "{{object.youtube_link.url}}"?</h3>
+      <h3 class="display-6" id="ent-delete-text">Sikker på at du vil slette posten med videoen <a href="{{object.youtube_link}}">"{{object.youtube_link}}"</a>?</h3>
       {% else %}
       <h3 class="display-6" id="ent-delete-text">Sikker på at du vil slette posten med bilde <a href="{{object.image.url}}">"{{object.image.url}}"?</a></h3>
       {% endif %}

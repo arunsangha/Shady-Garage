@@ -1,6 +1,18 @@
 from django.db import models
 from django.contrib import auth
+from django.contrib.auth import get_user_model
+
 # Create your models here.
+
+class EntertainmentManager(models.Manager):
+    def like_toogle(self, user, entertainment_obj):
+        if user in entertainment_obj.likes.all():
+            is_liked = True
+            entertainment_obj.likes.remove(user)
+        else:
+            is_liked = False
+            entertainment_obj.likes.add(user)
+        return is_liked
 
 class Entertainment(models.Model):
     user_fk = models.ForeignKey(auth.models.User, related_name="entertainment_user")
@@ -8,6 +20,9 @@ class Entertainment(models.Model):
     image = models.ImageField(upload_to="entertainment_pic/%Y/%M/%D/", blank=True)
     youtube_link = models.CharField(max_length=255, blank=True)
     created = models.DateTimeField(auto_now_add=True)
+    likes = models.ManyToManyField(auth.models.User, blank=True, related_name = "entertainment_likes")
+
+    objects = EntertainmentManager()
 
     def __str__(self):
 

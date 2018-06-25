@@ -29,6 +29,7 @@ urlpatterns = [
     url(r'^entertainment/', include('entertainments.urls'), name = "entertainments"),
     url(r'^api/posts/', include('posts.api.urls'), name="api-posts"),
     url(r'^api/meets/', include('meets.api.urls'), name="api-meets"),
+    url(r'^api/entertainment/', include('entertainments.api.urls'), name="api-entertainments"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     #Setningen over virker kun under production, ikke deployment.
 handler404 = views.error_404.as_view()
