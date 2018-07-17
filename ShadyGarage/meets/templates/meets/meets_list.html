@@ -83,6 +83,9 @@
           success:function(data){
             meetsList = data.results
             nextUrl = data.next
+            if(!nextUrl){
+              $('#loadMeets').text("Ingen flere treff")
+            }
             parseMeets()
             $("#loading-screen-logo").hide();
           }, error:function(data){

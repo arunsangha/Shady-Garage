@@ -188,6 +188,11 @@
           success:function(data){
             postList = data.results
             nextUrl = data.next
+            if(!nextUrl){
+              $('#loadMore').text("Ingen flere posts");
+            }
+
+
             parsePosts()
             $("#loading-screen-logo").hide();
           },

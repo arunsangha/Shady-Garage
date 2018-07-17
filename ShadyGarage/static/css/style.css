@@ -732,7 +732,7 @@ h1,h2,h3,h4,h5,h6{
   align-items: center;
   justify-content: space-between;
   background-color: var(--main-black-color);
-  width: 75%;
+  width: 50%;
   border-radius: 15px;
   border: 1px solid var(--main-yellow-color);
   margin: 20px auto;
