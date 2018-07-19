@@ -31,3 +31,16 @@ class UserDisplaySerializer(serializers.ModelSerializer):
 
     def get_url(self, obj):
         return reverse("accounts:profile_page_pk", kwargs={'pk':obj.id})
+
+class UserCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = [
+            'username',
+            'email',
+            'password',
+        ]
+
+        extra_kwargs = {"password":
+                        {"write_only":True}
+                       }
