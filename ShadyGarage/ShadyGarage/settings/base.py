@@ -137,6 +137,9 @@ STATICFILES_DIRS = [
 LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "home"
 
-#Open a terminal and paste in "python -m smtpd -n -c DebuggingServer localhost:1025"
- #-EMAIL_HOST = 'localhost'
- #-EMAIL_PORT = 1025
+
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'shadygarage.no@gmail.com'
+EMAIL_HOST_PASSWORD = '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'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
