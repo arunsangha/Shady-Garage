@@ -25,5 +25,5 @@ urlpatterns = [
         {'template_name':'accounts/password_reset_confirm.html', 'post_reset_redirect':'accounts:password_reset_complete'}
         ,name="password_reset_confirm"),
     url(r'^reset-password/complete/$', auth_views.password_reset_complete,
-        {'template_name':'accounts/password_reset_complete.html'}, name="password_reset_complete"),
+        {'template_name':'accounts/reset_password_complete.html'}, name="password_reset_complete"),
 ]
