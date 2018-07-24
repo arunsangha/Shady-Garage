@@ -5,6 +5,9 @@ User = get_user_model()
 from django.urls import reverse
 from accounts.models import Profile
 from accounts.models import User as model_user
+
+from rest_framework.serializers import ValidationError
+
 class ProfileDisplaySerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
@@ -44,3 +47,46 @@ class UserCreateSerializer(serializers.ModelSerializer):
         extra_kwargs = {"password":
                         {"write_only":True}
                        }
+
+
+class UserLoginSerializer(serializers.ModelSerializer):
+    token = serializers.CharField(allow_blank=True, read_only=True)
+    username = serializers.CharField(required=True, allow_blank=False)
+    class Meta:
+        model = User
+        fields = (
+            'username',
+            'password',
+            'token',
+        )
+
+        extra_kwargs = {"password":
+                        {"write_only":True}
+                    }
+
+    def validate(self, data):
+        user_obj = None
+        username = data.get("username", None)
+        password = data.get("password", None)
+        if not username:
+            raise ValidationError("A username must be required to login.")
+
+        try:
+            user = User.objects.get(username=username)
+        except User.DoesNotExist:
+            user = None
+
+        if user is not None:
+            user_obj = user
+        else:
+            raise ValidationError("This username is not valid!")
+
+
+        if user_obj:
+            if not user_obj.check_password(password):
+                raise ValidationError("Incorrect credentials please try again!")
+
+
+        data["token"] = "SOME RANDOM TOKEN"
+
+        return data
