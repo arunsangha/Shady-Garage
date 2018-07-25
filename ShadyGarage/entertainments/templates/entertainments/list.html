@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 {% block body %}
+<div class="linear-gradient-background">
   <div class="container">
     {% if perms.entertainments %}
     <div class="em-list-auth">
@@ -12,6 +13,7 @@
       <a href="#" id="loadMore" class="btn btn-info" style="align:center;">Flere posts</a>
     </div>
   </div>
+</div>
 {% endblock %}
 {% block script %}
 <script>
@@ -57,12 +59,12 @@
              if(image != null){
                $("#entertainmentList").append(
                  `
-                 <div class='post-list-card' style='width:70%;'>
-                   <div class='post-list-card-header'>
+                 <div class='post-list-card entertainment-card'>
+                   <div class='post-list-card-header entertainment-card-header'>
                      Shady Garage
                    </div>
                      <div class='post-list-card-body'>
-                         <h3 class='post-list-card-title'>
+                         <h3 class='post-list-card-title entertainment-list-card-title'>
                            ${title}
                            <hr style="background-color: var(--main-yellow-color);">
                          </h3>
@@ -88,12 +90,12 @@
              }else {
               $("#entertainmentList").append(
               `
-               <div class='post-list-card' style='width:70%;'>
-                 <div class='post-list-card-header'>
+               <div class='post-list-card entertainment-card'>
+                 <div class='post-list-card-header entertainment-card-header'>
                    Shady Garage
                  </div>
                    <div class='post-list-card-body'>
-                     <h3 class='post-list-card-title'>
+                     <h3 class='post-list-card-title entertainment-list-card-title'>
                        ${title}
                        <hr style="background-color: var(--main-yellow-color);">
                      </h3>

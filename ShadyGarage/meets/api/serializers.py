@@ -38,6 +38,7 @@ class MeetsModelSerializer(serializers.ModelSerializer):
             'location',
             'marker_image',
             'anonymous',
+            'organizer',
         )
 
     def get_day(self, obj):

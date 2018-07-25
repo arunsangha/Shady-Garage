@@ -7,10 +7,12 @@ import datetime
 class CreateMeetForm(forms.ModelForm):
     class Meta():
         model = models.Meet
-        fields = ('meet_name', 'description', 'anonymous', 'category', 'date', 'time','location', 'marker_image')
+        fields = ('organizer', 'anonymous', 'meet_name', 'description','category', 'date', 'time','location', 'marker_image')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields['organizer'].label = "Arrangør"
+        self.fields['organizer'].widget.attrs.update({'placeholder': 'Anonym? Marker knappen under'})
         self.fields['meet_name'].label = "Treff navn"
         self.fields['date'].widget = widgets.SelectDateWidget()
         self.fields['date'].initial = datetime.date.today()

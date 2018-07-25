@@ -1520,7 +1520,7 @@ h1,h2,h3,h4,h5,h6{
 
 /* list.html */
 .em-list-auth{
-  margin-top: 20px;
+  padding-top: 20px;
   text-align: center;
 }
 
@@ -1533,6 +1533,32 @@ h1,h2,h3,h4,h5,h6{
   }
 }
 
+.entertainment-card{
+  width:60%;
+}
+
+@media only screen and (max-width:480px) {
+  .entertainment-card{
+    width:100%;
+  }
+
+  .entertainment-card-header{
+    padding-left:0px;
+    font-size: 10px;
+    text-align: center;
+  }
+
+  .entertainment-list-card-title{
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-all;
+    word-break: break-word;
+    hyphens: auto;
+    font-size: 17px;
+    font-family: sans-serif;
+  }
+
+}
 /* entertainment update.html*/
 .entertainment-body{
   margin-bottom: 40px;
