@@ -17,16 +17,15 @@ class MeetsListAPIView(generics.ListAPIView):
         qs = Meet.objects.filter(Q(date__gte=today))
         query = self.request.GET.get('q',None)
         if query is not None:
+            print("Query is not none")
             qs = qs.filter(
                 Q(user_fk__username__icontains=query) |
                 Q(meet_name__icontains=query) |
                 Q(date__icontains=query) |
                 Q(time__icontains=query) |
                 Q(description__icontains=query) |
-                Q(users_joining__username__icontains=query) |
                 Q(location__icontains=query)
             )
-
         return qs
 
 class JoinToggleAPIView(APIView):

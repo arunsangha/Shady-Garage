@@ -60,7 +60,6 @@
   }
 
   $(document).ready(function(){
-      console.log("Working")
       var query = getParameterByName('q');
       var nextUrl;
       var meetsList = [];
@@ -69,7 +68,7 @@
         $("#loading-screen-logo").show();
         var fetchUrl;
         if(!url){
-          fetchUrl = "../../api/meets"
+          fetchUrl = "../../api/meets/"
         }else{
           fetchUrl = url
         }
