@@ -115,7 +115,7 @@
               }
               var username = ""
               if(value.anonymous == false){
-                 username = value.organizer
+                 username = value.organizer.substr(0, 16) + ".."
               }else{
                  username = "Anonymous"
               }
@@ -133,7 +133,7 @@
                       <p class="w"> ${value.day} - ${time}</p>
                       <p class="w"> ${date} </p>
                     </div>
-                    <h5 id="meet-card-creator">
+                    <h5 id="meet-card-creator" style="word-wrap:break-word;">
                       Arrangeres av: ${username}
                     </h5>
                     <h4 class="meet-card-location w">
