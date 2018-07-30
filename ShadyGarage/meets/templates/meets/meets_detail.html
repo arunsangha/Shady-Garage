@@ -20,7 +20,14 @@
   {% if user.is_authenticated %}
   <div class="meet-detail-body linear-gradient-background">
     <div class="meet-detail-title-container">
-        <h1>{{ meet.meet_name}}</h1>
+        <h1 id="meet-detail-title-h1">{{ meet.meet_name}}</h1>
+    </div>
+    <div class="meet-detail-title-container meet-detail-username-container">
+        {% if meet.anonymous %}
+          <h3>Arrangers av: Anonymous </h3>
+        {% else %}
+            <h3>Arrangers av: {{ meet.organizer}} </h3>
+        {% endif %}
     </div>
     <div class="meet_detail_description">
       {{meet.description}}
