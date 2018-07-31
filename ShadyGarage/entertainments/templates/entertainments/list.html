@@ -139,10 +139,10 @@
         method: 'GET',
         success:function(data){
           entList = data.results;
-          nextUrl = data.next;
+          entNextUrl = data.next;
           parseEnterainments();
 
-          if(!nextUrl){
+          if(!entNextUrl){
             $("#loadMore").text("Ingen flere posts")
           }
         }, error:function(data){
