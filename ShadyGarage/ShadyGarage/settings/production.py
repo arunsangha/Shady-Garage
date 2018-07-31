@@ -93,6 +93,7 @@ DATABASES = {
         'USER': 'shadygarage',
         'PASSWORD': 'heipådeg97',
         'HOST': 'shadygarage.mysql.pythonanywhere-services.com',
+        'OPTIONS': {'charset': 'utf8mb4'}, #emojis
     }
 }
 
