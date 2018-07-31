@@ -1,6 +1,14 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 {% block title %}ShadyGarage{% endblock %}
+{% block facebookShare %}
+<meta property="fb:app_id" content="1828194693869674"/>
+<meta property="og:url"      content="http://www.shadygarage.no/{{request.path}}">
+<meta property="og:type"            content="article" />
+<meta property="og:title"           content="Shady Garage" />
+<meta property="og:image"           content="http://www.shadygarage.no/static/images/faceBookShareGorilla.png" />
+<meta property="og:description"    content="Shady Garage har som formål å skape et forent bilsamfunn. Det vil si at uansett hvilken bil du kjører, hvor mye hestekrefter bilen har eller hvilken farge på bilen du har, så er du en del av et større samfunn." />
+{% endblock %}
 {% block body  %}
 <!--//TODO: Fikse fast høyde på bakgrunnsbilde-->
 <div class="background-image-div">

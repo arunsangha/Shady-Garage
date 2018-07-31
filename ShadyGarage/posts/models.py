@@ -40,11 +40,12 @@ class Post(models.Model):
         return reverse('posts:post_detail', kwargs={'slug':self.slug})
 
     def _get_unique_slug(self):
-        slug = slugify(self.post_title)
+        slug = slugify("shady:"+self.post_title+self.user_fk.username[0:3])
         unique_slug = slug
         num = 1
+        id=self.id
         while Post.objects.filter(slug=unique_slug).exists():
-            unique_slug = '{}-{}-{}'.format(slug, self.id, num)
+            unique_slug = '{}-{}-{}'.format(slug, id, num)
             num += 1
         return unique_slug
 
