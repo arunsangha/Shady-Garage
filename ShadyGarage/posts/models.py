@@ -57,7 +57,11 @@ class Post(models.Model):
         # Set our max thumbnail size in a tuple (max width, max height)
          THUMBNAIL_SIZE = (612, 612)
 
-         DJANGO_TYPE = self.post_image.file.content_type
+         try:
+             DJANGO_TYPE = self.post_image.file.content_type
+         except BaseException:
+             DJANGO_TYPE = 'image/jpeg'
+             print("ERROR")
 
          if DJANGO_TYPE == 'image/jpeg':
              PIL_TYPE = 'jpeg'
@@ -65,6 +69,7 @@ class Post(models.Model):
          elif DJANGO_TYPE == 'image/png':
              PIL_TYPE = 'png'
              FILE_EXTENSION = 'png'
+
 
         # Open original photo which we want to thumbnail using PIL's Image
          image = Image.open(BytesIO(self.post_image.read()))
