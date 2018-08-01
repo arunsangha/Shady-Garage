@@ -25,7 +25,7 @@ MEDIA_DIR = os.path.join(BASE_DIR, "media")
 SECRET_KEY = 'v2!n)ux548qgm3rpvh%fttfd#_&gryjjlnie-)c$x0soa4u@kb'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = [ 'www.shadygarage.no',
     ]
 
@@ -127,7 +127,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
