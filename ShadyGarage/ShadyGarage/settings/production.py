@@ -143,8 +143,23 @@ LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "home"
 
 
+#EMAIL
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_HOST_USER = 'shadygarage'
 EMAIL_HOST_PASSWORD = 'skriveboktavle97'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+
+
+#SSL
+
+CORS_REPLACE_HTTPS_REFERER      = True
+HOST_SCHEME                     = "https://"
+SECURE_PROXY_SSL_HEADER         = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT             = True
+SESSION_COOKIE_SECURE           = True
+CSRF_COOKIE_SECURE              = True
+SECURE_HSTS_INCLUDE_SUBDOMAINS  = True
+SECURE_HSTS_SECONDS             = 1000000
+SECURE_FRAME_DENY               = True
