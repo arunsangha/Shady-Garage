@@ -70,6 +70,9 @@ class Post(models.Model):
          elif DJANGO_TYPE == 'image/png':
              PIL_TYPE = 'png'
              FILE_EXTENSION = 'png'
+         elif DJANGO_TYPE == 'image/jpg':
+             PIL_TYPE = 'jpg'
+             FILE_EXTENSION = 'jpg'
 
 
         # Open original photo which we want to thumbnail using PIL's Image

@@ -52,7 +52,8 @@ $('#myform').submit(function(event) {
                         window.location.replace('/posts/post_feed');
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
-                      alert('Error! Ingen bilde lagt til eller feil format!');
+                      console.log("Error");
+                      window.location.replace('/posts/post_feed/');
                 },
                 params: {
                 'csrf_token': '{{ csrf_token }}',
