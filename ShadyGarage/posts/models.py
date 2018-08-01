@@ -60,7 +60,7 @@ class Post(models.Model):
 
          try:
              DJANGO_TYPE = self.post_image.file.content_type
-         except BaseException:
+         except AttributeError:
              DJANGO_TYPE = 'image/jpeg'
              print("ERROR")
 
