@@ -10,17 +10,22 @@
       background-attachment: fixed;
       background-size: cover;
     }
+
+    @media only screen and (max-width:480px) {
+
+      body{
+        background-image: url({% static "images/aboutpage-mobile-pic.jpg" %});
+      }
+    }
   </style>
   <div class="about-page-container">
     <div class="about-text-container">
-      <h4 class="about-text">Shady Garage
-      har som formål å skape et forent bilsamfunn. Det vil si at uansett hvilken bil du kjører, hvor mye hestekrefter du har eller hvilken farge på bilen du har, så er du en del av et større samfunn.
-      Shady Garage er for deg som prisetter bil høyere enn det den gjennomsnittelige menneske gjør.</h4>
+      <h4 class="about-text">Shady Garage har som formål å skape et forent bilsamfunn. Det vil si at uansett hvilken bil du kjører, hvor mye hestekrefter bilen har eller hvilken farge på bilen du har, så er du en del av et større samfunn.</h4>
 
-      <h4 class="about-text">Når du har på deg vår logo, enten på bilen din eller klærne dine, så skal du føle deg som en del av en større familie.</h4>
-      <h4 class="about-text">Shady Garage ønsker å gjøre det nordiske bilsamfunnet verdens kjent.</h4>
+<h4 class="about-text">Noe av det vi har mest fokus på er treff. Å finne ut hvor det er treff, lage treff og få folk til å komme på treff, har alltid vært slitsomt. Denne prosessen har vi nå gjort enklere. Du kan nå opprette et treff innen et minutt. Nå vil du få veibeskrivelser, se treff rundt omkring i hele Norge, og varsler om treffet.</h4>
 
-      <h4 class="about-text">I en verden hvor biler er på vei bort, har det aldri vært viktigere å holde sammen.</h4>
+<h4 class="about-text">Shady Garage ønsker å gjøre det nordiske bilsamfunnet verdens kjent.
+Bli med på vårt eventyr om å gjøre en liten bilinteresse til noe større!</h4>
     </div>
     <a href="{%url 'accounts:signup'%}" class="btn btn-info btn-lg" id="about-page-btn">Bli med!</a>
     <div class="about-page-gif">

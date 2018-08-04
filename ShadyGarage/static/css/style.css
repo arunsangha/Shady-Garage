@@ -1414,15 +1414,9 @@ h1,h2,h3,h4,h5,h6{
   }
 
   .sign-up-2-background{
-    height: 100%;
-    width: 100%;
-    padding-top: 25px;
-    padding-bottom: 175px;
-    background-image: url('../images/signup-mob-2.jpg');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+    min-height: 700px;
   }
+
 
 
 }
