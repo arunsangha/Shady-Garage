@@ -15,8 +15,11 @@ class Address(models.Model):
     post_code       = models.CharField(max_length=40)
     country         = models.CharField(max_length=120, default="Norge")
 
-    #def __str__(self):
-        #return
+    def __str__(self):
+        return "{username}: {adr_type}".format(
+                username=self.user.username,
+                adr_type=self.adr_type,
+            )
 
     def get_address(self):
         return "{line1}, {line2} {line4}".format(
