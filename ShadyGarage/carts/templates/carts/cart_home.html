@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block body %}
+  <div class="container">
+    <h1>Din handlekurv!</h1>
+    {% for product in cart.products.all %}
+      <h3> {{product.name}}</h3>
+      <h3> Pris: {{product.price}}</h3>
+      <hr>
+    {% empty %}
+      <h1>Handlekurven er tom!</h1>
+    {% endfor %}
+    <h4> Pris: {{cart.sub_total}}</h4>
+    <h4> Frakt: {{cart.shipping}}</h4>
+    <h4> Sum total: {{cart.total}}</h4>
+  </div>
+{% endblock %}

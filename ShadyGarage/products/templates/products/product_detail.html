@@ -9,6 +9,50 @@
       <p class="card-text">Antall igjen: {{object.get_stock}}</p>
     </div>
     </div>
-    <a href="#" class="btn btn-info">Kjøp</a>
+    <a href="#" id="buyProduct" data-pk="{{object.id}}" class="btn btn-info">Kjøp</a>
+    <div class="alert alert-success" role="alert" style="display:none;">
+      <h5 class="alert-heading">Varen er lagt til! 🤟</h5>
+      <p id="alert-description"></p>
+      <hr>
+      <p class="mb-0">🔥 Shady Garage 🔥</p>
+    </div>
 </div>
+{% endblock %}
+{% block script %}
+<script>
+$(document).ready(function(){
+
+  $("#buyProduct").on('click', function(event){
+    event.preventDefault()
+    var id = $("#buyProduct").attr("data-pk");
+    var data = {
+        'pk':id,
+        csrfmiddlewaretoken:'{{ csrf_token }}'
+
+    }
+    $("#buyProduct").html("<i class='fa fa-spinner'></i>");
+
+    $.ajax({
+      url:'../../../cart/add/' + id + '/',
+      method: 'POST',
+      data: data,
+      success:function(data){
+        $("#buyProduct").html("Kjøpt!")
+        console.log(data)
+        console.log("Success")
+
+        var description = "Antall varer i handlekurven: <span>" + data.cartItemCount + "</span><br> <a href='{% url 'carts:cart-home' %}' class='btn btn-info'>Ta meg til handlekurven</a>";
+        $("#alert-description").append(description);
+        $(".alert").show().delay(4000).fadeOut();
+
+      }, error:function(error){
+        console.log(error)
+      }
+    })
+    $("#alert-description").empty();
+  })
+});
+
+</script>
+
 {% endblock %}

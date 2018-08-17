@@ -2,7 +2,7 @@ from django.db import models
 from products.models import Product
 from django.contrib.auth import get_user_model
 User = get_user_model()
-from django.db.models.signals import m2m_changed
+from django.db.models.signals import m2m_changed, pre_save
 
 class CartManager(models.Manager):
     def new(self, user=None):
@@ -10,13 +10,13 @@ class CartManager(models.Manager):
         if user is not None:
             if user.is_authenticated():
                 user_obj = user
-        return self.models.objects.create(user=user_obj)
+        return self.model.objects.create(user=user_obj)
 
     def get_or_create(self, request):
-        cart_id = self.session.get('cart_id')
+        cart_id = request.session.get('cart_id')
         qs = self.get_queryset().filter(id=cart_id)
 
-        if qs.count == 1:
+        if qs.count() == 1:
             cart_obj = qs.first()
             new_obj = False
             if request.user.is_authenticated() and cart_obj.user is None:
@@ -34,8 +34,9 @@ class CartManager(models.Manager):
 class Cart(models.Model):
     user            = models.ForeignKey(User, related_name="carts_user_fk", blank=True, null=True)
     products        = models.ManyToManyField(Product, related_name="products_in_cart")
-    sub_total       = models.PositiveIntegerField()
-    total           = models.PositiveIntegerField()
+    sub_total       = models.DecimalField(default=0, max_digits=100, decimal_places=2)
+    total           = models.DecimalField(default=0, max_digits=100, decimal_places=2)
+    shipping        = models.PositiveIntegerField(default=0)
     active          = models.BooleanField(default=True)
     update          = models.DateTimeField(auto_now_add=True)
     timestamp       = models.DateTimeField(auto_now_add=True)
@@ -58,4 +59,18 @@ def m2m_changed_cart_receiver(sender, instance, action, *args, **kwargs):
             instance.sub_total = total
             instance.save()
 
-m2m_changed.connect(m2m2m_changed_cart_receiver, sender=Cart.products.through)
+m2m_changed.connect(m2m_changed_cart_receiver, sender=Cart.products.through)
+
+
+#Legger til shipping kostnader
+def pre_save_cart_receiver(sender, instance, *args, **kwargs):
+    total = 0
+    if float(instance.sub_total) < 300:
+        instance.shipping = 60
+        total = float(instance.sub_total) + instance.shipping
+    else:
+        instance.shipping = 0
+        total = float(instance.sub_total)
+    instance.total = total
+
+pre_save.connect(pre_save_cart_receiver, sender=Cart)
