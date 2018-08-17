@@ -16,6 +16,20 @@ ORDER_STATUS = (
     ('shippped', 'Sendt'),
     ('finished', 'Finished'),
 )
+class OrderManager(models.Manager):
+    def new_or_get(self, billing_profile, cart_obj):
+        order_qs = self.get_queryset().filter(billing_profile=billing_profile, cart=cart_obj, active=True, status='created')
+
+        if order_qs.count()==1:
+            created = False
+            order_obj = order_qs.first()
+        else:
+            created = True
+            order_obj = self.objects.create(billing_profile=billing_profile, order=order_obj)
+
+        return order_obj, created
+
+
 class Order(models.Model):
     order_id            = models.CharField(max_length=120, unique=True, blank=True)
     user                = models.ForeignKey(User, related_name="order_user")
@@ -28,6 +42,7 @@ class Order(models.Model):
     timestamp           = models.DateTimeField(auto_now_add=True)
     active              = models.BooleanField(default=True)
 
+    objects             = OrderManager()
     def __str__(self):
         return self.order_id
 
@@ -65,7 +80,7 @@ def pre_save_create_order(sender, instance, *args, **kwargs):
 pre_save.connect(pre_save_create_order, sender=Order)
 
 #?? From udemy...
-def post_save_cart_total(sender, instance, *args, **kwargs):
+def post_save_cart_total(sender, created, instance, *args, **kwargs):
     if not created:
         cart_obj = instance
         cart_total = instance.total
