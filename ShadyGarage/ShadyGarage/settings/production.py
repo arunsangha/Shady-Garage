@@ -46,6 +46,9 @@ INSTALLED_APPS = [
     'entertainments',
     'products',
     'carts',
+    'billing',
+    'addresses',
+    'stripe',
     'sorl.thumbnail',
 ]
 

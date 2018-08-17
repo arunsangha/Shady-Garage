@@ -10,15 +10,8 @@
       <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
       <a href="{% url 'products:detail' category='shady' slug=i.slug %}" class="btn btn-info">Mer info</a>
       <a href="#" id="buyProduct" data-pk="{{i.id}}" class="btn btn-info"><i class="fa fa-shopping-cart"></i></a>
-      <div class="alert alert-success" role="alert" style="display:none;">
-        <h5 class="alert-heading">Varen er lagt til! 🤟</h5>
-        <p id="alert-description"></p>
-        <hr>
-        <p class="mb-0">🔥 Shady Garage 🔥</p>
-      </div>
     </div>
     </div>
-
   {% endfor %}
   <div class="container">
     <a href="{% url 'products:list' category='list'%}" class="btn btn-warning">List</a>
@@ -39,24 +32,20 @@ $(document).ready(function(){
         csrfmiddlewaretoken:'{{ csrf_token }}'
 
     }
-    $("#buyProduct").html("<i class='fa fa-spinner'></i>");
+    $(this).html("<i class='fa fa-spinner'></i>");
 
     $.ajax({
       url:'../../cart/add/' + id + '/',
       method: 'POST',
       data: data,
       success:function(data){
-        $("#buyProduct").html("Kjøpt!")
-
-        var description = "Antall varer i handlekurven: <span>" + data.cartItemCount + "</span><br> <a href='{% url 'carts:cart-home' %}' class='btn btn-info'>Ta meg til handlekurven</a>";
-        $("#alert-description").append(description);
-        $(".alert").show().delay(4000).fadeOut();
-
+        $(this).html("Lagt til!");
       }, error:function(error){
         console.log(error)
       }
     })
-    $("#alert-description").empty();
+    $(this).html("Lagt til!");
+
   })
 });
 

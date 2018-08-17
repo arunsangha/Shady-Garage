@@ -46,6 +46,9 @@ INSTALLED_APPS = [
     'entertainments',
     'products',
     'carts',
+    'billing',
+    'addresses',
+    'stripe',
     'sorl.thumbnail',
 ]
 
@@ -84,6 +87,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ShadyGarage.wsgi.application'
 
+#STRIPE
+STRIPE_API_KEY = 'sk_test_czI0R33pVrj3VrDfBg1xbSSN'
+STRIPE_PUBLISH_KEY = 'pk_test_EpHMytNU1b76jhrlFLVzynLv'
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
