@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Cart
 from products.models import Product
 from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def cart_home(request):
@@ -37,3 +38,9 @@ def cart_add(request, pk):
         return JsonResponse(data)
 
     return redirect("carts:cart-home")
+
+
+@login_required
+def cart_checkout(request):
+    order_obj = None
+    

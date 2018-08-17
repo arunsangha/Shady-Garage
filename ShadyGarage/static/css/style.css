@@ -1573,3 +1573,55 @@ h1,h2,h3,h4,h5,h6{
 #ent-delete-text{
   word-wrap: break-word;
 }
+
+
+/*****
+ Products App
+ ****/
+
+ /* Product List */
+.sidenav{
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 60px;
+  left: 0;
+  background-color: var(--main-dark-color);
+  overflow-x: hidden;
+  padding-top: 20px;
+  transition: 0.5s;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #f1f1f1;
+    display: block;
+    transition: 0.3s;
+}
+#close-shop-nav{
+  padding: 0px;
+  text-align:center;
+}
+
+.sidenav a:hover {
+    color: white;
+}
+
+.shop-top-buttons{
+  margin-top: 40px;
+  margin-bottom:20px;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+
+@media only screen and (max-width:450px){
+  .sidenav{
+    top:49px;
+  }
+}

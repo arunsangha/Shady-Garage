@@ -1,9 +1,20 @@
 {% extends "base.html" %}
 {% block body %}
-<div class="container">
-  <a href="{% url 'carts:cart-home' %}" class="btn btn-info" style="display:block;">Shopping Bag</a>
+
+<div id="shop-nav" class="sidenav">
+  <a onclick="closeShopNav()" id="close-shop-nav"><div style="color:white;"><i class="fa fa-window-close"></i></div></a>
+  <a href="{% url 'products:list' category='list'%}">Alt</a>
+  <a href="{% url 'products:list' category='sticker' %}" >Stickers</a>
+  <a href="{% url 'products:list' category='tshirt' %}">Merch</a>
+  <a href="{% url 'carts:cart-home' %}"><i class="fa fa-shopping-cart"></i></a>
+</div>
+<div class="container" style="text-align: center;">
+  <div class="shop-top-buttons">
+    <a href="#" class="btn btn-info" onclick="openShopNav()">Kategorier <i class="fa fa-air-freshener"></i></a>
+    <a href="{% url 'carts:cart-home' %}" class="btn btn-info">Handlekurv <i class="fas fa-shopping-cart"></i></a>
+  </div>
   {% for i in object_list %}
-  <div class="card" style="width: 18rem; display:inline-block;">
+  <div class="card" style="width: 20rem; display:inline-block; margin-left:5px; margin-right:5px; z-index:-1;">
   <img class="card-img-top" src="{{i.get_list_image}}" alt="Card image cap">
     <div class="card-body">
       <h5 class="card-title">{{i.name}}</h5>
@@ -13,15 +24,24 @@
     </div>
     </div>
   {% endfor %}
-  <div class="container">
-    <a href="{% url 'products:list' category='list'%}" class="btn btn-warning">List</a>
-    <a href="{% url 'products:list' category='sticker' %}" class="btn btn-info">sticker</a>
-    <a href="{% url 'products:list' category='tshirt' %}" class="btn btn-info">tshirt</a>
-  </div>
+
 </div>
 {% endblock %}
 {% block script%}
 <script>
+function openShopNav() {
+    var w = window.innerWidth;
+    var width = "250px";
+    if(w < 450){
+      width = "50%";
+    }
+    document.getElementById("shop-nav").style.width = width;
+}
+
+/* Set the width of the side navigation to 0 */
+function closeShopNav() {
+    document.getElementById("shop-nav").style.width = "0";
+}
 $(document).ready(function(){
 
   $(document.body).on('click', '#buyProduct', function(event){
