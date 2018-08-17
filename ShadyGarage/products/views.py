@@ -16,7 +16,6 @@ class ProductList(ListView):
 
     def get_queryset(self, *args, **kwargs):
         query = self.kwargs.get('category')
-        print(query)
         if query == 'list':
             qs = Product.objects.all()
             return qs

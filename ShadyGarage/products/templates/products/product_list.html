@@ -1,9 +1,17 @@
 {% extends "base.html" %}
 {% block body %}
+<div class="container">
   {% for i in object_list %}
-    <a href="{% url 'products:detail' category='shady' slug=i.slug %}"><h1> {{i.name}} </h1></a>
+  <div class="card" style="width: 18rem; display:inline-block;">
+  <img class="card-img-top" src="{{i.get_list_image}}" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">{{i.name}}</h5>
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      <a href="{% url 'products:detail' category='shady' slug=i.slug %}" class="btn btn-primary">Buy</a>
+    </div>
+  </div>
   {% endfor %}
-
+</div>
   <a href="{% url 'products:list' category='list'%}" class="btn btn-warning">List</a>
   <a href="{% url 'products:list' category='sticker' %}" class="btn btn-info">sticker</a>
   <a href="{% url 'products:list' category='tshirt' %}" class="btn btn-info">tshirt</a>

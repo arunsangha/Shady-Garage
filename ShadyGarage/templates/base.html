@@ -35,10 +35,10 @@
         <li class="nav-list-item">
           <a class="nav-list-item-link" href="{% url 'posts:posts_feed' %}">Feed</a>
         </li>
-        {% if user.is_authenticated %}
         <li class="nav-list-item">
-          <a class="nav-list-item-link" href="{% url 'accounts:profile_page'%}">Min Profil</a>
+          <a class="nav-list-item-link" href="{% url 'products:list' category='list' %}">Shop</a>
         </li>
+        {% if user.is_authenticated %}
           <li class="nav-list-item">
             <a class="nav-list-item-link" href="{% url 'accounts:activity'%}" id="activityButton">EU-kontroll </a>
           </li>

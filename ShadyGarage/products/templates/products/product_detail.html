@@ -1,7 +1,14 @@
 {% extends "base.html" %}
 {% block body %}
   <div class="container">
-    <h2>detail</h2>
-    <h4>{{object.name}}</h4>
-  </div>
+    <div class="card bg-dark text-white">
+    <img class="card-img" src="{{object.get_list_image}}" alt="Card image" style="max-height:500px;">
+    <div class="card-img-overlay">
+      <h5 class="card-title">{{object.name}}</h5>
+      <p class="card-text">{{object.description}}</p>
+      <p class="card-text">Antall igjen: {{object.get_stock}}</p>
+    </div>
+    </div>
+    <a href="#" class="btn btn-info">Kjøp</a>
+</div>
 {% endblock %}

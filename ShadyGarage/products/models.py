@@ -26,7 +26,15 @@ class Product(models.Model):
         return self.price
 
     def get_stock(self):
-        return get_stock
+        return self.stock
+
+    def get_list_image(self):
+        qs = self.product_image.all()
+        if qs.exists():
+            print(qs.first())
+            image = qs.first()
+            return image.image.url
+        return None
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
@@ -35,3 +43,6 @@ class Product(models.Model):
 class ProductImage(models.Model):
     product_fk     = models.ForeignKey(Product, related_name="product_image")
     image          = models.ImageField(upload_to="shady_shop")
+
+    def __str__(self):
+        return self.product_fk.name
