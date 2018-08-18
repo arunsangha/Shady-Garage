@@ -14,7 +14,7 @@ class BillingProfileManager(models.Manager):
         billing_profile = None
 
         if user.is_authenticated():
-            billing_profile, created = self.model.obects.get_or_create(user=user, email=user.email)
+            billing_profile, created = self.model.objects.get_or_create(user=user, email=user.email)
 
         return billing_profile, created
 
@@ -26,7 +26,7 @@ class BillingProfile(models.Model):
     #Strippe customer id
     customer_id      = models.CharField(max_length=120, null=True, blank=True)
 
-
+    objects = BillingProfileManager()
 #Creates a stripe customer and adds stripe customer id to profile.
 #This happens before the billing profile objects get saved.
 def billing_profile_created_recevier(sender, instance, *args, **kwargs):

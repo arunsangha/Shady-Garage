@@ -3,6 +3,7 @@ from .models import Cart
 from products.models import Product
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
+from billing.models import BillingProfile
 # Create your views here.
 
 def cart_home(request):
@@ -43,4 +44,10 @@ def cart_add(request, pk):
 @login_required
 def cart_checkout(request):
     order_obj = None
-    
+    cart_obj, created = Cart.objects.get_or_create(request)
+    billing_profile, created = BillingProfile.objects.new_or_get(request)
+
+    if created:
+        print("FUCK OFF")
+
+    return render(request, "carts/cart-checkout.html", {'billing_profile':billing_profile})

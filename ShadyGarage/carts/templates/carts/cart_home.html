@@ -13,6 +13,6 @@
     <h4> Frakt: {{cart.shipping}}</h4>
     <h4> Sum total: {{cart.total}}</h4>
 
-    <a href="#" class="btn btn-success"> Til kassen </a>
+    <a href="{% url 'carts:cart-checkout' %}" class="btn btn-success"> Til kassen </a>
   </div>
 {% endblock %}
