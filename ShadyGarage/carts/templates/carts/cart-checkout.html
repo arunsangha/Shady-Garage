@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load bootstrap3 %}
 {% block body %}
   <div class="container">
     <h1>Checkout</h1>
@@ -19,14 +20,47 @@
     </div>
 
     <h2>{{billing_profile.email}}</h2>
+    <div class="shipping-address-container">
+      <h3> Shippping addresse!</h3>
+      <form method="POST" id="shipping-address-form" action='{% url 'addresses:create-address' %}'>
+        {% csrf_token %}
+        <input type="hidden" name="address_type" value="shipping"/>
+        <input type="hidden" name="billing_profile" value="{{billing_profile.id}}">
+        {%bootstrap_form address_form%}
+        <input type="submit" class="btn btn-info" value="Lagre"/>
+      </form>
+    </div>
     <a href="#" onclick="filll()" class="btn btn-info">Fill </a>
   </div>
 {% endblock %}
 {% block script %}
   <script>
-    function filll(){
+    function filll(width){
       document.getElementById("fuel").style.transition = "all 2s";
-      document.getElementById("fuel").style.width = "50%";
+      document.getElementById("fuel").style.width = width;
     }
+
+
+    $(document).ready(function(){
+      $('#shipping-address-form').submit(function(event){
+        event.preventDefault()
+        $.ajax({
+          url:'../../addresses/create_address/',
+          method: 'POST',
+          data: $('#shipping-address-form').serialize(),
+          success:function(data){
+            console.log(data.isShippingAddress)
+            console.log(data.success)
+            $(".shipping-address-container").hide();
+            filll("50%");
+
+          }, error:function(error){
+            console.log("ERROR")
+            console.log(error)
+          }
+        })
+
+      })
+    })
   </script>
 {% endblock %}

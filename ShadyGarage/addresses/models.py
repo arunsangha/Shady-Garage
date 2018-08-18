@@ -17,8 +17,8 @@ class Address(models.Model):
 
     def __str__(self):
         return "{username}: {adr_type}".format(
-                username=self.user.username,
-                adr_type=self.adr_type,
+                username=self.user.user.username,
+                adr_type=self.address_type,
             )
 
     def get_address(self):

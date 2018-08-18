@@ -33,6 +33,7 @@ urlpatterns = [
     url(r'^api/accounts/', include('accounts.api.urls'), name="api-accounts"),
     url(r'^shop/', include('products.urls'), name="products"),
     url(r'^cart/', include('carts.urls'), name="carts"),
+    url(r'^addresses/', include('addresses.urls'), name="addresses"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     #Setningen over virker kun under production, ikke deployment.
 handler404 = views.error_404.as_view()

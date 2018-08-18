@@ -40,8 +40,8 @@ def billing_profile_created_recevier(sender, instance, *args, **kwargs):
 pre_save.connect(billing_profile_created_recevier, sender=BillingProfile)
 
 #When a user is created, the billingprofile for the user will also be created
-def user_created_recevier(sender, instance, *args, **kwargs):
+def user_created_recevier(sender, created, instance, *args, **kwargs):
     if created and instance.email:
-        BillingProfile.objects.get_or_create(user=instace, email=instance.email)
+        BillingProfile.objects.get_or_create(user=instance, email=instance.email)
 
 post_save.connect(user_created_recevier, sender=User)

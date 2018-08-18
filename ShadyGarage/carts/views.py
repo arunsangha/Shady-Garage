@@ -4,6 +4,7 @@ from products.models import Product
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from billing.models import BillingProfile
+from addresses.forms import AddressForm
 # Create your views here.
 
 def cart_home(request):
@@ -45,9 +46,18 @@ def cart_add(request, pk):
 def cart_checkout(request):
     order_obj = None
     cart_obj, created = Cart.objects.get_or_create(request)
+
+    address_form = AddressForm()
     billing_profile, created = BillingProfile.objects.new_or_get(request)
+    shipping_address_id = request.session.get("shipping_address_id", None)
+
+    print(shipping_address_id)
 
     if created:
         print("FUCK OFF")
 
-    return render(request, "carts/cart-checkout.html", {'billing_profile':billing_profile})
+    context = {
+        'billing_profile':billing_profile,
+        'address_form':address_form,
+    }
+    return render(request, "carts/cart-checkout.html", context)

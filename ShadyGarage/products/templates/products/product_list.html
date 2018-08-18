@@ -14,7 +14,7 @@
     <a href="{% url 'carts:cart-home' %}" class="btn btn-info">Handlekurv <i class="fas fa-shopping-cart"></i></a>
   </div>
   {% for i in object_list %}
-  <div class="card" style="width: 20rem; display:inline-block; margin-left:5px; margin-right:5px; z-index:-1;">
+  <div class="card" style="width: 20rem; display:inline-block; margin-left:5px; margin-right:5px;">
   <img class="card-img-top" src="{{i.get_list_image}}" alt="Card image cap">
     <div class="card-body">
       <h5 class="card-title">{{i.name}}</h5>
@@ -22,7 +22,7 @@
       <a href="{% url 'products:detail' category='shady' slug=i.slug %}" class="btn btn-info">Mer info</a>
       <a href="#" id="buyProduct" data-pk="{{i.id}}" class="btn btn-info"><i class="fa fa-shopping-cart"></i></a>
     </div>
-    </div>
+  </div>
   {% endfor %}
 
 </div>
@@ -46,6 +46,7 @@ $(document).ready(function(){
 
   $(document.body).on('click', '#buyProduct', function(event){
     event.preventDefault()
+    console.log("HEELO")
     var id = $(this).attr("data-pk");
     var data = {
         'pk':id,
