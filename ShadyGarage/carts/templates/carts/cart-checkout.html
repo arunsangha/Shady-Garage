@@ -30,7 +30,34 @@
         <input type="submit" class="btn btn-info" value="Lagre"/>
       </form>
     </div>
-    <a href="#" onclick="filll()" class="btn btn-info">Fill </a>
+    <div class="billing-address-container" style="display:none;">
+      <h3> Faktura adresse!</h3>
+      <form method="POST" id="billing-address-form" action='{% url 'addresses:create-address' %}'>
+        {% csrf_token %}
+        <input type="hidden" name="address_type" value="billing"/>
+        <input type="hidden" name="billing_profile" value="{{billing_profile.id}}">
+        {%bootstrap_form address_form%}
+        <input type="submit" class="btn btn-info" value="Lagre"/>
+      </form>
+    </div>
+    <div class="card-element-container" style="display:none;">
+      <script src="https://js.stripe.com/v3/"></script>
+      <form action="/charge" method="post" id="payment-form">
+      <div class="form-row">
+        <label for="card-element">
+          Kreditkort
+        </label>
+        <div id="card-element" class="form-control">
+        <!-- A Stripe Element will be inserted here. -->
+        </div>
+
+      <!-- Used to display form errors. -->
+        <div id="card-errors" role="alert"></div>
+        </div>
+        <a href="#" class="btn btn-success">Betal!</a>
+      </form>
+    </div>
+
   </div>
 {% endblock %}
 {% block script %}
@@ -39,7 +66,6 @@
       document.getElementById("fuel").style.transition = "all 2s";
       document.getElementById("fuel").style.width = width;
     }
-
 
     $(document).ready(function(){
       $('#shipping-address-form').submit(function(event){
@@ -53,7 +79,7 @@
             console.log(data.success)
             $(".shipping-address-container").hide();
             filll("50%");
-
+            $(".billing-address-container").show();
           }, error:function(error){
             console.log("ERROR")
             console.log(error)
@@ -61,6 +87,83 @@
         })
 
       })
+
+      $("#billing-address-form").submit(function(event){
+        event.preventDefault()
+        $.ajax({
+          url:'../../addresses/create_address/',
+          method:'POST',
+          data: $("#billing-address-form").serialize(),
+          success:function(data){
+            console.log(data.isShippingAddress)
+            filll("75%");
+            $(".billing-address-container").hide();
+            $(".card-element-container").show();
+          }, error:function(error){
+            console.log("ERROR")
+          }
+        })
+      })
     })
+  </script>
+  <script>
+
+  // Create a Stripe client.
+var stripe = Stripe('pk_test_EpHMytNU1b76jhrlFLVzynLv');
+
+// Create an instance of Elements.
+var elements = stripe.elements();
+
+// Custom styling can be passed to options when creating an Element.
+// (Note that this demo uses a wider set of styles than the guide below.)
+var style = {
+base: {
+  color: '#32325d',
+  lineHeight: '18px',
+  fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+  fontSmoothing: 'antialiased',
+  fontSize: '16px',
+  '::placeholder': {
+    color: '#aab7c4'
+  }
+},
+invalid: {
+  color: '#fa755a',
+  iconColor: '#fa755a'
+}
+};
+
+// Create an instance of the card Element.
+var card = elements.create('card', {style: style});
+
+// Add an instance of the card Element into the `card-element` <div>.
+card.mount('#card-element');
+
+// Handle real-time validation errors from the card Element.
+card.addEventListener('change', function(event) {
+var displayError = document.getElementById('card-errors');
+if (event.error) {
+  displayError.textContent = event.error.message;
+} else {
+  displayError.textContent = '';
+}
+});
+
+// Handle form submission.
+var form = document.getElementById('payment-form');
+form.addEventListener('submit', function(event) {
+event.preventDefault();
+
+stripe.createToken(card).then(function(result) {
+  if (result.error) {
+    // Inform the user if there was an error.
+    var errorElement = document.getElementById('card-errors');
+    errorElement.textContent = result.error.message;
+  } else {
+    // Send the token to your server.
+    stripeTokenHandler(result.token);
+  }
+});
+});
   </script>
 {% endblock %}
