@@ -34,6 +34,7 @@ urlpatterns = [
     url(r'^shop/', include('products.urls'), name="products"),
     url(r'^cart/', include('carts.urls'), name="carts"),
     url(r'^addresses/', include('addresses.urls'), name="addresses"),
+    url(r'^billing/', include('billing.urls'), name="billing"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     #Setningen over virker kun under production, ikke deployment.
 handler404 = views.error_404.as_view()

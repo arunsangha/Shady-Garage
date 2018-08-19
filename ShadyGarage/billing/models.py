@@ -55,7 +55,7 @@ class CardManager(models.Manager):
     def add_new(self, billing_profile, token):
         if token:
             customer = stripe.Customer.retrieve(billing_profile.customer_id)
-            stripe_card_response = customer.source.create(source=token)
+            stripe_card_response = customer.sources.create(source=token)
             new_card = self.model(
                 billing_profile = billing_profile,
                 stripe_id = stripe_card_response.id,
@@ -79,7 +79,7 @@ class Card(models.Model):
     country            = models.CharField(max_length=120, null=True, blank=True)
     exp_month          = models.IntegerField(blank=True, null=True)
     exp_year           = models.IntegerField(blank=True, null=True)
-    last_4             = models.CharField(max_length=4, blank=True, null=True)
+    last4             = models.CharField(max_length=4, blank=True, null=True)
     default            = models.BooleanField(default=True)
     active             = models.BooleanField(default=True)
     timestamp          = models.DateTimeField(auto_now_add=True)

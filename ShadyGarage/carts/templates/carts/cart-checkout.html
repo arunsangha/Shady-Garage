@@ -73,7 +73,7 @@
       <!-- Used to display form errors. -->
         <div id="card-errors" role="alert"></div>
         </div>
-        <a href="#" class="btn btn-success">Betal!</a>
+        <button type="submit"  class="btn btn-success">Betal!</button>
       </form>
     </div>
 
@@ -140,7 +140,7 @@
       })
     })
   </script>
-  <script>
+<script>
 
   // Create a Stripe client.
 var stripe = Stripe('pk_test_EpHMytNU1b76jhrlFLVzynLv');
@@ -199,5 +199,24 @@ stripe.createToken(card).then(function(result) {
   }
 });
 });
-  </script>
+
+function stripeTokenHandler(token){
+  var data = {
+    'token':token.id,
+    csrfmiddlewaretoken:'{{csrf_token}}',
+  }
+  $.ajax({
+    url:'../../billing/create/',
+    method:'POST',
+    data: data,
+    success:function(data){
+      console.log("success")
+      console.log(data.message)
+    }, error:function(error){
+      console.log(error.message)
+      console.log("ERROR")
+    }
+  });
+}
+</script>
 {% endblock %}
