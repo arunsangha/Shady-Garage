@@ -22,6 +22,7 @@
     <h2>{{billing_profile.email}}</h2>
     <div class="shipping-address-container">
       <h3> Shippping addresse!</h3>
+      <div class="address-container" style="display:flex; justify-content:space-around;">
       <form method="POST" id="shipping-address-form" action='{% url 'addresses:create-address' %}'>
         {% csrf_token %}
         <input type="hidden" name="address_type" value="shipping"/>
@@ -29,6 +30,15 @@
         {%bootstrap_form address_form%}
         <input type="submit" class="btn btn-info" value="Lagre"/>
       </form>
+      {% if hasShippingAddress %}
+      <div class="old-shipping-address">
+          <div class="jumbotron">
+            <p>Bruk addressen: {{shipping_address.address_line_1}}, {{shipping_address.zip_code}} {{shipping_address.city}}</p>
+            <a href="#" onclick="useOldAddress('shipping')" class="btn btn-info">Bruk</a>
+          </div>
+      </div>
+      {% endif %}
+      </div>
     </div>
     <div class="billing-address-container" style="display:none;">
       <h3> Faktura adresse!</h3>
@@ -39,6 +49,14 @@
         {%bootstrap_form address_form%}
         <input type="submit" class="btn btn-info" value="Lagre"/>
       </form>
+      {% if hasBillingAddress %}
+      <div class="old-shipping-address">
+          <div class="jumbotron">
+            <p>Bruk addressen: {{billing_address.address_line_1}}, {{billing_address.zip_code}} {{billing_address.city}}</p>
+            <a href="#" onclick="useOldAddress('billing')" class="btn btn-info">Bruk</a>
+          </div>
+      </div>
+      {% endif %}
     </div>
     <div class="card-element-container" style="display:none;">
       <script src="https://js.stripe.com/v3/"></script>
@@ -67,6 +85,20 @@
       document.getElementById("fuel").style.width = width;
     }
 
+    function useOldAddress(type, event){
+      
+      if(type === 'shipping'){
+        $(".shipping-address-container").hide();
+        filll("50%");
+        $(".billing-address-container").show();
+      }else{
+        $(".billing-address-container").hide();
+        filll("75%");
+        $(".card-element-container").show();
+      }
+    }
+
+
     $(document).ready(function(){
       $('#shipping-address-form').submit(function(event){
         event.preventDefault()
@@ -87,6 +119,7 @@
         })
 
       })
+
 
       $("#billing-address-form").submit(function(event){
         event.preventDefault()
