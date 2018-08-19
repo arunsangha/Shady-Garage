@@ -45,3 +45,43 @@ def user_created_recevier(sender, created, instance, *args, **kwargs):
         BillingProfile.objects.get_or_create(user=instance, email=instance.email)
 
 post_save.connect(user_created_recevier, sender=User)
+
+
+class CardManager(models.Manager):
+    #Return all cards that are active
+    def all(self, *args, **kwargs):
+        return self.get_queryset().filter(active=True)
+
+    def add_new(self, billing_profile, token):
+        if token:
+            customer = stripe.Customer.retrieve(billing_profile.customer_id)
+            stripe_card_response = customer.source.create(source=token)
+            new_card = self.model(
+                billing_profile = billing_profile,
+                stripe_id = stripe_card_response.id,
+                brand = stripe_card_response.brand,
+                country = stripe_card_response.country,
+                exp_month = stripe_card_response.exp_month,
+                exp_year = stripe_card_response.exp_year,
+                last4 = stripe_card_response.last4,
+            )
+
+            new_card.save()
+            return new_card
+
+        return None
+
+
+class Card(models.Model):
+    billing_profile    = models.ForeignKey(BillingProfile, related_name="card_billing_profile")
+    stripe_id          = models.CharField(max_length=120)
+    brand              = models.CharField(max_length=120, null=True, blank=True)
+    country            = models.CharField(max_length=120, null=True, blank=True)
+    exp_month          = models.IntegerField(blank=True, null=True)
+    exp_year           = models.IntegerField(blank=True, null=True)
+    last_4             = models.CharField(max_length=4, blank=True, null=True)
+    default            = models.BooleanField(default=True)
+    active             = models.BooleanField(default=True)
+    timestamp          = models.DateTimeField(auto_now_add=True)
+
+    objects = CardManager()
