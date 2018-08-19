@@ -12,7 +12,9 @@ def payment_method_createview(request):
         token = request.POST.get('token')
         if token is not None:
             new_card = Card.objects.add_new(billing_profile=billing_profile, token=token)
+            request.session['card_id'] = new_card.id
             # TODO: add token to session
-        return JsonResponse({'message':'Done'})
+            message = "Done:" + str(request.session.get('card_id'))
+        return JsonResponse({'message':message})
 
     return HttpResponse({'error':'Not correct request'}, status=401)

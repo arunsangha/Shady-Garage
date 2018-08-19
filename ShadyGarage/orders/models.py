@@ -25,18 +25,18 @@ class OrderManager(models.Manager):
             order_obj = order_qs.first()
         else:
             created = True
-            order_obj = self.objects.create(billing_profile=billing_profile, order=order_obj)
+            order_obj = self.model.objects.create(billing_profile=billing_profile, cart=cart_obj)
 
         return order_obj, created
 
 
 class Order(models.Model):
     order_id            = models.CharField(max_length=120, unique=True, blank=True)
-    user                = models.ForeignKey(User, related_name="order_user")
-    cart                = models.ForeignKey(Cart, related_name="order_cart")
-    billing_profile     = models.ForeignKey(BillingProfile, related_name="order_billing_profile")
-    shipping_address    = models.ForeignKey(Address, related_name="order_shipping_address")
-    billing_address     = models.ForeignKey(Address, related_name="order_billing_profile")
+    user                = models.ForeignKey(User, related_name="order_user", blank=True, null=True)
+    cart                = models.ForeignKey(Cart, related_name="order_cart", blank=True, null=True)
+    billing_profile     = models.ForeignKey(BillingProfile, related_name="order_billing_profile", blank=True, null=True)
+    shipping_address    = models.ForeignKey(Address, related_name="order_shipping_address", blank=True, null=True)
+    billing_address     = models.ForeignKey(Address, related_name="order_billing_profile", blank=True, null=True)
     status              = models.CharField(choices=ORDER_STATUS, default='created', max_length=120)
     total               = models.DecimalField(default=0, max_digits=1000, decimal_places=2)
     timestamp           = models.DateTimeField(auto_now_add=True)
@@ -47,9 +47,9 @@ class Order(models.Model):
         return self.order_id
 
     def update_total(self):
-        self.total = self.cart.total_price
+        self.total = self.cart.total
         self.save()
-        return total
+        return self.total
 
     def check_done(self):
         billing_profile = self.billing_profile
@@ -69,10 +69,10 @@ class Order(models.Model):
 
 def pre_save_create_order(sender, instance, *args, **kwargs):
     if not instance.order_id:
-        instance.order_id = unique_order_id_generator()
+        instance.order_id = unique_order_id_generator(instance)
 
     #Check if a order with same cart exists. If so, deactivate it
-    qs = Order.objects.filter(cart=instance.cart).exlude(billing_profile=instance.billing_profile)
+    qs = Order.objects.filter(cart=instance.cart).exclude(billing_profile=instance.billing_profile)
 
     if qs.exists():
         qs.update(active=False)
@@ -92,7 +92,7 @@ def post_save_cart_total(sender, created, instance, *args, **kwargs):
 
 post_save.connect(post_save_cart_total, sender=Cart)
 
-def post_save_order(sender, instance, *args, **kwargs):
+def post_save_order(sender, created, instance, *args, **kwargs):
     if created:
         instance.update_total()
 post_save.connect(post_save_order, sender=Order)

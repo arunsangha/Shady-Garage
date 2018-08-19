@@ -54,7 +54,7 @@ def cart_checkout(request):
 
     if billing_profile is not None:
 
-        #order_obj, created = Order.objects.new_or_get(billing_profile=billing_profile, cart=cart_obj)
+        order_obj, created = Order.objects.new_or_get(billing_profile=billing_profile, cart_obj=cart_obj)
 
         # TODO: Legge til order & card i session for siste checkout del.
 
