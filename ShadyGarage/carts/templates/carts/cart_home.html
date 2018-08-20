@@ -1,7 +1,11 @@
 {% extends "base.html" %}
 {% block body %}
   <div class="container">
-    <h1>Din handlekurv!</h1>
+    <div class="jumbotron">
+      <div class="container">
+        <h4 class="display-4" align="center">Handlekurv</h4>
+      </div>
+    </div>
     {% for product in cart.products.all %}
       <h3> {{product.name}}</h3>
       <h3> Pris: {{product.price}}</h3>
@@ -9,10 +13,16 @@
     {% empty %}
       <h1>Handlekurven er tom!</h1>
     {% endfor %}
+
+    {% if cart.products.all.count > 0 %}
     <h4> Pris: {{cart.sub_total}}</h4>
     <h4> Frakt: {{cart.shipping}}</h4>
     <h4> Sum total: {{cart.total}}</h4>
-
     <a href="{% url 'carts:cart-checkout' %}" class="btn btn-success"> Til kassen </a>
+    {% else %}
+    <a href="{% url 'products:list' category='list' %}" class="btn btn-info"> Ta meg til produktene!</a>
+    {% endif %}
+
+
   </div>
 {% endblock %}

@@ -13,7 +13,6 @@ def payment_method_createview(request):
         if token is not None:
             new_card = Card.objects.add_new(billing_profile=billing_profile, token=token)
             request.session['card_id'] = new_card.id
-            # TODO: add token to session
             message = "Done:" + str(request.session.get('card_id'))
         return JsonResponse({'message':message})
 

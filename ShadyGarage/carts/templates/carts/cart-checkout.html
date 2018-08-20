@@ -76,8 +76,12 @@
         <button type="submit" id="buy-button" class="btn btn-success">Betal!</button>
       </form>
     </div>
-
   </div>
+
+  <div class="container" style="margin-top:100px;">
+    <a href="{% url 'carts:cart-confirm' %}" class="btn btn-warning">Confirm</a>
+  </div>
+
 {% endblock %}
 {% block script %}
   <script>

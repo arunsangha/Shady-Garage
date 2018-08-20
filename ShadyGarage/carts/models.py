@@ -43,6 +43,11 @@ class Cart(models.Model):
 
     objects         = CartManager()
 
+    def set_inactive(self):
+        self.active = False
+        self.save()
+        return self.active
+
     def __str__(self):
         return "{}-Products Count:{}".format(self.id, self.products.count())
 

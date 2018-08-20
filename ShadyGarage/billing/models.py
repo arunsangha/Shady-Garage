@@ -28,6 +28,13 @@ class BillingProfile(models.Model):
 
     objects = BillingProfileManager()
 
+
+    def __str__(self):
+        return self.user.username
+
+    def charge(self, order_obj, card=None):
+        return Charge.objects.create(self, order_obj, card)
+
 #Creates a stripe customer and adds stripe customer id to profile.
 #This happens before the billing profile objects get saved.
 def billing_profile_created_recevier(sender, instance, *args, **kwargs):
@@ -88,6 +95,11 @@ class Card(models.Model):
     objects = CardManager()
 
 
+
+    def __str__(self):
+        return self.last4
+
+#Creates the charge with stripe add creates charge object
 class ChargeManager(models.Manager):
     def create(self, billing_profile, order_obj, card=None):
         card_obj = card
@@ -120,7 +132,7 @@ class ChargeManager(models.Manager):
         )
 
         new_charge_obj.save()
-        
+
         return new_charge_obj.paid, new_charge_obj.seller_message
 
 class Charge(models.Model):
@@ -135,3 +147,6 @@ class Charge(models.Model):
 
 
     objects = ChargeManager()
+
+    def __str__(self):
+        return self.stripe_id
