@@ -13,18 +13,29 @@
     <a href="#" class="btn btn-info" onclick="openShopNav()">Kategorier <i class="fa fa-air-freshener"></i></a>
     <a href="{% url 'carts:cart-home' %}" class="btn btn-info">Handlekurv <i class="fas fa-shopping-cart"></i></a>
   </div>
+  <div class="meet-list-container">
   {% for i in object_list %}
-  <div class="card" style="width: 20rem; display:inline-block; margin-left:5px; margin-right:5px;">
-  <img class="card-img-top" src="{{i.get_list_image}}" alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">{{i.name}}</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="{% url 'products:detail' category='shady' slug=i.slug %}" class="btn btn-info">Mer info</a>
-      <a href="#" id="buyProduct" data-pk="{{i.id}}" class="btn btn-info"><i class="fa fa-shopping-cart"></i></a>
+  <div class="meet-card-container" style="background-image: url('{{i.get_list_image}}');background-position:center;">
+        <div class="meet-card-container-color-overlay" style="background-color:rgba(0,0,0,0.3);">
+            <div class="meet-card-title">
+                <a class="w" href=‘{{product.get_absolute_url}}’><h3>{{i.name}}</h3></a>
+            </div>
+            <div class="meet-card-imagecontainer" style=" border: 0.3px solid white;; background-image: url('{{i.get_list_image}}'); background-position:center;">
+            </div>
+            <div class="meet-card-timecontainer">
+            </div>
+            <h4 class="meet-card-location w">
+            {{i.name}}
+            </h4>
+    <a href="#" id="buyProduct" data-pk="{{i.id}}" class="btn btn-info"><i class="fa fa-shopping-cart"></i></a>
+		<a href="{% url 'products:detail' category='shady' slug=i.slug %}" class="btn btn-info">Mer info</a>
+      <div class="meet-card-bottom-info">
+        <p class="w"> {{i.price}} kr </p>
+      </div>
     </div>
-  </div>
+</div>
   {% endfor %}
-
+</div>
 </div>
 {% endblock %}
 {% block script%}
