@@ -6,18 +6,41 @@
         <h4 class="display-4" align="center">Handlekurv</h4>
       </div>
     </div>
+    <!--TODO: ajax for removing -->
     {% for product in cart.products.all %}
-      <h3> {{product.name}}</h3>
-      <h3> Pris: {{product.price}}</h3>
+    <div class="cart-product-card" style="display:flex; flex-direction:row;">
+      <div class="cart-product-card-image" style="height:100px; width:100px; background-image: url('{{product.get_list_image}}'); background-size:cover;">
+      </div>
+      <a href="{{product.get_absolute_url}}" style="text-decoration:none; color:black; font-family: 'Catamaran', light; ">
+      <div class="cart-product-card-text" style="display:inline-block; margin-left:20px;">
+        <h4> {{product.name}}</h4>
+        <h5> Pris: {{product.price}}</h5>
+      </div>
+      </a>
+      <a href="{% url 'carts:cart-add' pk=product.id %}" style="flex:1; text-align:right; color:red;"><i class="fas fa-minus-circle"></i></a>
+    </div>
       <hr>
     {% empty %}
       <h1>Handlekurven er tom!</h1>
     {% endfor %}
 
     {% if cart.products.all.count > 0 %}
-    <h4> Pris: {{cart.sub_total}}</h4>
-    <h4> Frakt: {{cart.shipping}}</h4>
-    <h4> Sum total: {{cart.total}}</h4>
+    <div class="cart-price-card" style="width:400px; padding: 5px;">
+    <div style="display:flex; justify-content:space-between; flex-direction:row; width:300px; font-family: 'Catamaran', light;">
+        <h5>Mellomsum </i></h5>
+        <h5>{{cart.sub_total}} kr</h5>
+    </div>
+    <div style="display:flex; justify-content:space-between; flex-direction:row; width:300px; font-family: 'Catamaran', light;">
+        <h5>Frakt </i></h5>
+        <h5>{{cart.shipping}} kr</h5>
+    </div>
+    <hr>
+    <div style="display:flex; justify-content:space-between; flex-direction:row; width:300px; font-family: 'Catamaran', light;">
+        <h5>Pris </h5>
+        <h5>{{cart.total}} kr</h5>
+    </div>
+    </div>
+
     <a href="{% url 'carts:cart-checkout' %}" class="btn btn-success"> Til kassen </a>
     {% else %}
     <a href="{% url 'products:list' category='list' %}" class="btn btn-info"> Ta meg til produktene!</a>

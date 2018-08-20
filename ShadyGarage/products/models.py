@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
+from django.core.urlresolvers import reverse
 # Create your models here.
 
 class Product(models.Model):
@@ -35,6 +36,9 @@ class Product(models.Model):
             image = qs.first()
             return image.image.url
         return None
+
+    def get_absolute_url(self, *args, **kwargs):
+        return reverse("products:detail", kwargs={'category':'sticker', 'slug':self.slug})
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
