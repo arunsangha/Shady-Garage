@@ -1639,12 +1639,13 @@ h1,h2,h3,h4,h5,h6{
     transition: 0.3s;
 }
 
-.product-list-card{
-  width: 18rem;
-  border-radius:10px;
-  margin:25px;
-}
 
+.card-buy-button{
+  padding: 5px;
+  padding-top: 15px;
+  border-left: 0.5px solid grey;
+  border-bottom-right-radius:9px;
+}
 .card:hover {
     box-shadow: 0 8px 16px 0 rgba(9,64,72,0.3);
 

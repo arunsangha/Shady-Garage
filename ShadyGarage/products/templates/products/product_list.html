@@ -20,14 +20,14 @@
     justify-content: center;">
   {% for i in object_list %}
   <a href="{{i.get_absolute_url}}" id="product-list-card" style="color:black;">
-  <div class="card product-list-card">
+  <div class="card product-list-card" style="width: 18rem; border-radius:10px; margin:25px;">
   <img class="card-img-top" src="{{i.get_list_image}}" alt="Card image cap">
   <div class="card-body" style="border-top: 0.5px solid grey; border-bottom-left-radius:10px; border-bottom-right-radius:10px; text-align:left; display: flex; flex-direction: row; flex-wrap:wrap; justify-content:space-between; padding:0px;">
     <div style="margin: 5px; padding-left:10px;">
       <h5 class="card-text">{{i.name}}</h5>
       <p class="card-text">{{i.price}} kr</p>
     </div>
-    <div class="card-buy-button" style="padding: 5px; padding-top: 15px; border-left: 0.5px solid grey; border-bottom-right-radius:9px;">
+    <div class="card-buy-button">
       {% if i.is_empty %}
       <p class="btn btn-danger"> UTSOLGT!</p>
       {% else %}
