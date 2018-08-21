@@ -395,6 +395,7 @@ h1,h2,h3,h4,h5,h6{
   margin: 0 auto;
 }
 
+
 .meet-card-container{
   display: flex;
 
@@ -1575,7 +1576,13 @@ h1,h2,h3,h4,h5,h6{
   word-wrap: break-word;
 }
 
+/***
+ CARTS APP
+****/
 
+.progress-bar{
+  color: var(--main-blue-color);
+}
 /*****
  Products App
  ****/
@@ -1627,9 +1634,18 @@ h1,h2,h3,h4,h5,h6{
   }
 }
 
+.card{
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
 
-.progress-bar{
-  color: var(--main-blue-color);
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(9,64,72,0.3);
+
+}
+
+.card-buy-button:hover{
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 

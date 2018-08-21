@@ -6,36 +6,40 @@
   <a href="{% url 'products:list' category='list'%}">Alt</a>
   <a href="{% url 'products:list' category='sticker' %}" >Stickers</a>
   <a href="{% url 'products:list' category='tshirt' %}">Merch</a>
-  <a href="{% url 'carts:cart-home' %}"><i class="fa fa-shopping-cart"></i></a>
+  <a href="{% url 'carts:cart-home' %}"><i class="fa fa-shopping-cart"></i> <span class="badge badge-light">4</span></a>
 </div>
 <div class="container" style="text-align: center;">
   <div class="shop-top-buttons">
     <a href="#" class="btn btn-info" onclick="openShopNav()">Kategorier <i class="fa fa-air-freshener"></i></a>
-    <a href="{% url 'carts:cart-home' %}" class="btn btn-info">Handlekurv <i class="fas fa-shopping-cart"></i></a>
+    <a href="{% url 'carts:cart-home' %}" id="cart-count" class="btn btn-info">Handlekurv <i class="fas fa-shopping-cart"></i></a>
   </div>
-  <div class="meet-list-container">
+  <div style="
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;">
   {% for i in object_list %}
-  <div class="meet-card-container" style="background-image: url('{{i.get_list_image}}');background-position:center;">
-        <div class="meet-card-container-color-overlay" style="background-color:rgba(0,0,0,0.3);">
-            <div class="meet-card-title">
-                <a class="w" href=‘{{product.get_absolute_url}}’><h3>{{i.name}}</h3></a>
-            </div>
-            <div class="meet-card-imagecontainer" style=" border: 0.3px solid white;; background-image: url('{{i.get_list_image}}'); background-position:center;">
-            </div>
-            <div class="meet-card-timecontainer">
-            </div>
-            <h4 class="meet-card-location w">
-            {{i.name}}
-            </h4>
-    <a href="#" id="buyProduct" data-pk="{{i.id}}" class="btn btn-info"><i class="fa fa-shopping-cart"></i></a>
-		<a href="{% url 'products:detail' category='shady' slug=i.slug %}" class="btn btn-info">Mer info</a>
-      <div class="meet-card-bottom-info">
-        <p class="w"> {{i.price}} kr </p>
-      </div>
+  <a href="{{i.get_absolute_url}}" id="product-list-card" style="color:black;">
+  <div class="card" style="width: 18rem; border-radius:10px; margin:25px;">
+  <img class="card-img-top" src="{{i.get_list_image}}" alt="Card image cap">
+  <div class="card-body" style="border-top: 0.5px solid grey; border-bottom-left-radius:10px; border-bottom-right-radius:10px; text-align:left; display: flex; flex-direction: row; flex-wrap:wrap; justify-content:space-between; padding:0px;">
+    <div style="margin: 5px; padding-left:10px;">
+      <h5 class="card-text">{{i.name}}</h5>
+      <p class="card-text">{{i.price}} kr</p>
     </div>
-</div>
+    <div class="card-buy-button" style="padding: 5px; padding-top: 15px; border-left: 0.5px solid grey; border-bottom-right-radius:9px;">
+      <a href="#" id="buyProduct" data-pk="{{i.id}}" class="btn btn-info">
+        {% if i in cart_obj.products.all %}
+          <i class="fas fa-minus-circle"></i>
+        {% else %}
+          <i class="fa fa-shopping-cart"></i>
+        {% endif %}
+      </a>
+    </div>
+  </div>
+  </div>
+  </a>
   {% endfor %}
-</div>
+  </div>
 </div>
 {% endblock %}
 {% block script%}
@@ -71,12 +75,12 @@ $(document).ready(function(){
       method: 'POST',
       data: data,
       success:function(data){
-        $(this).html("Lagt til!");
+        $(this).html("<i class='fas fa-check-circle'></i>");
       }, error:function(error){
         console.log(error)
       }
     })
-    $(this).html("Lagt til!");
+    $(this).html("<i class='fas fa-check-circle'></i>");
 
   })
 });

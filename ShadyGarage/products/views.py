@@ -5,12 +5,21 @@ from django.views.generic import (
 )
 from .models import Product
 from django.db.models import Q
+from carts.models import Cart
 
 class ProductList(ListView):
     template_name = "products/products_list.html"
 
     def get_context_data(self, *args, **kwargs):
         context = super(ProductList, self).get_context_data(*args, **kwargs)
+
+
+        cart_obj, created = Cart.objects.get_or_create(self.request)
+
+        if not created:
+            cart_obj = cart_obj
+
+        context['cart_obj'] = cart_obj
         return context
 
 

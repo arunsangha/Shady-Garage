@@ -30,7 +30,7 @@ def cart_add(request, pk):
         cart_obj.products.add(product)
 
 
-    request.session['cart_total'] = cart_obj.products.count()
+    request.session['cart_products_count'] = cart_obj.products.count()
 
     if request.is_ajax():
         data = {
