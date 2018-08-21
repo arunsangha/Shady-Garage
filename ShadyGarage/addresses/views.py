@@ -41,6 +41,7 @@ def create_address(request):
 def reuse_address(request):
     if request.method == "POST":
         #if request.is_ajax():
+        # TODO: Ajax here and set correct address in session key
         pk = request.POST.get('pk', 0)
         type = request.POST.get('type', 'shipping')
         print(pk)
