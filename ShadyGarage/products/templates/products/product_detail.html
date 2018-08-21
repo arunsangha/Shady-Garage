@@ -1,17 +1,39 @@
 {% extends "base.html" %}
 {% block body %}
   <div class="container">
-    <div class="card bg-dark text-white">
-    <img class="card-img" src="{{object.get_list_image}}" alt="Card image" style="max-height:500px;">
-    <div class="card-img-overlay">
-      <h5 class="card-title">{{object.name}}</h5>
-      <p class="card-text">{{object.description}}</p>
-      <p class="card-text">Antall igjen: {{object.get_stock}}</p>
+    <div class="product-detail-container">
+      <div class="product-detail-image" style="background-image:url('{{object.get_list_image}}');">
+      </div>
+      <div class="product-detail-description">
+        <h4>{{object.name}}</h4>
+        <h6>{{object.description}}</h6>
+        <hr>
+        <h4>Pris: {{object.price}}kr</h4>
+        <hr>
+        {% if object.get_stock < 10 and object.get_stock > 0 %}
+        <h5><i class="fas fa-surprise"></i>: Kun {{object.get_stock}} igjen!</h5>
+        {% endif %}
+        {% if object.get_stock <= 0%}
+        <a href="#" id="disableButton" class="btn btn-danger">UTSOLGT!</a>
+        {% else %}
+        <a href="#" id="buyProduct" data-pk="{{object.id}}" class="btn btn-info">
+          {% if object in cart_obj.products.all %}
+            <i class="fas fa-minus-circle"></i>
+          {% else %}
+            <i class="fa fa-shopping-cart"></i>
+          {% endif %}
+        </a>
+        {% endif %}
+      </div>
     </div>
-    </div>
-    <a href="#" id="buyProduct" data-pk="{{object.id}}" class="btn btn-info">Kjøp</a>
     <div class="alert alert-success" role="alert" style="display:none;">
       <h5 class="alert-heading">Varen er lagt til! 🤟</h5>
+      <p id="alert-description"></p>
+      <hr>
+      <p class="mb-0">🔥 Shady Garage 🔥</p>
+    </div>
+    <div class="alert alert-danger" role="alert" style="display:none;">
+      <h5 class="alert-heading">Varen er fjernet fra handlekurven..</h5>
       <p id="alert-description"></p>
       <hr>
       <p class="mb-0">🔥 Shady Garage 🔥</p>
@@ -25,6 +47,7 @@ $(document).ready(function(){
   $("#buyProduct").on('click', function(event){
     event.preventDefault()
     var id = $("#buyProduct").attr("data-pk");
+
     var data = {
         'pk':id,
         csrfmiddlewaretoken:'{{ csrf_token }}'
@@ -37,19 +60,27 @@ $(document).ready(function(){
       method: 'POST',
       data: data,
       success:function(data){
-        $("#buyProduct").html("Kjøpt!")
         console.log(data)
         console.log("Success")
 
         var description = "Antall varer i handlekurven: <span>" + data.cartItemCount + "</span><br> <a href='{% url 'carts:cart-home' %}' class='btn btn-info'>Ta meg til handlekurven</a>";
         $("#alert-description").append(description);
-        $(".alert").show().delay(4000).fadeOut();
-
+        if(data.removed){
+          $(".alert-danger").show().delay(4000).fadeOut();
+          $("#buyProduct").html("Fjernet!")
+        }else{
+          $(".alert-success").show().delay(4000).fadeOut();
+          $("#buyProduct").html("Lagt til!")
+        }
       }, error:function(error){
         console.log(error)
       }
     })
     $("#alert-description").empty();
+  })
+
+  $("#disableButton").on('click', function(evnet){
+    event.preventDefault()
   })
 });
 

@@ -18,6 +18,7 @@ def cart_add(request, pk):
 
     try:
         product = Product.objects.get(id=pk)
+
     except Product.DoesNotExist:
         # TODO: Adde json response her med error?
         redirect("carts:cart-home")
@@ -101,9 +102,15 @@ def cart_confirm(request):
     products = None
     card_obj = None
     order_obj = Order.objects.filter(id=order_id)
+    error_msg = ""
     if order_obj:
         order_obj = order_obj.first()
         products = order_obj.cart.products.all()
+        for x in products:
+            if not x.take_one():
+                error_msg = "Error! Produktet {product} er tomt! :(".format(product=x.name)
+                return render(request, "carts/cart-confirm.html", {'error_msg':error_msg})
+
         billing_address = Address.objects.get(id=billing_address_id)
         shipping_address = Address.objects.get(id=shipping_address_id)
         card_obj = Card.objects.get(id=card_id)
@@ -134,7 +141,6 @@ def cart_confirm(request):
         'shipping_address':shipping_address,
         'products':products,
         'card':card_obj,
-
     }
 
     return render(request, "carts/cart-confirm.html", context)

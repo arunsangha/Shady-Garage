@@ -19,7 +19,7 @@ class Product(models.Model):
         return self.name
 
     def is_empty(self):
-        if stock == 0:
+        if self.stock == 0:
             self.empty = True
         return self.empty
 
@@ -39,6 +39,17 @@ class Product(models.Model):
 
     def get_absolute_url(self, *args, **kwargs):
         return reverse("products:detail", kwargs={'category':'sticker', 'slug':self.slug})
+
+    def take_one(self):
+        success = False
+        if self.stock > 0:
+            self.stock = self.stock - 1
+            success = True
+        else:
+            self.empty = True
+        self.save()
+        return success
+
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
