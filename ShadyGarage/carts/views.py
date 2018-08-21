@@ -8,6 +8,8 @@ from addresses.forms import AddressForm
 from addresses.models import Address
 from orders.models import Order
 from django.views.generic import TemplateView
+from django.conf import settings
+from django.core.mail import send_mail
 # Create your views here.
 
 def cart_home(request):
@@ -51,11 +53,15 @@ def cart_checkout(request):
     order_obj = None
     cart_obj, created = Cart.objects.get_or_create(request)
 
+    addresses = None
+    hasAddress = False
     address_form = AddressForm()
     billing_profile, created = BillingProfile.objects.new_or_get(request)
 
     if billing_profile is not None:
-
+        addresses = Address.objects.all().filter(user=billing_profile)
+        if addresses.count() >= 1:
+            hasAddress = True
         order_obj, created = Order.objects.new_or_get(billing_profile=billing_profile, cart_obj=cart_obj)
         request.session['order_id'] = order_obj.id
 
@@ -85,6 +91,9 @@ def cart_checkout(request):
         'shipping_address':shipping_address,
         'hasBillingAddress':hasBillingAddress,
         'billingAddress':billing_address,
+        'addresses':addresses,
+        'hasBillingAddress':True,
+        'hasAddress':hasAddress,
     }
     return render(request, "carts/cart-checkout.html", context)
 

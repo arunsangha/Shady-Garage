@@ -29,10 +29,19 @@
         {%bootstrap_form address_form%}
         <input type="submit" class="btn btn-info" value="Lagre"/>
       </form>
-      {% if hasShippingAddress %}
+      {% if hasAddress %}
       <div class="old-shipping-address">
           <div class="jumbotron">
-            <p>Bruk addressen: {{shipping_address.address_line_1}}, {{shipping_address.post_code}} {{shipping_address.city}}</p>
+            <!--<p>Bruk addressen: {{shipping_address.address_line_1}}, {{shipping_address.post_code}} {{shipping_address.city}}</p>-->
+            {% for a in addresses %}
+            <form action="{% url 'addresses:reuse-address' %}" method="post">
+                {% csrf_token %}
+                <p>{{a.address_line_1}}, {{a.zip_code}} {{a.city}}</p>
+                <input type="hidden" name="pk" value="{{a.id}}">
+                <input type="hidden" name="type" value="shipping"/>
+                <input type="submit" name="" value="Bruk">
+            </form>
+            {% endfor %}
             <a href="#" onclick="useOldAddress('shipping')" class="btn btn-info">Bruk</a>
           </div>
       </div>
@@ -55,6 +64,7 @@
       <div class="old-shipping-address">
           <div class="jumbotron">
             <p>Bruk addressen: {{billing_address.address_line_1}}, {{billing_address.zip_code}} {{billing_address.city}}</p>
+
             <a href="#" onclick="useOldAddress('billing')" class="btn btn-info">Bruk</a>
           </div>
       </div>

@@ -37,3 +37,13 @@ def create_address(request):
             return JsonResponse(data)
 
         return redirect("carts:cart-checkout")
+
+def reuse_address(request):
+    if request.method == "POST":
+        #if request.is_ajax():
+        pk = request.POST.get('pk', 0)
+        type = request.POST.get('type', 'shipping')
+        print(pk)
+        print(type)
+
+    return redirect("carts:cart-checkout")
