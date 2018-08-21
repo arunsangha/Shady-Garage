@@ -11,7 +11,7 @@ User = get_user_model()
 
 ORDER_STATUS = (
     ('created', 'Opprettet'),
-    ('paid', 'Betal'),
+    ('paid', 'Betalt'),
     ('packing', 'Pakker'),
     ('shippped', 'Sendt'),
     ('finished', 'Finished'),

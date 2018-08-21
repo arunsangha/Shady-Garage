@@ -7,6 +7,7 @@ from billing.models import BillingProfile, Card
 from addresses.forms import AddressForm
 from addresses.models import Address
 from orders.models import Order
+from django.views.generic import TemplateView
 # Create your views here.
 
 def cart_home(request):
@@ -125,18 +126,21 @@ def cart_confirm(request):
 
             order_obj.save()
 
-            if order_obj.check_done():
-                billing_profile.charge(order_obj=order_obj, card=card_obj)
-                cart_obj = order_obj.cart
-                cart_obj.set_inactive()
-                del request.session['cart_id']
-                del request.session['card_id']
-                del request.session['order_id']
+            if request.method == "POST":
+                if order_obj.check_done():
+                    billing_profile.charge(order_obj=order_obj, card=card_obj)
+                    cart_obj = order_obj.cart
+                    cart_obj.set_inactive()
+                    del request.session['cart_id']
+                    del request.session['card_id']
+                    del request.session['order_id']
 
-                order_id = order_obj.order_id
+                    order_id = order_obj.order_id
+                    order_obj.set_paid()
+
+                    return redirect("carts:cart-success")
 
     context = {
-        'order_id':order_id,
         'billing_address': billing_address,
         'shipping_address':shipping_address,
         'products':products,
@@ -144,3 +148,6 @@ def cart_confirm(request):
     }
 
     return render(request, "carts/cart-confirm.html", context)
+
+class CartSuccess(TemplateView):
+    template_name = "carts/cart-success.html"

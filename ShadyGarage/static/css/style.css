@@ -1583,6 +1583,33 @@ h1,h2,h3,h4,h5,h6{
 .progress-bar{
   color: var(--main-blue-color);
 }
+
+.address-container-style{
+  margin-top: 20px;
+}
+
+#address-container-title{
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.address-container{
+  display:flex;
+  justify-content:space-around;
+}
+
+
+
+
+@media only screen and (max-width:480px){
+  .address-container{
+    flex-direction: column;
+  }
+
+  .old-shipping-address{
+    margin-top: 20px;
+  }
+}
 /*****
  Products App
  ****/

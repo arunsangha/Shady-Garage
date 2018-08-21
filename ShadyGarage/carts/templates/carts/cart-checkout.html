@@ -18,11 +18,10 @@
         F
       </div>
     </div>
-
-    <h2>{{billing_profile.email}}</h2>
-    <div class="shipping-address-container">
-      <h3> Shippping addresse!</h3>
-      <div class="address-container" style="display:flex; justify-content:space-around;">
+    <div class="shipping-address-container address-container-style">
+      <h3 id="address-container-title"> Shippping addresse!</h3>
+      <hr>
+      <div class="address-container">
       <form method="POST" id="shipping-address-form" action='{% url 'addresses:create-address' %}'>
         {% csrf_token %}
         <input type="hidden" name="address_type" value="shipping"/>
@@ -33,7 +32,7 @@
       {% if hasShippingAddress %}
       <div class="old-shipping-address">
           <div class="jumbotron">
-            <p>Bruk addressen: {{shipping_address.address_line_1}}, {{shipping_address.zip_code}} {{shipping_address.city}}</p>
+            <p>Bruk addressen: {{shipping_address.address_line_1}}, {{shipping_address.post_code}} {{shipping_address.city}}</p>
             <a href="#" onclick="useOldAddress('shipping')" class="btn btn-info">Bruk</a>
           </div>
       </div>
@@ -41,15 +40,17 @@
 
       </div>
     </div>
-    <div class="billing-address-container" style="display:none;">
-      <h3> Faktura adresse!</h3>
-      <form method="POST" id="billing-address-form" action='{% url 'addresses:create-address' %}'>
-        {% csrf_token %}
-        <input type="hidden" name="address_type" value="billing"/>
-        <input type="hidden" name="billing_profile" value="{{billing_profile.id}}">
-        {%bootstrap_form address_form%}
-        <input type="submit" class="btn btn-info" value="Lagre"/>
-      </form>
+    <div class="billing-address-container address-container-style" style="display:none;">
+      <h3 id="address-container-title"> Faktura adresse!</h3>
+      <hr>
+      <div class="address-container">
+        <form method="POST" id="billing-address-form" action='{% url 'addresses:create-address' %}'>
+          {% csrf_token %}
+          <input type="hidden" name="address_type" value="billing"/>
+          <input type="hidden" name="billing_profile" value="{{billing_profile.id}}">
+          {%bootstrap_form address_form%}
+          <input type="submit" class="btn btn-info" value="Lagre"/>
+        </form>
       {% if hasBillingAddress %}
       <div class="old-shipping-address">
           <div class="jumbotron">
@@ -58,8 +59,10 @@
           </div>
       </div>
       {% endif %}
+      </div>
     </div>
     <div class="card-element-container" style="display:none;">
+      <div class="container" style="align:center; width:80%;">
       <script src="https://js.stripe.com/v3/"></script>
       <form action="/charge" method="post" id="payment-form">
       <div class="form-row">
@@ -73,9 +76,17 @@
       <!-- Used to display form errors. -->
         <div id="card-errors" role="alert"></div>
         </div>
-        <button type="submit" id="buy-button" class="btn btn-success">Betal!</button>
+        <div class="container" style="text-align:center">
+        <button type="submit" id="buy-button" style="margin-top:20px;" class="btn btn-success">Betal!</button>
+        </div>
       </form>
+      <div class="container" style="color:rgba(0,0,0,0.5); font-size:30px; text-align:center;">
+        <i class="fab fa-cc-stripe"></i>
+        <i class="fab fa-cc-visa"></i>
+        <i class="fab fa-cc-mastercard"></i>
+      </div>
     </div>
+   </div>
   </div>
 
   <div class="container" style="margin-top:100px;">
@@ -191,7 +202,7 @@ if (event.error) {
 var form = document.getElementById('payment-form');
 form.addEventListener('submit', function(event) {
 event.preventDefault();
-$(this).find('#buy-button').html('<i class="fa fa-spinner">Sjekker..</i>');
+$(this).find('#buy-button').html('<i class="fa fa-spinner fa-spin"></i>Sjekker..');
 stripe.createToken(card).then(function(result) {
   if (result.error) {
     // Inform the user if there was an error.
@@ -214,9 +225,13 @@ function stripeTokenHandler(token){
     method:'POST',
     data: data,
     success:function(data){
+      filll("90%");
+      $("#buy-button").html("<i class='fas fa-check-circle'></i>")
       console.log("success")
-      console.log(data.message)
+      window.location.href = '/cart/checkout/confirm/';
+
     }, error:function(error){
+      $("#buy-button").html("<i class='fas fa-exclamation-triangle'></i> Error!!")
       console.log(error.message)
       console.log("ERROR")
     }
