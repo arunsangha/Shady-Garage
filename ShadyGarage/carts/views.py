@@ -59,7 +59,7 @@ def cart_checkout(request):
     billing_profile, created = BillingProfile.objects.new_or_get(request)
 
     if billing_profile is not None:
-        addresses = Address.objects.all().filter(user=billing_profile)
+        addresses = Address.objects.all().filter(user=billing_profile).exclude(address_type='billing')
         if addresses.count() >= 1:
             hasAddress = True
         order_obj, created = Order.objects.new_or_get(billing_profile=billing_profile, cart_obj=cart_obj)
