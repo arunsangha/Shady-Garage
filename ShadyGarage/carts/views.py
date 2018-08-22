@@ -138,6 +138,7 @@ def cart_confirm(request):
         'shipping_address':shipping_address,
         'products':products,
         'card':card_obj,
+        'order':order_obj,
     }
 
     return render(request, "carts/cart-confirm.html", context)

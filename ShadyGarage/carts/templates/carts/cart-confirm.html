@@ -25,13 +25,26 @@
         <li class="list-group-item">Faktura addresse: {{billing_address.address_line_1}}, {{billing_address.post_code}} {{billing_address.city}} </li>
         <li class="list-group-item">Leveringsaddresse: {{shipping_address.address_line_1}}, {{shipping_address.post_code}} {{shipping_address.city}} </li>
         <li class="list-group-item">Kort: {{card.brand}} {{card.last4}}</li>
-        <li class="list-group-item">Produkter: {% for i in products %}{{i.name}},
-        {% endfor %}</li>
+        <li class="list-group-item" style="display:inline-block;">Produkter: <div class="checkout-product-list">{% for i in products %}
+
+        <div class="card product-list-card" style="width: 13rem; border-radius:10px; margin:25px;">
+          <img class="card-img-top" src="{{i.get_list_image}}" alt="Card image cap">
+          <div class="card-body" style="border-top: 0.5px solid grey; border-bottom-left-radius:10px; border-bottom-right-radius:10px; text-align:left; display: flex; flex-direction: row; flex-wrap:wrap; justify-content:space-between; padding:0px;">
+            <div style="margin: 5px; padding-left:10px;">
+              <h5 class="card-text">{{i.name}}</h5>
+              <p class="card-text">{{i.price}} kr</p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        </div>
+      </li>
+      <li class="list-group-item">Sum: {{order.total}}kr</li>
       </ul>
     </p>
     <form method="post">
     {% csrf_token %}
-    Bekreft order: <button type="submit" class="btn btn-info">Bekreft</a>
+    Bekreft order: <button type="submit" class="btn btn-success">Bekreft</a>
     </form>
   </div>
 </div>
