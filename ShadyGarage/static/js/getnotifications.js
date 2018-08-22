@@ -1,7 +1,7 @@
 $(document).ready(function(){
   var notificiations = [];
   function getNotifications(){
-    // TODO: fikse urlen til ordentlig nettside url
+  
     var fetchUrl = "../../api/posts/accounts/myactivities/"
     $.ajax({
       url:fetchUrl,

@@ -19,7 +19,7 @@
       </div>
     </div>
     <div class="shipping-address-container address-container-style">
-      <h3 id="address-container-title"> Shippping addresse!</h3>
+      <h3 id="address-container-title"> Leveringsadresse!</h3>
       <hr>
       <div class="address-container">
       <form method="POST" id="shipping-address-form" action='{% url 'addresses:create-address' %}'>
@@ -32,17 +32,15 @@
       {% if hasAddress %}
       <div class="old-shipping-address">
           <div class="jumbotron">
-            <!--<p>Bruk addressen: {{shipping_address.address_line_1}}, {{shipping_address.post_code}} {{shipping_address.city}}</p>-->
+             <div class="form-group">
+              <label for="reuse-address">Mine addresser</label>
+              <select class="form-control" id="reuse-address">
             {% for a in addresses %}
-            <form action="{% url 'addresses:reuse-address' %}" method="post">
-                {% csrf_token %}
-                <p>{{a.address_line_1}}, {{a.zip_code}} {{a.city}}</p>
-                <input type="hidden" name="pk" value="{{a.id}}">
-                <input type="hidden" name="type" value="shipping"/>
-                <input type="submit" name="" value="Bruk">
-            </form>
+            <option id="{{a.id}}">{{a.address_line_1}}, {{a.post_code}} {{a.city}}</option>
             {% endfor %}
-            <a href="#" onclick="useOldAddress('shipping')" class="btn btn-info">Bruk</a>
+            </select>
+            </div>
+            <a href="#" data-type="shipping" id="reuse-address-btn" class="btn btn-info">Bruk</a>
           </div>
       </div>
       {% endif %}
@@ -50,7 +48,7 @@
       </div>
     </div>
     <div class="billing-address-container address-container-style" style="display:none;">
-      <h3 id="address-container-title"> Faktura adresse!</h3>
+      <h3 id="address-container-title"> Fakturaadresse!</h3>
       <hr>
       <div class="address-container">
         <form method="POST" id="billing-address-form" action='{% url 'addresses:create-address' %}'>
@@ -60,15 +58,21 @@
           {%bootstrap_form address_form%}
           <input type="submit" class="btn btn-info" value="Lagre"/>
         </form>
-      {% if hasBillingAddress %}
-      <div class="old-shipping-address">
-          <div class="jumbotron">
-            <p>Bruk addressen: {{billing_address.address_line_1}}, {{billing_address.zip_code}} {{billing_address.city}}</p>
-
-            <a href="#" onclick="useOldAddress('billing')" class="btn btn-info">Bruk</a>
-          </div>
-      </div>
-      {% endif %}
+        {% if hasAddress %}
+        <div class="old-shipping-address">
+            <div class="jumbotron">
+              <div class="form-group">
+               <label for="reuse-address">Mine addresser</label>
+               <select class="form-control" id="reuse-address-2">
+               {% for a in addresses %}
+               <option id="{{a.id}}">{{a.address_line_1}}, {{a.post_code}} {{a.city}}</option>
+               {% endfor %}
+             </select>
+             </div>
+             <a href="#" data-type="billing" id="reuse-address-btn-2" class="btn btn-info">Bruk</a>
+            </div>
+        </div>
+        {% endif %}
       </div>
     </div>
     <div class="card-element-container" style="display:none;">
@@ -140,6 +144,76 @@
             $(".billing-address-container").show();
           }, error:function(error){
             console.log("ERROR")
+            console.log(error)
+          }
+        })
+
+      })
+
+      /*TODO: FIKSE DENNE METODEN!! repeating.......*/
+      $("#reuse-address-btn").on('click', function(event){
+        event.preventDefault()
+        var type = $(this).attr("data-type");
+        console.log(type)
+        var address_id = $('#reuse-address option:selected').attr('id');
+        console.log(address_id)
+
+        var data = {
+          'type':type,
+          'pk':address_id,
+          csrfmiddlewaretoken:"{{csrf_token}}",
+          }
+        $.ajax({
+          url:'../../addresses/reuse_address/',
+          data:data,
+          method:'POST',
+          success:function(data){
+            console.log(data.success)
+            if(type === "shipping"){
+              $(".shipping-address-container").hide();
+              filll("50%");
+              $(".billing-address-container").show();
+            }else{
+              $(".billing-address-container").hide();
+              filll("75%");
+              $(".card-element-container").show();
+            }
+          }, error:function(error){
+            console.log(error)
+          }
+        })
+
+      })
+
+
+      $("#reuse-address-btn-2").on('click', function(event){
+        event.preventDefault()
+        var type = $(this).attr("data-type");
+        console.log(type)
+        var address_id = $('#reuse-address-2 option:selected').attr('id');
+        console.log(address_id)
+
+        var data = {
+          'type':type,
+          'pk':address_id,
+          csrfmiddlewaretoken:"{{csrf_token}}",
+          }
+        $.ajax({
+          url:'../../addresses/reuse_address/',
+          data:data,
+          method:'POST',
+          success:function(data){
+            console.log(data.success)
+            if(type === "shipping"){
+              $(".shipping-address-container").hide();
+              filll("50%");
+              $(".billing-address-container").show();
+            }else{
+              $(".billing-address-container").hide();
+              filll("75%");
+              $(".card-element-container").show();
+            }
+          }, error:function(error){
             console.log(error)
           }
         })

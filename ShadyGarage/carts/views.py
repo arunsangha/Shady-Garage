@@ -68,18 +68,6 @@ def cart_checkout(request):
         shipping_address_id = request.session.get("shipping_address_id", None)
         billing_adress_id = request.session.get("billing_address_id", None)
 
-        shipping_address = None
-        hasShippingAddress = False
-        if shipping_address_id:
-            shipping_address = Address.objects.get(id=shipping_address_id)
-            hasShippingAddress = True
-
-        billing_address = None
-        hasBillingAddress = False
-        billing_address_id = request.session.get("billing_address_id", None)
-        if billing_adress_id:
-            billing_address = Address.objects.get(id=billing_address_id)
-            hasBillingAddress = True
 
     if created:
         print("FUCK OFF")
@@ -87,10 +75,6 @@ def cart_checkout(request):
     context = {
         'billing_profile':billing_profile,
         'address_form':address_form,
-        'hasShippingAddress':hasShippingAddress,
-        'shipping_address':shipping_address,
-        'hasBillingAddress':hasBillingAddress,
-        'billingAddress':billing_address,
         'addresses':addresses,
         'hasBillingAddress':True,
         'hasAddress':hasAddress,

@@ -40,11 +40,36 @@ def create_address(request):
 
 def reuse_address(request):
     if request.method == "POST":
-        #if request.is_ajax():
-        # TODO: Ajax here and set correct address in session key
+        
         pk = request.POST.get('pk', 0)
         type = request.POST.get('type', 'shipping')
-        print(pk)
-        print(type)
+
+        if type == "shipping":
+            if 'shipping_address_id' in request.session:
+                del request.session['shipping_address_id']
+            request.session['shipping_address_id'] = pk
+        else:
+            print("HALLO")
+            if 'billing_address_id' in request.session:
+                del request.session['billing_address_id']
+            request.session['billing_address_id'] = pk
+
+    if request.is_ajax():
+        pk = request.POST.get('pk', 0)
+        type = request.POST.get('type', 'shipping')
+        success = False
+
+        if type == "shipping":
+            if 'shipping_address_id' in request.session:
+                del request.session['shipping_address_id']
+            request.session['shipping_address_id'] = pk
+            success = True
+        else:
+            if 'billing_address_id' in request.session:
+                print("EXISTS")
+                del request.session['billing_address_id']
+            request.session['billing_address_id'] = pk
+            success = True
+        return JsonResponse({"success":success})
 
     return redirect("carts:cart-checkout")

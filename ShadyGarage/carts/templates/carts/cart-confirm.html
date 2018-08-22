@@ -24,7 +24,7 @@
       <ul class="list-group list-group-flush">
         <li class="list-group-item">Faktura addresse: {{billing_address.address_line_1}}, {{billing_address.post_code}} {{billing_address.city}} </li>
         <li class="list-group-item">Leveringsaddresse: {{shipping_address.address_line_1}}, {{shipping_address.post_code}} {{shipping_address.city}} </li>
-        <li class="list-group-item">Kort: {{card.last4}}</li>
+        <li class="list-group-item">Kort: {{card.brand}} {{card.last4}}</li>
         <li class="list-group-item">Produkter: {% for i in products %}{{i.name}},
         {% endfor %}</li>
       </ul>
