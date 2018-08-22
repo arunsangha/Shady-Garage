@@ -1,0 +1,21 @@
+{% extends "base_email.html" %}
+{% load i18n %}
+{% load staticfiles %}
+{% load bootstrap3 %}
+{% block subject %}
+  {% blocktrans%} Confirmation of order!{% endblocktrans %}
+{% endblock %}
+{% block html_main %}
+  <h1> Halla {{username}}, </h1>
+  <h5>	Vi håper du har hatt en hyggelig opplevelse med din handel!<br>
+    Varen blir nå pakket og sendt til deg fortest mulig!</h5>
+  <hr>
+  <h6>Referansenummer: {{order_id}}</h6>
+  <hr>
+  <h6>Leveringsaddresse: {{shipping_address}}</h6>
+  <hr>
+  <h6>Forventet leveringstid: 3-6 dager</h6>
+  <hr>
+  <h6>Se hele orderen ved å trykke på knappen:</h6>
+  <a href="{{BASE_URL}}{% url 'accounts:my-orders' %}" class="btn btn-info btn-block">Min order!</a>
+{% endblock %}

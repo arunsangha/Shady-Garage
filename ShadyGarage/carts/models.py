@@ -69,6 +69,7 @@ m2m_changed.connect(m2m_changed_cart_receiver, sender=Cart.products.through)
 
 #Legger til shipping kostnader
 def pre_save_cart_receiver(sender, instance, *args, **kwargs):
+    # TODO: ADD tilbake shipping når 100 produkter er SOLGT!
     total = 0
     """
     if float(instance.sub_total) < 300:

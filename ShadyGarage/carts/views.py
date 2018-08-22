@@ -9,8 +9,10 @@ from addresses.models import Address
 from orders.models import Order
 from django.views.generic import TemplateView
 from django.conf import settings
-from django.core.mail import send_mail
-# Create your views here.
+
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 
 def cart_home(request):
     cart_obj, created = Cart.objects.get_or_create(request)
@@ -130,6 +132,19 @@ def cart_confirm(request):
 
                     order_id = order_obj.order_id
                     order_obj.set_paid()
+
+                    subject, from_email, to = 'Bekreftelse på ordre!', 'shadygarage.no@gmail.com', billing_profile.email
+                    adr = order_obj.shipping_address.address_line_1 + ", " + order_obj.shipping_address.post_code + " " + order_obj.shipping_address.city
+                    vars = {
+                        'username': request.user.username,
+                        'order_id':order_obj.order_id,
+                        'shipping_address': adr,
+                    }
+                    html_content = render_to_string('email_order_confirm.html', vars)
+                    text_content = strip_tags(html_content)
+                    msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+                    msg.attach_alternative(html_content, "text/html")
+                    msg.send()
 
                     return redirect("carts:cart-success")
 

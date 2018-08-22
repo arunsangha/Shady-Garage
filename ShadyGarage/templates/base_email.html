@@ -1,0 +1,39 @@
+{% load i18n %}
+{% load staticfiles %}
+{% block subject %}{% endblock %}
+
+{% block plain %}{% endblock %}
+
+{% block html %}
+<html>
+  <head>
+  </head>
+  <body style="font-family: sans-serif; background: #f5f5f5;">
+    <table cellspacing="0" cellpadding="0" border="0" width="100%">
+     <tr>
+       <td width="100%" align="center">
+         <table cellspacing="0" cellpadding="0" border="0" width="480">
+           <tr>
+             <td style="background-color: #FFFFFF; padding: 18px;"><img alt="" src="{{BASE_URL}}{% static 'images/Gorilla-logo.png' %}"></td>
+           </tr>
+           <tr>
+             <td style="background-color: white; padding:18px 18px; font-family: Arial, Helvetica, sans-serif; font-size: 14px; line-height: 21px; color: #444444" width="480" >
+               {% block html_main %}
+
+               {% endblock %}
+             </td>
+           </tr>
+           <tr>
+             <td style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 18px; color: #999999; padding: 12px 18px">
+               <p>
+                 {% blocktrans %} You received this email because you are a member of{% endblocktrans %} www.shadygarge.no
+               </p>
+             </td>
+           </tr>
+         </table>
+       </td>
+     </tr>
+   </table>
+  </body>
+</html>
+{% endblock %}
