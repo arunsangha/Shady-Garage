@@ -4,7 +4,7 @@
   <div class="jumbotron">
   <h1 class="display-4">Yes, suksess!</h1>
   <p class="lead">Du vil finne alle dine ordre ved å trykke på navnet ditt i navigasjonsbaren eller ved trykke på knappen under!</p>
-  <a href="#" class="btn btn-info">Mine ordre</a>
+  <a href="{% url 'accounts:my-orders' %}" class="btn btn-info">Mine ordre</a>
   <hr class="my-4">
   <p>I mens vi gjør klar din bestilling, så burde du sjekke ut noen treff!</p>
   <a href="{% url 'meets:meets_list' %}" class="btn btn-info">Ta meg til treff!</a>

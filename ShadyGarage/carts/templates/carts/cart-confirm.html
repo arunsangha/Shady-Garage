@@ -22,7 +22,7 @@
     <h1 class="display-4">Ordreoversikt</h1>
     <p class="lead">
       <ul class="list-group list-group-flush">
-        <li class="list-group-item">Faktura addresse: {{billing_address.address_line_1}}, {{billing_address.post_code}} {{billing_address.city}} </li>
+        <li class="list-group-item">Fakturaaddresse: {{billing_address.address_line_1}}, {{billing_address.post_code}} {{billing_address.city}} </li>
         <li class="list-group-item">Leveringsaddresse: {{shipping_address.address_line_1}}, {{shipping_address.post_code}} {{shipping_address.city}} </li>
         <li class="list-group-item">Kort: {{card.brand}} {{card.last4}}</li>
         <li class="list-group-item" style="display:inline-block;">Produkter: <div class="checkout-product-list">{% for i in products %}

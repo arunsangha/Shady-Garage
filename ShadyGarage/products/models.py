@@ -9,7 +9,7 @@ class Product(models.Model):
     name            = models.CharField(max_length=100)
     description     = models.TextField(max_length=255)
     category        = models.CharField(choices=CATEGORY_CHOICES, max_length=50, default="Sticker")
-    price           = models.PositiveIntegerField()
+    price           = models.DecimalField(decimal_places=2, max_digits=1000)
     stock           = models.PositiveIntegerField()
     empty           = models.BooleanField(default=False)
     slug            = models.SlugField(allow_unicode=True, unique=True)

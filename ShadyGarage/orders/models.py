@@ -43,6 +43,10 @@ class Order(models.Model):
     active              = models.BooleanField(default=True)
 
     objects             = OrderManager()
+
+    class Meta:
+        ordering = ['-timestamp']
+
     def __str__(self):
         return self.order_id
 
@@ -66,6 +70,7 @@ class Order(models.Model):
             self.status = 'paid'
             self.save()
         return self.status
+
 
 def pre_save_create_order(sender, instance, *args, **kwargs):
     if not instance.order_id:

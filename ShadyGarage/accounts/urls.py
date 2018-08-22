@@ -15,6 +15,7 @@ urlpatterns = [
     url(r'^myprofile/change-password/$', views.change_password, name="change_password"),
     url(r'^activities/$', views.ProfileActivity, name="activity"),
     url(r'^otherprofiles/(?P<pk>\d+)/activities/$', views.ProfileActivity, name="activity-otherprofile-pages"),
+    url(r'^my_orders/$', views.MyOrders.as_view(), name="my-orders"),
     #if user has forgotten password
     url(r'^reset-password/$', auth_views.password_reset,{'template_name': 'accounts/reset_password.html',
         'post_reset_redirect':'accounts:password_reset_done', 'email_template_name':'accounts/reset_password_email.html'}

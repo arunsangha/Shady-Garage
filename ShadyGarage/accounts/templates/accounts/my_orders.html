@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block body %}
+  <div class="container" style="padding:20px;">
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-4" align="center">Mine ordre<br><i class="fas fa-box-open"></i></h1>
+        <p class="lead"></p>
+      </div>
+    </div>
+    {% for order in object_list %}
+    <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-6" style="word-wrap:break-word;">Referansenummer: {{order.order_id}}</h1>
+      <p class="lead">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><i class="far fa-calendar-alt"></i>  {{order.timestamp}}</li>
+          <li class="list-group-item"><i class="fas fa-info-circle"></i> Status: {{order.get_status_display}}</li>
+          <li class="list-group-item"><i class="fas fa-map-marker-alt"></i> Fakturaaddresse: {{order.billing_address.address_line_1}}, {{order.billing_address.post_code}} {{order.billing_address.city}} </li>
+          <li class="list-group-item"><i class="fas fa-map-marker-alt"></i> Leveringsaddresse: {{order.shipping_address.address_line_1}}, {{order.shipping_address.post_code}} {{order.shipping_address.city}} </li>
+          <li class="list-group-item" style="display:inline-block;">Produkter: <div class="checkout-product-list">
+          {% for i in order.cart.products.all %}
+
+          <div class="card product-list-card" style="width: 13rem; border-radius:10px; margin:25px;">
+            <img class="card-img-top" src="{{i.get_list_image}}" alt="Card image cap">
+            <div class="card-body" style="border-top: 0.5px solid grey; border-bottom-left-radius:10px; border-bottom-right-radius:10px; text-align:left; display: flex; flex-direction: row; flex-wrap:wrap; justify-content:space-between; padding:0px;">
+              <div style="margin: 5px; padding-left:10px;">
+                <h5 class="card-text">{{i.name}}</h5>
+                <p class="card-text">{{i.price}} kr</p>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+          </div>
+        </li>
+        <li class="list-group-item"><i class="far fa-credit-card"></i> Betalt: {{order.total}}kr</li>
+        </ul>
+      </p>
+    </div>
+  </div>
+
+    {% empty %}
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-4" align="center">TOMT!<br><i class="fas fa-frown"></i></h1>
+        <p class="lead" align="center"><a href="{% url 'products:list' category='list' %}" class="btn btn-info">Ta meg til butikken!</a></p>
+      </div>
+    </div>
+
+    {% endfor %}
+
+  </div>
+
+
+{% endblock %}

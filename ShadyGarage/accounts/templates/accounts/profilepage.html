@@ -23,6 +23,7 @@
             <a href="{% url 'accounts:profile_edit' %}" class="btn btn-info profile-card-button">Edit profile</a>
             <a href="{% url 'accounts:change_password' %}" class="btn btn-info profile-card-button">Bytt passord</a>
             <a href="{% url 'accounts:activity'%}" class="btn btn-info profile-card-button" id="activityCount">EU-kontroll </a>
+            <a href="{% url 'accounts:my-orders'%}" class="btn btn-info profile-card-button" id="activityCount">Mine ordre </a>
           {% endif %}
         </div>
 
@@ -30,7 +31,6 @@
     </div>
   </div>
   <div class="profile-post-list"></div>
-
   <a href="#" id="loadMore" class="btn btn-info profile-more-posts-button">Se mer</a>
 </div>
 
@@ -49,11 +49,17 @@
         if(postList == 0){
           $(".profile-post-list").append(
            `
+           <div class="container" align="center">
            <div class="jumbotron jumbotron-fluid">
             <div class="container">
               <h1 class="display-4">Oida..vi fant ikke noe!</h1>
-              <p class="lead">Kom tilbake igjen senere, kanskje brukeren har lagt ut noe til da?</p>
+              {% if request.user == user %}
+                <p class="lead">Legg ut noe så slipper folk å se denne boksen på profilen din!</p>
+              {% else %}
+                <p class="lead">Kom tilbake igjen senere, kanskje brukeren har lagt ut noe til da?</p>
+              {% endif %}
             </div>
+          </div>
           </div>
 
            `
@@ -173,6 +179,9 @@
           success:function(data){
             postList = data.results
             nextUrl = data.next
+            if(!nextUrl){
+              $("#loadMore").html("Ingen flere posts")
+            }
             parsePosts()
           }, error:function(data){
             console.log("ERROR: Fetching off posts in profile_page")

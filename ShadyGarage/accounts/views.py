@@ -7,9 +7,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from . import models
 from . import forms
-from django.views.generic import CreateView, UpdateView, TemplateView
+from django.views.generic import CreateView, UpdateView, TemplateView, ListView
 from posts.models import Notification
-
+from orders.models import Order
+from billing.models import BillingProfile
 def signup(request):
     registered = False
     if request.method == 'POST':
@@ -88,3 +89,16 @@ def ProfileActivity(request, pk=None):
         user = request.user
     notifications = Notification.objects.filter(owner=user)
     return render(request, 'accounts/activity.html', {'user':user, 'notifications':notifications})
+
+class MyOrders(ListView):
+    template_name = "accounts/my_orders.html"
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(MyOrders, self).get_context_data(*args, **kwargs)
+        context['request'] = self.request
+        return context
+
+    def get_queryset(self, *args, **kwargs):
+        billing_profile, created = BillingProfile.objects.new_or_get(self.request)
+        qs = Order.objects.filter(billing_profile=billing_profile, status='paid')
+        return qs
