@@ -66,6 +66,10 @@ MIDDLEWARE = [
 
 ]
 
+#STRIPE
+STRIPE_API_KEY = 'sk_live_EhtVidPZZUkXoXAFoFgyODJe'
+STRIPE_PUBLISH_KEY = 'pk_live_166o5JG9PtRN8k7eLix4JMVy'
+
 ROOT_URLCONF = 'ShadyGarage.urls'
 
 TEMPLATES = [
