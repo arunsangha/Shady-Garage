@@ -10,13 +10,23 @@
         <hr>
         <h4>Pris: {{object.price}}kr</h4>
         <hr>
+        {% if object.has_size %}
+        <select id="size">
+          <option value="S">S</option>
+          <option value="M">M</option>
+          <option value="S">L</option>
+          <option value="M">XL</option>
+          <option value="M">XXL</option>
+        </select>
+        <hr>
+        {% endif %}
         {% if object.get_stock < 10 and object.get_stock > 0 %}
         <h5><i class="fas fa-surprise"></i>: Kun {{object.get_stock}} igjen!</h5>
         {% endif %}
         {% if object.get_stock <= 0%}
         <a href="#" id="disableButton" class="btn btn-danger">UTSOLGT!</a>
         {% else %}
-        <a href="#" id="buyProduct" data-pk="{{object.id}}" class="btn btn-info">
+        <a href="#" id="buyProduct" data-pk="{{object.id}}" data-tshirt="{{object.has_size}}"class="btn btn-info">
           {% if object in cart_obj.products.all %}
             <i class="fas fa-minus-circle"></i>
           {% else %}
@@ -47,16 +57,28 @@ $(document).ready(function(){
   $("#buyProduct").on('click', function(event){
     event.preventDefault()
     var id = $("#buyProduct").attr("data-pk");
-
+    var hasTshirt = $(this).attr("data-tshirt");
+    var size = "";
+    var url = '../../../cart/add/' + id + '/';
     var data = {
         'pk':id,
         csrfmiddlewaretoken:'{{ csrf_token }}'
-
     }
+    if (hasTshirt) {
+      size = $("#size").val();
+      url = '../../../cart/add-tshirt/' + id + '/' + size + "/";
+      data = {
+          'pk':id,
+          'size':size,
+          csrfmiddlewaretoken:'{{ csrf_token }}'
+      }
+    }
+
+
     $("#buyProduct").html("<i class='fa fa-spinner'></i>");
 
     $.ajax({
-      url:'../../../cart/add/' + id + '/',
+      url:url,
       method: 'POST',
       data: data,
       success:function(data){

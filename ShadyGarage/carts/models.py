@@ -4,6 +4,7 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 from django.db.models.signals import m2m_changed, pre_save
 
+
 class CartManager(models.Manager):
     def new(self, user=None):
         user_obj = None
