@@ -7,6 +7,7 @@ from accounts.models import Profile
 from accounts.models import User as model_user
 
 from rest_framework.serializers import ValidationError
+from rest_framework.authtoken.models import Token
 
 class ProfileDisplaySerializer(serializers.ModelSerializer):
     class Meta:
@@ -87,6 +88,6 @@ class UserLoginSerializer(serializers.ModelSerializer):
                 raise ValidationError("Incorrect credentials please try again!")
 
 
-        data["token"] = "SOME RANDOM TOKEN"
+        data["token"], created = Token.objects.get_or_create(user=user)
 
         return data
