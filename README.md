@@ -17,10 +17,21 @@ These instructions will get you a copy of the project up and running on your loc
 
 <h3>Prerequisites</h3>
 <ul>
-  <li> Anaconcda or Miniconda installed. - https://anaconda.org</li>
-  <li> Python 3.6.2 or higher. - https://www.python.org/downloads/release/python-362/</li>
-  <li> Django 1.11.8. - https://django-activity-stream.readthedocs.io/en/latest/installation.html </li>
-  <li> An editor(For example: Atom). - https://atom.io </li>
+<li> Anaconcda or Miniconda installed. - https://anaconda.org</li>
+<li> Python 3.6.2 or higher. - https://www.python.org/downloads/release/python-362/</li>
+<li> Django 1.11.8. - https://django-activity-stream.readthedocs.io/en/latest/installation.html </li>
+<li> An editor(For example: Atom). - https://atom.io </li>
 <ul>
   
-<h3> Installing </h3>
+<h3>Installing</h3>
+<ul>
+  <h5>Step 1</h5>
+  <p>After you have fulfilled all the prerequisites, clone the project: </p>
+</ul>
+<ul>
+  <h5>Step 2</h5>
+  <p>Open a terminal and create a conda enviroment:<br>
+    "conda create --name shadyGarage django=1.11.8"</p>
+</ul>
+
+
