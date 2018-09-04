@@ -28,11 +28,38 @@ These instructions will get you a copy of the project up and running on your loc
   <li><h5>Step 1</h5>
   <p>After you have fulfilled all the prerequisites, clone the project: "https://github.com/arunsangha/Shady-Garage.git"</p></li>
 
-  <li><h5>Step 2</h5>
+  <li>
+  <h5>Step 2</h5>
   <p>Open a terminal and create a conda enviroment:<br>
     "conda create --name shadyGarage django=1.11.8".<br>
     Activate the newly created enviroment: "activate shadyGarage" or for linux and mac users "source activate shadyGarage"</p>
   </li>
+  
+   <li><h5>Step 3</h5>
+    <p>Pip install all these packages (sorry, we should have had a requirments file):<br></p>
+    <ul>
+      <li>djangorestframework</li>
+      <li>django-bootstrap3</li>
+      <li>Faker</li>
+      <li>misaka</li>
+      <li>Pillow</li>
+      <li>piexif</li>
+      <li>sorl-thumbnail</li>
+    </ul>
+  </li>
+  
+   <li>
+  <h5>Step 5</h5>
+   <p>Check if the settings __init__.py file has "try: from .local import *".<br>
+      The file is in the ShadyGarage folder.
+   </p>
+  </li>
+ 
+   <li>
+  <h5>Step 6</h5>
+   <p>Now run "python manage.py runserver". </p>
+  </li>
+  
 </ul>
 
 
