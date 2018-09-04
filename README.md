@@ -22,16 +22,17 @@ These instructions will get you a copy of the project up and running on your loc
 <li> Django 1.11.8. - https://django-activity-stream.readthedocs.io/en/latest/installation.html </li>
 <li> An editor(For example: Atom). - https://atom.io </li>
 <ul>
-  
+Hello
 <h3>Installing</h3>
 <ul>
-  <h5>Step 1</h5>
-  <p>After you have fulfilled all the prerequisites, clone the project: </p>
-</ul>
-<ul>
-  <h5>Step 2</h5>
+  <li><h5>Step 1</h5>
+  <p>After you have fulfilled all the prerequisites, clone the project: "https://github.com/arunsangha/Shady-Garage.git"</p></li>
+
+  <li><h5>Step 2</h5>
   <p>Open a terminal and create a conda enviroment:<br>
-    "conda create --name shadyGarage django=1.11.8"</p>
+    "conda create --name shadyGarage django=1.11.8".<br>
+    Activate the newly created enviroment: "activate shadyGarage" or for linux and mac users "source activate shadyGarage"</p>
+  </li>
 </ul>
 
 
