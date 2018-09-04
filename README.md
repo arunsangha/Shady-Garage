@@ -63,3 +63,11 @@ These instructions will get you a copy of the project up and running on your loc
 </ul>
 
 
+<h2>Authors</h2>
+<ul>
+  <li><h5>Arun Sangha - Fullstack <H5></li>
+  <li><h5>Christian Thorby - Frontend </h5></li>
+</ul>
+
+<h2>License</h2>
+Copyright © 2017, Shady Garage.
