@@ -21,8 +21,8 @@ These instructions will get you a copy of the project up and running on your loc
 <li> Python 3.6.2 or higher. - https://www.python.org/downloads/release/python-362/</li>
 <li> Django 1.11.8. - https://django-activity-stream.readthedocs.io/en/latest/installation.html </li>
 <li> An editor(For example: Atom). - https://atom.io </li>
-<ul>
-Hello
+</ul>
+
 <h3>Installing</h3>
 <ul>
   <li><h5>Step 1</h5>
