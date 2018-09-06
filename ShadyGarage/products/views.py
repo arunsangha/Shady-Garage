@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.views.generic import (
         ListView,
-        DetailView
+        DetailView,
+        TemplateView,
 )
 from .models import Product
 from django.db.models import Q
@@ -47,3 +48,6 @@ class ProductDetail(DetailView):
             cart_obj = cart_obj
         context['cart_obj'] = cart_obj
         return context
+
+class CustomSticker(TemplateView):
+    template_name = "products/custom_sticker.html"

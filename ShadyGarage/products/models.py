@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils.text import slugify
 from django.core.urlresolvers import reverse
+from django.contrib.auth import get_user_model
+User = get_user_model()
 # Create your models here.
 
 class Product(models.Model):
@@ -65,3 +67,9 @@ class ProductImage(models.Model):
 
     def __str__(self):
         return self.product_fk.name
+
+class CustomProduct(models.Model):
+    user        = models.ForeignKey(User, related_name="custom_product_user")
+    mobile      = models.CharField(max_length=25)
+    description = models.CharField(max_length=240)
+    image       = models.ImageField(upload_to="custom_product")
