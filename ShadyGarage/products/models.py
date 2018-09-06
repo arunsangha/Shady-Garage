@@ -5,14 +5,12 @@ from django.core.urlresolvers import reverse
 
 class Product(models.Model):
     CATEGORY_CHOICES = (("STICKER", "Sticker"), ("Hoodie", "Hoodie"), ("TSHIRT", "Tshirt"))
-    SIZE_CHOICES = (('S', 'S'), ('M', 'M'), ('L', 'L'), ('XL', 'XL'), ('XXL', 'XXL'))
     name            = models.CharField(max_length=100)
     description     = models.TextField(max_length=255)
     category        = models.CharField(choices=CATEGORY_CHOICES, max_length=50, default="Sticker")
     price           = models.DecimalField(decimal_places=2, max_digits=30)
     stock           = models.PositiveIntegerField()
     empty           = models.BooleanField(default=False)
-    size            = models.CharField(choices=SIZE_CHOICES, max_length=10, blank=True, null=True)
     slug            = models.SlugField(allow_unicode=True, unique=True)
     timestamp       = models.DateTimeField(auto_now_add=True)
 
