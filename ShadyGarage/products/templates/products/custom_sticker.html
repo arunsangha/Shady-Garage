@@ -2,17 +2,27 @@
 {% load bootstrap3 %}
 {% load staticfiles %}
 {% block body %}
+<div class="linear-gradient-background">
   <div class="container">
     <div class="jumbotron jumbotron-fluid">
-      <div class="container">
+      <div class="container" style="text-align:center; color:black;">
         <h1 class="display-4">Custom Sticker</h1>
-        <p class="lead">Fyll inn feltene under for å få et prisoverslag over klistremerke du vil ha laget. </p>
+        <p class="lead">Fyll inn feltene under for å få et prisoverslag over klistremerke du vil ha laget. <br>
+        Feltet hvor du skal beskrive klistremerke så ønsker vi å vite om: <br>
+        <span style="color:var(--main-blue-color);">Farge, dimensjoner og antall.</span>
+        </p>
+
+       </div>
+
       </div>
     </div>
-    <form method="post">
+    <div class="create-meet-container" style="border:2px solid var(--main-yellow-color);">
+    <form method="post" enctype="multipart/form-data">
       {% csrf_token %}
       {% bootstrap_form form%}
-      <input type="submit" class="btn btn-success" value="Send inn forespørsel">
+      <input type="submit" class="btn btn-block btn-info" value="Send inn forespørsel">
     </form>
+    </div>
   </div>
+</div>
 {% endblock %}

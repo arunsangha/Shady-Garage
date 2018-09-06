@@ -73,7 +73,7 @@ class CustomProduct(models.Model):
     mobile            = models.CharField(max_length=25)
     instagram_profile = models.CharField(max_length=100, blank=True, null=True)
     facebook_profile  = models.CharField(max_length=200, blank=True, null=True)
-    description       = models.CharField(max_length=240)
+    description       = models.TextField()
     image             = models.ImageField(upload_to="custom_product", blank=True, null=True)
 
     def __str__(self):
