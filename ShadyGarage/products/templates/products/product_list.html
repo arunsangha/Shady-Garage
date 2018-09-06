@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 {% block body %}
 
 <div id="shop-nav" class="sidenav">
@@ -47,7 +48,7 @@
   {% endfor %}
   <a href="{% url 'products:custom-sticker' category='sticker' slug='custom' %}" id="product-list-card" style="color:black;">
   <div class="card product-list-card" style="width: 18rem; border-radius:10px; margin:25px;">
-  <img class="card-img-top" src="#" alt="Card image cap">
+  <img class="card-img-top" src="{% static "images/custom_sticker.jpg" %}" alt="Card image cap">
   <div class="card-body" style="border-top: 0.5px solid grey; border-bottom-left-radius:10px; border-bottom-right-radius:10px; text-align:left; display: flex; flex-direction: row; flex-wrap:wrap; justify-content:space-between; padding:0px;">
     <div style="margin: 5px; padding-left:10px;">
       <h5 class="card-text">Custom Sticker</h5>
