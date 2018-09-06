@@ -69,7 +69,12 @@ class ProductImage(models.Model):
         return self.product_fk.name
 
 class CustomProduct(models.Model):
-    user        = models.ForeignKey(User, related_name="custom_product_user")
-    mobile      = models.CharField(max_length=25)
-    description = models.CharField(max_length=240)
-    image       = models.ImageField(upload_to="custom_product")
+    user              = models.ForeignKey(User, related_name="custom_product_user")
+    mobile            = models.CharField(max_length=25)
+    instagram_profile = models.CharField(max_length=100, blank=True, null=True)
+    facebook_profile  = models.CharField(max_length=200, blank=True, null=True)
+    description       = models.CharField(max_length=240)
+    image             = models.ImageField(upload_to="custom_product", blank=True, null=True)
+
+    def __str__(self):
+        return self.user.username

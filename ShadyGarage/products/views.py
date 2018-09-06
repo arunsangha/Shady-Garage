@@ -1,12 +1,16 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponseRedirect
 from django.views.generic import (
         ListView,
         DetailView,
+        CreateView,
         TemplateView,
 )
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Product
 from django.db.models import Q
 from carts.models import Cart
+from .forms import CustomProductForm
+from django.core.urlresolvers import reverse_lazy
 
 class ProductList(ListView):
     template_name = "products/products_list.html"
@@ -49,5 +53,17 @@ class ProductDetail(DetailView):
         context['cart_obj'] = cart_obj
         return context
 
-class CustomSticker(TemplateView):
+
+class CustomSticker(LoginRequiredMixin, CreateView):
     template_name = "products/custom_sticker.html"
+    form_class = CustomProductForm
+    success_url = reverse_lazy("product:customsuccess", kwargs={'category':'success','slug':'c'})
+
+    def form_valid(self, form):
+        cs_form = form.save(commit = False)
+        cs_form.user = self.request.user
+        cs_form.save()
+        return HttpResponseRedirect(reverse_lazy("products:customsuccess", kwargs={'category':'success','slug':'c'}))
+
+class CustomStickerSuccess(TemplateView):
+    template_name = "products/custom_product_success.html"
