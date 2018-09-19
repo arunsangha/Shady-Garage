@@ -72,14 +72,13 @@ m2m_changed.connect(m2m_changed_cart_receiver, sender=Cart.products.through)
 def pre_save_cart_receiver(sender, instance, *args, **kwargs):
     # TODO: ADD tilbake shipping når 100 produkter er SOLGT!
     total = 0
-    """
+
     if float(instance.sub_total) < 300:
         instance.shipping = 60
         total = float(instance.sub_total) + instance.shipping
     else:
-        instance.shipping = 0"""
+        instance.shipping = 0
     total = float(instance.sub_total)
-    instance.shipping = 0
-    instance.total = total
+    instance.total = total + instance.shipping
 
 pre_save.connect(pre_save_cart_receiver, sender=Cart)
