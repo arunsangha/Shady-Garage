@@ -53,7 +53,11 @@ class MeetsModelSerializer(serializers.ModelSerializer):
             'Søndag',
         )
 
-        return days[obj.date.weekday()+1]
+        day = obj.date.weekday() + 1
+        if(day > 6){
+            day = 0
+        }
+        return days[day]
 
     def get_date(self, obj):
         return obj.date
