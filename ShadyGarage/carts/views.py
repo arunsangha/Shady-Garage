@@ -132,7 +132,7 @@ def cart_confirm(request):
                     order_id = order_obj.order_id
                     order_obj.set_paid()
 
-                    subject, from_email, to = 'Bekreftelse på ordre!', 'shadygarage.no@gmail.com', billing_profile.email
+                    subject, from_email, to = 'Bekreftelse på ordre!', 'shadygarage.no@gmail.com', 'arun.sangha@gmail.com'
                     adr = order_obj.shipping_address.address_line_1 + ", " + order_obj.shipping_address.post_code + " " + order_obj.shipping_address.city
                     vars = {
                         'username': request.user.username,
