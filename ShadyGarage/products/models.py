@@ -68,6 +68,30 @@ class ProductImage(models.Model):
     def __str__(self):
         return self.product_fk.name
 
+
+PRODUCT_SIZE = (
+    ('S', 'Small'),
+    ('M', 'Medium'),
+    ('L', 'Large'),
+    ('XL', 'XL'),
+    ('XXL', 'XXL'),
+    ('One Size', 'One Size'),
+)
+class ProductSize(models.Model):
+    product_fk    = models.ForeignKey(Product, related_name="products_fk_size")
+    size          = models.CharField(max_length=10, choices=PRODUCT_SIZE)
+    quantity      = models.PositiveIntegerField(default=0, blank=True, null=True)
+    empty         = models.BooleanField(default=False)
+
+
+class ProductItem(models.Model):
+    product_size_fk   = models.ForeignKey(ProductSize, related_name="product_size_fk")
+    quantity          = models.PositiveIntegerField(default=1, blank=True, null=True)
+    active            = models.BooleanField(default=True)
+
+    def __str__(self):
+        return "{}-{}".format(self.product_size_fk.product_fk.name, self.product_size_fk.size)
+
 class CustomProduct(models.Model):
     user              = models.ForeignKey(User, related_name="custom_product_user")
     mobile            = models.CharField(max_length=25)
