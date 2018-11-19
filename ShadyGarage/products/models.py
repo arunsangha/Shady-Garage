@@ -83,9 +83,27 @@ class ProductSize(models.Model):
     quantity      = models.PositiveIntegerField(default=0, blank=True, null=True)
     empty         = models.BooleanField(default=False)
 
+    def __str__(self):
+        return "{}-{}".format(self.product_fk.name, self.size)
+
+    def is_empty(self):
+        empty = True
+        if self.quantity > 0:
+            empty = False
+        return empty
+
+
+
+    def take_one(self):
+        success = False
+        if self.quantity > 0 and self.is_empty() == False:
+            self.quantity = self.quantity - 1
+            succes = True
+        return succcess
+
 
 class ProductItem(models.Model):
-    product_size_fk   = models.ForeignKey(ProductSize, related_name="product_size_fk")
+    product_size_fk   = models.ForeignKey(ProductSize, related_name="product_cart_size_fk")
     quantity          = models.PositiveIntegerField(default=1, blank=True, null=True)
     active            = models.BooleanField(default=True)
 

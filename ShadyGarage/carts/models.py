@@ -1,5 +1,5 @@
 from django.db import models
-from products.models import Product
+from products.models import ProductItem
 from django.contrib.auth import get_user_model
 User = get_user_model()
 from django.db.models.signals import m2m_changed, pre_save
@@ -34,7 +34,7 @@ class CartManager(models.Manager):
 
 class Cart(models.Model):
     user            = models.ForeignKey(User, related_name="carts_user_fk", blank=True, null=True)
-    products        = models.ManyToManyField(Product, related_name="products_in_cart")
+    products        = models.ManyToManyField(ProductItem, related_name="products_in_cart", blank=True)
     sub_total       = models.DecimalField(default=0, max_digits=20, decimal_places=2)
     total           = models.DecimalField(default=0, max_digits=20, decimal_places=2)
     shipping        = models.PositiveIntegerField(default=0)
@@ -59,7 +59,7 @@ def m2m_changed_cart_receiver(sender, instance, action, *args, **kwargs):
         total = 0
 
         for product in products_qs:
-            total += product.price
+            total += product.product_size_fk.product_fk.price
 
         if instance.sub_total != total:
             instance.sub_total = total
@@ -68,13 +68,12 @@ def m2m_changed_cart_receiver(sender, instance, action, *args, **kwargs):
 m2m_changed.connect(m2m_changed_cart_receiver, sender=Cart.products.through)
 
 
-#Legger til shipping kostnader
 def pre_save_cart_receiver(sender, instance, *args, **kwargs):
-    # TODO: ADD tilbake shipping når 100 produkter er SOLGT!
+
     total = 0
 
     if float(instance.sub_total) < 300:
-        instance.shipping = 60
+        instance.shipping = 40
         total = float(instance.sub_total) + instance.shipping
     else:
         instance.shipping = 0

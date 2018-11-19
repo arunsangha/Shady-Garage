@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Cart
-from products.models import Product
+from products.models import ProductItem, ProductSize, Product
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from billing.models import BillingProfile, Card
@@ -18,21 +18,28 @@ def cart_home(request):
     cart_obj, created = Cart.objects.get_or_create(request)
     return render(request, "carts/cart_home.html", {'cart':cart_obj})
 
-def cart_add(request, pk):
+def cart_add(request):
     cart_obj, created = Cart.objects.get_or_create(request)
-    try:
-        product = Product.objects.get(id=pk)
+    pk = request.POST.get('pk')
+    size = request.POST.get('size')
+    quantity = request.POST.get('quantity')
 
-    except Product.DoesNotExist:
-        # TODO: Adde json response her med error?
+    try:
+        product_item = ProductSize.objects.get(product_fk=pk, size=size)
+
+    except ProductSize.DoesNotExist:
+        if request.is_ajax():
+            return JsonResponse({'success':False, 'message':'Product size dosent exist..'})
         redirect("carts:cart-home")
 
-    if product in cart_obj.products.all():
+    product_, created = ProductItem.objects.get_or_create(product_size_fk=product_item)
+
+    if product_ in cart_obj.products.all():
         added = False
-        cart_obj.products.remove(product)
+        cart_obj.products.remove(product_)
     else:
         added = True
-        cart_obj.products.add(product)
+        cart_obj.products.add(product_)
 
 
     request.session['cart_products_count'] = cart_obj.products.count()

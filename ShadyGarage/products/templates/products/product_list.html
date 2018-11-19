@@ -32,8 +32,8 @@
       {% if i.is_empty %}
       <p class="btn btn-danger"> UTSOLGT!</p>
       {% else %}
-      <a href="#" id="buyProduct" data-pk="{{i.id}}" class="btn btn-info">
-
+      <a href="{% url 'products:detail' category=i.category slug=i.slug %}" id="buyProduct" data-pk="{{i.id}}" class="btn btn-info">
+      
         {% if i in cart_obj.products.all %}
           <i class="fas fa-minus-circle"></i>
         {% else %}
@@ -80,33 +80,7 @@ function openShopNav() {
 function closeShopNav() {
     document.getElementById("shop-nav").style.width = "0";
 }
-$(document).ready(function(){
 
-  $(document.body).on('click', '#buyProduct', function(event){
-    event.preventDefault()
-    console.log("HEELO")
-    var id = $(this).attr("data-pk");
-    var data = {
-        'pk':id,
-        csrfmiddlewaretoken:'{{ csrf_token }}'
-
-    }
-    $(this).html("<i class='fa fa-spinner'></i>");
-
-    $.ajax({
-      url:'../../cart/add/' + id + '/',
-      method: 'POST',
-      data: data,
-      success:function(data){
-        $(this).html("<i class='fas fa-check-circle'></i>");
-      }, error:function(error){
-        console.log(error)
-      }
-    })
-    $(this).html("<i class='fas fa-check-circle'></i>");
-
-  })
-});
 
 </script>
 

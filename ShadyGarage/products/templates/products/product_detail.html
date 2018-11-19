@@ -17,12 +17,16 @@
         {% if object.get_stock <= 0%}
         <a href="#" id="disableButton" class="btn btn-danger">UTSOLGT!</a>
         {% else %}
+        <div class="form-group">
+          <select class="form-control" id="size-select">
+            {% for size in object.products_fk_size.all %}
+              <option>{{size.size}}</option>
+            {%endfor%}
+          </select>
+        </div>
+
         <a href="#" id="buyProduct" data-pk="{{object.id}}" class="btn btn-info">
-          {% if object in cart_obj.products.all %}
-            <i class="fas fa-minus-circle"></i>
-          {% else %}
             <i class="fa fa-shopping-cart"></i>
-          {% endif %}
         </a>
         {% endif %}
       </div>
@@ -48,9 +52,12 @@ $(document).ready(function(){
   $("#buyProduct").on('click', function(event){
     event.preventDefault()
     var id = $("#buyProduct").attr("data-pk");
-    var url = '../../../cart/add/' + id + '/';
+    var size = $("#size-select option:selected").val();
+    console.log(size);
+    var url = '../../../cart/add/'
     var data = {
         'pk':id,
+        'size':size,
         csrfmiddlewaretoken:'{{ csrf_token }}'
     }
 
