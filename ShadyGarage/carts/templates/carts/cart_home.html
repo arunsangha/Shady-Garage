@@ -8,44 +8,131 @@
     </div>
     <!--TODO: ajax for removing -->
     {% for product in cart.products.all %}
-    <div class="cart-product-card" style="display:flex; flex-direction:row;">
-      <div class="cart-product-card-image" style="height:100px; width:100px; background-image: url('{{product.get_list_image}}'); background-size:cover;">
+    <div class="cart-product-card-{{product.product_size_fk.product_fk.id}}-{{product.product_size_fk.size}}" style="display:flex; flex-direction:row;">
+      <div class="cart-product-card-image" style="height:150px; width:150px; background-image: url('{{product.product_size_fk.product_fk.get_list_image}}'); background-size:cover;">
       </div>
-      <a href="{{product.get_absolute_url}}" style="text-decoration:none; color:black; font-family: 'Catamaran', light; ">
+      <a href="{{product.product_size_fk.product_fk.get_absolute_url}}" style="text-decoration:none; color:black; font-family: 'Catamaran', light; ">
       <div class="cart-product-card-text" style="display:inline-block; margin-left:20px;">
-        <h4> {{product.name}}</h4>
-        <h5> Pris: {{product.price}}</h5>
+        <h4> {{product.product_size_fk.product_fk.name}}</h4>
+        <h5> Størrelse: {{product.product_size_fk.size}}</h5>
+        <h5> Antall: <select id="product-quantity-form" data-pk="{{product.product_size_fk.product_fk.id}}" data-size="{{product.product_size_fk.size}}">
+          <option value="1"> 1</option>
+          <option value="2"> 2</option>
+          <option value="3"> 3</option>
+        </select></h5>
+        <h5> Pris: {{product.product_size_fk.product_fk.price}}</h5>
       </div>
       </a>
-      <a href="{% url 'carts:cart-add' pk=product.id %}" style="flex:1; text-align:right; color:red;"><i class="fas fa-minus-circle"></i></a>
+    <a href="#" class="remove-item" data-pk="{{product.product_size_fk.product_fk.id}}" data-size="{{product.product_size_fk.size}}" data-quantity="{{product.quantity}}" style="flex:1; text-align:right; color:red;"><i class="fas fa-minus-circle"></i></a>
     </div>
       <hr>
     {% empty %}
+    <div class="empty-message">
       <h1>Handlekurven er tom!</h1>
+      <a href="{% url 'products:list' category='list' %}" class="btn btn-info"> Ta meg til produktene!</a>
+    </div>
     {% endfor %}
 
     {% if cart.products.all.count > 0 %}
     <div class="cart-price-card" style="width:400px; padding: 5px;">
     <div style="display:flex; justify-content:space-between; flex-direction:row; width:300px; font-family: 'Catamaran', light;">
         <h5>Mellomsum </i></h5>
-        <h5>{{cart.sub_total}} kr</h5>
+        <h5 id="cart-subtotal">{{cart.sub_total}} kr</h5>
     </div>
     <div style="display:flex; justify-content:space-between; flex-direction:row; width:300px; font-family: 'Catamaran', light;">
         <h5>Frakt </i></h5>
-        <h5>{{cart.shipping}} kr</h5>
+        <h5 id="cart-shipping">{{cart.shipping}} kr</h5>
     </div>
     <hr>
     <div style="display:flex; justify-content:space-between; flex-direction:row; width:300px; font-family: 'Catamaran', light;">
         <h5>Pris </h5>
-        <h5>{{cart.total}} kr</h5>
+        <h5 id="cart-total">{{cart.total}} kr</h5>
     </div>
+    <a href="{% url 'carts:cart-checkout' %}" class="btn btn-success"> Til kassen </a>
     </div>
 
-    <a href="{% url 'carts:cart-checkout' %}" class="btn btn-success"> Til kassen </a>
-    {% else %}
-    <a href="{% url 'products:list' category='list' %}" class="btn btn-info"> Ta meg til produktene!</a>
+
     {% endif %}
 
-
+    <div class="empty-message" style="display:none;">
+      <h1>Handlekurven er tom!</h1>
+      <a href="{% url 'products:list' category='list' %}" class="btn btn-info"> Ta meg til produktene!</a>
+    </div>
   </div>
+{% endblock %}
+{% block script%}
+<script>
+  $(document).ready(function(){
+
+    $("#product-quantity-form").change(function(){
+      console.log("HELLO")
+
+      var pk = $(this).attr("data-pk");
+      var size = $(this).attr("data-size");
+      var quantity = $(this).val();
+
+      var data = {
+        csrfmiddlewaretoken:'{{ csrf_token }}',
+        'pk':pk,
+        'size': size,
+        'quantity': quantity,
+        'update':true,
+      };
+
+      $.ajax({
+        url:'add/',
+        method:'POST',
+        data: data,
+        success:function(data){
+          console.log(data)
+          $("#cart-subtotal").text(data.subTotal);
+          $("#cart-total").text(data.total);
+          $("#cart-shipping").text(data.shipping);
+        },error:function(data){
+          console.log(data.added);
+        }
+      })
+
+
+
+    });
+
+    $(document.body).on("click", ".remove-item", function(e){
+      event.preventDefault();
+      var pk = $(this).attr("data-pk");
+      var size = $(this).attr("data-size");
+      var quantity = $(this).val();
+      var data = {
+        csrfmiddlewaretoken:'{{ csrf_token }}',
+        'pk':pk,
+        'size': size,
+        'quantity': quantity,
+      };
+
+      $.ajax({
+        url:'add/',
+        method:'POST',
+        data: data,
+        success:function(data){
+          var cardId = ".cart-product-card-" + pk + "-" + size;
+          $(cardId).fadeOut("slow", function(){
+            $("#cart-subtotal").text(data.subTotal);
+            $("#cart-total").text(data.total);
+            $("#cart-shipping").text(data.shipping);
+            if(data.cartProductCount == 0){
+              $(".cart-price-card").fadeOut("slow");
+              $(".empty-message").fadeIn('slow');
+
+            }
+          });
+        },error:function(data){
+          console.log(data.added);
+        }
+      })
+
+    });
+
+  });
+
+</script>
 {% endblock %}

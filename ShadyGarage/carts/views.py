@@ -41,18 +41,48 @@ def cart_add(request):
         added = True
         cart_obj.products.add(product_)
 
-
-    request.session['cart_products_count'] = cart_obj.products.count()
+    cart_products_count = 0
+    for p in cart_obj.products.all():
+        cart_products_count += p.quantity
+    request.session['cart_products_count'] = cart_products_count
 
     if request.is_ajax():
         data = {
             'added':added,
             'removed': not added,
-            'cartItemCount': cart_obj.products.count()
+            'cartItemCount': cart_obj.products.count(),
+            'subTotal': cart_obj.sub_total,
+            'total': cart_obj.total,
+            'shipping': cart_obj.shipping,
+            'cartProductCount':cart_products_count,
         }
 
         return JsonResponse(data)
 
+    return redirect("carts:cart-home")
+
+
+def cart_update_quantity(request):
+    if request.method == 'POST' and request.is_ajax():
+        cart_obj, created = Cart.objects.new_or_get(request)
+        response = {"success":"False"}
+        try:
+            product_cart_obj = get_object_or_404(ProductItem, pk=product_cart)
+        except ProductItem.DoesNotExist:
+            return JsonResponse(response)
+
+        quantity = request.POST.get('quantity')
+        if quantity:
+            product_cart_obj.quantity = quantity
+            product_cart_obj.save()
+            updated = cart_obj.update_prices()
+            price = cart_obj.price
+            response = {
+                "success":"True",
+                "price":price
+
+                }
+        return JsonResponse(response)
     return redirect("carts:cart-home")
 
 
