@@ -10,7 +10,8 @@
   <a href="{% url 'products:list' category='tshirt' %}">Merch</a>
   <a href="{% url 'carts:cart-home' %}"><i class="fa fa-shopping-cart"></i></a>
 </div>
-<div class="container" style="text-align: center;">
+<img src="{% static 'images/black-friday.png'%}" style="width:100%;">
+<div class="container" style="text-align: center; z-index:10;">
   <div class="shop-top-buttons">
     <a href="#" class="btn btn-info" onclick="openShopNav()">Kategorier <i class="fa fa-air-freshener"></i></a>
     <a href="{% url 'carts:cart-home' %}" id="cart-count" class="btn btn-info">Handlekurv <i class="fas fa-shopping-cart"></i></a>
