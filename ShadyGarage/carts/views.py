@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Cart
 from products.models import ProductItem, ProductSize, Product
 from django.http import JsonResponse
@@ -22,7 +22,6 @@ def cart_add(request):
     cart_obj, created = Cart.objects.get_or_create(request)
     pk = request.POST.get('pk')
     size = request.POST.get('size')
-    quantity = request.POST.get('quantity')
 
     try:
         product_item = ProductSize.objects.get(product_fk=pk, size=size)
@@ -32,7 +31,7 @@ def cart_add(request):
             return JsonResponse({'success':False, 'message':'Product size dosent exist..'})
         redirect("carts:cart-home")
 
-    product_, created = ProductItem.objects.get_or_create(product_size_fk=product_item)
+    product_, created = ProductItem.objects.get_or_create(product_size_fk=product_item, cart_id=cart_obj.id)
 
     if product_ in cart_obj.products.all():
         added = False
@@ -64,22 +63,30 @@ def cart_add(request):
 
 def cart_update_quantity(request):
     if request.method == 'POST' and request.is_ajax():
-        cart_obj, created = Cart.objects.new_or_get(request)
+        cart_obj, created = Cart.objects.get_or_create(request)
+        product_pk = request.POST.get('pk')
+        size = request.POST.get('size')
+        quantity = request.POST.get('quantity')
+
         response = {"success":"False"}
         try:
-            product_cart_obj = get_object_or_404(ProductItem, pk=product_cart)
+            product_cart_obj = get_object_or_404(ProductItem, pk=product_pk, cart_id=cart_obj.id)
         except ProductItem.DoesNotExist:
             return JsonResponse(response)
 
-        quantity = request.POST.get('quantity')
+
         if quantity:
+
             product_cart_obj.quantity = quantity
             product_cart_obj.save()
-            updated = cart_obj.update_prices()
-            price = cart_obj.price
+            cart_obj.update_prices()
+            price = cart_obj.total
             response = {
                 "success":"True",
-                "price":price
+                "price":price,
+                'subTotal': cart_obj.sub_total,
+                'total': cart_obj.total,
+                'shipping': cart_obj.shipping,
 
                 }
         return JsonResponse(response)

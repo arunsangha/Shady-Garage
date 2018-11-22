@@ -103,12 +103,13 @@ class ProductSize(models.Model):
 
 
 class ProductItem(models.Model):
+    cart_id           = models.PositiveIntegerField(default=1)
     product_size_fk   = models.ForeignKey(ProductSize, related_name="product_cart_size_fk")
     quantity          = models.PositiveIntegerField(default=1, blank=True, null=True)
     active            = models.BooleanField(default=True)
 
     def __str__(self):
-        return "{}-{}".format(self.product_size_fk.product_fk.name, self.product_size_fk.size)
+        return "{}".format(self.cart_id)
 
 class CustomProduct(models.Model):
     user              = models.ForeignKey(User, related_name="custom_product_user")

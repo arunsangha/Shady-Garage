@@ -9,6 +9,7 @@ from ShadyGarage.utils import unique_order_id_generator
 User = get_user_model()
 
 
+
 ORDER_STATUS = (
     ('created', 'Opprettet'),
     ('paid', 'Betalt'),
@@ -28,6 +29,7 @@ class OrderManager(models.Manager):
             order_obj = self.model.objects.create(billing_profile=billing_profile, cart=cart_obj)
 
         return order_obj, created
+
 
 
 class Order(models.Model):

@@ -49,21 +49,25 @@ class Cart(models.Model):
         self.save()
         return self.active
 
-    def __str__(self):
-        return "{}-Products Count:{}".format(self.id, self.products.count())
-
     def update_prices(self):
         updated = False
-        price = self.price
+        price = self.total
         total = 0
         for x in self.products.all():
             total += (x.product_size_fk.product_fk.price * x.quantity)
 
-        if not total == price:
-            self.sub_price = total
+        print("Price:" + str(price))
+        print(total)
+        if total != price:
+            self.sub_total = total
             self.save()
             updated = True
         return updated
+
+    def __str__(self):
+        return "{}-Products Count:{}".format(self.id, self.products.count())
+
+
 
 #Update products (ManyToManyField) in Cart and updates the sub_total and total price
 def m2m_changed_cart_receiver(sender, instance, action, *args, **kwargs):
@@ -72,7 +76,7 @@ def m2m_changed_cart_receiver(sender, instance, action, *args, **kwargs):
         total = 0
 
         for product in products_qs:
-            total += product.product_size_fk.product_fk.price
+            total += (product.product_size_fk.product_fk.price * product.quantity)
 
         print(total)
         if instance.sub_total != total:
@@ -84,7 +88,7 @@ m2m_changed.connect(m2m_changed_cart_receiver, sender=Cart.products.through)
 
 def pre_save_cart_receiver(sender, instance, *args, **kwargs):
 
-    total = 0
+
 
     if float(instance.sub_total) < 300:
         instance.shipping = 40
