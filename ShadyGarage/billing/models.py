@@ -4,7 +4,7 @@ from django.db.models.signals import pre_save, post_save
 from django.conf import settings
 
 import stripe
-stripe.api_key = getattr(settings, "STRIPE_API_KEY", "sk_test_czI0R33pVrj3VrDfBg1xbSSN")
+stripe.api_key = getattr(settings, "STRIPE_API_KEY", "sk_live_EhtVidPZZUkXoXAFoFgyODJe")
 User = get_user_model()
 
 class BillingProfileManager(models.Manager):

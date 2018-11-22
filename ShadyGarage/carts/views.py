@@ -193,7 +193,7 @@ def cart_confirm(request):
                     text_content = strip_tags(html_content)
                     msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
                     msg.attach_alternative(html_content, "text/html")
-                    #msg.send()
+                    msg.send()
 
                     return redirect("carts:cart-success")
 
