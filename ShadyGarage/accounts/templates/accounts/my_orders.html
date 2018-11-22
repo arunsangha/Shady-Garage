@@ -21,17 +21,20 @@
           {% for i in order.cart.products.all %}
 
           <div class="card product-list-card" style="width: 13rem; border-radius:10px; margin:25px;">
-            <img class="card-img-top" src="{{i.get_list_image}}" alt="Card image cap">
+            <img class="card-img-top" src="{{i.product_size_fk.product_fk.get_list_image}}" alt="Card image cap">
             <div class="card-body" style="border-top: 0.5px solid grey; border-bottom-left-radius:10px; border-bottom-right-radius:10px; text-align:left; display: flex; flex-direction: row; flex-wrap:wrap; justify-content:space-between; padding:0px;">
               <div style="margin: 5px; padding-left:10px;">
-                <h5 class="card-text">{{i.name}}</h5>
-                <p class="card-text">{{i.price}} kr</p>
+                <h5 class="card-text">{{i.product_size_fk.product_fk.name}}</h5>
+                <p class="card-text">{{i.product_size_fk.product_fk.price}} kr</p>
+                <p class="card-text">Str: {{i.product_size_fk.size}}</p>
+                <p class="card-text">Antall: {{i.quantity}}</p>
               </div>
             </div>
           </div>
           {% endfor %}
           </div>
         </li>
+        <li class="list-group-item"><i class="fas fa-shipping-fast"></i> : {{order.cart.shipping}}kr</li>
         <li class="list-group-item"><i class="far fa-credit-card"></i> Betalt: {{order.total}}kr</li>
         </ul>
       </p>

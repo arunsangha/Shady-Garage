@@ -108,6 +108,16 @@ class ProductItem(models.Model):
     quantity          = models.PositiveIntegerField(default=1, blank=True, null=True)
     active            = models.BooleanField(default=True)
 
+    def take_one(self):
+        success = False
+        product_quantity = self.product_size_fk.quantity
+        to_take = self.quantity
+        if product_quantity > to_take:
+            self.product_size_fk.quantity = self.product_size_fk.quantity - to_take
+            self.product_size_fk.save()
+            success = True
+        return success
+
     def __str__(self):
         return "{}".format(self.cart_id)
 
