@@ -78,7 +78,7 @@ PRODUCT_SIZE = (
     ('L', 'Large'),
     ('XL', 'XL'),
     ('XXL', 'XXL'),
-    ('One Size', 'One Size'),
+    ('OneSize', 'OneSize'),
 )
 class ProductSize(models.Model):
     product_fk    = models.ForeignKey(Product, related_name="products_fk_size")

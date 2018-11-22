@@ -120,6 +120,7 @@
         success:function(data){
           var cardId = ".cart-product-card-" + pk + "-" + size;
           $(cardId).fadeOut("slow", function(){
+            
             $("#cart-subtotal").text(data.subTotal + " kr");
             $("#cart-total").text(data.total + " kr");
             $("#cart-shipping").text(data.shipping + " kr");
