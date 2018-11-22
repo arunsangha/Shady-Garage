@@ -34,15 +34,20 @@
               <h5 class="card-text">{{i.product_size_fk.product_fk.name}}</h5>
               <h5 class="card-text">Str: {{i.product_size_fk.size}}</h5>
               <h5 class="card-text">Antall: {{i.quantity}}</h5>
+              {% if i.product_size_fk.product_fk.sale %}
+              <p class="card-text">{{i.product_size_fk.product_fk.sale_price}} kr</p>
+              <p class="card-text">{{i.product_size_fk.product_fk.sale_percentage}}% Rabatt! <strike>{{i.product_size_fk.product_fk.price}}</strike></p>
+              {% else %}
               <p class="card-text">{{i.product_size_fk.product_fk.price}} kr</p>
+              {% endif %}
             </div>
           </div>
         </div>
         {% endfor %}
         </div>
       </li>
-      <li class="list-group-item">Shipping: {{order.cart.shipping}}</li>
-      <li class="list-group-item">Sum: {{order.total}}kr</li>
+      <li class="list-group-item">Shipping: {{order.cart.shipping}} kr</li>
+      <li class="list-group-item">Sum: {{order.total}} kr</li>
       </ul>
     </p>
     <form method="post">

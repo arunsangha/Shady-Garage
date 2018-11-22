@@ -41,6 +41,7 @@ class Order(models.Model):
     billing_address     = models.ForeignKey(Address, related_name="order_billing_profile", blank=True, null=True)
     status              = models.CharField(choices=ORDER_STATUS, default='created', max_length=120)
     total               = models.DecimalField(default=0, max_digits=20, decimal_places=2)
+    money_saved         = models.DecimalField(default=0, max_digits=20, decimal_places=2, blank=True, null=True)
     timestamp           = models.DateTimeField(auto_now_add=True)
     active              = models.BooleanField(default=True)
 

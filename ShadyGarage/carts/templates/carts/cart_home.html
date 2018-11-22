@@ -21,7 +21,11 @@
           <option value="2"> 2</option>
           <option value="3"> 3</option>
         </select></h5>
-        <h5> Pris: {{product.product_size_fk.product_fk.price}}</h5>
+        {% if product.product_size_fk.product_fk.sale %}
+         <h5> Pris: <span style="background-color:red;" class="badge badge-secondary">{{product.product_size_fk.product_fk.sale_price}} kr</span></h5>
+        {% else %}
+         <h5> Pris: {{product.product_size_fk.product_fk.price}}</h5>
+        {% endif %}
       </div>
       </a>
     <a href="#" class="remove-item" data-pk="{{product.product_size_fk.product_fk.id}}" data-size="{{product.product_size_fk.size}}" data-quantity="{{product.quantity}}" style="flex:1; text-align:right; color:red;"><i class="fas fa-minus-circle"></i></a>

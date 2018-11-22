@@ -54,7 +54,10 @@ class Cart(models.Model):
         price = self.total
         total = 0
         for x in self.products.all():
-            total += (x.product_size_fk.product_fk.price * x.quantity)
+            if x.product_size_fk.product_fk.sale == True:
+                total += (x.product_size_fk.product_fk.sale_price * x.quantity)
+            else:
+                total += (x.product_size_fk.product_fk.price * x.quantity)
 
         print("Price:" + str(price))
         print(total)
@@ -76,7 +79,10 @@ def m2m_changed_cart_receiver(sender, instance, action, *args, **kwargs):
         total = 0
 
         for product in products_qs:
-            total += (product.product_size_fk.product_fk.price * product.quantity)
+            if product.product_size_fk.product_fk.sale == True:
+                total += (product.product_size_fk.product_fk.sale_price * product.quantity)
+            else:
+                total += (product.product_size_fk.product_fk.price * product.quantity)
 
         print(total)
         if instance.sub_total != total:

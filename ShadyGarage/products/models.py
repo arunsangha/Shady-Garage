@@ -15,6 +15,9 @@ class Product(models.Model):
     empty           = models.BooleanField(default=False)
     slug            = models.SlugField(allow_unicode=True, unique=True)
     timestamp       = models.DateTimeField(auto_now_add=True)
+    sale            = models.BooleanField(default=False)
+    sale_price      = models.DecimalField(decimal_places=2, max_digits=30, blank=True, null=True)
+    sale_percentage = models.PositiveIntegerField(default=0, blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -87,19 +90,20 @@ class ProductSize(models.Model):
         return "{}-{}".format(self.product_fk.name, self.size)
 
     def is_empty(self):
-        empty = True
-        if self.quantity > 0:
-            empty = False
+        empty = False
+        if self.quantity == 0:
+            self.empty = True
+            empty = True
         return empty
 
 
 
     def take_one(self):
         success = False
-        if self.quantity > 0 and self.is_empty() == False:
+        if (self.quantity > 0) and self.is_empty() == False:
             self.quantity = self.quantity - 1
-            succes = True
-        return succcess
+            success = True
+        return success
 
 
 class ProductItem(models.Model):

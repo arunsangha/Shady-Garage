@@ -8,7 +8,12 @@
         <h4>{{object.name}}</h4>
         <h6>{{object.description}}</h6>
         <hr>
-        <h4>Pris: {{object.price}}kr</h4>
+        {% if object.sale%}
+          <h4> <span style="font-style:italic"> Før: {{object.price}}kr</span></h4>
+          <h4> <span style="background-color:red;" class="badge badge-secondary">Nå: {{object.sale_price}}</span></h4>
+        {% else%}
+          <h4> Pris: {{object.price}}kr</h4>
+        {% endif%}
         <hr>
 
         {% if object.get_stock < 10 and object.get_stock > 0 %}

@@ -36,6 +36,9 @@
         </li>
         <li class="list-group-item"><i class="fas fa-shipping-fast"></i> : {{order.cart.shipping}}kr</li>
         <li class="list-group-item"><i class="far fa-credit-card"></i> Betalt: {{order.total}}kr</li>
+        {% if order.money_saved  %}
+        <li class="list-group-item"><i class="fas fa-coins"></i> Spart på salg: {{order.money_saved}}kr</li>
+        {% endif %}
         </ul>
       </p>
     </div>

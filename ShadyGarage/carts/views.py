@@ -145,10 +145,15 @@ def cart_confirm(request):
     if order_obj:
         order_obj = order_obj.first()
         products = order_obj.cart.products.all()
+        money_saved = 0
         for x in products:
-            if not x.take_one():
-                error_msg = "Error! Produktet {product} er tomt! :(".format(product=x.name)
+            if not x.product_size_fk.take_one():
+                print("error")
+                error_msg = "Error! Produktet {product} er tomt! :(".format(product=x.product_size_fk.product_fk.name)
                 return render(request, "carts/cart-confirm.html", {'error_msg':error_msg})
+
+            if x.product_size_fk.product_fk.sale:
+                money_saved += (x.product_size_fk.product_fk.price - x.product_size_fk.product_fk.sale_price)
 
         billing_address = Address.objects.get(id=billing_address_id)
         shipping_address = Address.objects.get(id=shipping_address_id)
@@ -161,7 +166,8 @@ def cart_confirm(request):
 
             order_obj.shipping_address = shipping_address
             order_obj.billing_address = billing_address
-
+            if money_saved > 0:
+                order_obj.money_saved = money_saved
             order_obj.save()
 
             if request.method == "POST":
@@ -187,7 +193,7 @@ def cart_confirm(request):
                     text_content = strip_tags(html_content)
                     msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
                     msg.attach_alternative(html_content, "text/html")
-                    msg.send()
+                    #msg.send()
 
                     return redirect("carts:cart-success")
 
