@@ -4,7 +4,7 @@
 
 :root{
   --main-blue-color: #17a2b8;
-  --main-dark-color: #2E2E2E;
+  --main-dark-color: #292F36;
   --main-light-color: #a0a0a0;
   --main-yellow-color: #FFFF00;
   --main-black-color: #212121;
@@ -241,10 +241,10 @@ h1,h2,h3,h4,h5,h6{
 
   .nav-list-item{
       display: block;
-      border-top: 1px solid var(--main-yellow-color);
+      border-top: 0.5px solid white;
       width: 100%;
       font-weight: bold;
-      background-color: var(--main-black-color);
+      background-color: var(--main-dark-color);
   }
 
   .nav-list-item-link{
@@ -744,23 +744,23 @@ h1,h2,h3,h4,h5,h6{
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  background-color: var(--main-black-color);
+  background-color: var(--main-dark-color);
   width: 50%;
   border-radius: 15px;
-  border: 1px solid var(--main-yellow-color);
+  border: 2px solid var(--main-dark-color);
   margin: 20px auto;
   min-height: 200px;
 }
 
 .post-list-card-header{
   width: 100%;
-  color: var(--main-black-color);
+  color:white;
   text-align: left;
-  border-bottom: 1px solid var(--main-yellow-color);
+  border-bottom: 1px solid var(--main-dark-color);
   border-top-left-radius: 13px;
   border-top-right-radius: 13px;
   padding-left: 15px;
-  background-color: var(--main-yellow-color);
+  background-color: var(--main-dark-color);
   word-wrap: break-word;
   word-break: break-all;
   font-family: nosifer;

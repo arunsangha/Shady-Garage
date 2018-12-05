@@ -10,8 +10,7 @@ from django.db.models import Q
 
 # Create your views here.
 
-
-class PostList(LoginRequiredMixin, ListView):
+class PostList(ListView):
     template_name = 'posts/post_list.html'
     def get_context_data(self, *args, **kwargs):
         context = super(PostList, self).get_context_data(*args, **kwargs)

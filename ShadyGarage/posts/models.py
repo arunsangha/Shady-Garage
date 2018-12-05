@@ -26,6 +26,7 @@ class Post(models.Model):
     post_title = models.CharField(max_length = 100)
     post_image = models.ImageField(upload_to="post_pic", blank = True)
     thumbnail = models.ImageField(upload_to="thumbnail", blank=True)
+    thumbnail_blurred = models.ImageField(upload_to="thumbnail_blurred", blank=True, null=True)
     post_description = models.TextField(max_length = 255, blank = True)
     post_likes = models.ManyToManyField(auth.models.User, blank = True, related_name = "post_likes")
     post_created = models.DateTimeField(auto_now_add = True)
@@ -50,7 +51,7 @@ class Post(models.Model):
         return unique_slug
 
     def create_thumbnail(self):
-         from PIL import Image
+         from PIL import Image, ImageFilter
          from io import BytesIO
          from django.core.files.uploadedfile import SimpleUploadedFile
          import os
@@ -99,7 +100,28 @@ class Post(models.Model):
              '%s_thumbnail.%s' % (os.path.splitext(suf.name)[0], FILE_EXTENSION),
              suf,
              save=False
-        )
+         )
+
+         THUMBNAIL_SIZE = (612, 612)
+         image.thumbnail(THUMBNAIL_SIZE, Image.ANTIALIAS)
+         temp_handle = BytesIO()
+         im1 = image.filter(ImageFilter.GaussianBlur)
+         im1.save(temp_handle, PIL_TYPE)
+         temp_handle.seek(0)
+
+       # Save image to a SimpleUploadedFile which can be saved into
+       # ImageField
+         suf = SimpleUploadedFile(os.path.split(self.post_image.name)[-1],
+            temp_handle.read(), content_type=DJANGO_TYPE)
+       # Save SimpleUploadedFile into image field
+         self.thumbnail_blurred.save(
+            '%s_thumbnail-blurred.%s' % (os.path.splitext(suf.name)[0], FILE_EXTENSION),
+            suf,
+            save=False
+          )
+
+
+
 
 
     def save(self, *args, **kwargs):

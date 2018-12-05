@@ -23,6 +23,7 @@ class PostModelSerializer(serializers.ModelSerializer):
             'post_title',
             'post_image',
             'thumbnail',
+            'thumbnail_blurred',
             'post_description',
             'post_likes',
             'post_created',
