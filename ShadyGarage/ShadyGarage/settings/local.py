@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'addresses',
     'orders',
     'stripe',
+    'blogs',
     'sorl.thumbnail',
 ]
 
