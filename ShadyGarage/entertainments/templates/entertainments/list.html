@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 {% block body %}
-<div class="linear-gradient-background">
+<div id="background-image">
+<img src="{% static 'images/Design.png'%}" alt="" style="z-index:-10; height:90%; position:fixed;>
+</div>
   <div class="container">
     {% if perms.entertainments %}
     <div class="em-list-auth">
@@ -16,7 +18,7 @@
       <a href="#" id="loadMore" class="btn btn-info" style="align:center;">Flere posts</a>
     </div>
   </div>
-</div>
+
 {% endblock %}
 {% block script %}
 <script>
