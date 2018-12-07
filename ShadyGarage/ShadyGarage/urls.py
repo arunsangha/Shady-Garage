@@ -26,7 +26,7 @@ urlpatterns = [
     url(r'^accounts/', include("django.contrib.auth.urls")),
     url(r'^meets/', include('meets.urls'), name = 'meets'),
     url(r'^posts/', include('posts.urls'), name = 'posts'),
-    url(r'^media/', include('blogs.urls'), name="media"),
+    url(r'^blog/', include('blogs.urls'), name="blog"),
     url(r'^entertainment/', include('entertainments.urls'), name = "entertainments"),
     url(r'^api/posts/', include('posts.api.urls'), name="api-posts"),
     url(r'^api/meets/', include('meets.api.urls'), name="api-meets"),
