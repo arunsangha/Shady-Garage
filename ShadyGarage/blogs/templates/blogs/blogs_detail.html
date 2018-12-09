@@ -14,7 +14,7 @@
     }
   }
   .blog-top-image{
-    min-height:850px;
+    min-height:950px;
     background-attachment: fixed;
     background-position:center;
     background-repeat:no-repeat;
@@ -36,9 +36,9 @@
 
   .blog-fade-in{
     width:100%;
-    height:750px;
+    height:850px;
     background-color:rgba(0,0,0,0.4);
-    font-size:40px;
+    font-size:35px;
     font-family: 'Heebo', sans-serif;
     display:none;
     padding-top:200px;
@@ -49,8 +49,8 @@
     display:inline-block;
   }
   .thing-to-know-icon{
-    width:100px;
-    height:100px;
+    width:80px;
+    height:80px;
   }
 
   .test{
@@ -58,6 +58,13 @@
     color:white;
   }
 
+  .paragraph-1{
+    width:50%;
+    padding-left: 30px;
+  }
+  .paragraph-1 p{
+    word-break:break-all;
+  }
 
 }
 </style>
@@ -76,6 +83,12 @@
         </div>
         <div class="row test">
           <div>
+            <img class="thing-to-know-icon" src="{% static 'images/blogs/engine.svg'%}" alt="" align="middle">
+             4,0L V8 Biturbo</img>
+          </div>
+        </div>
+        <div class="row test">
+          <div>
             <img class="thing-to-know-icon" src="{% static 'images/blogs/flag.svg'%}" alt="" align="middle">
             0-100 på <i> 3 sekund </i></img>
           </div>
@@ -90,9 +103,35 @@
     </div>
   </div>
 </div>
-<div class="test" style="min-height:500px; width:100%; background-color:white">
+<div class="container" style="padding-top:30px; min-height:450px; width:100%; background-color:white;">
+  <div class="row">
+    <div class="col-sm" style="background-color:red; padding:0px;">
+      <div style="width:100%;">
+        <img src="{% static 'images/blogs/e63wagon_back.jp2'%}" alt="" style="width:100%;"</img>
+      </div>
+    </div>
+    <div class="col-sm">
+      <h1 style="color:black;">En helt ny formula for Mercedes</h1>
+      <p style="color:black;">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      </p>
+    </div>
+  </div>
+</div>
+<div class="container-fluid" style="width:100%; padding-top:30px; min-height:400px; background-image:url('{% static 'images/blogs/e63_sideshoot.png'%}'); background-repeat:no-repeat; background-size:cover; background-position: center;"></div>
+<div class="container" style="padding-top:30px; min-height:350px; background-color:white;">
+  <h1 style="color:black; text-align:center;">Motor og girkasse</h1>
+  <p style="color:black;">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+  </p>
 
 </div>
+<!--https://www.google.com/search?client=safari&rls=en&q=e63s+wagon+lights&ie=UTF-8&oe=UTF-8-->
 
 
 
