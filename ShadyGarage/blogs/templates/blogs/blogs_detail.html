@@ -53,6 +53,45 @@
     height:80px;
   }
 
+  @media only screen and (max-width:375px){
+
+
+    .thing-to-know-icon{
+      width:50px;
+      height:50px;
+    }
+
+    .blog-fade-in{
+      font-size: 25px;
+    }
+
+  }
+  @media only screen and (max-width:450px){
+    .blog-title{
+      padding-left: 5px;
+      padding-right: 5px;
+      text-align:center;
+      color:white;
+      min-height:90px;
+      width:100%;
+      background-color:rgba(0,0,0,0.4);
+      font-size:30px;
+      font-family: 'Heebo', sans-serif;
+    }
+  }
+
+  @media only screen and (min-height:736px) and (min-width:380px), (max-height:812px){
+    .blog-fade-in{
+      height:1200px;
+    }
+  }
+
+  @media only screen and (min-width:1910px) and (min-height:1020px){
+    .blog-top-image{
+      min-height:1080px;
+    }
+  }
+
   .test{
     margin-top:50px;
     color:white;
@@ -67,6 +106,9 @@
   }
 
 }
+
+
+
 </style>
 <div class="blog-top-image" style="background-image:url('{% static 'images/e63_wagon.jpg'%}');">
   <div class="blog-title">
@@ -105,7 +147,7 @@
 </div>
 <div class="container" style="padding-top:30px; min-height:450px; width:100%; background-color:white;">
   <div class="row">
-    <div class="col-sm" style="background-color:red; padding:0px;">
+    <div class="col-sm" style="padding:0px;">
       <div style="width:100%;">
         <img src="{% static 'images/blogs/e63wagon_back.jp2'%}" alt="" style="width:100%;"</img>
       </div>
@@ -119,7 +161,8 @@
     </div>
   </div>
 </div>
-<div class="container-fluid" style="width:100%; padding-top:30px; min-height:400px; background-image:url('{% static 'images/blogs/e63_sideshoot.png'%}'); background-repeat:no-repeat; background-size:cover; background-position: center;"></div>
+<div class="container-fluid" style="padding-top:30px; min-height:600px; background-image:url('{% static 'images/blogs/e63_gif.gif'%}'); background-repeat:no-repeat; background-size:cover; background-position: center;">
+</div>
 <div class="container" style="padding-top:30px; min-height:350px; background-color:white;">
   <h1 style="color:black; text-align:center;">Motor og girkasse</h1>
   <p style="color:black;">
@@ -129,7 +172,26 @@
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
   </p>
-
+</div>
+<div class="exhaust-parallax" style="background-image:url('{% static 'images/blogs/e63_back.jpg'%}'); background-position:center; background-size:cover; background-repeat:no-repeat; background-attachment:fixed; width:100%; min-height:500px;">
+  <div class="exhaust-parallax-container">
+    Hør lyden!
+  </div>
+</div>
+<div class="container-fluid">
+<div class="row" style="min-height:500px;">
+<div class="col-sm" style="min-width:50%;background-image:url('{% static 'images/blogs/e63wagon_back.jp2'%}'); background-repeat:no-repeat; background-size:cover;">
+</div>
+<div class="col-sm">
+  <p style="color:black;">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+  </p>
+</div>
+</div>
 </div>
 <!--https://www.google.com/search?client=safari&rls=en&q=e63s+wagon+lights&ie=UTF-8&oe=UTF-8-->
 
@@ -140,6 +202,7 @@
 <script>
   $(document).ready(function(){
     $(window).scroll(function() {
+      console.log(screen.width);
       if ($(window).scrollTop()>150) {
         $('.blog-fade-in').fadeIn();
       }
