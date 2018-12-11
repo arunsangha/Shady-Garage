@@ -78,6 +78,8 @@
       font-size:30px;
       font-family: 'Heebo', sans-serif;
     }
+
+
   }
 
   @media only screen and (min-height:736px) and (min-width:380px), (max-height:812px){
@@ -105,7 +107,27 @@
     word-break:break-all;
   }
 
+.round-play-btn{
+  box-sizing: border-box;
+  display:inline-block;
+  height: 60px;
+  width:60px;
+  border: 3px solid var(--main-orange-color);
+  border-radius:50%;
+  color: var(--main-orange-color);
+  text-align:center;
+  padding-top:10px;
+  padding-left:5px;
 }
+
+.round-play-btn:hover{
+  background-color: var(--main-orange-color);
+  color:white;
+  transition: all 0.4s ease-in-out;
+}
+
+
+
 
 
 
@@ -149,12 +171,12 @@
   <div class="row">
     <div class="col-sm" style="padding:0px;">
       <div style="width:100%;">
-        <img src="{% static 'images/blogs/e63wagon_back.jp2'%}" alt="" style="width:100%;"</img>
+        <img src="{% static 'images/blogs/e63_backshoot.jpg'%}" alt="" style="width:100%;"</img>
       </div>
     </div>
     <div class="col-sm">
-      <h1 style="color:black;">En helt ny formula for Mercedes</h1>
-      <p style="color:black;">
+      <h1 style="color:black; font-family: 'Heebo', sans-serif;">En helt ny formula for Mercedes</h1>
+      <p style="color:black; font-family: 'Quicksand', sans-serif; font-weight:light; font-size:18px;">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
       </p>
@@ -163,35 +185,38 @@
 </div>
 <div class="container-fluid" style="padding-top:30px; min-height:600px; background-image:url('{% static 'images/blogs/e63_gif.gif'%}'); background-repeat:no-repeat; background-size:cover; background-position: center;">
 </div>
-<div class="container" style="padding-top:30px; min-height:350px; background-color:white;">
-  <h1 style="color:black; text-align:center;">Motor og girkasse</h1>
-  <p style="color:black;">
+<div class="container" style="padding-top:50px; padding-bottom: 50px; min-height:350px; background-color:white;">
+  <h1 style="color:black; text-align:center; font-family: 'Heebo', sans-serif;">Motor og girkasse</h1>
+  <p style="color:black; padding-left:30px; padding-right:30px; margin-top:10px; font-family: 'Quicksand', sans-serif; font-weight:light; font-size:18px;">
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor<br><br> incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
   </p>
-</div>
-<div class="exhaust-parallax" style="background-image:url('{% static 'images/blogs/e63_back.jpg'%}'); background-position:center; background-size:cover; background-repeat:no-repeat; background-attachment:fixed; width:100%; min-height:500px;">
-  <div class="exhaust-parallax-container">
-    Hør lyden!
+  <div style="text-align:center;">
+    <h4>Hør lyden</h4>
+    <a href="#" id="show-exhaust-video" data-toggle="modal" data-target="#youtube-exhaust-video" class="round-play-btn"><i class="fa fa-play fa-2x"></i></a>
   </div>
 </div>
+{% include 'blogs/youtube_modal.html' with youtube_video='<iframe width="100%" height="300px"src="https://www.youtube.com/embed/p0uGW1vwBB4?start=14?rel=0&amp;showinfo=0&amp;modestbranding=1&amp;" frameborder="0" allow="autoplay;" allowfullscreen></iframe>'%}
+<div class="exhaust-parallax" style="background-image:url('{% static 'images/blogs/e63_back.jpg'%}'); background-position:center; background-size:cover; background-repeat:no-repeat; background-attachment:fixed; width:100%; min-height:500px;">
+</div>
 <div class="container-fluid">
-<div class="row" style="min-height:500px;">
-<div class="col-sm" style="min-width:50%;background-image:url('{% static 'images/blogs/e63wagon_back.jp2'%}'); background-repeat:no-repeat; background-size:cover;">
-</div>
-<div class="col-sm">
-  <p style="color:black;">
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-  </p>
-</div>
-</div>
+  <div class="row" style="min-height:500px;">
+    <div class="col-sm" id="test-interior-pic" style="min-width:50%; min-height:500px; background-image:url('{% static 'images/blogs/e63_interior.jpg'%}'); background-repeat:no-repeat; background-size:cover; background-position:center;">
+    </div>
+    <div class="col-sm" style="padding-top:50px;">
+      <h1 style="color:black; text-align:center;">Interiør</h1>
+      <p style="color:black;  padding:30px; padding-top:10px;">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      </p>
+    </div>
+  </div>
 </div>
 <!--https://www.google.com/search?client=safari&rls=en&q=e63s+wagon+lights&ie=UTF-8&oe=UTF-8-->
 
@@ -202,15 +227,23 @@
 <script>
   $(document).ready(function(){
     $(window).scroll(function() {
-      console.log(screen.width);
       if ($(window).scrollTop()>150) {
         $('.blog-fade-in').fadeIn();
       }
       if($(window).scrollTop()<150){
         $('.blog-fade-in').fadeOut();
       }
-   })
+   });
+
+
+   $('#youtube-exhaust-video').on('hidden.bs.modal', function (e) {
+      $iframe = $(this).find("iframe");
+      $iframe.attr("src", $iframe.attr("src"));
+    });
 
   })
+
+
+
 </script>
 {% endblock %}

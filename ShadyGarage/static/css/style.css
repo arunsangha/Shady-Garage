@@ -9,6 +9,7 @@
   --main-yellow-color: #FFFF00;
   --main-black-color: #212121;
   --main-red-color: #b81c17;
+  --main-orange-color:#FF9900;
 }
 
 
@@ -1771,4 +1772,24 @@ Billing App
 
 .StripeElement--webkit-autofill {
   background-color: #fefde5 !important;
+}
+
+/*
+  Blogs app
+*/
+
+/* blogs_detail.html */
+.youtube-video-wrapper{
+  position: relative;
+  height: 0;
+  width: 100%;
+  padding-bottom: 56.25%;
+}
+
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
 }
