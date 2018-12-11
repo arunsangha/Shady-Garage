@@ -4,3 +4,6 @@ from django.views.generic import TemplateView
 
 class BlogDetail(TemplateView):
     template_name = "blogs/blogs_detail.html"
+
+class BlogList(TemplateView):
+    template_name = "blogs/blogs_list.html"

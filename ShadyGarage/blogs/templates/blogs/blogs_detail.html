@@ -79,6 +79,10 @@
       font-family: 'Heebo', sans-serif;
     }
 
+    .blog-1-con{
+      padding-top:0px;
+    }
+
 
   }
 
@@ -126,10 +130,66 @@
   transition: all 0.4s ease-in-out;
 }
 
+.blog-1-con{
+  padding-top:30px;
+  min-height:450px;
+  width:100%;
+  background-color:white;
+}
+
+
+.img-comp-container {
+  position:relative;
+  height: 300px; /*should be the same height as the images*/
+  width:600px;
+}
+.img-comp-img {
+  position: absolute;
+  width: auto;
+  height: auto;
+  overflow: hidden;
+}
+
+.img-comp-img img {
+  display: block;
+  vertical-align: middle;
+  width:600px;
+}
+
+@media only screen and (max-width:620px){
+  .img-comp-container{
+    width:300px;
+  }
+
+  .img-comp-img img{
+    width:300px;
+  }
+}
+
+@media only screen and (max-width:330px){
+  .img-comp-container{
+    width:240px;
+  }
+
+  .img-comp-img img{
+    width:240px;
+  }
+}
 
 
 
+.img-comp-slider {
+  position: absolute;
+  z-index: 9;
+  cursor: ew-resize;
+  /*set the appearance of the slider:*/
+  width: 40px;
+  height: 40px;
+  background-color: var(--main-dark-color);
+  opacity: 0.7;
+  border-radius: 50%;
 
+}
 
 </style>
 <div class="blog-top-image" style="background-image:url('{% static 'images/e63_wagon.jpg'%}');">
@@ -167,7 +227,7 @@
     </div>
   </div>
 </div>
-<div class="container" style="padding-top:30px; min-height:450px; width:100%; background-color:white;">
+<div class="container blog-1-con">
   <div class="row">
     <div class="col-sm" style="padding:0px;">
       <div style="width:100%;">
@@ -200,7 +260,7 @@
   </div>
 </div>
 {% include 'blogs/youtube_modal.html' with youtube_video='<iframe width="100%" height="300px"src="https://www.youtube.com/embed/p0uGW1vwBB4?start=14?rel=0&amp;showinfo=0&amp;modestbranding=1&amp;" frameborder="0" allow="autoplay;" allowfullscreen></iframe>'%}
-<div class="exhaust-parallax" style="background-image:url('{% static 'images/blogs/e63_back.jpg'%}'); background-position:center; background-size:cover; background-repeat:no-repeat; background-attachment:fixed; width:100%; min-height:500px;">
+<div class="blog-parallax" style="background-image:url('{% static 'images/blogs/e63_back.jpg'%}'); background-position:center; background-size:cover; background-repeat:no-repeat; background-attachment:fixed; width:100%; min-height:500px;">
 </div>
 <div class="container-fluid">
   <div class="row" style="min-height:500px;">
@@ -218,8 +278,57 @@
     </div>
   </div>
 </div>
-<!--https://www.google.com/search?client=safari&rls=en&q=e63s+wagon+lights&ie=UTF-8&oe=UTF-8-->
+<div class="blog-parallax" style="background-image:url('{% static 'images/blogs/e63_night.jpg'%}'); background-position:center; background-size:cover; background-repeat:no-repeat; background-attachment:fixed; width:100%; min-height:500px;">
+</div>
 
+<div class="container" style="padding-top:50px; padding-bottom: 50px; min-height:350px; background-color:white;">
+  <h1 style="color:black; text-align:center; font-family: 'Heebo', sans-serif;">Utseende</h1>
+  <p style="color:black; padding-left:30px; padding-right:30px; margin-top:10px; font-family: 'Quicksand', sans-serif; font-weight:light; font-size:18px;">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor<br><br> incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+  </p>
+
+  <div class="container" align="center">
+    <div class="img-comp-container">
+      <div class="img-comp-img">
+        <img src="{% static 'images/blogs/e63_side.jpeg'%}">
+      </div>
+      <div class="img-comp-img img-comp-overlay">
+        <img src="{% static 'images/blogs/rs6_side.jpeg'%}">
+      </div>
+    </div>
+    </div>
+</div>
+
+<div class="container-fluid" style="padding-top:20px;background-color:var(--main-dark-color); min-height:400px">
+
+  <h1 style="color:white; text-align:center; font-family: 'Heebo', sans-serif;">Vår karakter</h1>
+  <div class="round-circle-con" align="center">
+  <div class="round-circle" style="margin-top:10px; background-color:var(--main-dark-color); border:3px solid var(--main-blue-color); color:white; font-size:50px; text-align:center; padding-top:20px; border-radius:50%; width:125px; height:125px;">6</div>
+  </div>
+  <div class="container" align="center" style="margin-top:50px;">
+    <form method="post">
+      {% csrf_token %}
+      <div style="background-color:var(--main-dark-color); text-align:center; border-radius: 5px;padding:10px; width:210px;font-family:Arial;font-size:small; color:#FFFFFF;">
+        <div style="padding:2px 0px 4px 2px; text-align:center; font-size:20px;">
+          <strong>Hva synes du om bilen?</strong>
+        </div>
+        <div class="row">
+          <div class="col" style="margin-left:20px; background-color:white; font-size:30px; width:50px">
+            😍
+          </div>
+          <div class="col" style="margin-right:20px; background-color:yellow; font-size:30px; width:50px">
+            😐
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</div>
 
 
 {% endblock %}
@@ -243,7 +352,87 @@
 
   })
 
+</script>
+<script>
+  function initComparisons() {
+    var x, i;
+    /* Find all elements with an "overlay" class: */
+    x = document.getElementsByClassName("img-comp-overlay");
+    for (i = 0; i < x.length; i++) {
+      /* Once for each "overlay" element:
+      pass the "overlay" element as a parameter when executing the compareImages function: */
+      compareImages(x[i]);
+    }
+    function compareImages(img) {
+      var slider, img, clicked = 0, w, h;
+      /* Get the width and height of the img element */
+      w = img.offsetWidth;
+      h = img.offsetHeight;
+      /* Set the width of the img element to 50%: */
+      img.style.width = (w / 2) + "px";
+      /* Create slider: */
+      slider = document.createElement("DIV");
+      slider.setAttribute("class", "img-comp-slider");
+      slider.setAttribute("style", "background-color: var(--main-dark-color);");
+      /* Insert slider */
+      img.parentElement.insertBefore(slider, img);
+      /* Position the slider in the middle: */
+      slider.style.top = (h / 2) - (slider.offsetHeight / 2) + "px";
+      slider.style.left = (w / 2) - (slider.offsetWidth / 2) + "px";
+      /* Execute a function when the mouse button is pressed: */
+      slider.addEventListener("mousedown", slideReady);
+      /* And another function when the mouse button is released: */
+      window.addEventListener("mouseup", slideFinish);
+      /* Or touched (for touch screens: */
+      slider.addEventListener("touchstart", slideReady);
+       /* And released (for touch screens: */
+      window.addEventListener("touchstop", slideFinish);
+      function slideReady(e) {
+        /* Prevent any other actions that may occur when moving over the image: */
+        e.preventDefault();
+        /* The slider is now clicked and ready to move: */
+        clicked = 1;
+        /* Execute a function when the slider is moved: */
+        window.addEventListener("mousemove", slideMove);
+        window.addEventListener("touchmove", slideMove);
+      }
+      function slideFinish() {
+        /* The slider is no longer clicked: */
+        clicked = 0;
+      }
+      function slideMove(e) {
+        var pos;
+        /* If the slider is no longer clicked, exit this function: */
+        if (clicked == 0) return false;
+        /* Get the cursor's x position: */
+        pos = getCursorPos(e)
+        /* Prevent the slider from being positioned outside the image: */
+        if (pos < 0) pos = 0;
+        if (pos > w) pos = w;
+        /* Execute a function that will resize the overlay image according to the cursor: */
+        slide(pos);
+      }
+      function getCursorPos(e) {
+        var a, x = 0;
+        e = e || window.event;
+        /* Get the x positions of the image: */
+        a = img.getBoundingClientRect();
+        /* Calculate the cursor's x coordinate, relative to the image: */
+        x = e.pageX - a.left;
+        /* Consider any page scrolling: */
+        x = x - window.pageXOffset;
+        return x;
+      }
+      function slide(x) {
+        /* Resize the image: */
+        img.style.width = x + "px";
+        /* Position the slider: */
+        slider.style.left = img.offsetWidth - (slider.offsetWidth / 2) + "px";
+      }
+    }
+  }
 
+  initComparisons();
 
 </script>
 {% endblock %}
