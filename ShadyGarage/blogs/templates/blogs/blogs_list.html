@@ -46,22 +46,19 @@
 <div class="container-fluid">
   <div class="row">
     <div class="column">
-      <img src="{%static 'images/blogs/e63_back.jpg'%}" style="width:100%">
-      <img src="{%static 'images/blogs/e63_backshoot.jpg'%}" style="width:100%">
-      <img src="{%static 'images/blogs/e63_interior.jpg'%}" style="width:100%">
-      <img src="{%static 'images/blogs/e63_sideshoot.jpg'%}" style="width:100%">
+      {% for i in object_list%}
+      <a href="{{i.get_absolute_url}}"><img src="{{i.top_image.url}}" style="width:100%"></a>
+      {% endfor %}
     </div>
     <div class="column">
       <img src="{%static 'images/blogs/e63_sideshoot.png'%}" style="width:100%">
       <img src="{%static 'images/blogs/e63_backshoot.jpg'%}" style="width:100%">
       <img src="{%static 'images/blogs/e63_interior.jpg'%}" style="width:100%">
-      <img src="{%static 'images/blogs/e63_sideshoot.jpg'%}" style="width:100%">
     </div>
     <div class="column">
       <img src="{%static 'images/blogs/e63_interior.jpg'%}" style="width:100%">
       <img src="{%static 'images/blogs/e63_backshoot.jpg'%}" style="width:100%">
       <img src="{%static 'images/blogs/e63_interior.jpg'%}" style="width:100%">
-      <img src="{%static 'images/blogs/e63_sideshoot.jpg'%}" style="width:100%">
     </div>
   </div>
 </div>
