@@ -13,3 +13,4 @@ class BlogList(ListView):
     def get_queryset(self, *args, **kwargs):
         qs = Blog.objects.all()
         return qs
+ 

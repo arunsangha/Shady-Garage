@@ -3,6 +3,7 @@ from django.utils.text import slugify
 from django.core.urlresolvers import reverse
 
 
+
 class Car(models.Model):
     make                 = models.CharField(max_length=20)
     model                = models.CharField(max_length=20)
@@ -11,8 +12,6 @@ class Car(models.Model):
     zero_to_100          = models.DecimalField(max_digits=5, decimal_places=1)
     consumption          = models.DecimalField(max_digits=5, decimal_places=1)
 
-    def __str__(self):
-        return "{} {}".format(self.make, self.model)
 
 class Blog(models.Model):
     car                  = models.ForeignKey(Car, related_name="car_fk")
