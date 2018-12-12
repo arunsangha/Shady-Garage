@@ -1,13 +1,22 @@
 from django.db import models
 from django.utils.text import slugify
 from django.core.urlresolvers import reverse
-# Create your models here.
-class Blog(models.Model):
-    title                = models.CharField(max_length=200)
-    price                = models.PositiveIntegerField()
+
+
+class Car(models.Model):
+    make                 = models.CharField(max_length=20)
+    model                = models.CharField(max_length=20)
+    price                = models.CharField(max_length=40)
     engine               = models.CharField(max_length=50)
-    zero_to_100          = models.DecimalField(max_digits=2, decimal_places=2)
-    consumption          = models.DecimalField(max_digits=2, decimal_places=2)
+    zero_to_100          = models.DecimalField(max_digits=5, decimal_places=1)
+    consumption          = models.DecimalField(max_digits=5, decimal_places=1)
+
+    def __str__(self):
+        return "{} {}".format(self.make, self.model)
+
+class Blog(models.Model):
+    car                  = models.ForeignKey(Car, related_name="car_fk")
+    title                = models.CharField(max_length=200)
     top_image            = models.ImageField(upload_to="blogs/top_image")
     intro_image          = models.ImageField(upload_to="blogs/intro_image")
     intro_title          = models.CharField(max_length=70)

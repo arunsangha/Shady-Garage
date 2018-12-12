@@ -11,25 +11,25 @@
         <div class="row thing-to-know-con">
           <div>
             <img class="thing-to-know-icon" src="{% static 'images/blogs/cash.svg'%}" alt="" align="middle">
-            {{object.price}} kr</img>
+            {{object.car.price}} kr</img>
           </div>
         </div>
         <div class="row thing-to-know-con">
           <div>
             <img class="thing-to-know-icon" src="{% static 'images/blogs/engine.svg'%}" alt="" align="middle">
-             {{object.engine}}</img>
+             {{object.car.engine}}</img>
           </div>
         </div>
         <div class="row thing-to-know-con">
           <div>
             <img class="thing-to-know-icon" src="{% static 'images/blogs/flag.svg'%}" alt="" align="middle">
-            0-100 på <i> {{object.zero_to_100}} sekund </i></img>
+            0-100 på <i> {{object.car.zero_to_100}} sekund </i></img>
           </div>
         </div>
         <div class="row thing-to-know-con">
           <div>
             <img class="thing-to-know-icon" src="{% static 'images/blogs/petrol.svg'%}" alt="" align="middle">
-           Forbruk: {{object.consumption}} l/100 km</img>
+           Forbruk: {{object.car.consumption}} l/100 km</img>
           </div>
         </div>
       </div>
