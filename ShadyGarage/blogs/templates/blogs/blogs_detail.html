@@ -1,223 +1,32 @@
 {% extends 'base.html'%}
 {% load staticfiles%}
 {% block body%}
-<style>
-
-
-  @media only screen and (max-width:700px){
-    .top-image{
-      min-height:700px;
-      background-attachment: fixed;
-      background-position:center;
-      background-repeat:no-repeat;
-      background-size:cover;
-    }
-  }
-  .blog-top-image{
-    min-height:950px;
-    background-attachment: fixed;
-    background-position:center;
-    background-repeat:no-repeat;
-    background-size:cover;
-  }
-
-
-
-  .blog-title{
-    padding-top:30px;
-    padding-left:40px;
-    color:white;
-    min-height:100px;
-    width:100%;
-    background-color:rgba(0,0,0,0.4);
-    font-size:40px;
-    font-family: 'Heebo', sans-serif;
-  }
-
-  .blog-fade-in{
-    width:100%;
-    height:850px;
-    background-color:rgba(0,0,0,0.4);
-    font-size:35px;
-    font-family: 'Heebo', sans-serif;
-    display:none;
-    padding-top:200px;
-    text-align: center;
-  }
-
-  .thing-to-know{
-    display:inline-block;
-  }
-  .thing-to-know-icon{
-    width:80px;
-    height:80px;
-  }
-
-  @media only screen and (max-width:375px){
-
-
-    .thing-to-know-icon{
-      width:50px;
-      height:50px;
-    }
-
-    .blog-fade-in{
-      font-size: 25px;
-    }
-
-  }
-  @media only screen and (max-width:450px){
-    .blog-title{
-      padding-left: 5px;
-      padding-right: 5px;
-      text-align:center;
-      color:white;
-      min-height:90px;
-      width:100%;
-      background-color:rgba(0,0,0,0.4);
-      font-size:30px;
-      font-family: 'Heebo', sans-serif;
-    }
-
-    .blog-1-con{
-      padding-top:0px;
-    }
-
-
-  }
-
-  @media only screen and (min-height:736px) and (min-width:380px), (max-height:812px){
-    .blog-fade-in{
-      height:1200px;
-    }
-  }
-
-  @media only screen and (min-width:1910px) and (min-height:1020px){
-    .blog-top-image{
-      min-height:1080px;
-    }
-  }
-
-  .test{
-    margin-top:50px;
-    color:white;
-  }
-
-  .paragraph-1{
-    width:50%;
-    padding-left: 30px;
-  }
-  .paragraph-1 p{
-    word-break:break-all;
-  }
-
-.round-play-btn{
-  box-sizing: border-box;
-  display:inline-block;
-  height: 60px;
-  width:60px;
-  border: 3px solid var(--main-orange-color);
-  border-radius:50%;
-  color: var(--main-orange-color);
-  text-align:center;
-  padding-top:10px;
-  padding-left:5px;
-}
-
-.round-play-btn:hover{
-  background-color: var(--main-orange-color);
-  color:white;
-  transition: all 0.4s ease-in-out;
-}
-
-.blog-1-con{
-  padding-top:30px;
-  min-height:450px;
-  width:100%;
-  background-color:white;
-}
-
-
-.img-comp-container {
-  position:relative;
-  height: 300px; /*should be the same height as the images*/
-  width:600px;
-}
-.img-comp-img {
-  position: absolute;
-  width: auto;
-  height: auto;
-  overflow: hidden;
-}
-
-.img-comp-img img {
-  display: block;
-  vertical-align: middle;
-  width:600px;
-}
-
-@media only screen and (max-width:620px){
-  .img-comp-container{
-    width:300px;
-  }
-
-  .img-comp-img img{
-    width:300px;
-  }
-}
-
-@media only screen and (max-width:330px){
-  .img-comp-container{
-    width:240px;
-  }
-
-  .img-comp-img img{
-    width:240px;
-  }
-}
-
-
-
-.img-comp-slider {
-  position: absolute;
-  z-index: 9;
-  cursor: ew-resize;
-  /*set the appearance of the slider:*/
-  width: 40px;
-  height: 40px;
-  background-color: var(--main-dark-color);
-  opacity: 0.7;
-  border-radius: 50%;
-
-}
-
-</style>
-<div class="blog-top-image" style="background-image:url('{% static 'images/e63_wagon.jpg'%}');">
+<div class="blog-top-image" style="background-image:url('{{% static 'images/e63_wagon.jpg'%}}');">
   <div class="blog-title">
     Alt du trenger å vite om E63s!
   </div>
   <div class="blog-fade-in">
     <div class="thing-to-know">
       <div class="col">
-        <div class="row test">
+        <div class="row thing-to-know-con">
           <div>
             <img class="thing-to-know-icon" src="{% static 'images/blogs/cash.svg'%}" alt="" align="middle">
             1.6 millioner kroner</img>
           </div>
         </div>
-        <div class="row test">
+        <div class="row thing-to-know-con">
           <div>
             <img class="thing-to-know-icon" src="{% static 'images/blogs/engine.svg'%}" alt="" align="middle">
              4,0L V8 Biturbo</img>
           </div>
         </div>
-        <div class="row test">
+        <div class="row thing-to-know-con">
           <div>
             <img class="thing-to-know-icon" src="{% static 'images/blogs/flag.svg'%}" alt="" align="middle">
             0-100 på <i> 3 sekund </i></img>
           </div>
         </div>
-        <div class="row test">
+        <div class="row thing-to-know-con">
           <div>
             <img class="thing-to-know-icon" src="{% static 'images/blogs/petrol.svg'%}" alt="" align="middle">
            Forbruk: 10.8 l/100 km</img>
@@ -234,20 +43,20 @@
         <img src="{% static 'images/blogs/e63_backshoot.jpg'%}" alt="" style="width:100%;"</img>
       </div>
     </div>
-    <div class="col-sm">
-      <h1 style="color:black; font-family: 'Heebo', sans-serif;">En helt ny formula for Mercedes</h1>
-      <p style="color:black; font-family: 'Quicksand', sans-serif; font-weight:light; font-size:18px;">
+    <div class="col-sm intro-con">
+      <h1 class="blog-heading">En helt ny formula for Mercedes</h1>
+      <p class="blog-paragraph">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
       </p>
     </div>
   </div>
 </div>
-<div class="container-fluid" style="padding-top:30px; min-height:600px; background-image:url('{% static 'images/blogs/e63_gif.gif'%}'); background-repeat:no-repeat; background-size:cover; background-position: center;">
+<div class="container-fluid blog-gif" style="background-image:url('{% static 'images/blogs/e63_gif.gif'%}');">
 </div>
-<div class="container" style="padding-top:50px; padding-bottom: 50px; min-height:350px; background-color:white;">
-  <h1 style="color:black; text-align:center; font-family: 'Heebo', sans-serif;">Motor og girkasse</h1>
-  <p style="color:black; padding-left:30px; padding-right:30px; margin-top:10px; font-family: 'Quicksand', sans-serif; font-weight:light; font-size:18px;">
+<div class="container paragraph-1-con">
+  <h1 class="blog-heading">Motor og girkasse</h1>
+  <p class="blog-paragraph">
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor<br><br> incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
@@ -260,15 +69,15 @@
   </div>
 </div>
 {% include 'blogs/youtube_modal.html' with youtube_video='<iframe width="100%" height="300px"src="https://www.youtube.com/embed/p0uGW1vwBB4?start=14?rel=0&amp;showinfo=0&amp;modestbranding=1&amp;" frameborder="0" allow="autoplay;" allowfullscreen></iframe>'%}
-<div class="blog-parallax" style="background-image:url('{% static 'images/blogs/e63_back.jpg'%}'); background-position:center; background-size:cover; background-repeat:no-repeat; background-attachment:fixed; width:100%; min-height:500px;">
+<div class="blog-parallax" style="background-image:url('{% static 'images/blogs/e63_back.jpg'%}');">
 </div>
 <div class="container-fluid">
   <div class="row" style="min-height:500px;">
-    <div class="col-sm" id="test-interior-pic" style="min-width:50%; min-height:500px; background-image:url('{% static 'images/blogs/e63_interior.jpg'%}'); background-repeat:no-repeat; background-size:cover; background-position:center;">
+    <div class="col-sm" id="paragraph-2-image" style="background-image:url('{% static 'images/blogs/e63_interior.jpg'%}');">
     </div>
-    <div class="col-sm" style="padding-top:50px;">
-      <h1 style="color:black; text-align:center;">Interiør</h1>
-      <p style="color:black;  padding:30px; padding-top:10px;">
+    <div class="col-sm paragraph-2-con">
+      <h1 class="blog-heading">Interiør</h1>
+      <p class="blog-paragraph">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
@@ -278,12 +87,12 @@
     </div>
   </div>
 </div>
-<div class="blog-parallax" style="background-image:url('{% static 'images/blogs/e63_night.jpg'%}'); background-position:center; background-size:cover; background-repeat:no-repeat; background-attachment:fixed; width:100%; min-height:500px;">
+<div class="blog-parallax" style="background-image:url('{% static 'images/blogs/e63_night.jpg'%}');">
 </div>
 
-<div class="container" style="padding-top:50px; padding-bottom: 50px; min-height:350px; background-color:white;">
-  <h1 style="color:black; text-align:center; font-family: 'Heebo', sans-serif;">Utseende</h1>
-  <p style="color:black; padding-left:30px; padding-right:30px; margin-top:10px; font-family: 'Quicksand', sans-serif; font-weight:light; font-size:18px;">
+<div class="container paragraph-3-con">
+  <h1 class="blog-heading">Utseende</h1>
+  <p class="blog-paragraph">
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor<br><br> incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
@@ -300,27 +109,27 @@
         <img src="{% static 'images/blogs/rs6_side.jpeg'%}">
       </div>
     </div>
-    </div>
+  </div>
 </div>
 
-<div class="container-fluid" style="padding-top:20px;background-color:var(--main-dark-color); min-height:400px">
+<div class="container-fluid score-con">
 
-  <h1 style="color:white; text-align:center; font-family: 'Heebo', sans-serif;">Vår karakter</h1>
+  <h1>Vår karakter</h1>
   <div class="round-circle-con" align="center">
-  <div class="round-circle" style="margin-top:10px; background-color:var(--main-dark-color); border:3px solid var(--main-blue-color); color:white; font-size:50px; text-align:center; padding-top:20px; border-radius:50%; width:125px; height:125px;">6</div>
+  <div class="round-circle">6</div>
   </div>
   <div class="container" align="center" style="margin-top:50px;">
     <form method="post">
       {% csrf_token %}
-      <div style="background-color:var(--main-dark-color); text-align:center; border-radius: 5px;padding:10px; width:210px;font-family:Arial;font-size:small; color:#FFFFFF;">
-        <div style="padding:2px 0px 4px 2px; text-align:center; font-size:20px;">
+      <div class="vote-form">
+        <div class="vote-form-title">
           <strong>Hva synes du om bilen?</strong>
         </div>
         <div class="row">
-          <div class="col" style="margin-left:20px; background-color:white; font-size:30px; width:50px">
+          <div class="col vote-icon" style="margin-left:20px;">
             😍
           </div>
-          <div class="col" style="margin-right:20px; background-color:yellow; font-size:30px; width:50px">
+          <div class="col vote-icon" style="margin-right:20px;">
             😐
           </div>
         </div>
