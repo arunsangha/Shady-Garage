@@ -85,14 +85,14 @@
   </p>
 
   <div class="container" align="center">
-    <div class="img-comp-container">
+    <!--<div class="img-comp-container">
       <div class="img-comp-img">
         <img src="{% static 'images/blogs/e63_side.jpeg'%}">
       </div>
       <div class="img-comp-img img-comp-overlay">
         <img src="{% static 'images/blogs/rs6_side.jpeg'%}">
       </div>
-    </div>
+    </div>-->
   </div>
 </div>
 
@@ -102,7 +102,7 @@
   <div class="round-circle-con" align="center">
   <div class="round-circle">{{object.score}}</div>
   </div>
-  <div class="container" align="center" style="margin-top:50px;">
+  <div class="container" id="user-score-con" align="center" style="margin-top:50px;">
     <form method="post">
       {% csrf_token %}
       <div class="vote-form">
@@ -111,19 +111,31 @@
 
         </div>
         <div class="row">
-          <div class="col vote-icon" style="margin-left:20px;">
-            😍
-          </div>
-          <div class="col vote-icon" style="margin-right:20px;">
-            😐
-          </div>
+          <a href="#" class="vote-btn" data-car-id="{{object.car.id}}" data-vote="True">
+            <div class="col vote-icon" style="margin-left:10px; margin-right:20px; background-color:var(--main-blue-color);">
+              😍
+            </div>
+          </a>
+          <a href="#" class="vote-btn" data-car-id="{{object.car.id}}" data-vote="False">
+            <div class="col vote-icon" style="margin-right:10px; margin-left:20px; background-color:var(--main-orange-color);">
+              😐
+            </div>
+          </a>
         </div>
-      </div>
+        </div>
     </form>
   </div>
-
+  <div class="container" id="show-score" align="center" style="margin-top:50px; width:50%; display:none;">
+  <div class="row" style="height:60px; font-size:30px; width:100%;">
+    <div class="col" style="width:70%; background-color:var(--main-blue-color);">😍</div>
+    <div class="col" style="background-color:white; color:black;">70%</div>
+  </div>
+  <div class="row" style="font-size:30px; margin-top:20px;height:60px; width:100%;">
+    <div class="col" style="width:20%; background-color:var(--main-orange-color);">😐</div>
+    <div class="col" style="background-color:white; color:black;">30%</div>
+  </div>
+  </div>
 </div>
-
 
 {% endblock %}
 {% block script%}
@@ -143,6 +155,35 @@
       $iframe = $(this).find("iframe");
       $iframe.attr("src", $iframe.attr("src"));
     });
+
+   $(".vote-btn").on('click', function(event){
+     event.preventDefault()
+     var vote = $(this).attr("data-vote");
+     var car_id = $(this).attr("data-car-id");
+     var data = {
+        'vote':vote,
+        'id':car_id,
+        csrfmiddlewaretoken:'{{csrf_token}}'
+     }
+
+     $.ajax({
+       url:'../../vote/',
+       method:'POST',
+       data:data,
+       success:function(data){
+         console.log(data.success)
+
+         $("#user-score-con").fadeOut(900, function(){
+           $("#show-score").fadeIn(1000)
+         })
+
+
+
+       }, error:function(data){
+         console.log(data.success)
+       }
+     })
+   })
 
   })
 

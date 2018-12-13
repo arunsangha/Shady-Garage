@@ -12,6 +12,16 @@ class Car(models.Model):
     zero_to_100          = models.DecimalField(max_digits=5, decimal_places=1)
     consumption          = models.DecimalField(max_digits=5, decimal_places=1)
 
+    def __str__(self):
+        return "{}-{}".format(self.make, self.model)
+        
+class UserVote(models.Model):
+    car  = models.ForeignKey(Car, related_name="car_vote_fk")
+    vote = models.NullBooleanField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return "{} {} {}".format(self.car.model, self.vote, self.timestamp)
 
 class Blog(models.Model):
     car                  = models.ForeignKey(Car, related_name="car_fk")

@@ -2077,7 +2077,8 @@ background-color:white;
 .score-con{
   padding-top:20px;
   background-color:var(--main-dark-color);
-  min-height:400px
+  min-height:400px;
+  padding-bottom:100px;
 }
 
 .score-con h1{
@@ -2117,5 +2118,5 @@ background-color:white;
 .vote-icon{
   background-color:white;
   font-size:30px;
-  width:50px
+  width:50px;
 }
