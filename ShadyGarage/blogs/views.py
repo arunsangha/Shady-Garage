@@ -36,8 +36,9 @@ def user_vote(request):
          vote_count = UserVote.objects.all().count()
          print(vote_true_count)
          print(vote_count)
-         
-         response = {'status':'success','message':'NiceWork'}
+         voted_true = round((vote_true_count/vote_count) * 100)
+         voted_false = round(((vote_count - vote_true_count)/vote_count) * 100)
+         response = {'status':'success','message':'NiceWork', 'voted_true':voted_true, 'voted_false':voted_false}
 
          return JsonResponse(response, status=200)
      redirect("blogs:list")

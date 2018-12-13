@@ -1365,8 +1365,8 @@ h1,h2,h3,h4,h5,h6{
 */
 
 #brand-image{
-    height: 52.5px;
-    width: 93.3px;
+    width:40px;
+    margin-left: 10px;
 }
 
 .form-container{
@@ -1629,7 +1629,7 @@ h1,h2,h3,h4,h5,h6{
   width: 0;
   position: fixed;
   z-index: 1;
-  top: 60px;
+  top: 45px;
   left: 0;
   background-color: var(--main-dark-color);
   overflow-x: hidden;
@@ -2119,4 +2119,31 @@ background-color:white;
   background-color:white;
   font-size:30px;
   width:50px;
+}
+
+#show-score{
+  margin-top:50px;
+  width:50%;
+  display:none;
+}
+
+#show-score .row{
+  height:60px;
+  font-size:30px;
+  width:100%;
+}
+
+.voted-col{
+  background-color:white;
+  color:black;
+}
+
+.blogs-read{
+  height:200px;
+  align-items: center;
+  text-align: center;
+  background-color: var(--main-dark-color);
+  font-size: 30px;
+  color:white;
+  border-top:1px solid var(--main-blue-color);
 }

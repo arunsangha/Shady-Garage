@@ -125,17 +125,23 @@
         </div>
     </form>
   </div>
-  <div class="container" id="show-score" align="center" style="margin-top:50px; width:50%; display:none;">
+  <div class="container" id="show-score" align="center">
   <div class="row" style="height:60px; font-size:30px; width:100%;">
-    <div class="col" style="width:70%; background-color:var(--main-blue-color);">😍</div>
-    <div class="col" style="background-color:white; color:black;">70%</div>
+    <div class="col" style="background-color:var(--main-blue-color);">😍</div>
+    <div class="col voted-col" id="voted-true"></div>
   </div>
-  <div class="row" style="font-size:30px; margin-top:20px;height:60px; width:100%;">
-    <div class="col" style="width:20%; background-color:var(--main-orange-color);">😐</div>
-    <div class="col" style="background-color:white; color:black;">30%</div>
+  <div class="row" style="margin-top:20px;">
+    <div class="col" style="background-color:var(--main-orange-color);">😐</div>
+    <div class="col voted-col" id="voted-false"></div>
   </div>
   </div>
+
 </div>
+<div class="container-fluid blogs-read">
+  <img src="{% static 'images/blogs/glasses.svg'%}" alt="" align="middle">
+  <h1>1203</h1>
+</div>
+
 
 {% endblock %}
 {% block script%}
@@ -174,6 +180,8 @@
          console.log(data.success)
 
          $("#user-score-con").fadeOut(900, function(){
+           $("#voted-true").html(data.voted_true + "%")
+           $("#voted-false").html(data.voted_false + "%")
            $("#show-score").fadeIn(1000)
          })
 
