@@ -1,12 +1,26 @@
 from django.shortcuts import render, redirect
 from .models import Blog, Car, UserVote
 from django.views.generic import DetailView, ListView
+from django.http import Http404
 from django.http import JsonResponse
-# Create your views here.
+from analytics.signals import object_viewed_signal
 
 class BlogDetail(DetailView):
     template_name = "blogs/blogs_detail.html"
     model = Blog
+
+
+    def get_object(self, *args, **kwargs):
+        request = self.request
+        slug = self.kwargs.get('slug')
+
+        try:
+            object = Blog.objects.get(slug=slug)
+        except Blog.DoesNotExist:
+            raise Http404("Not found..")
+
+        object_viewed_signal.send(sender=object.__class__, instance=object, request=request)
+        return object
 
 class BlogList(ListView):
     template_name = "blogs/blogs_list.html"
