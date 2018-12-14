@@ -2,64 +2,127 @@
 {% load staticfiles %}
 {% block body %}
 <style>
-  .row {
-    display: -ms-flexbox; /* IE10 */
-    display: flex;
-    -ms-flex-wrap: wrap; /* IE10 */
-    flex-wrap: wrap;
-    padding: 0 4px;
+  body{
+    background-color:var(--main-dark-color);
   }
 
-  /* Create four equal columns that sits next to each other */
-  .column {
-    -ms-flex: 25%; /* IE10 */
-    flex: 25%;
-    max-width: 25%;
-    padding: 0 4px;
+  .blog-list-a{
+    color:white;
+    text-decoration:none;
   }
 
-  .column img {
-    margin-top: 8px;
-    vertical-align: middle;
+  .blog-list-box-overlay{
+    padding: 20px;
   }
 
-  /* Responsive layout - makes a two column-layout instead of four columns */
-  @media screen and (max-width: 800px) {
-    .column {
-      -ms-flex: 50%;
-      flex: 50%;
-      max-width: 50%;
+  @media only screen and (min-width:1500px){
+    #test{
+      width:70%;
     }
   }
-
-  /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
-  @media screen and (max-width: 600px) {
-    .column {
-      -ms-flex: 100%;
-      flex: 100%;
-      max-width: 100%;
-    }
-  }
-
 </style>
-<h1>Hei</h1>
-<div class="container-fluid">
-  <div class="row">
-    <div class="column">
-      {% for i in object_list%}
-      <a href="{{i.get_absolute_url}}"><img src="{{i.top_image.url}}" style="width:100%"></a>
-      {% endfor %}
+<div class="container-fluid" id="test" style="padding-top:20px;">
+<div id="container">
+  {% for i in object_list%}
+  <a href="{{i.get_absolute_url}}" class="blog-list-a">
+    <div class="box" style="height:520px; background-image:url('{{i.top_image.url}}'); background-size:cover; background-position:center;">
+      <div class="blog-list-box-overlay" style="width:100%; height:100%; background-color:rgba(0,0,0,0.5);">
+        <h3>{{i.title}}</h3>
+        <p>{{i.car.make}}</p>
+      </div>
     </div>
-    <div class="column">
-      <img src="{%static 'images/blogs/e63_sideshoot.png'%}" style="width:100%">
-      <img src="{%static 'images/blogs/e63_backshoot.jpg'%}" style="width:100%">
-      <img src="{%static 'images/blogs/e63_interior.jpg'%}" style="width:100%">
+  </a>
+  <a href="{{i.get_absolute_url}}" class="blog-list-a">
+    <div class="box" style="height:390px;background-image:url('{{i.intro_image.url}}'); background-size:cover; background-position:center;">
+      <div class="blog-list-box-overlay" style="width:100%; height:100%; background-color:rgba(0,0,0,0.5);">
+        <h3>{{i.title}}</h3>
+        <p>{{i.car.make}}</p>
+      </div>
     </div>
-    <div class="column">
-      <img src="{%static 'images/blogs/e63_interior.jpg'%}" style="width:100%">
-      <img src="{%static 'images/blogs/e63_backshoot.jpg'%}" style="width:100%">
-      <img src="{%static 'images/blogs/e63_interior.jpg'%}" style="width:100%">
+  </a>
+  <a href="{{i.get_absolute_url}}" class="blog-list-a">
+    <div class="box" style="height:480px; background-image:url('{{i.gif.url}}'); background-size:cover; background-position:center;">
+      <div class="blog-list-box-overlay" style="width:100%; height:100%; background-color:rgba(0,0,0,0.5);">
+        <h3>{{i.title}}</h3>
+        <p>{{i.car.make}}</p>
+      </div>
     </div>
-  </div>
+  </a>
+  <a href="{{i.get_absolute_url}}" class="blog-list-a">
+    <div class="box" style="height:300px;background-image:url('{{i.paragraph_two_image.url}}'); background-size:cover; background-position:center;">
+      <div class="blog-list-box-overlay" style="width:100%; height:100%; background-color:rgba(0,0,0,0.5);">
+        <h3>{{i.title}}</h3>
+        <p>{{i.car.make}}</p>
+      </div>
+    </div>
+  </a>
+  <a href="{{i.get_absolute_url}}" class="blog-list-a">
+    <div class="box" style="height:560px; background-image:url('{{i.gif.url}}'); background-size:cover; background-position:center;">
+      <div class="blog-list-box-overlay" style="width:100%; height:100%; background-color:rgba(0,0,0,0.5);">
+        <h3>{{i.title}}</h3>
+        <p>{{i.car.make}}</p>
+      </div>
+    </div>
+  </a>
+  <a href="{{i.get_absolute_url}}" class="blog-list-a">
+    <div class="box" style="height:380px;background-image:url('{{i.second_parallax.url}}'); background-size:cover; background-position:center;">
+      <div class="blog-list-box-overlay" style="width:100%; height:100%; background-color:rgba(0,0,0,0.5);">
+        <h3>{{i.title}}</h3>
+        <p>{{i.car.make}}</p>
+      </div>
+    </div>
+  </a>
+  <a href="{{i.get_absolute_url}}" class="blog-list-a">
+    <div class="box" style="height:390px;background-image:url('{{i.intro_image.url}}'); background-size:cover; background-position:center;">
+      <div class="blog-list-box-overlay" style="width:100%; height:100%; background-color:rgba(0,0,0,0.5);">
+        <h3>{{i.title}}</h3>
+        <p>{{i.car.make}}</p>
+      </div>
+    </div>
+  </a>
+  <a href="{{i.get_absolute_url}}" class="blog-list-a">
+    <div class="box" style="height:480px; background-image:url('{{i.gif.url}}'); background-size:cover; background-position:center;">
+      <div class="blog-list-box-overlay" style="width:100%; height:100%; background-color:rgba(0,0,0,0.5);">
+        <h3>{{i.title}}</h3>
+        <p>{{i.car.make}}</p>
+      </div>
+    </div>
+  </a>
+  <a href="{{i.get_absolute_url}}" class="blog-list-a">
+    <div class="box" style="height:300px;background-image:url('{{i.intro_image.url}}'); background-size:cover; background-position:center;">
+      <div class="blog-list-box-overlay" style="width:100%; height:100%; background-color:rgba(0,0,0,0.5);">
+        <h3>{{i.title}}</h3>
+        <p>{{i.car.make}} {{i.car.model}}</p>
+      </div>
+    </div>
+  </a>
+  <a href="{{i.get_absolute_url}}" class="blog-list-a">
+    <div class="box" style="height:480px; background-image:url('{{i.gif.url}}'); background-size:cover; background-position:center;">
+      <div class="blog-list-box-overlay" style="width:100%; height:100%; background-color:rgba(0,0,0,0.5);">
+        <h3>{{i.title}}</h3>
+        <p>{{i.car.make}}</p>
+      </div>
+    </div>
+  </a>
+
+  {% endfor %}
 </div>
 {% endblock %}
+{% block script %}
+<script src="{% static 'js/jquery.wallyti.js'%}"></script>
+
+<script>
+  $(document).ready(function(){
+    console.log("hello");
+    $('#container').wallyti({
+      blockMaxWidth: 500,
+      blockMinWidth: 400,
+      blockMargin: 35,
+      delayOnResize: 60,
+      disableTransitions: false,
+      cssTransition: "all 0.2s ease-in-out",
+      onComplete: function(){}
+    });
+})
+</script>
+{% endblock%}
