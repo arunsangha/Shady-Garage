@@ -3,9 +3,9 @@ from .models import Blog, Car, UserVote
 from django.views.generic import DetailView, ListView
 from django.http import Http404
 from django.http import JsonResponse
-from analytics.signals import object_viewed_signal
+from analytics.mixins import ObjectViewedMixin
 
-class BlogDetail(DetailView):
+class BlogDetail(ObjectViewedMixin, DetailView):
     template_name = "blogs/blogs_detail.html"
     model = Blog
 
@@ -18,8 +18,6 @@ class BlogDetail(DetailView):
             object = Blog.objects.get(slug=slug)
         except Blog.DoesNotExist:
             raise Http404("Not found..")
-
-        object_viewed_signal.send(sender=object.__class__, instance=object, request=request)
         return object
 
 class BlogList(ListView):

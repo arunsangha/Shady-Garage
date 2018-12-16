@@ -14,7 +14,7 @@ class Car(models.Model):
 
     def __str__(self):
         return "{}-{}".format(self.make, self.model)
-        
+
 class UserVote(models.Model):
     car  = models.ForeignKey(Car, related_name="car_vote_fk")
     vote = models.NullBooleanField()
@@ -59,6 +59,9 @@ class Blog(models.Model):
 
     def get_absolute_url(self):
         return reverse('blogs:detail', kwargs={'slug':self.slug})
+
+    def get_class(self):
+        return self.__class__.__name__
 
     def save(self, *args, **kwargs):
         if not self.slug:

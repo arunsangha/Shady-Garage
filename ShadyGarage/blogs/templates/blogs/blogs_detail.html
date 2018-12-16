@@ -138,8 +138,8 @@
 
 </div>
 <div class="container-fluid blogs-read">
-  <img src="{% static 'images/blogs/glasses.svg'%}" alt="" align="middle">
-  <h1>1203</h1>
+  <img src="{% static 'images/blogs/viewed.svg'%}" alt="" align="middle" style="width:50px;">
+  <h2 id="views-count" data-id="{{object.id}}" data-object-type="{{object.get_class}}">1403</h2>
 </div>
 
 
@@ -192,6 +192,31 @@
        }
      })
    })
+
+   function getViewsCount(){
+     var id = $('#views-count').attr('data-id');
+     var objectType = $("#views-count").attr('data-object-type');
+     console.log(id)
+     console.log(objectType)
+     var data = {
+       'id':id,
+       'object_class':objectType,
+       csrfmiddlewaretoken:'{{csrf_token}}',
+     }
+
+     $.ajax({
+       url:'../../../analytics/',
+       data:data,
+       method: 'GET',
+       success:function(data){
+         $("#views-count").html(data.views)
+       }, error:function(error){
+         console.log(error.message)
+      }
+     })
+   }
+
+   getViewsCount()
 
   })
 
