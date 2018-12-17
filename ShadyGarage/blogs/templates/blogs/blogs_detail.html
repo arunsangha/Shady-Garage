@@ -11,13 +11,19 @@
         <div class="row thing-to-know-con">
           <div>
             <img class="thing-to-know-icon" src="{% static 'images/blogs/cash.svg'%}" alt="" align="middle">
-            {{object.car.price}} kr</img>
+            {{object.car.get_price}}</img>
           </div>
         </div>
         <div class="row thing-to-know-con">
           <div>
             <img class="thing-to-know-icon" src="{% static 'images/blogs/engine.svg'%}" alt="" align="middle">
-             {{object.car.engine}}</img>
+             {{object.car.get_engine}}</img>
+          </div>
+        </div>
+        <div class="row thing-to-know-con">
+          <div>
+            <img class="thing-to-know-icon" src="{% static 'images/blogs/horse2.svg'%}" alt="" align="middle">
+             {{object.car.hp}} hk</img>
           </div>
         </div>
         <div class="row thing-to-know-con">

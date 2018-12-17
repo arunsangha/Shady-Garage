@@ -3,14 +3,42 @@ from django.utils.text import slugify
 from django.core.urlresolvers import reverse
 
 
+engine_choices = (
+    ('V12', 'V12'),
+    ('V10', 'V10'),
+    ('V8', 'V8'),
+    ('V6', 'V6'),
+    ('R5', 'R5'),
+    ('R4', 'R4'),
+    ('R3', 'R3'),
+)
+
+drive_train_choices = (
+    ('4WD', 'Firehjulsdrift'),
+    ('FWD', 'Forhjulsdrift'),
+    ('RWD', 'Bakhjulsdrift'),
+)
 
 class Car(models.Model):
     make                 = models.CharField(max_length=20)
     model                = models.CharField(max_length=20)
-    price                = models.CharField(max_length=40)
-    engine               = models.CharField(max_length=50)
+    price                = models.PositiveIntegerField(default=0)
+    hp                   = models.PositiveIntegerField(default=10)
+    nm                   = models.PositiveIntegerField(default=10)
+    engine               = models.CharField(choices=engine_choices, max_length=50)
+    liter                = models.DecimalField(max_digits=5, decimal_places=1)
     zero_to_100          = models.DecimalField(max_digits=5, decimal_places=1)
     consumption          = models.DecimalField(max_digits=5, decimal_places=1)
+    drive_train          = models.CharField(choices=drive_train_choices, max_length=10)
+
+    def get_price(self):
+        price = str(self.price)
+        if self.price < 1000000:
+            return "{}.{} kr".format(price[0:3], price[3:])
+        return "{} {} {} kr".format(price[0:1], price[1:4], price[4:7])
+
+    def get_engine(self):
+        return "{}L {}".format(self.liter, self.engine)
 
     def __str__(self):
         return "{}-{}".format(self.make, self.model)
