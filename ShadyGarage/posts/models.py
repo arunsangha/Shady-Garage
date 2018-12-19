@@ -63,6 +63,7 @@ class Post(models.Model):
              DJANGO_TYPE = self.post_image.file.content_type
          except AttributeError:
              DJANGO_TYPE = 'image/jpeg'
+             PIL_TYPE = "jpeg"
              print("ERROR")
 
          if DJANGO_TYPE == 'image/jpeg':
@@ -74,6 +75,11 @@ class Post(models.Model):
          elif DJANGO_TYPE == 'image/jpg':
              PIL_TYPE = 'jpg'
              FILE_EXTENSION = 'jpg'
+         else:
+             PIL_TYPE = "jpeg"
+             FILE_EXTENSION = 'jpeg'
+
+
 
 
         # Open original photo which we want to thumbnail using PIL's Image

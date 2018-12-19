@@ -1,7 +1,10 @@
 from django.db import models
 from django.utils.text import slugify
 from django.core.urlresolvers import reverse
-
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from ShadyGarage.utils import rotate_image
+import os
 
 engine_choices = (
     ('V12', 'V12'),
@@ -101,3 +104,18 @@ class Blog(models.Model):
             self.slug = _get_unique_slug()
 
         super().save()
+
+@receiver(post_save, sender=Blog, dispatch_uid="update_image_blog")
+def update_image(sender, instance, **kwargs):
+  if instance.top_image_mobile and instance.intro_image_mobile and instance.paragraph_two_image and instance.first_parallax_mobile and instance.second_parallax_mobile:
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    fullpath = BASE_DIR + instance.top_image_mobile.url
+    rotate_image(fullpath)
+    fullpath = BASE_DIR + instance.intro_image_mobile.url
+    rotate_image(fullpath)
+    fullpath = BASE_DIR + instance.paragraph_two_image.url
+    rotate_image(fullpath)
+    fullpath = BASE_DIR + instance.first_parallax_mobile.url
+    rotate_image(fullpath)
+    fullpath = BASE_DIR + instance.second_parallax_mobile.url
+    rotate_image(fullpath)
