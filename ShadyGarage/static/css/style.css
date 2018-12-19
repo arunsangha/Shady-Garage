@@ -2034,6 +2034,16 @@ background-color:white;
  min-height:500px;
 }
 
+
+#paragraph-1-image{
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+  min-width:50%;
+  min-height:500px;
+}
+
+
 #paragraph-2-image{
   background-repeat:no-repeat;
   background-size:cover;

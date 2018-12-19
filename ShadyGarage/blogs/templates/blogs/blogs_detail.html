@@ -1,7 +1,52 @@
 {% extends 'base.html'%}
 {% load staticfiles%}
 {% block body%}
-<div class="blog-top-image" style="background-image:url('{{object.top_image.url}}');">
+<style>
+
+  .blog-top-image{
+    background-image:url('{{object.top_image.url}}');
+  }
+
+  #paragraph-1-image{
+    background-image:url('{{object.intro_image.url}}');
+  }
+
+  #blog-parallax-1{
+    background-image:url('{{object.first_parallax.url}}');
+  }
+
+  #paragraph-2-image{
+    background-image:url('{{object.paragraph_two_image.url}}');
+  }
+
+  #blog-parallax-2{
+    background-image:url('{{object.second_parallax.url}}');
+  }
+
+  @media only screen and (max-width:750px){
+    .blog-top-image{
+      background-image:url('{{object.top_image_mobile.url}}');
+    }
+
+    #paragraph-1-image{
+      background-image:url('{{object.intro_image_mobile.url}}')
+    }
+
+    #blog-parallax-1{
+      background-image:url('{{object.first_parallax_mobile.url}}');
+    }
+
+    #paragraph-2-image{
+      background-image:url('{{object.paragraph_two_image_mobile.url}}');
+    }
+
+    #blog-parallax-2{
+      background-image:url('{{object.second_parallax_mobile.url}}');
+    }
+  }
+
+</style>
+<div class="blog-top-image" style="">
   <div class="blog-title">
   {{object.title}}
   </div>
@@ -44,7 +89,7 @@
 </div>
 <div class="container-fluid">
   <div class="row" style="min-height:500px;">
-    <div class="col-sm" id="paragraph-2-image" style="background-image:url('{{object.intro_image.url}}');">
+    <div class="col-sm" id="paragraph-1-image">
     </div>
     <div class="col-sm paragraph-2-con">
       <h1 class="blog-heading">{{object.intro_title}}</h1>
@@ -67,11 +112,11 @@
   </div>
 </div>
 {% include 'blogs/youtube_modal.html' with youtube_video=object.youtube_link%}
-<div class="blog-parallax" style="background-image:url('{{object.first_parallax.url}}');">
+<div class="blog-parallax" id="blog-parallax-1">
 </div>
 <div class="container-fluid">
   <div class="row" style="min-height:500px;">
-    <div class="col-sm" id="paragraph-2-image" style="background-image:url('{{object.paragraph_two_image.url}}');">
+    <div class="col-sm" id="paragraph-2-image">
     </div>
     <div class="col-sm paragraph-2-con">
       <h1 class="blog-heading">{{object.paragraph_two_title}}</h1>
@@ -81,7 +126,7 @@
     </div>
   </div>
 </div>
-<div class="blog-parallax" style="background-image:url('{{object.second_parallax.url}}');">
+<div class="blog-parallax" id="blog-parallax-2">
 </div>
 
 <div class="container paragraph-3-con">
@@ -223,6 +268,7 @@
    }
 
    getViewsCount()
+
 
   })
 
