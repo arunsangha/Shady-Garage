@@ -42,16 +42,8 @@
 </style>
 <div class="container-fluid" id="test" style="padding-top:20px;">
 <div id="container">
-  {% for i in object_list%}
-  <a href="{{i.get_absolute_url}}" class="blog-list-a">
-    <div class="box" style="height:520px; background-image:url('{{i.top_image.url}}');">
-      <div class="blog-list-box-overlay">
-        <h3>{{i.title}}</h3>
-        <p>{{i.car.make}}</p>
-      </div>
-    </div>
-  </a>
-  {% endfor %}
+  <div id="blogs"></div>
+
 </div>
 {% endblock %}
 {% block script %}
@@ -73,4 +65,95 @@
 
 })
 </script>
-{% endblock%}
+
+<script>
+  function getParameterByName(name, url) {
+      if (!url) url = window.location.href;
+      name = name.replace(/[\[\]]/g, "\\$&");
+      var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+          results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return '';
+      return decodeURIComponent(results[2].replace(/\+/g, " "));
+  }
+
+  $(document).ready(function(){
+    var query = getParameterByName('q');
+    console.log(query)
+    var nextUrl;
+    var blogList = [];
+
+    function parseBlogs(){
+      if(blogList == 0){
+        $("#blogs").append(
+          `
+          <div class="jumbotron jumbotron-fluid" style="text-align:center; background-color: var(--main-black-color); border:2px solid var(--main-yellow-color);" align="center">
+           <div class="container">
+             <h1 class="display-4" style="color:white;">Oida..vi fant ikke noe!</h1>
+             <p class="lead" style="color:white;">Prøv å søk etter noe annet!</p>
+           </div>
+         </div>
+
+          `
+        )
+      }else{
+        $.each(blogList, function(key, value){
+          $("#container").append(
+
+            `
+            <a href="${value.url}" class="blog-list-a">
+              <div class="box" style="height:${value.height}px; background-image:url('${value.image}');">
+                <div class="blog-list-box-overlay">
+                  <h3>${value.title}</h3>
+                  <p>${value.car}</p>
+                </div>
+              </div>
+            </a>
+
+            `
+          )
+
+        })
+      }
+    }
+
+
+    function loadBlogs(url){
+      var fetchUrl;
+      if(!url){
+        fetchUrl = "../api/blog/";
+      }else{
+        fetchUrl = url;
+      }
+
+      $.ajax({
+        url:fetchUrl,
+        method:'GET',
+        data:{
+          'q':query,
+        },
+        success:function(data){
+          blogList = data.results
+          nextUrl = data.next
+          /*if(!nextUrl){
+            $("loadBlogs").css("display", "none");
+          }*/
+          parseBlogs()
+
+        },error:function(data){
+          console.log("Error")
+          console.log(data)
+        }
+      })
+
+
+
+    }
+
+    loadBlogs()
+
+
+
+  })
+</script>
+{% endblock %}

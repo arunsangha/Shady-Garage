@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^meets/', include('meets.urls'), name = 'meets'),
     url(r'^posts/', include('posts.urls'), name = 'posts'),
     url(r'^blog/', include('blogs.urls'), name="blog"),
+    url(r'^api/blog/', include('blogs.api.urls'), name="api-blog"),
     url(r'^analytics/', include('analytics.urls'), name="analytics"),
     url(r'^entertainment/', include('entertainments.urls'), name = "entertainments"),
     url(r'^api/posts/', include('posts.api.urls'), name="api-posts"),
