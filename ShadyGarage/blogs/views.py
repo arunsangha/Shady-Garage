@@ -9,7 +9,6 @@ class BlogDetail(ObjectViewedMixin, DetailView):
     template_name = "blogs/blogs_detail.html"
     model = Blog
 
-
     def get_object(self, *args, **kwargs):
         request = self.request
         slug = self.kwargs.get('slug')
@@ -47,7 +46,7 @@ def user_vote(request):
          vote_qs = UserVote.objects.filter(car=car_obj)
          vote_count = vote_qs.count()
          vote_true_count = vote_qs.filter(vote=True).count()
-        
+
          voted_true = round((vote_true_count/vote_count) * 100)
          voted_false = round(((vote_count - vote_true_count)/vote_count) * 100)
          response = {'status':'success','message':'NiceWork', 'voted_true':voted_true, 'voted_false':voted_false}

@@ -1930,31 +1930,34 @@ background-color:white;
 
 
 .img-comp-container {
-position:relative;
-height: 300px; /*should be the same height as the images*/
-width:600px;
+  margin-top:90px;
+  position:relative;
+  height: 600px; /*should be the same height as the images*/
+  width:600px;
 }
+
 .img-comp-img {
-position: absolute;
-width: auto;
-height: auto;
-overflow: hidden;
+  position: absolute;
+  width: auto;
+  height: auto;
+  overflow: hidden;
 }
 
 .img-comp-img img {
-display: block;
-vertical-align: middle;
-width:600px;
+  display: block;
+  vertical-align: middle;
+  width:600px;
 }
 
 @media only screen and (max-width:620px){
-.img-comp-container{
-  width:300px;
-}
+  .img-comp-container{
+    width:300px;
+    height: 300px;
+  }
 
-.img-comp-img img{
-  width:300px;
-}
+  .img-comp-img img{
+    width:300px;
+  }
 }
 
 @media only screen and (max-width:330px){
@@ -1994,11 +1997,28 @@ font-size:18px;
 }
 
 .blog-gif{
-padding-top:30px;
-min-height:600px;
-background-repeat:no-repeat;
-background-size:cover;
-background-position: center;
+  padding-top:30px;
+  min-height:600px;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position: center;
+}
+
+.blog-mobile-gif{
+  display: none;
+  width:100%;
+  height:auto;
+}
+
+@media only screen and (max-width:500px){
+  .blog-gif{
+    display: none;
+  }
+
+  .blog-mobile-gif{
+    display: block;
+  }
+
 }
 
 .paragraph-1-con{
@@ -2066,12 +2086,17 @@ background-color:white;
   font-size: 18px;
 }
 
-
 .paragraph-3-con{
   padding-top:50px;
-  padding-bottom: 50px;
   min-height:350px;
   background-color:white;
+}
+
+@media only screen and (max-width:480px){
+
+  .paragraph-3-con{
+    padding-bottom: 100px;
+  }
 }
 
 .paragraph-3-con h1{

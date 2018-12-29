@@ -35,4 +35,5 @@ def object_viewed_reciever(sender, instance, request, *args, **kwargs):
         ip_address = get_client_ip(request),
     )
 
+
 object_viewed_signal.connect(object_viewed_reciever)

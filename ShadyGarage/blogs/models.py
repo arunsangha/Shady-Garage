@@ -11,6 +11,7 @@ engine_choices = (
     ('V10', 'V10'),
     ('V8', 'V8'),
     ('V6', 'V6'),
+    ('R6', 'R6'),
     ('R5', 'R5'),
     ('R4', 'R4'),
     ('R3', 'R3'),
@@ -22,6 +23,12 @@ drive_train_choices = (
     ('RWD', 'Bakhjulsdrift'),
 )
 
+fuel_choices = (
+    ('Petrol', 'Bensin'),
+    ('Diesel', 'Diesel'),
+    ('Hybrid', 'Hybrid'),
+    ('Electric', 'Elektrisk'),
+)
 class Car(models.Model):
     make                 = models.CharField(max_length=20)
     model                = models.CharField(max_length=20)
@@ -29,6 +36,7 @@ class Car(models.Model):
     hp                   = models.PositiveIntegerField(default=10)
     nm                   = models.PositiveIntegerField(default=10)
     engine               = models.CharField(choices=engine_choices, max_length=50)
+    fuel                 = models.CharField(choices=fuel_choices, max_length=20, null=True)
     liter                = models.DecimalField(max_digits=5, decimal_places=1)
     zero_to_100          = models.DecimalField(max_digits=5, decimal_places=1)
     consumption          = models.DecimalField(max_digits=5, decimal_places=1)

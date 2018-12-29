@@ -62,7 +62,7 @@
         <div class="row thing-to-know-con">
           <div>
             <img class="thing-to-know-icon" src="{% static 'images/blogs/engine.svg'%}" alt="" align="middle">
-             {{object.car.get_engine}}</img>
+             {{object.car.get_engine}} {{object.car.fuel}}</img>
           </div>
         </div>
         <div class="row thing-to-know-con">
@@ -101,6 +101,9 @@
 </div>
 <div class="container-fluid blog-gif" style="background-image:url('{{object.gif.url}}');">
 </div>
+<div class="container-fluid blog-mobile-gif">
+  <img src="{{object.gif.url}}" style="width:100%; height: auto;">
+</div>
 <div class="container paragraph-1-con">
   <h1 class="blog-heading">{{object.paragraph_one_title}}</h1>
   <p class="blog-paragraph">
@@ -136,14 +139,14 @@
   </p>
 
   <div class="container" align="center">
-    <!--<div class="img-comp-container">
+    <div class="img-comp-container">
       <div class="img-comp-img">
-        <img src="{% static 'images/blogs/e63_side.jpeg'%}">
+        <img src="{% static 'images/blogs/x7_side.jpeg'%}">
       </div>
       <div class="img-comp-img img-comp-overlay">
-        <img src="{% static 'images/blogs/rs6_side.jpeg'%}">
+        <img src="{% static 'images/blogs/cullinan_side.jpeg'%}">
       </div>
-    </div>-->
+    </div>
   </div>
 </div>
 
@@ -261,6 +264,7 @@
        data:data,
        method: 'GET',
        success:function(data){
+         console.log(data.views)
          $("#views-count").html(data.views)
        }, error:function(error){
          console.log(error.message)
