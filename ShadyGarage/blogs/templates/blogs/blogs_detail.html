@@ -1,5 +1,13 @@
 {% extends 'base.html'%}
 {% load staticfiles%}
+{% block facebookShare %}
+<meta property="fb:app_id" content="1828194693869674"/>
+<meta property="og:url"      content="http://www.shadygarage.no/{{request.path}}">
+<meta property="og:type"            content="article" />
+<meta property="og:title"           content="Shady Garage: {{object.title}}" />
+<meta property="og:image"           content="http://www.shadygarage.no/{{object.top_image.url}}" />
+<meta property="og:description"    content="{{object.intro_paragraph|truncatechars:40}}" />
+{% endblock %}
 {% block body%}
 <style>
 
