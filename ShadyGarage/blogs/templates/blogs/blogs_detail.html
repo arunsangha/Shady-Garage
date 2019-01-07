@@ -34,6 +34,8 @@
   @media only screen and (max-width:750px){
     .blog-top-image{
       background-image:url('{{object.top_image_mobile.url}}');
+      background-attachment: inherit;
+      
     }
 
     #paragraph-1-image{
@@ -42,6 +44,7 @@
 
     #blog-parallax-1{
       background-image:url('{{object.first_parallax_mobile.url}}');
+      background-attachment: inherit;
     }
 
     #paragraph-2-image{
@@ -50,11 +53,12 @@
 
     #blog-parallax-2{
       background-image:url('{{object.second_parallax_mobile.url}}');
+      background-attachment: inherit;
     }
   }
 
 </style>
-<div class="blog-top-image" style="">
+<div class="blog-top-image">
   <div class="blog-title">
   {{object.title}}
   </div>

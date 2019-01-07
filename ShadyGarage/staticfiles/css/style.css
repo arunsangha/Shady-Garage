@@ -1804,6 +1804,7 @@ Billing App
     background-size:cover;
   }
 }
+
 .blog-top-image{
   min-height:950px;
   background-attachment: fixed;
@@ -1812,6 +1813,9 @@ Billing App
   background-size:cover;
 }
 
+@media only screen and (max-width:450px){
+
+}
 
 
 .blog-title{
