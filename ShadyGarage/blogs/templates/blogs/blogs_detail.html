@@ -35,7 +35,7 @@
     .blog-top-image{
       background-image:url('{{object.top_image_mobile.url}}');
       background-attachment: inherit;
-      
+
     }
 
     #paragraph-1-image{
@@ -150,17 +150,20 @@
     {{object.paragraph_three|safe}}
   </p>
 
+  {% if object.has_compare_image %}
   <div class="container" align="center">
     <div class="img-comp-container">
       <div class="img-comp-img">
-        <img src="{% static 'images/blogs/x7_side.jpeg'%}">
+        <img src="{{object.compare_image_one.url}}">
       </div>
       <div class="img-comp-img img-comp-overlay">
-        <img src="{% static 'images/blogs/cullinan_side.jpeg'%}">
+        <img src="{{object.compare_image_two.url}}">
       </div>
     </div>
   </div>
+{% endif %}
 </div>
+
 
 <div class="container-fluid score-con">
 

@@ -85,6 +85,9 @@ class Blog(models.Model):
     second_parallax_mobile = models.ImageField(upload_to="blogs/mobile/parallax_2",blank=True, null=True)
     paragraph_three_title  = models.CharField(max_length=70)
     paragraph_three        = models.CharField(max_length=2000)
+    compare_image_one      = models.ImageField(upload_to="blogs/compare", blank=True, null=True)
+    compare_image_two      = models.ImageField(upload_to="blogs/compare", blank=True, null=True)
+    has_compare_image      = models.BooleanField(default=False, blank=True)
     score                  = models.PositiveIntegerField()
     slug                   = models.SlugField(unique=True)
 
