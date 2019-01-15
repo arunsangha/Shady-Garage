@@ -90,6 +90,10 @@ class Blog(models.Model):
     has_compare_image      = models.BooleanField(default=False, blank=True)
     score                  = models.PositiveIntegerField()
     slug                   = models.SlugField(unique=True)
+    timestamp              = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-timestamp']
 
     def __str__(self):
         return "{}".format(self.title)
