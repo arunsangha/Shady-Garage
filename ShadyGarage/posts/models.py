@@ -51,7 +51,7 @@ class Post(models.Model):
         return unique_slug
 
     def create_thumbnail(self):
-         from PIL import Image, ImageFilter
+         from PIL import Image, ImageFilter, ImageEnhance
          from io import BytesIO
          from django.core.files.uploadedfile import SimpleUploadedFile
          import os
@@ -75,11 +75,15 @@ class Post(models.Model):
          elif DJANGO_TYPE == 'image/jpg':
              PIL_TYPE = 'jpg'
              FILE_EXTENSION = 'jpg'
+         elif DJANGO_TYPE == 'image/gif':
+             PIL_TYPE = 'gif'
+             FILE_EXTENSION = 'gif'
+             self.thumbnail.save("gif{}".format(self.slug), self.post_image, save=False)
+             return None
+
          else:
              PIL_TYPE = "jpeg"
              FILE_EXTENSION = 'jpeg'
-
-
 
 
         # Open original photo which we want to thumbnail using PIL's Image
@@ -108,11 +112,13 @@ class Post(models.Model):
              save=False
          )
 
-         THUMBNAIL_SIZE = (612, 612)
+
          image.thumbnail(THUMBNAIL_SIZE, Image.ANTIALIAS)
          temp_handle = BytesIO()
          im1 = image.filter(ImageFilter.GaussianBlur)
-         im1.save(temp_handle, PIL_TYPE)
+         enhancer = ImageEnhance.Brightness(im1)
+         enhanced = enhancer.enhance(0.6)
+         enhanced.save(temp_handle, PIL_TYPE)
          temp_handle.seek(0)
 
        # Save image to a SimpleUploadedFile which can be saved into
@@ -125,10 +131,6 @@ class Post(models.Model):
             suf,
             save=False
           )
-
-
-
-
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -219,9 +221,11 @@ def rotate_image(filepath, thumbnail_filepath):
     image.save(thumbnail_filepath)
     image.close()
     rotation = 0
+
   except (AttributeError, KeyError, IndexError):
     # cases: image don't have getexif
     pass
+
 
 @receiver(post_save, sender=Post, dispatch_uid="update_image_profile")
 def update_image(sender, instance, **kwargs):

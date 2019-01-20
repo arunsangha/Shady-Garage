@@ -10,6 +10,9 @@
   <div class="container post-form-body" align="center">
     <div class="post-form-container">
       <form method="post" id="myform">
+        <div class="alert alert-danger" id="post-alert">
+          Ops! Noe gikk galt. <br>Sikker på at du har valgt riktig filtype? <br>Kun JPG, JPEG, PNG og GIF er tillatt.
+        </div>
           {% csrf_token %}
           {% bootstrap_form form%}
           <input type="submit" name="" class="btn btn-info" value="Del!">
@@ -25,10 +28,9 @@ $('#myform').submit(function(event) {
         event.preventDefault();
         var formData = new FormData();
         var formData = new FormData($('form')[0]);
-        for (var pair of formData.entries()) {
-            console.log(pair[0]+ ', ' + pair[1]);
-        }
+
         if(formData.has('post_image')){
+
           if(formData.get('post_image').size < 1){
             formData.delete('post_image');
           }
@@ -52,8 +54,8 @@ $('#myform').submit(function(event) {
                         window.location.replace('/posts/post_feed');
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
-                      console.log("Error");
-                      window.location.replace('/posts/post_feed/');
+                      $('#loading-screen').hide();
+                      $("#post-alert").css("display", "block");
                 },
                 params: {
                 'csrf_token': '{{ csrf_token }}',

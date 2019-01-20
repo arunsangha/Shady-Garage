@@ -684,6 +684,10 @@ h1,h2,h3,h4,h5,h6{
 /*
   Post Form
 */
+
+#post-alert{
+  display: none;
+}
 .post-form-body{
   padding: 10px;
 }
@@ -1396,10 +1400,10 @@ h1,h2,h3,h4,h5,h6{
     height: 100%;
     width: 100%;
     padding-bottom: 50px;
-    background-image: url('../images/signup-mob-1.jpg');
-    background-position: center;
+    background-image: url('../images/signup-shady-mob.png');
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
   }
 
   .form-container{
