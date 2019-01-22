@@ -24,10 +24,10 @@ drive_train_choices = (
 )
 
 fuel_choices = (
-    ('Petrol', 'Bensin'),
+    ('Bensin', 'Bensin'),
     ('Diesel', 'Diesel'),
     ('Hybrid', 'Hybrid'),
-    ('Electric', 'Elektrisk'),
+    ('Elektrisk', 'Elektrisk'),
 )
 class Car(models.Model):
     make                 = models.CharField(max_length=20)
