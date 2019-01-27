@@ -1,9 +1,12 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponseRedirect
 from .models import Blog, Car, UserVote
-from django.views.generic import DetailView, ListView
+from django.views.generic import DetailView, ListView, CreateView
 from django.http import Http404
 from django.http import JsonResponse
 from analytics.mixins import ObjectViewedMixin
+from braces.views import SuperuserRequiredMixin
+from .forms import CreateBlogForm
+from django.core.urlresolvers import reverse
 
 class BlogDetail(ObjectViewedMixin, DetailView):
     template_name = "blogs/blogs_detail.html"
@@ -52,4 +55,16 @@ def user_vote(request):
          response = {'status':'success','message':'NiceWork', 'voted_true':voted_true, 'voted_false':voted_false}
 
          return JsonResponse(response, status=200)
-     redirect("blogs:list")
+     return redirect("blogs:list")
+
+
+class BlogCreate(SuperuserRequiredMixin, CreateView):
+    form_class = CreateBlogForm
+    template_name = "blogs/blogs_create.html"
+
+    def form_valid(self, form):
+        blog_form = form.save(commit=False)
+        slug = self.kwargs.get('slug')
+        blog_form.save()
+
+        return HttpResponseRedirect(reverse("blogs:detail", kwargs={'slug':slug}))

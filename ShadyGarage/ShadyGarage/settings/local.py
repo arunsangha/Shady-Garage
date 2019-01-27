@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'accounts',
     'meets',
     'bootstrap3',
+    'braces',
     'posts',
     'entertainments',
     'products',
