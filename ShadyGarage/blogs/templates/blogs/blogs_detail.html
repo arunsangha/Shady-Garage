@@ -74,7 +74,7 @@
         <div class="row thing-to-know-con">
           <div>
             <img class="thing-to-know-icon" src="{% static 'images/blogs/engine.svg'%}" alt="" align="middle">
-             {{object.car.get_engine}} {{object.car.fuel}}</img>
+             {{object.car.get_engine}}</img>
           </div>
         </div>
         <div class="row thing-to-know-con">
@@ -89,12 +89,15 @@
             0-100 på <i> {{object.car.zero_to_100}} sekund </i></img>
           </div>
         </div>
+        {% if object.car.is_electric %}
+        {%else %}
         <div class="row thing-to-know-con">
           <div>
             <img class="thing-to-know-icon" src="{% static 'images/blogs/petrol.svg'%}" alt="" align="middle">
            Forbruk: {{object.car.consumption}} l/100 km</img>
           </div>
         </div>
+        {% endif %}
       </div>
     </div>
   </div>
@@ -121,12 +124,15 @@
   <p class="blog-paragraph">
     {{object.paragraph_one|safe}}
   </p>
+{% if object.has_youtube_link %}
   <div style="text-align:center;">
     <h4>Hør lyden</h4>
     <a href="#" id="show-exhaust-video" data-toggle="modal" data-target="#youtube-exhaust-video" class="round-play-btn"><i class="fa fa-play fa-2x"></i></a>
   </div>
 </div>
-{% include 'blogs/youtube_modal.html' with youtube_video=object.youtube_link%}
+  {% include 'blogs/youtube_modal.html' with youtube_video=object.youtube_link%}
+{% endif %}
+</div>
 <div class="blog-parallax" id="blog-parallax-1">
 </div>
 <div class="container-fluid">

@@ -49,7 +49,18 @@ class Car(models.Model):
         return "{} {} {} kr".format(price[0:1], price[1:4], price[4:7])
 
     def get_engine(self):
-        return "{}L {}".format(self.liter, self.engine)
+        if self.is_electric:
+            engine = "Elektrisk"
+        else:
+            engine = "{}L {} {}".format(self.liter, self.engine, self.fuel)
+        return engine
+
+    def is_electric(self):
+        is_electric = False
+        if self.fuel == 'Elektrisk':
+            is_electric = True
+        return is_electric
+
 
     def __str__(self):
         return "{}-{}".format(self.make, self.model)
@@ -70,11 +81,12 @@ class Blog(models.Model):
     intro_image          = models.ImageField(upload_to="blogs/intro_image" ,blank=True, null=True)
     intro_image_mobile   = models.ImageField(upload_to="blogs/mobile/intro_image", blank=True, null=True)
     intro_title          = models.CharField(max_length=70)
-    intro_paragraph      = models.CharField(max_length=600)
+    intro_paragraph      = models.CharField(max_length=1000)
     gif                  = models.ImageField(upload_to="blogs/gif",blank=True, null=True)
     paragraph_one_title  = models.CharField(max_length=70)
     paragraph_one        = models.CharField(max_length=2000)
-    youtube_link         = models.CharField(max_length=1000)
+    youtube_link         = models.CharField(max_length=1000, blank=True, null=True)
+    has_youtube_link     = models.BooleanField(default=True, blank=True)
     first_parallax       = models.ImageField(upload_to="blogs/parallax_1")
     first_parallax_mobile = models.ImageField(upload_to="blogs/mobile/parallax_1",blank=True, null=True)
     paragraph_two_title  = models.CharField(max_length=70)
@@ -113,6 +125,7 @@ class Blog(models.Model):
 
     def get_class(self):
         return self.__class__.__name__
+
 
     def save(self, *args, **kwargs):
         if not self.slug:

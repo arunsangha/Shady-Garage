@@ -30,4 +30,4 @@ class BlogListSerializer(serializers.ModelSerializer):
 
     def get_height(self, obj):
         from random import randint
-        return randint(320, 540)
+        return randint(320, 500)
