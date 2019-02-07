@@ -49,7 +49,7 @@ class Car(models.Model):
         return "{} {} {} kr".format(price[0:1], price[1:4], price[4:7])
 
     def get_engine(self):
-        if self.is_electric:
+        if self.is_electric():
             engine = "Elektrisk"
         else:
             engine = "{}L {} {}".format(self.liter, self.engine, self.fuel)
@@ -59,6 +59,7 @@ class Car(models.Model):
         is_electric = False
         if self.fuel == 'Elektrisk':
             is_electric = True
+
         return is_electric
 
 
