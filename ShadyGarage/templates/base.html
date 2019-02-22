@@ -5,9 +5,7 @@
     <meta name="viewport" content="width=device-width">
     <meta charset="utf-8">
     <link href="https://fonts.googleapis.com/css?family=Catamaran:300,400" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Nosifer" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Nanum+Brush+Script" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Knewave" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Playball" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Heebo:500" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,700" rel="stylesheet">
     <title>{%block title%} {% endblock%} </title>
@@ -27,7 +25,7 @@
       <a class="burger-nav" href="#"><h4 id="burger-nav-title">Shady Garage</h4></a>
       <ul class="nav-list">
         <li class="nav-list-item nav-list-image-item">
-          <a class="navbar-brand" href="{% url 'home'%}"><img src="{%static "images/Gorilla-logo.png"%}" id="brand-image" alt=""></a>
+          <a class="navbar-brand" href="{% url 'home'%}"><img src="{%static "images/Gorilla-logo.svg"%}" id="brand-image" alt=""></a>
         </li>
         <li class="nav-list-item">
           <a class="nav-list-item-link" href="{% url 'meets:meets_list' %}">Treff</a>
@@ -45,14 +43,12 @@
           <li class="nav-list-item">
             <a class="nav-list-item-link" href="{% url 'accounts:activity'%}" id="activityButton">EU-kontroll </a>
           </li>
-          <li class="nav-list-item">
-            <a class="nav-list-item-link" href="{% url 'entertainments:list'%}" style="font-family: 'Knewave'; font-size:17px;">HAHA!</a>
-          </li>
+
         <li class="nav-list-item nav-list-item-move-right">
           <a class="nav-list-item-link nav-username" href="{% url 'accounts:profile_page'%}"><img src="{% static 'images/Gorilla-logo.png'%}" alt="" width="40px">{{request.user.username|truncatechars:11}}</a>
         </li>
         <li class="nav-list-item">
-          <a class="nav-list-item-link" href="{% url 'accounts:logout' %}">Logg Ut</a>
+          <a class="nav-list-item-link" href="{% url 'accounts:logout' %}">Logg ut</a>
         </li>
         {% else %}
         <li class="nav-list-item">

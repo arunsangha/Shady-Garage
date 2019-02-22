@@ -14,8 +14,8 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border: 2px solid var(--main-yellow-color);
-  box-shadow: 1px 1px 4px black;
+  border: 1px solid #eee;
+  box-shadow: 0px 2px 3px grey;
   margin-top: 10px;
   padding: 3px;
   margin-bottom: 10px;
@@ -46,11 +46,11 @@
 
 
 #activity-card-username{
-  font-family: nosifer;
+  font-family: 'Catamaran';
 }
 
 #acitivty-card-comment{
-  font-family: 'Nanum Brush Script';
+  font-family: 'Catamaran';
   font-size: 30px;
 }
 
@@ -65,10 +65,10 @@
   padding: 10px;
 }
 
-.activity-card-comment{  
+.activity-card-comment{
   display: flex;
   flex-direction: column;
-  padding: 10px;  
+  padding: 10px;
   word-break: break-word;
   width: 100%;
 }

@@ -31,7 +31,7 @@ a:hover{
   Universals
 */
 
-p {
+/*p {
   font-family: 'Catamaran', sans-serif;
   font-size: 16px;
 
@@ -40,6 +40,10 @@ p {
 h1,h2,h3,h4,h5,h6{
   font-family: 'Catamaran', sans-serif;
   font-size: 60px;
+}*/
+
+body {
+    font: 'Catamaran', sans-serif;
 }
 
 .w {
@@ -192,8 +196,8 @@ h1,h2,h3,h4,h5,h6{
 }
 
 .nav-username{
-  font-family: 'Nosifer';
-  font-size: 10px;
+  font-family: 'Playball';
+  font-size: 15px;
 }
 
 @media only screen and (max-width: 1110px){
@@ -267,7 +271,7 @@ h1,h2,h3,h4,h5,h6{
     #burger-nav-title{
       display: block;
       color: white;
-      font-family: nosifer;
+      font-family: Playball;
       font-size: 15px;
       text-align: center;
       padding-top: 17px;
@@ -534,7 +538,7 @@ h1,h2,h3,h4,h5,h6{
   vertical-align: top;
   margin-bottom: 20px;
   color: white;
-  font-family: nosifer;
+  font-family: 'Heebo';
   text-align: center;
 }
 
@@ -768,7 +772,7 @@ h1,h2,h3,h4,h5,h6{
   background-color: var(--main-dark-color);
   word-wrap: break-word;
   word-break: break-all;
-  font-family: nosifer;
+  font-family: 'Heebo';
 }
 
 .post-list-card-title{
@@ -876,7 +880,7 @@ h1,h2,h3,h4,h5,h6{
   color: white;
   word-break: break-all;
   word-wrap: break-word;
-  font-family: 'nosifer';
+  font-family: 'Catamaran';
 }
 
 .post-detail-post-title{
@@ -910,7 +914,7 @@ h1,h2,h3,h4,h5,h6{
 .post-footer{
   display: flex;
   flex-direction: column;
-  width: 65%;
+  width: 50%;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
   align-items: center;
@@ -967,7 +971,6 @@ h1,h2,h3,h4,h5,h6{
   .post-detail-image{
     width: 100%;
 
-
   }
   .post-footer{
     width: 100%;
@@ -1002,7 +1005,7 @@ h1,h2,h3,h4,h5,h6{
 }
 .user-id a{
   color:black;
-  font-family:'nosifer';
+  font-family:'Playball';
   font-size:15px;
 }
 
@@ -1039,8 +1042,8 @@ h1,h2,h3,h4,h5,h6{
 
 
 .post-detail-image{
-  height: 65%;
-  width: 65%;
+  height: 50%;
+  width: 50%;
 }
 
 /*Post-form*/
@@ -1079,7 +1082,7 @@ h1,h2,h3,h4,h5,h6{
 .profile-page-title{
   text-align: center;
   padding: 40px 0 0 10px;
-  font-family: 'nosifer';
+  font-family: 'Playball';
   flex-grow: 1;
   word-wrap: break-word;
 }
@@ -1281,7 +1284,7 @@ h1,h2,h3,h4,h5,h6{
 }
 
 #usernameLink{
-  font-family: 'nosifer';
+  font-family: 'Playball';
   color:white;
 }
 
