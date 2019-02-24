@@ -2127,10 +2127,14 @@ background-color:white;
   padding-bottom:100px;
 }
 
-.score-con h1{
-  color:white;
+.score-con h1, h6{
+  color: white;
   text-align:center;
   font-family: 'Heebo', sans-serif;
+}
+
+.score-con h6{
+  color: white;
 }
 
 .round-circle{
