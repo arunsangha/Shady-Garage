@@ -22,7 +22,7 @@ MEDIA_DIR = os.path.join(BASE_DIR, "media")
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'v2!n)ux548qgm3rpvh%fttfd#_&gryjjlnie-)c$x0soa4u@kb'
+SECRET_KEY = 'mkemkfeank4142414141'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -93,8 +93,9 @@ TEMPLATES = [
 WSGI_APPLICATION = 'ShadyGarage.wsgi.application'
 
 #STRIPE
-STRIPE_API_KEY = 'sk_test_czI0R33pVrj3VrDfBg1xbSSN'
-STRIPE_PUBLISH_KEY = 'pk_test_EpHMytNU1b76jhrlFLVzynLv'
+
+STRIPE_API_KEY = os.environ.get('STRIPE_API_KEY_DEV')
+STRIPE_PUBLISH_KEY = os.environ.get('STRIPE_PUBLISH_KEY_DEV')
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases

@@ -22,7 +22,7 @@ MEDIA_DIR = os.path.join(BASE_DIR, "media")
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'v2!n)ux548qgm3rpvh%fttfd#_&gryjjlnie-)c$x0soa4u@kb'
+SECRET_KEY = 'feafe'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -70,8 +70,8 @@ MIDDLEWARE = [
 ]
 
 #STRIPE
-STRIPE_API_KEY = 'sk_live_EhtVidPZZUkXoXAFoFgyODJe'
-STRIPE_PUBLISH_KEY = 'pk_live_166o5JG9PtRN8k7eLix4JMVy'
+STRIPE_API_KEY = 'fafeafa'
+STRIPE_PUBLISH_KEY = 'feafa'
 
 
 ROOT_URLCONF = 'ShadyGarage.urls'
