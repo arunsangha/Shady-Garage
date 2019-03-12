@@ -11,3 +11,4 @@ ShadyGarage/db.sqlite3
 db.sqlite3
 ShadyGarage/media
 .DS_Store
+ShadyGarage/settings/secret.py
