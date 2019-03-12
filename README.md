@@ -49,6 +49,10 @@ These instructions will get you a copy of the project up and running on your loc
   </li>
   
    <li>
+  <h5>Step 4</h5>
+   <p>Create a stripe account and add the keys to local.py and cart-checkout.html<br>
+   </p>
+  </li>
   <h5>Step 5</h5>
    <p>Check if the settings __init__.py file has "try: from .local import *".<br>
       The file is in the ShadyGarage folder.
