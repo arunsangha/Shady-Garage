@@ -1,3 +1,4 @@
+import os
 from django.db import models
 from django.contrib import auth
 from django.utils.text import slugify
@@ -5,7 +6,10 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth import get_user_model
 User = get_user_model()
 from django.contrib import auth
-# Create your models here.
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+import piexif
+
 
 class MeetManager(models.Manager):
     def join_toggle(self, user, meet_obj):
@@ -19,21 +23,24 @@ class MeetManager(models.Manager):
         return is_joining
 
 class Meet(models.Model):
-    MARKER_CHOICES = (("static/images/markers/Ford_Mustang_Icon.svg", "Ford Mustang 69"), ("static/images/markers/Yamaha_R1_Icon.svg", "Yahmaha R1"), ("static/images/markers/Jeep_Wrangler_Icon.svg", "Jeep Wrangler"),("static/images/markers/AudiURQuattro.svg", "Audi Ur-Quattro"), ("static/images/markers/BMWE30.svg", "BMW E30"), ("static/images/markers/Stance.svg", "Audi A4 B8 Stance"), ("static/images/markers/lamborghini.svg", "Lamborghini Huracan"))
-    CATEGORY_CHOICES = (("static/images/logomidlertidig.png", "ShadyGarage"), ("static/images/meet_card/Stance-Car.jpg", "Stance"),("static/images/meet_card/Classic-Car.jpg", "Classic"), ("static/images/meet_card/Tuner-Car.jpg", "Tuner"), ("static/images/meet_card/Mc.jpg", "MC"), ("static/images/meet_card/Offroad-Car.jpg", "Offroad"))
+    MARKER_CHOICES = (("static/images/markers/Ford_Mustang_Icon.svg", "Ford Mustang 69"),
+     ("static/images/markers/Yamaha_R1_Icon.svg", "Yahmaha R1"), 
+     ("static/images/markers/Jeep_Wrangler_Icon.svg", "Jeep Wrangler"),
+     ("static/images/markers/AudiURQuattro.svg", "Audi Ur-Quattro"), 
+     ("static/images/markers/BMWE30.svg", "BMW E30"), 
+     ("static/images/markers/Stance.svg", "Audi A4 B8 Stance"), 
+     ("static/images/markers/lamborghini.svg", "Lamborghini Huracan"))
     organizer = models.CharField(max_length=120, blank=True, null=True)
     user_fk = models.ForeignKey(auth.models.User, related_name="meets_user_fk")
     meet_name = models.CharField(max_length = 255, unique = True)
-    category = models.CharField(choices=CATEGORY_CHOICES, default="static/images/burning.jpg", max_length=255)
     date = models.DateTimeField()
     time = models.TimeField(blank = True, default="19:00:00")
     slug = models.SlugField(allow_unicode = True, unique = True)
     description = models.TextField()
-    meet_image = models.ImageField(upload_to = "meets_pic", blank = True, default = "/meets_pic/meet_default.png")
+    meet_image = models.ImageField(upload_to = "meets_pic", blank = True, default = "static/Tuner-Car.jpg")
     marker_image = models.CharField(choices = MARKER_CHOICES, default="static/images/e30marker.svg", max_length=255)
     users_joining = models.ManyToManyField(auth.models.User, blank = True, related_name = "members_joining_meet")
     location = models.CharField(max_length = 1275)
-    anonymous = models.BooleanField(default=False)
     objects = MeetManager()
 
     def save(self, *args, **kwargs):
@@ -75,3 +82,37 @@ class MeetAdminMessage(models.Model):
 
     def __str__(self):
         return "Meet: {} | Owner: {}".format(self.meet.meet_name, self.owner.username)
+
+  #TODO! Make this a global function
+from PIL import Image, ExifTags
+def rotate_image(filepath):
+  rotation = 0
+  try:
+    image = Image.open(filepath)
+    for orientation in ExifTags.TAGS.keys():
+      if ExifTags.TAGS[orientation] == 'Orientation':
+            break
+    exif = dict(image._getexif().items())
+
+    if exif[orientation] == 3:
+        image = image.rotate(180, expand=True)
+        rotation = 180
+    elif exif[orientation] == 6:
+        image = image.rotate(270, expand=True)
+        rotation = 270
+    elif exif[orientation] == 8:
+        image = image.rotate(90, expand=True)
+        rotation = 90
+    image.save(filepath)
+    image.close()
+
+  except (AttributeError, KeyError, IndexError):
+    # cases: image don't have getexif
+    pass
+
+@receiver(post_save, sender=Meet, dispatch_uid="update_image_meet")
+def update_image(sender, instance, **kwargs):
+  if instance.meet_image:
+      BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+      fullpath = BASE_DIR + instance.meet_image.url
+      rotate_image(fullpath)
