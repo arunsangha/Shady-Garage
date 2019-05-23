@@ -7,7 +7,7 @@ import datetime
 class CreateMeetForm(forms.ModelForm):
     class Meta():
         model = models.Meet
-        fields = ('organizer','meet_name', 'description','date', 'time','location', 'meet_image','marker_image')
+        fields = ('organizer','meet_name', 'description','date', 'time', 'adress', 'post_code', 'city', 'meet_image','marker_image')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -19,8 +19,8 @@ class CreateMeetForm(forms.ModelForm):
         self.fields['date'].label = "Dato"
         self.fields['time'].label = "Treffet starter..."
         self.fields['description'].label = "Beskrivelse av treffet:"
-        self.fields['location'].label = "Adresse:"
-        self.fields['location'].widget.attrs.update({'placeholder': 'F.eks "Altagårdskogen 32, 9515 Alta"'})
+        self.fields['adress'].label = "Adresse:"
+        self.fields['adress'].widget.attrs.update({'placeholder': 'F.eks "Altagårdskogen 32"'})
         self.fields['marker_image'].label = "Markør på kart:"
 
 class CommentForm(forms.ModelForm):

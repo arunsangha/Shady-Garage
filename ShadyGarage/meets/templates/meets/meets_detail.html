@@ -23,11 +23,9 @@
         <h1 id="meet-detail-title-h1">{{ meet.meet_name}}</h1>
     </div>
     <div class="meet-detail-title-container meet-detail-username-container">
-        {% if meet.anonymous %}
-          <h3>Arrangers av: Anonymous </h3>
-        {% else %}
-            <h3>Arrangers av: {{ meet.organizer}} </h3>
-        {% endif %}
+       
+        <h3>Arrangers av: {{ meet.organizer}} </h3>
+        
     </div>
     <div class="meet_detail_description">
       {{meet.description}}
@@ -35,7 +33,7 @@
     <div class="meet_detail_description_container">
         <div class="meet_detail_description_item" id="location" data-marker="{{meet.marker_image}}">
           <img src="{% static "images/maps-icon.svg" %}" class="meet_detail_icon">
-          {{meet.location}}
+          {{meet.adress}}, {{meet.city}} {{meet.post_code}}
         </div>
         <div class="meet_detail_description_item">
           <img src="{% static "images/calender-icon.svg" %}" class="meet_detail_icon">

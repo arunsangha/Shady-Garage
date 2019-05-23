@@ -40,7 +40,10 @@ class Meet(models.Model):
     meet_image = models.ImageField(upload_to = "meets_pic")
     marker_image = models.CharField(choices = MARKER_CHOICES, default="static/images/e30marker.svg", max_length=255)
     users_joining = models.ManyToManyField(auth.models.User, blank = True, related_name = "members_joining_meet")
-    location = models.CharField(max_length = 1275)
+    adress = models.CharField(max_length=300)
+    post_code = models.CharField(max_length=7)
+    city = models.CharField(max_length=100)
+    country = models.CharField(max_length=100, blank=True, default="Norge")
     objects = MeetManager()
 
     def save(self, *args, **kwargs):

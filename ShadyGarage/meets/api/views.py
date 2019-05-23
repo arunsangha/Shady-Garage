@@ -24,7 +24,8 @@ class MeetsListAPIView(generics.ListAPIView):
                 Q(date__icontains=query) |
                 Q(time__icontains=query) |
                 Q(description__icontains=query) |
-                Q(location__icontains=query)
+                Q(adress__icontains=query) |
+                Q(city__icontains=query)
             )
         return qs
 

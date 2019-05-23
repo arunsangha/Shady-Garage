@@ -35,7 +35,10 @@ class MeetsModelSerializer(serializers.ModelSerializer):
             'day',
             'url',
             'did_join',
-            'location',
+            'adress',
+            'post_code',
+            'city',
+            'country',
             'marker_image',
             'organizer',
         )

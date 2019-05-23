@@ -170,9 +170,9 @@ function initMap() {
          nextUrl = data.nextUrl;
          $.each(meetsList, function(key, value){
 
-           if(value.location){
+           if(value.adress){
              var geocoder = new google.maps.Geocoder();
-             var location = value.location
+             var location = value.adress + ", " + value.post_code + " " + value.city;
              var marker, placeid, contentString, infowindow;
              var markerIcon = value.marker_image
              var meetUrl = value.url
