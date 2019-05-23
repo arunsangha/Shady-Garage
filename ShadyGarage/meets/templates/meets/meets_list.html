@@ -107,21 +107,18 @@
               }else{
                 users_joining = 'Skal: ' + users_joining
               }
-              var username = ""
-              if(value.anonymous == false){
-                 username = value.organizer.substr(0, 16) + ".."
-              }else{
-                 username = "Anonymous"
-              }
+              var username = value.organizer
+              console.log(value.meet_image)
+              
 
             $(".meet-list-container").append(
                 `
-                <div class="meet-card-container" style="background-image: url(../${value.category})">
+                <div class="meet-card-container" style="background-image: url(${value.meet_image})">
                   <div class="meet-card-container-color-overlay">
                     <div class="meet-card-title">
                       <a class="w" href='${value.url}'><h3>${meet_name}</h3></a>
                     </div>
-                    <div class="meet-card-imagecontainer" style="background-image: url(../${value.category})">
+                    <div class="meet-card-imagecontainer" style="background-image: url(${value.meet_image})">
                     </div>
                     <div class="meet-card-timecontainer">
                       <p class="w"> ${value.day} - ${time}</p>
