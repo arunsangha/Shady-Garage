@@ -7,11 +7,12 @@ import json
 from django.utils import timezone
 
 class DateTimeFieldWihTZ(serializers.DateTimeField):
-    '''Class to make output of a DateTime Field timezone aware
-    '''
+    #Class to make output of a DateTime Field timezone aware
+    
     def to_representation(self, value):
         value = timezone.localtime(value)
         return super(DateTimeFieldWihTZ, self).to_representation(value)
+   
 
 class MeetsModelSerializer(serializers.ModelSerializer):
     user_fk = UserDisplaySerializer()
@@ -30,14 +31,12 @@ class MeetsModelSerializer(serializers.ModelSerializer):
             'time',
             'description',
             'meet_image',
-            'category',
             'joining',
             'day',
             'url',
             'did_join',
             'location',
             'marker_image',
-            'anonymous',
             'organizer',
         )
 
