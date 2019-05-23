@@ -432,12 +432,14 @@ body {
   word-break: break-all;
 }
 
-.meet-card-imagecontainer{
-  flex-grow: 1;
-  border: 3px solid white;
-  width: 75%;
-  height: 25%;
-  background-size: cover;
+.meet-card-imagecontainer {
+ flex-grow: 1;
+ border: 3px solid white;
+ width: 75%;
+ height: 25%;
+ background-size: cover;
+ background-position: center;
+ background-repeat: no-repeat;
 }
 
 .meet-card-timecontainer{
