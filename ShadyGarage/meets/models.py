@@ -37,7 +37,7 @@ class Meet(models.Model):
     time = models.TimeField(blank = True, default="19:00:00")
     slug = models.SlugField(allow_unicode = True, unique = True)
     description = models.TextField()
-    meet_image = models.ImageField(upload_to = "meets_pic", blank = True, default = "static/Tuner-Car.jpg")
+    meet_image = models.ImageField(upload_to = "meets_pic")
     marker_image = models.CharField(choices = MARKER_CHOICES, default="static/images/e30marker.svg", max_length=255)
     users_joining = models.ManyToManyField(auth.models.User, blank = True, related_name = "members_joining_meet")
     location = models.CharField(max_length = 1275)

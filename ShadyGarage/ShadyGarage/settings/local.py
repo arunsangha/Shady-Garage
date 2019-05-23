@@ -17,7 +17,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 MEDIA_DIR = os.path.join(BASE_DIR, "media")
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
@@ -94,8 +93,8 @@ WSGI_APPLICATION = 'ShadyGarage.wsgi.application'
 
 #STRIPE
 
-STRIPE_API_KEY = os.environ.get('STRIPE_API_KEY_DEV')
-STRIPE_PUBLISH_KEY = os.environ.get('STRIPE_PUBLISH_KEY_DEV')
+STRIPE_API_KEY = 'sk_test_8AgNRp8gOOGvVFAHKiYHTLZk'
+STRIPE_PUBLISH_KEY = 'pk_test_GkCRR2B0bYhh5ARX51dTystJ'
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
@@ -153,12 +152,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "home"
-
-EMAIL_HOST =
-EMAIL_HOST_USER = 
-EMAIL_HOST_PASSWORD = 
-EMAIL_PORT = 
-EMAIL_USE_TLS = 
 
 
 SECURE_SSL_REDIRECT             = False

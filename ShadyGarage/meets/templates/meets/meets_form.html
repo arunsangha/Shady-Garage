@@ -9,7 +9,7 @@
     }
   </style>
   <div class="create-meet-container">
-    <form class="" action="{% url 'meets:create_meet' %}" method="post">
+    <form class="" action="{% url 'meets:create_meet' %}" enctype="multipart/form-data" method="post">
       {% csrf_token %}
       {% bootstrap_form form %}
       <div class="bfh-timepicker">
