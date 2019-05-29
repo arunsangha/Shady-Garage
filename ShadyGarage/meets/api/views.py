@@ -32,6 +32,16 @@ class SampleApi(APIView):
         }
         return Response(content)
 
+@method_decorator(csrf_exempt, name='dispatch')
+class JoinMeetAPIView(APIView):
+    permission_classes = (IsAuthenticated,)
+    authentication_classes = (authentication.TokenAuthentication,) 
+    def get(self, request, format=None):
+        meet_qs = Meet.objects.filter(slug=request.data['pk'])
+        is_joining = Meet.objects.join_toggle(request.user, meet_qs.first())
+        return Response({'joining':is_joining})
+
+
 
 class MeetsListAPIView(generics.ListAPIView):
     serializer_class = MeetsModelSerializer
