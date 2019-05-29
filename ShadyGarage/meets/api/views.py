@@ -7,6 +7,31 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .pagination import CommentResultsPagination
 from datetime import datetime
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.status import (
+    HTTP_400_BAD_REQUEST,
+    HTTP_404_NOT_FOUND,
+    HTTP_200_OK
+)
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.authtoken.models import Token
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework import authentication
+
+from django.utils.decorators import method_decorator
+@method_decorator(csrf_exempt, name='dispatch')
+class SampleApi(APIView):
+    permission_classes = (IsAuthenticated,)
+    authentication_classes = (authentication.TokenAuthentication,)    
+
+    def get(self, request, format=None):
+        print(request.user)
+        content = {
+            'status': 'request was permitted'
+        }
+        return Response(content)
+
 
 class MeetsListAPIView(generics.ListAPIView):
     serializer_class = MeetsModelSerializer
