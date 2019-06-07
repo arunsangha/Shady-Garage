@@ -20,27 +20,36 @@ from rest_framework.response import Response
 from rest_framework import authentication
 
 from django.utils.decorators import method_decorator
-@method_decorator(csrf_exempt, name='dispatch')
-class SampleApi(APIView):
-    permission_classes = (IsAuthenticated,)
-    authentication_classes = (authentication.TokenAuthentication,)
 
-    def get(self, request, format=None):
-        print(request.user)
-        content = {
-            'status': 'request was permitted'
-        }
-        return Response(content)
 
 @method_decorator(csrf_exempt, name='dispatch')
 class JoinMeetAPIView(APIView):
     permission_classes = (IsAuthenticated,)
     authentication_classes = (authentication.TokenAuthentication,)
     def post(self, request, format=None):
-        print(request);
         meet_qs = Meet.objects.filter(slug=request.data['pk'])
         is_joining = Meet.objects.join_toggle(request.user, meet_qs.first())
         return Response({'joining':is_joining})
+    
+@method_decorator(csrf_exempt, name='dispatch')
+class IsJoiningAPIView(APIView):
+    permission_classes = (IsAuthenticated,)
+    authentication_classes = (authentication.TokenAuthentication,)
+    def get(self, request, format=None):
+        print(request.GET['meet'])
+        meet_slug = request.GET['meet']
+        meet = Meet.objects.filter(slug=meet_slug).first()
+        if meet:
+            if Meet.objects.filter(pk=meet.pk, users_joining=request.user):
+                response = {'joining':True}
+            else:
+                print(request.user)
+                response = {'joining':False}
+            return Response(response)
+        else:
+            return Response({'error':'Meet not found'}, 400)
+        
+
 
 
 
