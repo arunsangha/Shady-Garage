@@ -49,6 +49,34 @@ class IsJoiningAPIView(APIView):
         else:
             return Response({'error':'Meet not found'}, 400)
         
+@method_decorator(csrf_exempt, name='dispatch')
+class CreateMeetAPIView(APIView):
+    permission_classes = (IsAuthenticated,)
+    authentication_classes = (authentication.TokenAuthentication,)
+
+    def post(self, request, format=None):
+        print(request.data['meet_name'])
+       
+        meet = Meet.objects.create(
+                user_fk = request.user,
+                meet_name=request.data['meet_name'],
+                organizer=request.data['organizer'],
+                description = request.data['description'],
+                date = request.data['date'],
+                time = request.data['time'],
+                adress = request.data['adress'],
+                post_code = request.data['post_code'],
+                city = request.data['city'],
+                meet_image = request.data['image']
+            )
+
+        meet.save()
+        return Response({'slug':meet.slug})
+      
+
+
+
+        
 
 
 
